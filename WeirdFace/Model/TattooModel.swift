@@ -9,28 +9,146 @@
 import Foundation
 import UIKit
 
+
+protocol Printable {
+    var description: String { get }
+}
+
+enum TattooType: Int, Printable, CaseIterable {
+    case leftBrow = 1
+    case forehead = 2
+    case rightBrow = 3
+    case leftCheek = 4
+    case nose = 5
+    case rightCheek = 6
+    case lowerLip = 7
+    //static var count: Int { return TattooType.leftEye.hashValue + 1 }
+    
+    var description: String {
+        switch self {
+        case .leftBrow: return "1"
+        case .forehead: return "2"
+        case .rightBrow: return "3"
+        case .leftCheek   : return "4"
+        case .nose : return "5"
+        case .rightCheek : return "6"
+        case .lowerLip: return "7"
+        }
+    }
+}
+
 public class TattooModel {
     let image: UIImage?
-    let position: Int
+    var type: TattooType {
+        didSet {
+            updateDimensions()
+        }
+    }
     var width: CGFloat
     var height: CGFloat
     var x: CGFloat
     var y: CGFloat
-    var rotation: CGFloat
+    var rotation: Float
     
-    public init(
-                imageName: String, width: CGFloat, height: CGFloat, position: Int) {
+    init(
+                imageName: String, tattooType: TattooType) {
         self.image = UIImage(named: imageName)
-        self.width = width
-        self.height = height
-        self.position = position
-        switch position {
-        default:
-            self.x = 0
-            self.y = 0
+        self.type = tattooType
+        switch type {
+        case .lowerLip:
+            self.x = 400
+            self.y = 692
             self.rotation = 0
+            self.width = 200
+            self.height = 100
+        case .leftCheek:
+            self.x = 142
+            self.y = 380
+            self.rotation = 0.436332
+            self.width = 200
+            self.height = 100
+        case .forehead:
+            self.x = 398
+            self.y = 52
+            self.rotation = 0
+            self.width = 200
+            self.height = 100
+        case .leftBrow:
+            self.x = 144
+            self.y = 60
+            self.rotation = -0.39444
+            self.width = 200
+            self.height = 100
+        case .rightBrow:
+            self.x = 666
+            self.y = 54
+            self.rotation = 0.39444
+            self.width = 200
+            self.height = 100
+        case .nose:
+            self.x = 450
+            self.y = 292
+            self.rotation = 1.5708
+            self.width = 200
+            self.height = 100
+        case .rightCheek:
+            self.x = 630
+            self.y = 388
+            self.rotation = -0.436332
+            self.width = 200
+            self.height = 100
         }
     }
+    
+    func updateDimensions(){
+        switch type {
+        case .lowerLip:
+            self.x = 400
+            self.y = 692
+            self.rotation = 0
+            self.width = 200
+            self.height = 100
+        case .leftCheek:
+            self.x = 142
+            self.y = 380
+            self.rotation = 0.436332
+            self.width = 200
+            self.height = 100
+        case .forehead:
+            self.x = 398
+            self.y = 52
+            self.rotation = 0
+            self.width = 200
+            self.height = 100
+        case .leftBrow:
+            self.x = 144
+            self.y = 60
+            self.rotation = -0.39444
+            self.width = 200
+            self.height = 100
+        case .rightBrow:
+            self.x = 666
+            self.y = 54
+            self.rotation = 0.39444
+            self.width = 200
+            self.height = 100
+        case .nose:
+            self.x = 450
+            self.y = 292
+            self.rotation = 1.5708
+            self.width = 200
+            self.height = 100
+        case .rightCheek:
+            self.x = 630
+            self.y = 388
+            self.rotation = -0.436332
+            self.width = 200
+            self.height = 100
+        }
+    }
+    
 }
+
+
 
 

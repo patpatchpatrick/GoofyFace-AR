@@ -13,18 +13,12 @@ import SceneKit
 class ViewController: UIViewController {
     
 
+    @IBOutlet weak var tabBar: UITabBar!
+    @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
     
-    var contentNode: SCNNode?
-    var tattooWidth: CGFloat = 200.0
-    var tattooHeight: CGFloat = 100.0
-    var tattooX: CGFloat = 0.0
-    var tattooY: CGFloat = 0.0
     var imageChanged = false
-    var primaryImage: UIImage?
-    var resizedImg: UIImage?
-    var imageOnCanvas: UIImage?
-    var contentImage: UIImage?
+    var viewModel: TattooViewModel?
 
     
     override func viewDidLoad() {
@@ -34,14 +28,22 @@ class ViewController: UIViewController {
             fatalError("Face tracking is not supported on this device")
         }
         
-        primaryImage = UIImage(named: "exampletat")
+        tabBar.delegate = self
+        tattooTypePicker.delegate = self
+        tattooTypePicker.dataSource = self
+        let model = TattooModel(imageName: "exampletat", tattooType: .lowerLip)
+        viewModel = TattooViewModel(tattooModel: model)
+        viewModel?.loadImage()
         
         sceneView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updated_data),
+                                               name:Notification.Name("UPDATED_DATA"),
+                                               object: nil)
         let configuration = ARFaceTrackingConfiguration()
         
         sceneView.session.run(configuration)
@@ -49,76 +51,89 @@ class ViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        NotificationCenter.default.removeObserver(self)
         sceneView.session.pause()
     }
     
+    @objc func updated_data(notification:Notification) -> Void{
+        
+        imageChanged = true
+        
+    }
+    
+    
+    
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
+        /*
         if tattooHeight < 900.0 {
             tattooWidth += 100.0
             tattooHeight += 100.0
             checkPositions()
               imageChanged = true
         }
+ */
         
     }
     
     
     @IBAction func minusButtonTapped(_ sender: UIButton) {
+        /*
         if tattooHeight > 200.0 {
             tattooWidth -= 100.0
             tattooHeight -= 100.0
             checkPositions()
               imageChanged = true
         }
+ */
     }
     
     
     @IBAction func plusX(_ sender: UIButton) {
-        
+        /*
         tattooX += 100.0
         if tattooX > (1000 - tattooWidth) {
             tattooX = 1000 - tattooWidth
         }
-        imageChanged = true
+        imageChanged = true */
         
     }
     
     
     @IBAction func plusY(_ sender: UIButton) {
-        
+        /*
         tattooY += 100.0
         if tattooY > (1000 - tattooHeight) {
             tattooY = 1000 - tattooHeight
         }
-        imageChanged = true
+        imageChanged = true */
         
     }
     
     
     @IBAction func minusX(_ sender: UIButton) {
+        /*
         
         tattooX -= 100.0
         if tattooX < 0 {
             tattooX = 0
         }
-         imageChanged = true
+         imageChanged = true */
         
     }
     
     @IBAction func minusY(_ sender: UIButton) {
-        
+        /*
         tattooY -= 100.0
         if tattooY < 0 {
             tattooY = 0
         }
-     imageChanged = true
+     imageChanged = true */
         
     }
     
     func checkPositions(){
-        
+        /*
         if tattooY > (1000 - tattooHeight) {
             tattooY = 1000 - tattooHeight
             imageChanged = true
@@ -126,39 +141,11 @@ class ViewController: UIViewController {
         if tattooX > (1000 - tattooWidth) {
             tattooX = 1000 - tattooWidth
             imageChanged = true
-        }
-        
-    }
-    
-    func setImageForehead(){
-        
-        let resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
-        
-        
-        
-        let expandedSize = CGSize(width: 1000, height: 1000)
-        
-        imageOnCanvas = drawImageOnCanvas(resizedImg, canvasSize: expandedSize, canvasColor: .clear, x:500 - 100, y: 692)
-        
-        contentImage = imageOnCanvas
-    }
-    
-    func setImageRotated(){
-        let resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
-        
-        let rotatedImage = resizedImg.rotate(radians: 0.436332)
-        
-        let expandedSize = CGSize(width: 1000, height: 1000)
-        
-        imageOnCanvas = drawImageOnCanvas(rotatedImage!, canvasSize: expandedSize, canvasColor: .clear, x:142, y: 380)
-        
-        contentImage = imageOnCanvas
-        
+        } */
         
     }
     
     
-
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -174,19 +161,14 @@ extension ViewController: ARSCNViewDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
         let material = faceGeometry.firstMaterial!
         
-        
-            
-             setImageRotated()
-            
-            material.diffuse.contents = contentImage// Example texture map image.
+        if imageChanged {
+            material.diffuse.contents = viewModel?.image// Example texture map image.
             material.lightingModel = .physicallyBased
-            
+            imageChanged = false
+        }
         
-        
-        
-        contentNode = SCNNode(geometry: faceGeometry)
         #endif
-        return contentNode
+        return SCNNode(geometry: faceGeometry)
         
         
     }
@@ -202,27 +184,51 @@ extension ViewController: ARSCNViewDelegate {
         
         
         if imageChanged {
-            
             let material = faceGeometry.firstMaterial!
-                
-                resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
-                
-                let expandedSize = CGSize(width: 1000, height: 1000)
-                
-                imageOnCanvas = drawImageOnCanvas(resizedImg!, canvasSize: expandedSize, canvasColor: .clear, x: tattooX, y: tattooY)
-                
-                contentImage = imageOnCanvas
-                
-                material.diffuse.contents = contentImage!// Example texture map image.
-                material.lightingModel = .physicallyBased
-                
-            
+            material.diffuse.contents = viewModel?.image// Example texture map image.
+            material.lightingModel = .physicallyBased
             imageChanged = false
         }
 
         
         faceGeometry.update(from: faceAnchor.geometry)
  
+    }
+    
+}
+
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        print("PICKER COUNT", TattooType.allCases.count)
+        return TattooType.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return TattooType(rawValue: row+1)?.description
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        //If Picker position is changed, update viewModel
+        if let type = TattooType(rawValue: row+1) {
+            viewModel?.changeTattooType(type: type)
+        }
+        
+    }
+    
+}
+
+extension ViewController: UITabBarDelegate {
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item.tag == 2 {
+            print("ADD TATTOO")
+        }
     }
     
 }

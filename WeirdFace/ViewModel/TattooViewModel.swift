@@ -15,17 +15,33 @@ let defaultCanvasWidth:CGFloat = 1000
 public class TattooViewModel {
     
     private let tattoo: TattooModel
+    var image: UIImage?
     
     public init(tattooModel: TattooModel) {
         self.tattoo = tattooModel
     }
     
     func loadImage(){
-        guard let image = tattoo.image else {return}
-        let resizedImg = resizeImage(image: image, targetSize: CGSize(width: tattoo.width, height: tattoo.height))
-        let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
-        let imageOnCanvas = drawImageOnCanvas(resizedImg, canvasSize: expandedSize, canvasColor: .clear, x: tattoo.x, y: tattoo.y)
         
+        print("Loading Image")
+        DispatchQueue.global(qos: .background).async {
+            guard let image = self.tattoo.image else {return}
+            let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
+            let rotatedImage = resizedImg.rotate(radians: self.tattoo.rotation)
+            let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
+            let uiImage = drawImageOnCanvas(rotatedImage!, canvasSize: expandedSize, canvasColor: .clear, x: self.tattoo.x, y: self.tattoo.y)
+            self.image = uiImage.alpha(0.8)
+            
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
+            }
+        }
+        
+    }
+    
+    func changeTattooType(type: TattooType){
+        self.tattoo.type = type
+        loadImage()
     }
     
 }

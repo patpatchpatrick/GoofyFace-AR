@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeirdFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="ViewController" customClass="ViewController" customModule="WeirdFace" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ARSCNView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,6 +69,10 @@
                                             <action selector="minusY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qai-Sq-SPJ"/>
                                         </connections>
                                     </button>
+                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="And-L5-wPD">
+                                        <rect key="frame" x="0.0" y="483" width="414" height="216"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -78,7 +82,7 @@
                                 <items>
                                     <tabBarItem title="Transforms" image="transforms" id="8HX-JG-j86"/>
                                     <tabBarItem tag="1" title="Texture" image="texture" id="eD9-1i-A5P"/>
-                                    <tabBarItem tag="2" title="Add Tattoo" image="geometry" id="lpP-b3-2s9"/>
+                                    <tabBarItem tag="2" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
                                     <tabBarItem tag="3" title="Video Texture" image="videoTexture" id="1Y2-b5-LSz"/>
                                     <tabBarItem tag="4" title="Blend Shapes" image="blendShapes" id="R5u-Fc-AMs"/>
                                 </items>
@@ -95,9 +99,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outlet property="delegate" destination="BYZ-38-t0r" id="z4g-aY-yIV"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
+                        <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
+                        <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -107,7 +116,7 @@
     </scenes>
     <resources>
         <image name="blendShapes" width="16" height="16"/>
-        <image name="geometry" width="16" height="16"/>
+        <image name="plusIcon" width="52" height="52"/>
         <image name="texture" width="16" height="16"/>
         <image name="transforms" width="16" height="16"/>
         <image name="videoTexture" width="16" height="16"/>
