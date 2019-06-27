@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import VideoToolbox
 
-func drawImageOnCanvas(_ useImage: UIImage, canvasSize: CGSize, canvasColor: UIColor, x: CGFloat, y: CGFloat ) -> UIImage {
+func drawImageOnCanvas(_ useImage: UIImage, canvas: UIImage?, canvasSize: CGSize, x: CGFloat, y: CGFloat ) -> UIImage {
     
     let rect = CGRect(origin: .zero, size: canvasSize)
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
@@ -19,8 +19,13 @@ func drawImageOnCanvas(_ useImage: UIImage, canvasSize: CGSize, canvasColor: UIC
     var yPos = y
     
     // fill the entire image
-    canvasColor.setFill()
-    UIRectFill(rect)
+    if canvas == nil {
+        let canvasColor: UIColor = .clear
+        canvasColor.setFill()
+         UIRectFill(rect)
+    } else {
+        canvas?.draw(in: rect)
+    }
     
     if xPos < 0 {
         xPos = 0
@@ -36,19 +41,20 @@ func drawImageOnCanvas(_ useImage: UIImage, canvasSize: CGSize, canvasColor: UIC
     }
 
     // calculate a Rect the size of the image to draw, centered in the canvas rect
-    let centeredImageRect = CGRect(x: xPos,
+    let imageRectToClear = CGRect(x: xPos,
                                    y: yPos,
                                    width: useImage.size.width,
                                    height: useImage.size.height)
     
     // get a drawing context
-    let context = UIGraphicsGetCurrentContext();
+    let context = UIGraphicsGetCurrentContext()
+    context?.interpolationQuality = .high
     
     // "cut" a transparent rectangle in the middle of the "canvas" image
-    context?.clear(centeredImageRect)
+    context?.clear(imageRectToClear)
     
     // draw the image into that rect
-    useImage.draw(in: centeredImageRect)
+    useImage.draw(in: imageRectToClear, blendMode: .normal, alpha: 1.0)
     
     // get the new "image in the center of a canvas image"
     let image = UIGraphicsGetImageFromCurrentImageContext()

@@ -16,6 +16,7 @@ public class TattooViewModel {
     
     private let tattoo: TattooModel
     var image: UIImage?
+    var canvas: UIImage?
     
     public init(tattooModel: TattooModel) {
         self.tattoo = tattooModel
@@ -29,8 +30,8 @@ public class TattooViewModel {
             let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
             let rotatedImage = resizedImg.rotate(radians: self.tattoo.rotation)
             let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
-            let uiImage = drawImageOnCanvas(rotatedImage!, canvasSize: expandedSize, canvasColor: .clear, x: self.tattoo.x, y: self.tattoo.y)
-            self.image = uiImage.alpha(0.8)
+            self.canvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.tattoo.x, y: self.tattoo.y)
+            self.image = self.canvas?.alpha(0.8)
             
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
