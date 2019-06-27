@@ -17,15 +17,99 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ARSCNView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atl-Lq-BB2" customClass="ARSCNView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFi-bX-qjf">
+                                        <rect key="frame" x="310" y="30" width="72" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="PLUS"/>
+                                        <connections>
+                                            <action selector="plusButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OOF-2T-w0X"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBj-vu-oPn">
+                                        <rect key="frame" x="310" y="96" width="72" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="MINUS"/>
+                                        <connections>
+                                            <action selector="minusButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YoL-dX-e7U"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ec3-YK-XjR">
+                                        <rect key="frame" x="310" y="177" width="72" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="PLUSX"/>
+                                        <connections>
+                                            <action selector="plusX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YXa-uN-B1E"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i1-ez-QlO">
+                                        <rect key="frame" x="310" y="252" width="72" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="MINUSX"/>
+                                        <connections>
+                                            <action selector="minusX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="86z-zi-l3K"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AE4-82-WQd">
+                                        <rect key="frame" x="310" y="356" width="72" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="PLUSY"/>
+                                        <connections>
+                                            <action selector="plusY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="noQ-Lr-0OM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="off-Qj-Kv0">
+                                        <rect key="frame" x="310" y="430" width="72" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="MINUSY"/>
+                                        <connections>
+                                            <action selector="minusY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qai-Sq-SPJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <tabBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="lUI-CS-egL">
+                                <rect key="frame" x="0.0" y="779" width="414" height="83"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="Transforms" image="transforms" id="8HX-JG-j86"/>
+                                    <tabBarItem tag="1" title="Texture" image="texture" id="eD9-1i-A5P"/>
+                                    <tabBarItem tag="2" title="Add Tattoo" image="geometry" id="lpP-b3-2s9"/>
+                                    <tabBarItem tag="3" title="Video Texture" image="videoTexture" id="1Y2-b5-LSz"/>
+                                    <tabBarItem tag="4" title="Blend Shapes" image="blendShapes" id="R5u-Fc-AMs"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Atl-Lq-BB2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="71C-ei-uB6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lUI-CS-egL" secondAttribute="bottom" id="BbK-EF-IWd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lUI-CS-egL" secondAttribute="trailing" id="Li7-sO-VHO"/>
+                            <constraint firstItem="Atl-Lq-BB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UzG-TH-Msb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Atl-Lq-BB2" secondAttribute="bottom" id="hSU-r7-osO"/>
+                            <constraint firstItem="lUI-CS-egL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="n3K-7Z-xma"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="sceneView" destination="8bC-Xf-vdC" id="Ku0-0V-FLz"/>
+                        <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="34.782608695652179" y="18.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="blendShapes" width="16" height="16"/>
+        <image name="geometry" width="16" height="16"/>
+        <image name="texture" width="16" height="16"/>
+        <image name="transforms" width="16" height="16"/>
+        <image name="videoTexture" width="16" height="16"/>
+    </resources>
 </document>

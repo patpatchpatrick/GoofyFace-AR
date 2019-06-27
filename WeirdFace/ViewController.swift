@@ -12,10 +12,19 @@ import SceneKit
 
 class ViewController: UIViewController {
     
-    
-    @IBOutlet var sceneView: ARSCNView!
+
+    @IBOutlet weak var sceneView: ARSCNView!
     
     var contentNode: SCNNode?
+    var tattooWidth: CGFloat = 1000.0
+    var tattooHeight: CGFloat = 1000.0
+    var tattooX: CGFloat = 0.0
+    var tattooY: CGFloat = 0.0
+    var imageChanged = false
+    var primaryImage: UIImage?
+    var resizedImg: UIImage?
+    var imageOnCanvas: UIImage?
+    var contentImage: UIImage?
 
     
     override func viewDidLoad() {
@@ -24,6 +33,8 @@ class ViewController: UIViewController {
         guard ARFaceTrackingConfiguration.isSupported else {
             fatalError("Face tracking is not supported on this device")
         }
+        
+        primaryImage = UIImage(named: "noragrets")
         
         sceneView.delegate = self
     }
@@ -41,9 +52,85 @@ class ViewController: UIViewController {
         
         sceneView.session.pause()
     }
-
     
-
+    
+    @IBAction func plusButtonTapped(_ sender: UIButton) {
+        if tattooHeight < 900.0 {
+            tattooWidth += 100.0
+            tattooHeight += 100.0
+            checkPositions()
+              imageChanged = true
+        }
+        
+    }
+    
+    
+    @IBAction func minusButtonTapped(_ sender: UIButton) {
+        if tattooHeight > 200.0 {
+            tattooWidth -= 100.0
+            tattooHeight -= 100.0
+            checkPositions()
+              imageChanged = true
+        }
+    }
+    
+    
+    @IBAction func plusX(_ sender: UIButton) {
+        
+        tattooX += 100.0
+        if tattooX > (1000 - tattooWidth) {
+            tattooX = 1000 - tattooWidth
+        }
+        imageChanged = true
+        
+    }
+    
+    
+    @IBAction func plusY(_ sender: UIButton) {
+        
+        tattooY += 100.0
+        if tattooY > (1000 - tattooHeight) {
+            tattooY = 1000 - tattooHeight
+        }
+        imageChanged = true
+        
+    }
+    
+    
+    @IBAction func minusX(_ sender: UIButton) {
+        
+        tattooX -= 100.0
+        if tattooX < 0 {
+            tattooX = 0
+        }
+         imageChanged = true
+        
+    }
+    
+    @IBAction func minusY(_ sender: UIButton) {
+        
+        tattooY -= 100.0
+        if tattooY < 0 {
+            tattooY = 0
+        }
+     imageChanged = true
+        
+    }
+    
+    func checkPositions(){
+        
+        if tattooY > (1000 - tattooHeight) {
+            tattooY = 1000 - tattooHeight
+            imageChanged = true
+        }
+        if tattooX > (1000 - tattooWidth) {
+            tattooX = 1000 - tattooWidth
+            imageChanged = true
+        }
+        
+    }
+    
+    
 
 }
 
@@ -60,8 +147,21 @@ extension ViewController: ARSCNViewDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
         let material = faceGeometry.firstMaterial!
         
-        material.diffuse.contents = UIImage(named: "facegrid") // Example texture map image.
-        material.lightingModel = .physicallyBased
+        
+            
+             let resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
+            
+            let expandedSize = CGSize(width: 1000, height: 1000)
+            
+            imageOnCanvas = drawImageOnCanvas(resizedImg, canvasSize: expandedSize, canvasColor: .clear, x:tattooX, y: tattooY)
+            
+            contentImage = imageOnCanvas
+            
+            material.diffuse.contents = contentImage// Example texture map image.
+            material.lightingModel = .physicallyBased
+            
+        
+        
         
         contentNode = SCNNode(geometry: faceGeometry)
         #endif
@@ -78,6 +178,27 @@ extension ViewController: ARSCNViewDelegate {
         guard let faceGeometry = node.geometry as? ARSCNFaceGeometry,
             let faceAnchor = anchor as? ARFaceAnchor
             else { return }
+        
+        
+        if imageChanged {
+            
+            let material = faceGeometry.firstMaterial!
+                
+                resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
+                
+                let expandedSize = CGSize(width: 1000, height: 1000)
+                
+                imageOnCanvas = drawImageOnCanvas(resizedImg!, canvasSize: expandedSize, canvasColor: .clear, x: tattooX, y: tattooY)
+                
+                contentImage = imageOnCanvas
+                
+                material.diffuse.contents = contentImage!// Example texture map image.
+                material.lightingModel = .physicallyBased
+                
+            
+            imageChanged = false
+        }
+
         
         faceGeometry.update(from: faceAnchor.geometry)
  
