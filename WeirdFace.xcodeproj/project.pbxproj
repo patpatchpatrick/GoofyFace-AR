@@ -15,9 +15,8 @@
 		F624769122C414C60066215E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F624768F22C414C60066215E /* LaunchScreen.storyboard */; };
 		F624769C22C414C60066215E /* WeirdFaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624769B22C414C60066215E /* WeirdFaceTests.swift */; };
 		F62476A722C414C60066215E /* WeirdFaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476A622C414C60066215E /* WeirdFaceUITests.swift */; };
-		F62476B722C4196A0066215E /* BodyPartNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476B522C4196A0066215E /* BodyPartNode.swift */; };
-		F62476B822C4196A0066215E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476B622C4196A0066215E /* StringExtension.swift */; };
 		F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476BA22C42D2A0066215E /* ImageExtensions.swift */; };
+		F62476BD22C436410066215E /* VideoTexturedFace.shader in Resources */ = {isa = PBXBuildFile; fileRef = F62476BC22C436410066215E /* VideoTexturedFace.shader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +51,8 @@
 		F62476A222C414C60066215E /* WeirdFaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeirdFaceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F62476A622C414C60066215E /* WeirdFaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeirdFaceUITests.swift; sourceTree = "<group>"; };
 		F62476A822C414C60066215E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F62476B522C4196A0066215E /* BodyPartNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPartNode.swift; sourceTree = "<group>"; };
-		F62476B622C4196A0066215E /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		F62476BA22C42D2A0066215E /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		F62476BC22C436410066215E /* VideoTexturedFace.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VideoTexturedFace.shader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +106,10 @@
 				F62476B922C42D1A0066215E /* ImageHelper */,
 				F624768322C414C50066215E /* AppDelegate.swift */,
 				F624768522C414C50066215E /* ViewController.swift */,
-				F62476B422C4196A0066215E /* SuperUsefulCode */,
 				F624768722C414C50066215E /* Main.storyboard */,
 				F624768D22C414C60066215E /* Assets.xcassets */,
 				F624768F22C414C60066215E /* LaunchScreen.storyboard */,
+				F62476BC22C436410066215E /* VideoTexturedFace.shader */,
 				F624769222C414C60066215E /* Info.plist */,
 				F624768A22C414C50066215E /* WeirdFace.xcdatamodeld */,
 			);
@@ -134,15 +132,6 @@
 				F62476A822C414C60066215E /* Info.plist */,
 			);
 			path = WeirdFaceUITests;
-			sourceTree = "<group>";
-		};
-		F62476B422C4196A0066215E /* SuperUsefulCode */ = {
-			isa = PBXGroup;
-			children = (
-				F62476B522C4196A0066215E /* BodyPartNode.swift */,
-				F62476B622C4196A0066215E /* StringExtension.swift */,
-			);
-			path = SuperUsefulCode;
 			sourceTree = "<group>";
 		};
 		F62476B922C42D1A0066215E /* ImageHelper */ = {
@@ -257,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F62476BD22C436410066215E /* VideoTexturedFace.shader in Resources */,
 				F624769122C414C60066215E /* LaunchScreen.storyboard in Resources */,
 				F624768E22C414C60066215E /* Assets.xcassets in Resources */,
 				F624768922C414C50066215E /* Main.storyboard in Resources */,
@@ -284,9 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F62476B722C4196A0066215E /* BodyPartNode.swift in Sources */,
 				F624768622C414C50066215E /* ViewController.swift in Sources */,
-				F62476B822C4196A0066215E /* StringExtension.swift in Sources */,
 				F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */,
 				F624768422C414C50066215E /* AppDelegate.swift in Sources */,
 				F624768C22C414C50066215E /* WeirdFace.xcdatamodeld in Sources */,

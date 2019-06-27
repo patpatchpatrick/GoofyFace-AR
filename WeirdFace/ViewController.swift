@@ -8,15 +8,15 @@
 
 import UIKit
 import ARKit
+import SceneKit
 
 class ViewController: UIViewController {
     
     
     @IBOutlet var sceneView: ARSCNView!
     
-    var noseNode: BodyPartNode?
-    var capturedFrameImage: UIImage?
-    var num = 1
+    var contentNode: SCNNode?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,6 @@ class ViewController: UIViewController {
         }
         
         sceneView.delegate = self
-        sceneView.session.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,21 +41,6 @@ class ViewController: UIViewController {
         
         sceneView.session.pause()
     }
-    
-    func updateFeatures(for node: SCNNode, using anchor: ARFaceAnchor) {
-        // 1
-        
-        if let pix = capturedFrameImage {
-         noseNode?.image = pix
-        }
-        
-        let child = node.childNode(withName: "nose", recursively: false) as? BodyPartNode
-        child?.plane?.firstMaterial?.diffuse.contents = child?.image
-     
-        let vertices = [anchor.geometry.vertices[9]]
-        
-        child?.updatePosition(for: vertices)
-    }
 
     
 
@@ -67,31 +51,23 @@ extension ViewController: ARSCNViewDelegate {
     // 2
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
+        guard let sceneView = renderer as? ARSCNView,
+            anchor is ARFaceAnchor else { return nil }
         
-        guard let faceAnchor = anchor as? ARFaceAnchor,
-            let device = sceneView.device else {
-                return nil
-        }
+        #if targetEnvironment(simulator)
+        #error("ARKit is not supported in iOS Simulator. Connect a physical iOS device and select it as your Xcode run destination, or select Generic iOS Device as a build-only destination.")
+        #else
+        let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
+        let material = faceGeometry.firstMaterial!
         
-        let faceGeometry = ARSCNFaceGeometry(device: device)
+        material.diffuse.contents = UIImage(named: "facegrid") // Example texture map image.
+        material.lightingModel = .physicallyBased
         
-        let node = SCNNode(geometry: faceGeometry)
+        contentNode = SCNNode(geometry: faceGeometry)
+        #endif
+        return contentNode
         
-        node.geometry?.firstMaterial?.fillMode = .lines
         
-        node.geometry?.firstMaterial?.transparency = 0.0
-        
-        noseNode = BodyPartNode()
-        
-        noseNode?.name = "nose"
-        
-        if let bodyPartNode = noseNode {
-            node.addChildNode(bodyPartNode)
-        }
-        
-        updateFeatures(for: node, using: faceAnchor)
-        
-        return node
     }
     
     func renderer(
@@ -99,24 +75,14 @@ extension ViewController: ARSCNViewDelegate {
         didUpdate node: SCNNode,
         for anchor: ARAnchor) {
 
-        guard let faceAnchor = anchor as? ARFaceAnchor,
-            let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
-                return
-        }
+        guard let faceGeometry = node.geometry as? ARSCNFaceGeometry,
+            let faceAnchor = anchor as? ARFaceAnchor
+            else { return }
         
         faceGeometry.update(from: faceAnchor.geometry)
-        
-        updateFeatures(for: node, using: faceAnchor)
+ 
     }
     
 }
 
-extension ViewController: ARSessionDelegate {
-    
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        capturedFrameImage = UIImage(pixelBuffer: frame.capturedImage)
-    }
-    
-    
-}
 
