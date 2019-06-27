@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var sceneView: ARSCNView!
     
     var contentNode: SCNNode?
-    var tattooWidth: CGFloat = 1000.0
-    var tattooHeight: CGFloat = 1000.0
+    var tattooWidth: CGFloat = 200.0
+    var tattooHeight: CGFloat = 100.0
     var tattooX: CGFloat = 0.0
     var tattooY: CGFloat = 0.0
     var imageChanged = false
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             fatalError("Face tracking is not supported on this device")
         }
         
-        primaryImage = UIImage(named: "noragrets")
+        primaryImage = UIImage(named: "exampletat")
         
         sceneView.delegate = self
     }
@@ -130,6 +130,33 @@ class ViewController: UIViewController {
         
     }
     
+    func setImageForehead(){
+        
+        let resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
+        
+        
+        
+        let expandedSize = CGSize(width: 1000, height: 1000)
+        
+        imageOnCanvas = drawImageOnCanvas(resizedImg, canvasSize: expandedSize, canvasColor: .clear, x:500 - 100, y: 692)
+        
+        contentImage = imageOnCanvas
+    }
+    
+    func setImageRotated(){
+        let resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
+        
+        let rotatedImage = resizedImg.rotate(radians: 0.436332)
+        
+        let expandedSize = CGSize(width: 1000, height: 1000)
+        
+        imageOnCanvas = drawImageOnCanvas(rotatedImage!, canvasSize: expandedSize, canvasColor: .clear, x:142, y: 380)
+        
+        contentImage = imageOnCanvas
+        
+        
+    }
+    
     
 
 }
@@ -149,13 +176,7 @@ extension ViewController: ARSCNViewDelegate {
         
         
             
-             let resizedImg = resizeImage(image: primaryImage!, targetSize: CGSize(width: tattooWidth, height: tattooHeight))
-            
-            let expandedSize = CGSize(width: 1000, height: 1000)
-            
-            imageOnCanvas = drawImageOnCanvas(resizedImg, canvasSize: expandedSize, canvasColor: .clear, x:tattooX, y: tattooY)
-            
-            contentImage = imageOnCanvas
+             setImageRotated()
             
             material.diffuse.contents = contentImage// Example texture map image.
             material.lightingModel = .physicallyBased

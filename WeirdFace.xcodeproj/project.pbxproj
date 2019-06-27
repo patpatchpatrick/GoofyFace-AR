@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F60EA44822C53895002BE1CD /* TattooModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44722C53895002BE1CD /* TattooModel.swift */; };
 		F624768422C414C50066215E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624768322C414C50066215E /* AppDelegate.swift */; };
 		F624768622C414C50066215E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624768522C414C50066215E /* ViewController.swift */; };
 		F624768922C414C50066215E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F624768722C414C50066215E /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F60EA44722C53895002BE1CD /* TattooModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooModel.swift; sourceTree = "<group>"; };
 		F624768022C414C50066215E /* WeirdFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeirdFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F624768322C414C50066215E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F624768522C414C50066215E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F60EA44622C53869002BE1CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F60EA44722C53895002BE1CD /* TattooModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F624767722C414C50066215E = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		F624768222C414C50066215E /* WeirdFace */ = {
 			isa = PBXGroup;
 			children = (
+				F60EA44622C53869002BE1CD /* Model */,
 				F62476B922C42D1A0066215E /* ImageHelper */,
 				F624768322C414C50066215E /* AppDelegate.swift */,
 				F624768522C414C50066215E /* ViewController.swift */,
@@ -275,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F624768622C414C50066215E /* ViewController.swift in Sources */,
+				F60EA44822C53895002BE1CD /* TattooModel.swift in Sources */,
 				F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */,
 				F624768422C414C50066215E /* AppDelegate.swift in Sources */,
 				F624768C22C414C50066215E /* WeirdFace.xcdatamodeld in Sources */,
