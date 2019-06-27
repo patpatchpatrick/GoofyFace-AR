@@ -38,7 +38,12 @@ enum TattooType: Int, Printable, CaseIterable {
 }
 
 public class TattooModel {
-    let image: UIImage?
+    var image: UIImage?
+    var imageName: String {
+        didSet {
+            self.image = UIImage(named: imageName)
+        }
+    }
     var type: TattooType {
         didSet {
             updateDimensions()
@@ -52,6 +57,7 @@ public class TattooModel {
     
     init(
                 imageName: String, tattooType: TattooType) {
+        self.imageName = imageName
         self.image = UIImage(named: imageName)
         self.type = tattooType
         switch type {

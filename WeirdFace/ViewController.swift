@@ -13,6 +13,7 @@ import SceneKit
 class ViewController: UIViewController {
     
 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
@@ -28,6 +29,8 @@ class ViewController: UIViewController {
             fatalError("Face tracking is not supported on this device")
         }
         
+        collectionView.delegate = self
+        collectionView.dataSource = self
         tabBar.delegate = self
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
@@ -226,10 +229,46 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 extension ViewController: UITabBarDelegate {
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 2 {
-            print("ADD TATTOO")
+        //If the "Select Image Button" is tapped, the collection view should appear for the user to select a tattoo image
+        if item.tag == 0 {
+            collectionView.isHidden = false
+        } else {
+            collectionView.isHidden = true
+        }
+        
+        if item.tag == 1 {
+            viewModel?.displayPositionMap()
+            tattooTypePicker.isHidden = false
+        } else {
+            tattooTypePicker.isHidden = true
         }
     }
+    
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tattooImagesCount
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! CollectionViewCell
+        let imageName = String(indexPath.row)
+        print("INDEX PATH", indexPath.row)
+        cell.collectionImage.image = UIImage(named: imageName)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //Update the image in the viewModel to match the image selected in the collection view by the user
+        let imageName = String(indexPath.row)
+        viewModel?.changeImage(named: imageName)
+        collectionView.isHidden = true
+    }
+    
+    
+    
     
 }
 

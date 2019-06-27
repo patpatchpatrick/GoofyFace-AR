@@ -39,8 +39,28 @@ public class TattooViewModel {
         
     }
     
+    func displayPositionMap(){
+        
+        //Set the image on the user's face to show a map of tattoo positions
+        
+        DispatchQueue.global(qos: .background).async {
+            guard let image = UIImage(named: "positionMap") else {return}
+            self.image = image
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
+            }
+        }
+        
+        
+    }
+    
     func changeTattooType(type: TattooType){
         self.tattoo.type = type
+        loadImage()
+    }
+    
+    func changeImage(named: String){
+        self.tattoo.imageName = named
         loadImage()
     }
     
