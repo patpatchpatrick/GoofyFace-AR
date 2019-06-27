@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class TattooModel {
-    public let image: UIImage
+    let image: UIImage?
     let position: Int
     var width: CGFloat
     var height: CGFloat
@@ -18,9 +18,9 @@ public class TattooModel {
     var y: CGFloat
     var rotation: CGFloat
     
-    public init(name: String,
-                image: UIImage, width: CGFloat, height: CGFloat, position: Int) {
-        self.image = image
+    public init(
+                imageName: String, width: CGFloat, height: CGFloat, position: Int) {
+        self.image = UIImage(named: imageName)
         self.width = width
         self.height = height
         self.position = position
@@ -32,3 +32,5 @@ public class TattooModel {
         }
     }
 }
+
+
