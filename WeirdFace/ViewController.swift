@@ -12,6 +12,7 @@ import SceneKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var mainView: ARSCNView!
     
     @IBOutlet weak var uploadImageBorderedView: BorderedView!
     @IBOutlet weak var uploadedImage: UIImageView!
@@ -23,6 +24,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
      var imagePicker = UIImagePickerController()
+    
+    let modeSelect = 0
+    let modeDraw = 1
+    let modeUpload = 2
+    let modePosition = 3
+    let modePlace = 4
+    
+    var viewMode:Int = 0
     
     var imageChanged = false
     var viewModel: TattooViewModel?
@@ -113,85 +122,76 @@ class ViewController: UIViewController {
     
     
     
-    @IBAction func plusButtonTapped(_ sender: UIButton) {
-        /*
-        if tattooHeight < 900.0 {
-            tattooWidth += 100.0
-            tattooHeight += 100.0
-            checkPositions()
-              imageChanged = true
-        }
- */
+    @IBAction func rotateClockwise(_ sender: UIButton) {
+        viewModel?.rotation -= 1.0
+        
+        viewModel?.loadImage()
         
     }
     
     
-    @IBAction func minusButtonTapped(_ sender: UIButton) {
-        /*
-        if tattooHeight > 200.0 {
-            tattooWidth -= 100.0
-            tattooHeight -= 100.0
-            checkPositions()
-              imageChanged = true
-        }
- */
+    @IBAction func rotateCounterClock(_ sender: UIButton) {
+        viewModel?.rotation += 1.0
+        
+        viewModel?.loadImage()
     }
     
     
     @IBAction func plusX(_ sender: UIButton) {
-        /*
-        tattooX += 100.0
-        if tattooX > (1000 - tattooWidth) {
-            tattooX = 1000 - tattooWidth
-        }
-        imageChanged = true */
+        viewModel?.x += 10.0
+        
+        viewModel?.loadImage()
         
     }
     
     
     @IBAction func plusY(_ sender: UIButton) {
-        /*
-        tattooY += 100.0
-        if tattooY > (1000 - tattooHeight) {
-            tattooY = 1000 - tattooHeight
-        }
-        imageChanged = true */
+        viewModel?.y += 10.0
+        
+        viewModel?.loadImage()
         
     }
     
     
     @IBAction func minusX(_ sender: UIButton) {
-        /*
+        viewModel?.x -= 10.0
         
-        tattooX -= 100.0
-        if tattooX < 0 {
-            tattooX = 0
-        }
-         imageChanged = true */
+        viewModel?.loadImage()
         
     }
     
     @IBAction func minusY(_ sender: UIButton) {
-        /*
-        tattooY -= 100.0
-        if tattooY < 0 {
-            tattooY = 0
-        }
-     imageChanged = true */
+        
+        viewModel?.y -= 10.0
+
+     viewModel?.loadImage()
         
     }
     
-    func checkPositions(){
-        /*
-        if tattooY > (1000 - tattooHeight) {
-            tattooY = 1000 - tattooHeight
-            imageChanged = true
-        }
-        if tattooX > (1000 - tattooWidth) {
-            tattooX = 1000 - tattooWidth
-            imageChanged = true
-        } */
+    
+    @IBAction func viewPanned(_ sender: UIPanGestureRecognizer) {
         
+        if viewMode == modePosition {
+            let vel = sender.velocity(in: self.mainView)
+            if vel.x > 0 {
+                // user dragged towards the right
+                print("right")
+            }
+            else if vel.x < 0 {
+                // user dragged towards the left
+                print("left")
+            }
+            
+            if vel.y > 0 {
+                // user dragged towards the down
+                print("down")
+            }
+            else if vel.y < 0 {
+                print("up")
+            }
+            
+            
+        }
     }
     
     func resetDrawView(){
@@ -290,20 +290,21 @@ extension ViewController: UITabBarDelegate {
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         //If the "Select Image Button" is tapped, the collection view should appear for the user to select a tattoo image
-        if item.tag == 0 {
+        viewMode = item.tag
+        if item.tag == modeSelect {
             collectionView.isHidden = false
         } else {
             collectionView.isHidden = true
         }
         
-        if item.tag == 1 {
+        if item.tag == modeDraw {
             resetDrawView()
             drawnImageContainerView.isHidden = false
         } else {
             drawnImageContainerView.isHidden = true
         }
         
-        if item.tag == 2 {
+        if item.tag == modeUpload {
             resetUploadView()
             uploadedImageContainer.isHidden = false
             selectUploadPicture()
@@ -311,14 +312,14 @@ extension ViewController: UITabBarDelegate {
             uploadedImageContainer.isHidden = true
         }
         
-        if item.tag == 3 {
+        if item.tag == modePosition {
             viewModel?.displayPositionMap()
             tattooTypePicker.isHidden = false
         } else {
             tattooTypePicker.isHidden = true
         }
         
-        if item.tag == 4 {
+        if item.tag == modePlace {
             //If the "Add Tattoo" button is clicked, commit the tattoo to the canvas (i.e. the user's face)
             viewModel?.commitTattoo()
         }

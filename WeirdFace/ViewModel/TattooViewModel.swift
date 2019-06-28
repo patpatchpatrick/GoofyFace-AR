@@ -19,6 +19,10 @@ public class TattooViewModel {
     var canvas: UIImage?
     var lastCanvas: UIImage?
     
+    var x: CGFloat = 400
+    var y: CGFloat = 400
+    var rotation: Float = 0
+    
     public init(tattooModel: TattooModel) {
         self.tattoo = tattooModel
     }
@@ -29,9 +33,11 @@ public class TattooViewModel {
         DispatchQueue.global(qos: .background).async {
             guard let image = self.tattoo.image else {return}
             let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
-            let rotatedImage = resizedImg.rotate(radians: self.tattoo.rotation)
+            //let rotatedImage = resizedImg.rotate(radians: self.tattoo.rotation)
+            let rotatedImage = resizedImg.rotate(radians: self.rotation)
             let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
-            let currentCanvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.tattoo.x, y: self.tattoo.y)
+            //let currentCanvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.tattoo.x, y: self.tattoo.y)
+            let currentCanvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.x, y: self.y)
             self.image = currentCanvas.alpha(0.8)
             
             DispatchQueue.main.async {
