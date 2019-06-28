@@ -12,12 +12,17 @@ import SceneKit
 
 class ViewController: UIViewController {
     
+    
+    @IBOutlet weak var uploadImageBorderedView: BorderedView!
+    @IBOutlet weak var uploadedImage: UIImageView!
+    @IBOutlet weak var uploadedImageContainer: UIView!
     @IBOutlet weak var drawnImageContainerView: UIView!
     @IBOutlet weak var drawnImageView: DrawnImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
+     var imagePicker = UIImagePickerController()
     
     var imageChanged = false
     var viewModel: TattooViewModel?
@@ -76,6 +81,36 @@ class ViewController: UIViewController {
         drawnImageContainerView.isHidden = true
         
     }
+    
+    
+    @IBAction func canvasDrawingDiscarded(_ sender: UIButton) {
+        
+        drawnImageContainerView.isHidden = true
+        drawnImageView.clear()
+        
+    }
+    
+    
+    @IBAction func uploadedImageAccepted(_ sender: UIButton) {
+        guard let image = uploadedImage.image else {return}
+        uploadImageBorderedView.layer.borderWidth = 0.0
+        guard let uploadedImage = uploadImageBorderedView.screenShot else {return}
+        
+        viewModel?.changeImage(image: uploadedImage)
+        uploadedImageContainer.isHidden = true
+    }
+    
+    
+    @IBAction func uploadedImageDiscarded(_ sender: UIButton) {
+        uploadedImageContainer.isHidden = true
+    }
+    
+    @IBAction func imageResizedByPinch(_ sender: UIPinchGestureRecognizer) {
+        
+        uploadedImage.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+        
+    }
+    
     
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
@@ -163,6 +198,11 @@ class ViewController: UIViewController {
         drawnImageView.layer.backgroundColor = UIColor.white.cgColor
         drawnImageView.layer.borderWidth = 2.0
     }
+    
+    func resetUploadView(){
+        uploadImageBorderedView.layer.borderWidth = 2.0
+    }
+    
     
 }
 
@@ -264,13 +304,21 @@ extension ViewController: UITabBarDelegate {
         }
         
         if item.tag == 2 {
+            resetUploadView()
+            uploadedImageContainer.isHidden = false
+            selectUploadPicture()
+        } else {
+            uploadedImageContainer.isHidden = true
+        }
+        
+        if item.tag == 3 {
             viewModel?.displayPositionMap()
             tattooTypePicker.isHidden = false
         } else {
             tattooTypePicker.isHidden = true
         }
         
-        if item.tag == 3 {
+        if item.tag == 4 {
             //If the "Add Tattoo" button is clicked, commit the tattoo to the canvas (i.e. the user's face)
             viewModel?.commitTattoo()
         }
@@ -301,6 +349,36 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     
     
+    
+}
+
+extension ViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    
+    func selectUploadPicture(){
+        
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            print("Button capture")
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)
+        guard let image = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        //let size = CGSize(width: 200, height: 200)
+        //let croppedImage = image.crop(to: size)
+        uploadedImage.image = image
+        
+    }
     
 }
 

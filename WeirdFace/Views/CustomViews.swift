@@ -44,6 +44,11 @@ class DrawnImageView: UIImageView {
         isUserInteractionEnabled = true
     }
     
+    func clear(){
+        path.removeAllPoints()
+            shapeLayer.path = path.cgPath
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if let location = touches.first?.location(in: self) { previousTouchPoint = location }
@@ -62,6 +67,29 @@ class DrawnImageView: UIImageView {
 
 @IBDesignable
 class BorderedDrawnImageView: DrawnImageView {
+    @IBInspectable var borderColor: UIColor? {
+        set {
+            guard let uiColor = newValue else { return }
+            layer.borderColor = uiColor.cgColor
+        }
+        get {
+            guard let color = layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
+    }
+}
+
+@IBDesignable
+class BorderedView: UIView{
     @IBInspectable var borderColor: UIColor? {
         set {
             guard let uiColor = newValue else { return }

@@ -114,11 +114,26 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ya-u3-Wpc">
                                 <rect key="frame" x="0.0" y="44" width="414" height="735"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbI-J8-cpZ">
-                                        <rect key="frame" x="336" y="685" width="58" height="30"/>
-                                        <state key="normal" title="ACCEPT"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbI-J8-cpZ">
+                                        <rect key="frame" x="290" y="611" width="104" height="104"/>
+                                        <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="iconCheckMark">
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
                                         <connections>
                                             <action selector="canvasDrawingAccepted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ohR-1e-2k5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YD-bA-91R">
+                                        <rect key="frame" x="20" y="625" width="90" height="90"/>
+                                        <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="iconDiscard">
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="canvasDrawingDiscarded:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RAq-Kr-gdD"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-Vk-1Wr" customClass="BorderedDrawnImageView" customModule="WeirdFace" customModuleProvider="target">
@@ -141,9 +156,78 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ieo-Vk-1Wr" firstAttribute="centerY" secondItem="1ya-u3-Wpc" secondAttribute="centerY" id="QQD-tZ-0Jb"/>
+                                    <constraint firstItem="8YD-bA-91R" firstAttribute="leading" secondItem="1ya-u3-Wpc" secondAttribute="leading" constant="20" id="VHu-UH-h59"/>
                                     <constraint firstAttribute="bottom" secondItem="SbI-J8-cpZ" secondAttribute="bottom" constant="20" id="eEh-zL-9IA"/>
+                                    <constraint firstAttribute="bottom" secondItem="8YD-bA-91R" secondAttribute="bottom" constant="20" id="evl-xX-x64"/>
                                     <constraint firstItem="ieo-Vk-1Wr" firstAttribute="centerX" secondItem="1ya-u3-Wpc" secondAttribute="centerX" id="g9c-fJ-6cO"/>
                                     <constraint firstAttribute="trailing" secondItem="SbI-J8-cpZ" secondAttribute="trailing" constant="20" id="yvm-C7-Jtk"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Ct-qDG">
+                                <rect key="frame" x="0.0" y="44" width="414" height="735"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-Pw-Uuz">
+                                        <rect key="frame" x="20" y="625" width="90" height="90"/>
+                                        <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="iconDiscard">
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="uploadedImageDiscarded:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cqV-ae-zBD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUL-rS-EfA">
+                                        <rect key="frame" x="290" y="611" width="104" height="104"/>
+                                        <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="iconCheckMark">
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="uploadedImageAccepted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RWy-E8-saT"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2s-JJ-VR2" customClass="BorderedView" customModule="WeirdFace" customModuleProvider="target">
+                                        <rect key="frame" x="7" y="267.5" width="400" height="200"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SoO-Kd-aHe">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="U4f-Id-PCa"/>
+                                                    <constraint firstAttribute="width" constant="400" id="yjM-1Q-V1J"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="fiT-hB-J7C" appends="YES" id="fCp-LY-N2r"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="2Vf-Hd-8NX"/>
+                                            <constraint firstItem="SoO-Kd-aHe" firstAttribute="centerY" secondItem="O2s-JJ-VR2" secondAttribute="centerY" id="DVZ-f8-mne"/>
+                                            <constraint firstItem="SoO-Kd-aHe" firstAttribute="centerX" secondItem="O2s-JJ-VR2" secondAttribute="centerX" id="PkZ-4z-Ji5"/>
+                                            <constraint firstAttribute="width" constant="400" id="uyi-u7-Dux"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="pEf-Pw-Uuz" secondAttribute="bottom" constant="20" id="Gea-QD-Glt"/>
+                                    <constraint firstAttribute="trailing" secondItem="zUL-rS-EfA" secondAttribute="trailing" constant="20" id="UOG-ny-geg"/>
+                                    <constraint firstItem="O2s-JJ-VR2" firstAttribute="centerX" secondItem="kiK-Ct-qDG" secondAttribute="centerX" id="j5a-IP-u7T"/>
+                                    <constraint firstAttribute="bottom" secondItem="zUL-rS-EfA" secondAttribute="bottom" constant="20" id="pCr-r2-Bhw"/>
+                                    <constraint firstItem="O2s-JJ-VR2" firstAttribute="centerY" secondItem="kiK-Ct-qDG" secondAttribute="centerY" id="sc2-i5-Iqv"/>
+                                    <constraint firstItem="pEf-Pw-Uuz" firstAttribute="leading" secondItem="kiK-Ct-qDG" secondAttribute="leading" constant="20" id="ure-wk-g0l"/>
                                 </constraints>
                             </view>
                             <tabBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="lUI-CS-egL">
@@ -156,11 +240,13 @@
                                     <tabBarItem tag="1" title="Custom Tattoo" image="iconDraw" id="1Y2-b5-LSz">
                                         <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                     </tabBarItem>
-                                    <tabBarItem tag="2" title="Select Position" image="iconPosition" id="eD9-1i-A5P">
+                                    <tabBarItem tag="2" title="Upload Tattoo" image="iconUpload" id="R5u-Fc-AMs">
                                         <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                     </tabBarItem>
-                                    <tabBarItem tag="3" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
-                                    <tabBarItem tag="4" title="Blend Shapes" image="blendShapes" id="R5u-Fc-AMs"/>
+                                    <tabBarItem tag="3" title="Select Position" image="iconPosition" id="eD9-1i-A5P">
+                                        <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                    </tabBarItem>
+                                    <tabBarItem tag="4" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
                                 </items>
                             </tabBar>
                         </subviews>
@@ -172,7 +258,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lUI-CS-egL" secondAttribute="trailing" id="Li7-sO-VHO"/>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UzG-TH-Msb"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="B4U-NF-7Rw" secondAttribute="bottom" id="WB9-Jt-JyK"/>
+                            <constraint firstItem="kiK-Ct-qDG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fgf-6N-SWD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1ya-u3-Wpc" secondAttribute="trailing" id="gWG-rt-B6j"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kiK-Ct-qDG" secondAttribute="trailing" id="h1Y-tW-rOD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Atl-Lq-BB2" secondAttribute="bottom" id="hSU-r7-osO"/>
                             <constraint firstItem="B4U-NF-7Rw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jgk-EO-ntF"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="1ya-u3-Wpc" secondAttribute="bottom" id="juc-TI-lPX"/>
@@ -181,6 +269,8 @@
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocq-ZH-Cba"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
+                            <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
+                            <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="kiK-Ct-qDG" secondAttribute="bottom" id="zgk-Aw-Tj2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -194,18 +284,28 @@
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
+                        <outlet property="uploadImageBorderedView" destination="O2s-JJ-VR2" id="9Ww-JI-PM0"/>
+                        <outlet property="uploadedImage" destination="SoO-Kd-aHe" id="3iT-Q2-ghh"/>
+                        <outlet property="uploadedImageContainer" destination="kiK-Ct-qDG" id="onU-gj-lkI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="fiT-hB-J7C">
+                    <connections>
+                        <action selector="imageResizedByPinch:" destination="BYZ-38-t0r" id="MEc-l7-Yep"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="18.75"/>
         </scene>
     </scenes>
     <resources>
-        <image name="blendShapes" width="16" height="16"/>
+        <image name="iconCheckMark" width="104" height="104"/>
+        <image name="iconDiscard" width="90" height="90"/>
         <image name="iconDraw" width="96" height="96"/>
         <image name="iconPosition" width="100" height="100"/>
         <image name="iconTattoo" width="100" height="100"/>
+        <image name="iconUpload" width="96" height="96"/>
         <image name="plusIcon" width="52" height="52"/>
     </resources>
 </document>
