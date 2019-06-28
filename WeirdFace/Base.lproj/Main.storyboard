@@ -72,6 +72,7 @@
                                     <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="And-L5-wPD">
                                         <rect key="frame" x="0.0" y="483" width="414" height="216"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,6 +111,41 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ya-u3-Wpc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="735"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbI-J8-cpZ">
+                                        <rect key="frame" x="336" y="685" width="58" height="30"/>
+                                        <state key="normal" title="ACCEPT"/>
+                                        <connections>
+                                            <action selector="canvasDrawingAccepted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ohR-1e-2k5"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-Vk-1Wr" customClass="BorderedDrawnImageView" customModule="WeirdFace" customModuleProvider="target">
+                                        <rect key="frame" x="7" y="267.5" width="400" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="0jJ-uX-Z1G"/>
+                                            <constraint firstAttribute="width" constant="400" id="Hun-3x-USt"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ieo-Vk-1Wr" firstAttribute="centerY" secondItem="1ya-u3-Wpc" secondAttribute="centerY" id="QQD-tZ-0Jb"/>
+                                    <constraint firstAttribute="bottom" secondItem="SbI-J8-cpZ" secondAttribute="bottom" constant="20" id="eEh-zL-9IA"/>
+                                    <constraint firstItem="ieo-Vk-1Wr" firstAttribute="centerX" secondItem="1ya-u3-Wpc" secondAttribute="centerX" id="g9c-fJ-6cO"/>
+                                    <constraint firstAttribute="trailing" secondItem="SbI-J8-cpZ" secondAttribute="trailing" constant="20" id="yvm-C7-Jtk"/>
+                                </constraints>
+                            </view>
                             <tabBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="lUI-CS-egL">
                                 <rect key="frame" x="0.0" y="779" width="414" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -117,11 +153,13 @@
                                     <tabBarItem title="Select Tattoo" image="iconTattoo" id="8HX-JG-j86">
                                         <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                     </tabBarItem>
-                                    <tabBarItem tag="1" title="Select Position" image="iconPosition" id="eD9-1i-A5P">
+                                    <tabBarItem tag="1" title="Custom Tattoo" image="iconDraw" id="1Y2-b5-LSz">
                                         <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                     </tabBarItem>
-                                    <tabBarItem tag="2" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
-                                    <tabBarItem tag="3" title="Video Texture" image="videoTexture" id="1Y2-b5-LSz"/>
+                                    <tabBarItem tag="2" title="Select Position" image="iconPosition" id="eD9-1i-A5P">
+                                        <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                    </tabBarItem>
+                                    <tabBarItem tag="3" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
                                     <tabBarItem tag="4" title="Blend Shapes" image="blendShapes" id="R5u-Fc-AMs"/>
                                 </items>
                             </tabBar>
@@ -130,13 +168,17 @@
                         <constraints>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="71C-ei-uB6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lUI-CS-egL" secondAttribute="bottom" id="BbK-EF-IWd"/>
+                            <constraint firstItem="1ya-u3-Wpc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EM4-Dn-4Wo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lUI-CS-egL" secondAttribute="trailing" id="Li7-sO-VHO"/>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UzG-TH-Msb"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="B4U-NF-7Rw" secondAttribute="bottom" id="WB9-Jt-JyK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1ya-u3-Wpc" secondAttribute="trailing" id="gWG-rt-B6j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Atl-Lq-BB2" secondAttribute="bottom" id="hSU-r7-osO"/>
                             <constraint firstItem="B4U-NF-7Rw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jgk-EO-ntF"/>
+                            <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="1ya-u3-Wpc" secondAttribute="bottom" id="juc-TI-lPX"/>
                             <constraint firstItem="B4U-NF-7Rw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mMI-vY-ZvD"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="n3K-7Z-xma"/>
+                            <constraint firstItem="1ya-u3-Wpc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocq-ZH-Cba"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
                         </constraints>
@@ -147,6 +189,8 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="B4U-NF-7Rw" id="Ghn-rv-ouP"/>
+                        <outlet property="drawnImageContainerView" destination="1ya-u3-Wpc" id="e8i-Dv-5Jc"/>
+                        <outlet property="drawnImageView" destination="ieo-Vk-1Wr" id="EFM-NH-Y6Y"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
@@ -159,9 +203,9 @@
     </scenes>
     <resources>
         <image name="blendShapes" width="16" height="16"/>
+        <image name="iconDraw" width="96" height="96"/>
         <image name="iconPosition" width="100" height="100"/>
         <image name="iconTattoo" width="100" height="100"/>
         <image name="plusIcon" width="52" height="52"/>
-        <image name="videoTexture" width="16" height="16"/>
     </resources>
 </document>

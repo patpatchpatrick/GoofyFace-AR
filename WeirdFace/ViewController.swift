@@ -12,7 +12,8 @@ import SceneKit
 
 class ViewController: UIViewController {
     
-
+    @IBOutlet weak var drawnImageContainerView: UIView!
+    @IBOutlet weak var drawnImageView: DrawnImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
@@ -65,6 +66,16 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func canvasDrawingAccepted(_ sender: UIButton) {
+        
+        //Update the tattoo image to be the user's drawing
+        drawnImageView.layer.backgroundColor = UIColor.clear.cgColor
+        drawnImageView.layer.borderWidth = 0.0
+        let userDrawing = drawnImageView.screenShot
+        viewModel?.changeImage(image: userDrawing!)
+        drawnImageContainerView.isHidden = true
+        
+    }
     
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
@@ -148,6 +159,10 @@ class ViewController: UIViewController {
         
     }
     
+    func resetDrawView(){
+        drawnImageView.layer.backgroundColor = UIColor.white.cgColor
+        drawnImageView.layer.borderWidth = 2.0
+    }
     
 }
 
@@ -224,6 +239,11 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
     }
     
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let string = TattooType(rawValue: row+1)?.description
+        return NSAttributedString(string: string!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+    }
+    
 }
 
 extension ViewController: UITabBarDelegate {
@@ -237,10 +257,22 @@ extension ViewController: UITabBarDelegate {
         }
         
         if item.tag == 1 {
+            resetDrawView()
+            drawnImageContainerView.isHidden = false
+        } else {
+            drawnImageContainerView.isHidden = true
+        }
+        
+        if item.tag == 2 {
             viewModel?.displayPositionMap()
             tattooTypePicker.isHidden = false
         } else {
             tattooTypePicker.isHidden = true
+        }
+        
+        if item.tag == 3 {
+            //If the "Add Tattoo" button is clicked, commit the tattoo to the canvas (i.e. the user's face)
+            viewModel?.commitTattoo()
         }
     }
     

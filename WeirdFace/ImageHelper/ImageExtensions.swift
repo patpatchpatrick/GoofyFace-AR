@@ -12,6 +12,9 @@ import VideoToolbox
 
 func drawImageOnCanvas(_ useImage: UIImage, canvas: UIImage?, canvasSize: CGSize, x: CGFloat, y: CGFloat ) -> UIImage {
     
+    //This method takes a canvas image, and adds another image to it at a given position
+    //This method is used to add tattoos to the face map canvas, and it allows tattoos to overlay each other
+    
     let rect = CGRect(origin: .zero, size: canvasSize)
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
     
@@ -124,5 +127,8 @@ extension UIImage {
         return newImage!
     }
 }
+
+
+
 
 
