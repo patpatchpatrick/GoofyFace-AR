@@ -51,12 +51,17 @@ public class TattooViewModel {
         print("Loading Image")
         DispatchQueue.global(qos: .background).async {
             guard let image = self.tattoo.image else {return}
-            let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
+            
+            var resizedImg: UIImage?
+            switch self.positionType {
+            case .auto:    resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
+            case .manual:  resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.width, height: self.height))
+            }
             
             var rotatedImage: UIImage?
             switch self.positionType {
-            case .auto:    rotatedImage = resizedImg.rotate(radians: self.tattoo.rotation)
-            case .manual:  rotatedImage = resizedImg.rotate(radians: self.rotation)
+            case .auto:    rotatedImage = resizedImg!.rotate(radians: self.tattoo.rotation)
+            case .manual:  rotatedImage = resizedImg!.rotate(radians: self.rotation)
             }
             
             let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
@@ -78,25 +83,38 @@ public class TattooViewModel {
     
     func reset(){
         
-        positionType = .auto //reset position type to auto, which is the default
+        //reset default position and tattoo types
+        self.positionType = .auto
+        self.tattoo.type = .new
         
-        //Reset the viewModel by displaying a blank image so that the user can select a new tattoo
+        //Set canvas back to nil to reset the image
+        self.canvas = nil
+        
+        //Reload a blank image
         DispatchQueue.global(qos: .background).async {
-            guard let image = UIImage(named: "blank") else {return}
-            let resizedImg = resizeImage(image: image, targetSize: CGSize(width: 1, height: 1))
             
-            let rotatedImage = resizedImg.rotate(radians: 0)
-            
+            guard let resetImage = UIImage(named: "blank") else {return}
             let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
-            
-            let currentCanvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: 999 , y: 999)
-            
+            let resizedResetImg = resizeImage(image: resetImage, targetSize: CGSize(width: 1, height: 1))
+            let resetRotatedImage = resizedResetImg.rotate(radians: 0)
+            let currentCanvas = drawImageOnCanvas(resetRotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: 999 , y: 999)
             self.image = currentCanvas.alpha(0.8)
+            
+            self.x = 400
+            self.y = 400
+            self.width = 200
+            self.height = 100
+            self.rotation = 0
+            
+            //reset default position and tattoo types
+            self.positionType = .auto
+            self.tattoo.type = .new
             
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
             }
         }
+        
         
     }
     
@@ -104,10 +122,10 @@ public class TattooViewModel {
         print("Loading Image")
         DispatchQueue.global(qos: .background).async {
             guard let image = self.tattoo.image else {return}
-            let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
-            let rotatedImage = resizedImg.rotate(radians: self.tattoo.rotation)
+            let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.width, height: self.height))
+            let rotatedImage = resizedImg.rotate(radians: self.rotation)
             let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
-            self.canvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.tattoo.x, y: self.tattoo.y)
+            self.canvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.x, y: self.y)
             self.image = self.canvas?.alpha(0.8)
             
             guard let resetImage = UIImage(named: "blank") else {return}
@@ -119,6 +137,12 @@ public class TattooViewModel {
             //reset default position and tattoo types
             self.positionType = .auto
             self.tattoo.type = .new
+            
+            self.x = 400
+            self.y = 400
+            self.width = 200
+            self.height = 100
+            self.rotation = 0
             
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)

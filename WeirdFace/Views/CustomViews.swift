@@ -39,7 +39,7 @@ class DrawnImageView: UIImageView {
     
     func setupView(){
         layer.addSublayer(shapeLayer)
-        shapeLayer.lineWidth = 4
+        shapeLayer.lineWidth = 7
         shapeLayer.strokeColor = UIColor.black.cgColor
         isUserInteractionEnabled = true
     }

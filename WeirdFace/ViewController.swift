@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     let modeUpload = 2
     let modePosition = 3
     let modePlace = 4
+    let modeSave = 5
     
     var viewMode:Int = 0
     
@@ -172,30 +173,23 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func viewPanned(_ sender: UIPanGestureRecognizer) {
+    @IBAction func sizeDecrease(_ sender: UIButton) {
         
-        if viewMode == modePosition {
-            let vel = sender.velocity(in: self.mainView)
-            if vel.x > 0 {
-                // user dragged towards the right
-                print("right")
-            }
-            else if vel.x < 0 {
-                // user dragged towards the left
-                print("left")
-            }
-            
-            if vel.y > 0 {
-                // user dragged towards the down
-                print("down")
-            }
-            else if vel.y < 0 {
-                print("up")
-            }
-            
-            
-        }
+        //Decrease tattoo size while keeping 2x1 proportions
+        viewModel?.width -= 10.0
+        viewModel?.height -= 5.0
+        viewModel?.loadImage()
     }
+    
+    
+    @IBAction func sizeIncrease(_ sender: UIButton) {
+         //Increase tattoo size while keeping 2x1 proportions
+        viewModel?.width += 10.0
+        viewModel?.height += 5.0
+        viewModel?.loadImage()
+    }
+    
+    
     
     func resetDrawView(){
         drawnImageView.layer.backgroundColor = UIColor.white.cgColor
@@ -217,6 +211,12 @@ class ViewController: UIViewController {
         transformButtonContainer.isHidden = false
         acceptPositionButton.isHidden = true
         
+    }
+    
+    
+    @IBAction func resetButtonTapped(_ sender: UIButton) {
+        
+        viewModel?.reset()
     }
     
     
@@ -346,6 +346,27 @@ extension ViewController: UITabBarDelegate {
             viewModel?.commitTattoo()
             transformButtonContainer.isHidden = true
         }
+        
+        if item.tag == modeSave {
+            transformButtonContainer.isHidden = true
+            let selectedImage = sceneView.snapshot()
+            UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
+    }
+    
+    //Save image to user's gallery
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            showAlertWith(title: "Save error", message: error.localizedDescription)
+        } else {
+            showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
+        }
+    }
+    
+    func showAlertWith(title: String, message: String){
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
 }

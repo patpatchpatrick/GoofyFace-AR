@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Face Tattoo would like to access photo library so you use your own photos as tattoos and save your tattoos to your gallery.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Face Tattoo would like to access photo library so you use your own photos as tattoos and save your tattoos to your gallery.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>WeirdFace need access to your camera to track your face.</string>
+	<string>Face Tattoo would like access to your camera to track your face.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
