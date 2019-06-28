@@ -22,6 +22,7 @@ enum TattooType: Int, Printable, CaseIterable {
     case nose = 5
     case rightCheek = 6
     case lowerLip = 7
+    case new = 8
     //static var count: Int { return TattooType.leftEye.hashValue + 1 }
     
     var description: String {
@@ -33,6 +34,8 @@ enum TattooType: Int, Printable, CaseIterable {
         case .nose : return "5"
         case .rightCheek : return "6"
         case .lowerLip: return "7"
+        case .new:
+            return "8"
         }
     }
 }
@@ -103,6 +106,12 @@ public class TattooModel {
             self.rotation = -0.436332
             self.width = 200
             self.height = 100
+        case .new:
+            self.x = 398
+            self.y = 155
+            self.rotation = 0
+            self.width = 200
+            self.height = 100
         }
     }
     
@@ -148,6 +157,12 @@ public class TattooModel {
             self.x = 630
             self.y = 388
             self.rotation = -0.436332
+            self.width = 200
+            self.height = 100
+        case .new:
+            self.x = 398
+            self.y = 155
+            self.rotation = 0
             self.width = 200
             self.height = 100
         }

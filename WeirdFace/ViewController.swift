@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     
     @IBOutlet var mainView: ARSCNView!
     
+    @IBOutlet weak var acceptPositionButton: UIButton!
+    
+    @IBOutlet weak var transformButtonContainer: UIView!
     @IBOutlet weak var uploadImageBorderedView: BorderedView!
     @IBOutlet weak var uploadedImage: UIImageView!
     @IBOutlet weak var uploadedImageContainer: UIView!
@@ -49,7 +52,7 @@ class ViewController: UIViewController {
         tabBar.delegate = self
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
-        let model = TattooModel(imageName: "exampletat", tattooType: .lowerLip)
+        let model = TattooModel(imageName: "blank", tattooType: .new)
         viewModel = TattooViewModel(tattooModel: model)
         viewModel?.loadImage()
         
@@ -123,7 +126,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func rotateClockwise(_ sender: UIButton) {
-        viewModel?.rotation -= 1.0
+        viewModel?.rotation -= 0.1
         
         viewModel?.loadImage()
         
@@ -131,7 +134,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func rotateCounterClock(_ sender: UIButton) {
-        viewModel?.rotation += 1.0
+        viewModel?.rotation += 0.1
         
         viewModel?.loadImage()
     }
@@ -146,7 +149,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func plusY(_ sender: UIButton) {
-        viewModel?.y += 10.0
+        viewModel?.y -= 10.0
         
         viewModel?.loadImage()
         
@@ -162,7 +165,7 @@ class ViewController: UIViewController {
     
     @IBAction func minusY(_ sender: UIButton) {
         
-        viewModel?.y -= 10.0
+        viewModel?.y += 10.0
 
      viewModel?.loadImage()
         
@@ -201,6 +204,19 @@ class ViewController: UIViewController {
     
     func resetUploadView(){
         uploadImageBorderedView.layer.borderWidth = 2.0
+    }
+    
+    
+    @IBAction func acceptPosition(_ sender: UIButton) {
+        
+        //If tattoo auto position is accepted, tattoo manual box is displayed for user to adjust the tattoo
+        
+        viewModel?.acceptPosition()
+        tattooTypePicker.isHidden = true
+        viewModel?.positionType = .manual
+        transformButtonContainer.isHidden = false
+        acceptPositionButton.isHidden = true
+        
     }
     
     
@@ -263,7 +279,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         print("PICKER COUNT", TattooType.allCases.count)
-        return TattooType.allCases.count
+        //Display all tattoo types except for the last one (which is the default type and shouldn't be selectable)
+        return TattooType.allCases.count - 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -274,7 +291,9 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         //If Picker position is changed, update viewModel
         if let type = TattooType(rawValue: row+1) {
+            viewModel?.positionType = .auto
             viewModel?.changeTattooType(type: type)
+            
         }
         
     }
@@ -313,15 +332,19 @@ extension ViewController: UITabBarDelegate {
         }
         
         if item.tag == modePosition {
+            viewModel?.positionType = .auto
             viewModel?.displayPositionMap()
             tattooTypePicker.isHidden = false
+            acceptPositionButton.isHidden = false
         } else {
             tattooTypePicker.isHidden = true
+            acceptPositionButton.isHidden = true
         }
         
         if item.tag == modePlace {
             //If the "Add Tattoo" button is clicked, commit the tattoo to the canvas (i.e. the user's face)
             viewModel?.commitTattoo()
+            transformButtonContainer.isHidden = true
         }
     }
     
