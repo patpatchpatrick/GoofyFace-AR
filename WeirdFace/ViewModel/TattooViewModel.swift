@@ -31,9 +31,62 @@ public class TattooViewModel {
     var width: CGFloat = 200
     var height: CGFloat = 100
     var rotation: Float = 0
+    let xMax: CGFloat = 799
+    let xMin: CGFloat = 100
+    let yMax: CGFloat = 700
+    let yMin: CGFloat = 100
+    let widthMax: CGFloat = 800
+    let heightMax: CGFloat = 400
+    let widthMin: CGFloat = 50
+    let heightMin: CGFloat = 25
+    
     
     public init(tattooModel: TattooModel) {
         self.tattoo = tattooModel
+    }
+    
+    func incrementX(){
+        if self.x < xMax {
+                   self.x += 10
+            loadImage()
+        }
+    }
+    
+    func decrementX(){
+        if self.x > xMin {
+            self.x -= 10
+            loadImage()
+        }
+    }
+    
+    func incrementY(){
+        if self.y < yMax {
+            self.y += 10
+            loadImage()
+        }
+    }
+    
+    func decrementY(){
+        if self.y > yMin {
+            self.y -= 10
+            loadImage()
+        }
+    }
+    
+    func incrementSize(){
+        if self.width < widthMax && self.height < heightMax {
+            self.width += 10
+            self.height += 5
+            loadImage()
+        }
+    }
+    
+    func decrementSize(){
+        if self.height > heightMin && self.width > widthMin {
+            self.width -= 10
+            self.height -= 5
+            loadImage()
+        }
     }
     
     func acceptPosition(){

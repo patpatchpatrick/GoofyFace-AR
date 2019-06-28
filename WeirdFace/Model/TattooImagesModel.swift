@@ -10,4 +10,4 @@ import Foundation
 
 //Model for stored tattoo images
 
-let tattooImagesCount: Int = 6
+let tattooImagesCount: Int = 18

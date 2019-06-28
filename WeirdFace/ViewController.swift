@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     
     @IBOutlet var mainView: ARSCNView!
     
+    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var hideButton: UIButton!
     @IBOutlet weak var acceptPositionButton: UIButton!
     
     @IBOutlet weak var transformButtonContainer: UIView!
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         guard ARFaceTrackingConfiguration.isSupported else {
             fatalError("Face tracking is not supported on this device")
@@ -142,33 +145,26 @@ class ViewController: UIViewController {
     
     
     @IBAction func plusX(_ sender: UIButton) {
-        viewModel?.x += 10.0
         
-        viewModel?.loadImage()
-        
+
+        viewModel?.incrementX()
     }
     
     
     @IBAction func plusY(_ sender: UIButton) {
-        viewModel?.y -= 10.0
-        
-        viewModel?.loadImage()
+        viewModel?.decrementY()
         
     }
     
     
     @IBAction func minusX(_ sender: UIButton) {
-        viewModel?.x -= 10.0
-        
-        viewModel?.loadImage()
+        viewModel?.decrementX()
         
     }
     
     @IBAction func minusY(_ sender: UIButton) {
         
-        viewModel?.y += 10.0
-
-     viewModel?.loadImage()
+        viewModel?.incrementY()
         
     }
     
@@ -176,17 +172,13 @@ class ViewController: UIViewController {
     @IBAction func sizeDecrease(_ sender: UIButton) {
         
         //Decrease tattoo size while keeping 2x1 proportions
-        viewModel?.width -= 10.0
-        viewModel?.height -= 5.0
-        viewModel?.loadImage()
+        viewModel?.decrementSize()
     }
     
     
     @IBAction func sizeIncrease(_ sender: UIButton) {
          //Increase tattoo size while keeping 2x1 proportions
-        viewModel?.width += 10.0
-        viewModel?.height += 5.0
-        viewModel?.loadImage()
+        viewModel?.incrementSize()
     }
     
     
@@ -209,6 +201,7 @@ class ViewController: UIViewController {
         tattooTypePicker.isHidden = true
         viewModel?.positionType = .manual
         transformButtonContainer.isHidden = false
+        hideButton.isHidden = false
         acceptPositionButton.isHidden = true
         
     }
@@ -219,19 +212,27 @@ class ViewController: UIViewController {
         viewModel?.reset()
     }
     
+    @IBAction func hideButtonTapped(_ sender: UIButton) {
+        
+        //Hide/Show the transform buttons
+        transformButtonContainer.isHidden = !transformButtonContainer.isHidden
+    }
     
 }
 
 extension ViewController: ARSCNViewDelegate {
-    // 2
+    
+    
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
         guard let sceneView = renderer as? ARSCNView,
             anchor is ARFaceAnchor else { return nil }
         
+        
         #if targetEnvironment(simulator)
         #error("ARKit is not supported in iOS Simulator. Connect a physical iOS device and select it as your Xcode run destination, or select Generic iOS Device as a build-only destination.")
         #else
+ 
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
         let material = faceGeometry.firstMaterial!
         
@@ -268,6 +269,7 @@ extension ViewController: ARSCNViewDelegate {
         faceGeometry.update(from: faceAnchor.geometry)
  
     }
+ 
     
 }
 
@@ -293,6 +295,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         if let type = TattooType(rawValue: row+1) {
             viewModel?.positionType = .auto
             viewModel?.changeTattooType(type: type)
+            acceptPositionButton.isHidden = false
             
         }
         
@@ -312,8 +315,10 @@ extension ViewController: UITabBarDelegate {
         viewMode = item.tag
         if item.tag == modeSelect {
             collectionView.isHidden = false
+            resetButton.isHidden = true
         } else {
             collectionView.isHidden = true
+            resetButton.isHidden = false
         }
         
         if item.tag == modeDraw {
@@ -335,20 +340,23 @@ extension ViewController: UITabBarDelegate {
             viewModel?.positionType = .auto
             viewModel?.displayPositionMap()
             tattooTypePicker.isHidden = false
-            acceptPositionButton.isHidden = false
         } else {
             tattooTypePicker.isHidden = true
             acceptPositionButton.isHidden = true
+            hideButton.isHidden = true
+            transformButtonContainer.isHidden = true
         }
         
         if item.tag == modePlace {
             //If the "Add Tattoo" button is clicked, commit the tattoo to the canvas (i.e. the user's face)
             viewModel?.commitTattoo()
             transformButtonContainer.isHidden = true
+            hideButton.isHidden = true
         }
         
         if item.tag == modeSave {
             transformButtonContainer.isHidden = true
+            hideButton.isHidden = true
             let selectedImage = sceneView.snapshot()
             UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         }
@@ -390,6 +398,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         let imageName = String(indexPath.row)
         viewModel?.changeImage(named: imageName)
         collectionView.isHidden = true
+        resetButton.isHidden = false
     }
     
     
