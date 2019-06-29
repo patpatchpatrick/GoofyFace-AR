@@ -30,6 +30,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var sceneView: ARSCNView!
      var imagePicker = UIImagePickerController()
     
+    //TABVIEWS
+    
+    @IBOutlet weak var selectTab: UITabBarItem!
+    @IBOutlet weak var customTab: UITabBarItem!
+    @IBOutlet weak var uploadTab: UITabBarItem!
+    @IBOutlet weak var positionTab: UITabBarItem!
+    @IBOutlet weak var addTatTab: UITabBarItem!
+    @IBOutlet weak var saveTab: UITabBarItem!
+    
+    
     let modeSelect = 0
     let modeDraw = 1
     let modeUpload = 2
@@ -47,6 +57,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
+        
         guard ARFaceTrackingConfiguration.isSupported else {
             fatalError("Face tracking is not supported on this device")
         }
@@ -56,11 +67,12 @@ class ViewController: UIViewController {
         tabBar.delegate = self
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
+        sceneView.delegate = self
+        
         let model = TattooModel(imageName: "blank", tattooType: .new)
         viewModel = TattooViewModel(tattooModel: model)
         viewModel?.loadImage()
         
-        sceneView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +107,7 @@ class ViewController: UIViewController {
         let userDrawing = drawnImageView.screenShot
         viewModel?.changeImage(image: userDrawing!)
         drawnImageContainerView.isHidden = true
+        positionTab.isEnabled = true
         
     }
     
@@ -114,6 +127,7 @@ class ViewController: UIViewController {
         
         viewModel?.changeImage(image: uploadedImage)
         uploadedImageContainer.isHidden = true
+        positionTab.isEnabled = true
     }
     
     
@@ -203,6 +217,7 @@ class ViewController: UIViewController {
         transformButtonContainer.isHidden = false
         hideButton.isHidden = false
         acceptPositionButton.isHidden = true
+        addTatTab.isEnabled = true
         
     }
     
@@ -210,6 +225,9 @@ class ViewController: UIViewController {
     @IBAction func resetButtonTapped(_ sender: UIButton) {
         
         viewModel?.reset()
+        positionTab.isEnabled = false
+        addTatTab.isEnabled = false
+        saveTab.isEnabled = false
     }
     
     @IBAction func hideButtonTapped(_ sender: UIButton) {
@@ -221,6 +239,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ARSCNViewDelegate {
+    
     
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -270,6 +289,9 @@ extension ViewController: ARSCNViewDelegate {
  
     }
  
+ 
+ 
+ 
     
 }
 
@@ -301,10 +323,25 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var title = UILabel()
+        if var title = view {
+            title = title as! UILabel
+        }
+        title.font = UIFont.systemFont(ofSize: 21, weight: UIFont.Weight.bold)
+        title.textColor = UIColor.green
+        title.text = TattooType(rawValue: row+1)?.description
+        title.textAlignment = .center
+        
+        return title
+    }
+    
+    /*
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let string = TattooType(rawValue: row+1)?.description
-        return NSAttributedString(string: string!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-    }
+        return NSAttributedString(string: string!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.green])
+    }*/
+    
     
 }
 
@@ -352,6 +389,9 @@ extension ViewController: UITabBarDelegate {
             viewModel?.commitTattoo()
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
+            saveTab.isEnabled = true
+            addTatTab.isEnabled = false
+            positionTab.isEnabled = false
         }
         
         if item.tag == modeSave {
@@ -399,6 +439,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         viewModel?.changeImage(named: imageName)
         collectionView.isHidden = true
         resetButton.isHidden = false
+        positionTab.isEnabled = true
     }
     
     

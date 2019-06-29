@@ -112,6 +112,7 @@
 				F624769A22C414C60066215E /* WeirdFaceTests */,
 				F62476A522C414C60066215E /* WeirdFaceUITests */,
 				F624768122C414C50066215E /* Products */,
+				F6C5B1A622C6D532003E4A33 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +177,13 @@
 				F658C2DD22C56ACD0005CF09 /* CustomViews.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F6C5B1A622C6D532003E4A33 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +254,11 @@
 				TargetAttributes = {
 					F624767F22C414C50066215E = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					F624769622C414C60066215E = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -499,7 +512,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.patpatchpatrick.WeirdFace;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.patpatchpatrick.FaceTattooArtist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -517,7 +530,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.patpatchpatrick.WeirdFace;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.patpatchpatrick.FaceTattooArtist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

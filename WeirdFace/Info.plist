@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Face Tattoo would like to access photo library so you use your own photos as tattoos and save your tattoos to your gallery.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Face Tattoo would like to access photo library so you use your own photos as tattoos and save your tattoos to your gallery.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Face Tattoo would like access to your camera to track your face.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Face Tattoo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,21 +20,28 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Face Tattoo would like access to your camera to track your face.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Face Tattoo would like to access photo library so you use your own photos as tattoos and save your tattoos to your gallery.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Face Tattoo would like to access photo library so you use your own photos as tattoos and save your tattoos to your gallery.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>arkit</string>
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
