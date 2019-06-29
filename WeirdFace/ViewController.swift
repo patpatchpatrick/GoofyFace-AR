@@ -28,9 +28,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
-     var imagePicker = UIImagePickerController()
-    
-    //TABVIEWS
+    var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var selectTab: UITabBarItem!
     @IBOutlet weak var customTab: UITabBarItem!
@@ -39,14 +37,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var addTatTab: UITabBarItem!
     @IBOutlet weak var saveTab: UITabBarItem!
     
-    
+    //App mode
     let modeSelect = 0
     let modeDraw = 1
     let modeUpload = 2
     let modePosition = 3
     let modePlace = 4
     let modeSave = 5
-    
     var viewMode:Int = 0
     
     var imageChanged = false
@@ -82,7 +79,6 @@ class ViewController: UIViewController {
                                                name:Notification.Name("UPDATED_DATA"),
                                                object: nil)
         let configuration = ARFaceTrackingConfiguration()
-        
         sceneView.session.run(configuration)
     }
     
@@ -136,7 +132,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func imageResizedByPinch(_ sender: UIPinchGestureRecognizer) {
-        
+        //User uploaded image can be resized by pinch
         uploadedImage.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
         
     }
@@ -144,17 +140,15 @@ class ViewController: UIViewController {
     
     
     @IBAction func rotateClockwise(_ sender: UIButton) {
-        viewModel?.rotation -= 0.1
         
-        viewModel?.loadImage()
+        viewModel?.rotate(clockwise: true)
         
     }
     
     
     @IBAction func rotateCounterClock(_ sender: UIButton) {
-        viewModel?.rotation += 0.1
         
-        viewModel?.loadImage()
+        viewModel?.rotate(clockwise: false)
     }
     
     
@@ -198,18 +192,20 @@ class ViewController: UIViewController {
     
     
     func resetDrawView(){
+        //Set the drawView back to its default state
         drawnImageView.layer.backgroundColor = UIColor.white.cgColor
         drawnImageView.layer.borderWidth = 2.0
     }
     
     func resetUploadView(){
+        //set the uploadview back to its default state
         uploadImageBorderedView.layer.borderWidth = 2.0
     }
     
     
     @IBAction func acceptPosition(_ sender: UIButton) {
         
-        //If tattoo auto position is accepted, tattoo manual box is displayed for user to adjust the tattoo
+        //If tattoo auto position is accepted, tattoo manual transformation box is displayed for user to adjust the tattoo
         
         viewModel?.acceptPosition()
         tattooTypePicker.isHidden = true
@@ -223,6 +219,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {
+        
+        //Reset the screen and remove all tattoos
         
         viewModel?.reset()
         positionTab.isEnabled = false
@@ -244,6 +242,8 @@ extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
+        //New node added to AR renderer
+        
         guard let sceneView = renderer as? ARSCNView,
             anchor is ARFaceAnchor else { return nil }
         
@@ -255,8 +255,10 @@ extension ViewController: ARSCNViewDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
         let material = faceGeometry.firstMaterial!
         
+        
+        //If the image was changed, set the new image on the face contents
         if imageChanged {
-            material.diffuse.contents = viewModel?.image// Example texture map image.
+            material.diffuse.contents = viewModel?.image
             material.lightingModel = .physicallyBased
             imageChanged = false
         }
@@ -271,12 +273,15 @@ extension ViewController: ARSCNViewDelegate {
         _ renderer: SCNSceneRenderer,
         didUpdate node: SCNNode,
         for anchor: ARAnchor) {
+        
+        //Renderer node updated
 
         guard let faceGeometry = node.geometry as? ARSCNFaceGeometry,
             let faceAnchor = anchor as? ARFaceAnchor
             else { return }
         
         
+        //If the image was changed, set the new image on the face contents
         if imageChanged {
             let material = faceGeometry.firstMaterial!
             material.diffuse.contents = viewModel?.image// Example texture map image.
@@ -314,6 +319,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         //If Picker position is changed, update viewModel
+        //If a new position is chose, the image must be repositioned
         if let type = TattooType(rawValue: row+1) {
             viewModel?.positionType = .auto
             viewModel?.changeTattooType(type: type)
@@ -324,6 +330,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        //Add style (big green text) to the pickerview
         var title = UILabel()
         if var title = view {
             title = title as! UILabel
@@ -336,20 +344,16 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return title
     }
     
-    /*
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let string = TattooType(rawValue: row+1)?.description
-        return NSAttributedString(string: string!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.green])
-    }*/
-    
-    
 }
 
 extension ViewController: UITabBarDelegate {
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        //If the "Select Image Button" is tapped, the collection view should appear for the user to select a tattoo image
+        
+        
         viewMode = item.tag
+        
+        //"Select mode" - user can select custom tattooo
         if item.tag == modeSelect {
             collectionView.isHidden = false
             resetButton.isHidden = true
@@ -358,6 +362,7 @@ extension ViewController: UITabBarDelegate {
             resetButton.isHidden = false
         }
         
+        //"Draw mode" - user can draw their own tattoo
         if item.tag == modeDraw {
             resetDrawView()
             drawnImageContainerView.isHidden = false
@@ -365,6 +370,7 @@ extension ViewController: UITabBarDelegate {
             drawnImageContainerView.isHidden = true
         }
         
+        //"Upload mode" - user can upload their own tattoo
         if item.tag == modeUpload {
             resetUploadView()
             uploadedImageContainer.isHidden = false
@@ -373,6 +379,7 @@ extension ViewController: UITabBarDelegate {
             uploadedImageContainer.isHidden = true
         }
         
+        //"Position mode" - User can position/transform the tattoo
         if item.tag == modePosition {
             viewModel?.positionType = .auto
             viewModel?.displayPositionMap()
@@ -384,8 +391,8 @@ extension ViewController: UITabBarDelegate {
             transformButtonContainer.isHidden = true
         }
         
+        //"Place Mode" - User can place the tattoo and commit the changes (i.e. commit the tattoo to the user's face)
         if item.tag == modePlace {
-            //If the "Add Tattoo" button is clicked, commit the tattoo to the canvas (i.e. the user's face)
             viewModel?.commitTattoo()
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
@@ -394,6 +401,7 @@ extension ViewController: UITabBarDelegate {
             positionTab.isEnabled = false
         }
         
+        //"Save Mode" - Save image to user's gallery
         if item.tag == modeSave {
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
@@ -451,26 +459,23 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
     
     
     func selectUploadPicture(){
-        
+        //Select photo from user's gallery
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             print("Button capture")
-            
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = false
-            
             present(imagePicker, animated: true, completion: nil)
         }
         
     }
     
+    //Image chosen by user
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
         guard let image = info[.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-        //let size = CGSize(width: 200, height: 200)
-        //let croppedImage = image.crop(to: size)
         uploadedImage.image = image
         
     }

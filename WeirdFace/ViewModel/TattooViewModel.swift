@@ -12,7 +12,6 @@ import UIKit
 let defaultCanvasHeight:CGFloat = 1000
 let defaultCanvasWidth:CGFloat = 1000
 
-
 public class TattooViewModel {
     
     private let tattoo: TattooModel
@@ -46,6 +45,7 @@ public class TattooViewModel {
     }
     
     func incrementX(){
+        //Increment image x position
         if self.x < xMax {
                    self.x += 10
             loadImage()
@@ -53,6 +53,7 @@ public class TattooViewModel {
     }
     
     func decrementX(){
+          //Decrement image x position
         if self.x > xMin {
             self.x -= 10
             loadImage()
@@ -60,6 +61,7 @@ public class TattooViewModel {
     }
     
     func incrementY(){
+        //Increment image y position
         if self.y < yMax {
             self.y += 10
             loadImage()
@@ -67,13 +69,25 @@ public class TattooViewModel {
     }
     
     func decrementY(){
+        //Decrement image y position
         if self.y > yMin {
             self.y -= 10
             loadImage()
         }
     }
     
+    func rotate(clockwise: Bool){
+        //Rotate tattoo by 0.1 radians when rotate is called
+        if clockwise {
+            self.rotation += 0.1
+        } else {
+            self.rotation -= 0.1
+        }
+        loadImage()
+    }
+    
     func incrementSize(){
+        //Scale image.  Keep proportions 2:1
         if self.width < widthMax && self.height < heightMax {
             self.width += 10
             self.height += 5
@@ -82,6 +96,7 @@ public class TattooViewModel {
     }
     
     func decrementSize(){
+        //Scale image.  Keep proportions 2:1
         if self.height > heightMin && self.width > widthMin {
             self.width -= 10
             self.height -= 5
@@ -90,6 +105,8 @@ public class TattooViewModel {
     }
     
     func acceptPosition(){
+        
+        //Set the manual position of the image to match the default tattoo's position when the image's position is chosen via the picker view
         
         self.x = self.tattoo.x
         self.y = self.tattoo.y
@@ -101,16 +118,17 @@ public class TattooViewModel {
     
     func loadImage(){
         
-        print("Loading Image")
         DispatchQueue.global(qos: .background).async {
             guard let image = self.tattoo.image else {return}
             
+            //Resize image.  If auto, use Tattoo type default values.  If manual, use viewModel manual values
             var resizedImg: UIImage?
             switch self.positionType {
             case .auto:    resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.tattoo.width, height: self.tattoo.height))
             case .manual:  resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.width, height: self.height))
             }
             
+              //Rotate image.  If auto, use Tattoo type default values.  If manual, use viewModel manual values
             var rotatedImage: UIImage?
             switch self.positionType {
             case .auto:    rotatedImage = resizedImg!.rotate(radians: self.tattoo.rotation)
@@ -119,6 +137,7 @@ public class TattooViewModel {
             
             let expandedSize = CGSize(width: defaultCanvasWidth, height: defaultCanvasHeight)
             
+              //Position image.  If auto, use Tattoo type default values.  If manual, use viewModel manual values
             var currentCanvas : UIImage?
             switch self.positionType {
             case .auto:    currentCanvas = drawImageOnCanvas(rotatedImage!, canvas: self.canvas, canvasSize: expandedSize, x: self.tattoo.x, y: self.tattoo.y)
@@ -159,10 +178,6 @@ public class TattooViewModel {
             self.height = 100
             self.rotation = 0
             
-            //reset default position and tattoo types
-            self.positionType = .auto
-            self.tattoo.type = .new
-            
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
             }
@@ -172,7 +187,10 @@ public class TattooViewModel {
     }
     
     func commitTattoo(){
-        print("Loading Image")
+      
+        //When tattoo is committed, the current canvas (i.e. AR face map) becomes the canvas.  Then, the current canvas is reset to a blank image.
+        //Generate the current canvas image, conver the current canvas to the canvas, then clear the canvas by creating a new blank image.
+        
         DispatchQueue.global(qos: .background).async {
             guard let image = self.tattoo.image else {return}
             let resizedImg = resizeImage(image: image, targetSize: CGSize(width: self.width, height: self.height))
