@@ -16,7 +16,7 @@ protocol Printable {
 
 //Total count of tattoo images user can select from
 //Images are numbered, and this number is used to load them
-let tattooImagesCount: Int = 43
+let tattooImagesCount: Int = 51
 
 enum TattooType: Int, Printable, CaseIterable {
     case leftBrow = 1

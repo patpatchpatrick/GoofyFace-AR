@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         guard ARFaceTrackingConfiguration.isSupported else {
             fatalError("Face tracking is not supported on this device")
         }
+ 
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -223,6 +224,8 @@ class ViewController: UIViewController {
         //Reset the screen and remove all tattoos
         
         viewModel?.reset()
+        transformButtonContainer.isHidden = true
+        hideButton.isHidden = true
         positionTab.isEnabled = false
         addTatTab.isEnabled = false
         saveTab.isEnabled = false

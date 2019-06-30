@@ -79,9 +79,9 @@ public class TattooViewModel {
     func rotate(clockwise: Bool){
         //Rotate tattoo by 0.1 radians when rotate is called
         if clockwise {
-            self.rotation += 0.1
-        } else {
             self.rotation -= 0.1
+        } else {
+            self.rotation += 0.1
         }
         loadImage()
     }
