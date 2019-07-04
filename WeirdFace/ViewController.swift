@@ -12,6 +12,9 @@ import SceneKit
 
 class ViewController: UIViewController {
     
+    var arTrackingSupported = true
+    @IBOutlet weak var arNotSupportedTextView: UITextView!
+    
     @IBOutlet var mainView: ARSCNView!
     
     @IBOutlet weak var resetButton: UIButton!
@@ -55,8 +58,12 @@ class ViewController: UIViewController {
         
         
         
-        guard ARFaceTrackingConfiguration.isSupported else {
-            fatalError("Face tracking is not supported on this device")
+        if ARFaceTrackingConfiguration.isSupported == false {
+            arTrackingSupported = false
+            arNotSupportedTextView.isHidden = false
+            //fatalError("Face tracking is not supported on this device")
+        } else {
+            arNotSupportedTextView.isHidden = true
         }
  
         
@@ -79,14 +86,17 @@ class ViewController: UIViewController {
                                                selector: #selector(updated_data),
                                                name:Notification.Name("UPDATED_DATA"),
                                                object: nil)
+        if arTrackingSupported {
         let configuration = ARFaceTrackingConfiguration()
-        sceneView.session.run(configuration)
+            sceneView.session.run(configuration)}
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.removeObserver(self)
-        sceneView.session.pause()
+        if arTrackingSupported{
+                sceneView.session.pause()
+        }
     }
     
     @objc func updated_data(notification:Notification) -> Void{
@@ -246,14 +256,18 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
         //New node added to AR renderer
+        if !arTrackingSupported {return nil}
         
         guard let sceneView = renderer as? ARSCNView,
             anchor is ARFaceAnchor else { return nil }
         
-        
+       /*
         #if targetEnvironment(simulator)
         #error("ARKit is not supported in iOS Simulator. Connect a physical iOS device and select it as your Xcode run destination, or select Generic iOS Device as a build-only destination.")
         #else
+ */
+ 
+ 
  
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
         let material = faceGeometry.firstMaterial!
@@ -265,9 +279,12 @@ extension ViewController: ARSCNViewDelegate {
             material.lightingModel = .physicallyBased
             imageChanged = false
         }
+ 
         
-        #endif
-        return SCNNode(geometry: faceGeometry)
+     //   #endif
+ 
+       return SCNNode(geometry: faceGeometry)
+        // return SCNNode(geometry: nil)
         
         
     }
@@ -276,6 +293,8 @@ extension ViewController: ARSCNViewDelegate {
         _ renderer: SCNSceneRenderer,
         didUpdate node: SCNNode,
         for anchor: ARAnchor) {
+        
+        if !arTrackingSupported {return}
         
         //Renderer node updated
 
@@ -296,6 +315,7 @@ extension ViewController: ARSCNViewDelegate {
         faceGeometry.update(from: faceAnchor.geometry)
  
     }
+ 
  
  
  
