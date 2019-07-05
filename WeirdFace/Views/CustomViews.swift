@@ -66,6 +66,15 @@ class DrawnImageView: UIImageView {
         
     }
     
+    func undo(){
+        //Undo the most recent drawing (path) drawn by user and remove from stacks
+        guard let path = pathStack.pop() else {return}
+        guard let shapeLayer = shapeLayerStack.pop() else {return}
+        path.removeAllPoints()
+        shapeLayer.path = path.cgPath
+        
+    }
+    
     func clear(){
        //Remove points from all current paths and reset all shapelayers to have blank paths
         //Then, clear the path and shape stacks

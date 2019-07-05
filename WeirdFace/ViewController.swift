@@ -30,7 +30,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
     @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
     @IBOutlet weak var drawnImageFullScreenAcceptButton: UIButton!
+    @IBOutlet weak var drawnImageFullScreenUndoButton: UIButton!
     @IBOutlet weak var colorPickerButton: UIButton!
+    @IBOutlet weak var colorPickerFullScreenButton: UIButton!
     @IBOutlet weak var colorPicker: HSBColorPicker!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
@@ -80,8 +82,10 @@ class ViewController: UIViewController {
         sceneView.delegate = self
         colorPicker.delegate = self
         
-        //Rotate the accept button in the full screen imageview since user will be using the screen in landscape mode
+        //Rotate the buttons in the full screen imageview since user will be using the screen in landscape mode
         drawnImageFullScreenAcceptButton.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+
+        drawnImageFullScreenUndoButton.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
         
         let model = TattooModel(imageName: "blank", tattooType: .new)
         viewModel = TattooViewModel(tattooModel: model)
@@ -288,6 +292,15 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func drawnImageFullScreenColorWheelTapped(_ sender: UIButton) {
+        colorPicker.isHidden = false
+    }
+    
+    
+    @IBAction func drawnImageFullScreenUndoTapped(_ sender: UIButton) {
+        drawnImageViewFullScreen.undo()
+        
+    }
     
     
 }
@@ -556,6 +569,8 @@ extension ViewController: HSBColorPickerDelegate {
         //Update the color picker button image color to show the chosen color so that the user can see the color they chose
         colorPickerButton.setImage(UIImage(named: "iconColorWheelTemplate"), for: .normal)
         colorPickerButton.tintColor = color
+        colorPickerFullScreenButton.setImage(UIImage(named: "iconColorWheelTemplate"), for: .normal)
+        colorPickerFullScreenButton.tintColor = color
         drawnImageView.changeColor(color: color)
         drawnImageViewFullScreen.changeColor(color: color)
     }
