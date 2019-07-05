@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        
+        //Set bool to track if facetracking is supported, if it is not supported, facetracking features are disabled and a message is displayed to the user indicating that their device is not supported
         if ARFaceTrackingConfiguration.isSupported == false {
             arTrackingSupported = false
             arNotSupportedTextView.isHidden = false
@@ -284,7 +284,7 @@ extension ViewController: ARSCNViewDelegate {
      //   #endif
  
        return SCNNode(geometry: faceGeometry)
-        // return SCNNode(geometry: nil)
+       // return SCNNode(geometry: nil)
         
         
     }
