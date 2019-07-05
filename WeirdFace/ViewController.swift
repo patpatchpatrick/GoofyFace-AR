@@ -27,6 +27,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var uploadedImageContainer: UIView!
     @IBOutlet weak var drawnImageContainerView: UIView!
     @IBOutlet weak var drawnImageView: DrawnImageView!
+    @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
+    @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
+    @IBOutlet weak var drawnImageFullScreenAcceptButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
@@ -73,6 +76,9 @@ class ViewController: UIViewController {
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
         sceneView.delegate = self
+        
+        //Rotate the accept button in the full screen imageview since user will be using the screen in landscape mode
+        drawnImageFullScreenAcceptButton.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
         
         let model = TattooModel(imageName: "blank", tattooType: .new)
         viewModel = TattooViewModel(tattooModel: model)
@@ -245,6 +251,32 @@ class ViewController: UIViewController {
         
         //Hide/Show the transform buttons
         transformButtonContainer.isHidden = !transformButtonContainer.isHidden
+    }
+    
+    
+    @IBAction func drawnImageFullScreenButtonTapped(_ sender: UIButton) {
+        
+        drawnImageViewFullScreenContainer.isHidden = false
+        drawnImageContainerView.isHidden = true
+        
+    }
+    
+    @IBAction func drawnImageFullScreenDiscardButtonTapped(_ sender: UIButton) {
+        drawnImageViewFullScreenContainer.isHidden = true
+        drawnImageViewFullScreen.clear()
+    }
+    
+    @IBAction func drawnImageFullScreenAcceptButtonTapped(_ sender: UIButton) {
+        
+        //Update the tattoo image to be the user's drawing
+        //Clear the background before taking a screenshot of the drawn image
+        drawnImageViewFullScreen.layer.backgroundColor = UIColor.clear.cgColor
+        let userDrawing = drawnImageViewFullScreen.screenShot?.rotate(radians: -.pi/2)
+        
+        drawnImageViewFullScreen.layer.backgroundColor = UIColor.white.cgColor
+        viewModel?.changeImage(image: userDrawing!)
+        drawnImageViewFullScreenContainer.isHidden = true
+        positionTab.isEnabled = true
     }
     
 }
