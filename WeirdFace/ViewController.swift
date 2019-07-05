@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
     @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
     @IBOutlet weak var drawnImageFullScreenAcceptButton: UIButton!
+    @IBOutlet weak var colorPickerButton: UIButton!
+    @IBOutlet weak var colorPicker: HSBColorPicker!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
@@ -76,6 +78,7 @@ class ViewController: UIViewController {
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
         sceneView.delegate = self
+        colorPicker.delegate = self
         
         //Rotate the accept button in the full screen imageview since user will be using the screen in landscape mode
         drawnImageFullScreenAcceptButton.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
@@ -278,6 +281,14 @@ class ViewController: UIViewController {
         drawnImageViewFullScreenContainer.isHidden = true
         positionTab.isEnabled = true
     }
+    
+    @IBAction func drawnImageColorWheelTapped(_ sender: UIButton) {
+        colorPicker.isHidden = false
+        
+    }
+    
+    
+    
     
 }
 
@@ -534,6 +545,21 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
         uploadedImage.image = image
         
     }
+    
+}
+
+extension ViewController: HSBColorPickerDelegate {
+    func HSBColorColorPickerTouched(sender: HSBColorPicker, color: UIColor, point: CGPoint, state: UIGestureRecognizer.State) {
+        //Color is chosen in color picker
+        //Change the color of the pens in the drawnImageViews
+        colorPicker.isHidden = true
+        //Update the color picker button image color to show the chosen color so that the user can see the color they chose
+        colorPickerButton.setImage(UIImage(named: "iconColorWheelTemplate"), for: .normal)
+        colorPickerButton.tintColor = color
+        drawnImageView.changeColor(color: color)
+        drawnImageViewFullScreen.changeColor(color: color)
+    }
+    
     
 }
 

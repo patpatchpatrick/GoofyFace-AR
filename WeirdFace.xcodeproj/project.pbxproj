@@ -20,6 +20,7 @@
 		F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476BA22C42D2A0066215E /* ImageExtensions.swift */; };
 		F62476BD22C436410066215E /* VideoTexturedFace.shader in Resources */ = {isa = PBXBuildFile; fileRef = F62476BC22C436410066215E /* VideoTexturedFace.shader */; };
 		F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658C2DD22C56ACD0005CF09 /* CustomViews.swift */; };
+		F6EA899722D001C6002935DB /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EA899622D001C6002935DB /* DataStructures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		F62476BA22C42D2A0066215E /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		F62476BC22C436410066215E /* VideoTexturedFace.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VideoTexturedFace.shader; sourceTree = "<group>"; };
 		F658C2DD22C56ACD0005CF09 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
+		F6EA899622D001C6002935DB /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				F62476BC22C436410066215E /* VideoTexturedFace.shader */,
 				F624769222C414C60066215E /* Info.plist */,
 				F624768A22C414C50066215E /* WeirdFace.xcdatamodeld */,
+				F6EA899622D001C6002935DB /* DataStructures.swift */,
 			);
 			path = WeirdFace;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */,
 				F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */,
 				F60EA44B22C53D21002BE1CD /* TattooViewModel.swift in Sources */,
+				F6EA899722D001C6002935DB /* DataStructures.swift in Sources */,
 				F624768422C414C50066215E /* AppDelegate.swift in Sources */,
 				F624768C22C414C50066215E /* WeirdFace.xcdatamodeld in Sources */,
 			);

@@ -230,6 +230,20 @@
                                             <action selector="drawnImageFullScreenButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Fs-i5-yJl"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zud-lK-KvL">
+                                        <rect key="frame" x="90" y="20" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="9ky-57-1qc"/>
+                                            <constraint firstAttribute="width" constant="50" id="q7Y-D3-D48"/>
+                                        </constraints>
+                                        <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        <state key="normal" image="iconColorWheel">
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="drawnImageColorWheelTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h2e-Bo-sUD"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbI-J8-cpZ">
                                         <rect key="frame" x="290" y="609" width="104" height="104"/>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
@@ -274,10 +288,12 @@
                                     <constraint firstItem="iwg-Pb-pdY" firstAttribute="top" secondItem="1ya-u3-Wpc" secondAttribute="top" constant="20" id="9wV-jE-CAN"/>
                                     <constraint firstItem="ieo-Vk-1Wr" firstAttribute="centerY" secondItem="1ya-u3-Wpc" secondAttribute="centerY" id="QQD-tZ-0Jb"/>
                                     <constraint firstItem="8YD-bA-91R" firstAttribute="leading" secondItem="1ya-u3-Wpc" secondAttribute="leading" constant="20" id="VHu-UH-h59"/>
+                                    <constraint firstItem="zud-lK-KvL" firstAttribute="leading" secondItem="iwg-Pb-pdY" secondAttribute="trailing" constant="20" id="W1W-Te-Gc1"/>
                                     <constraint firstAttribute="bottom" secondItem="SbI-J8-cpZ" secondAttribute="bottom" constant="20" id="eEh-zL-9IA"/>
                                     <constraint firstAttribute="bottom" secondItem="8YD-bA-91R" secondAttribute="bottom" constant="20" id="evl-xX-x64"/>
                                     <constraint firstItem="ieo-Vk-1Wr" firstAttribute="centerX" secondItem="1ya-u3-Wpc" secondAttribute="centerX" id="g9c-fJ-6cO"/>
                                     <constraint firstItem="iwg-Pb-pdY" firstAttribute="leading" secondItem="1ya-u3-Wpc" secondAttribute="leading" constant="20" id="hxf-vV-TEX"/>
+                                    <constraint firstItem="zud-lK-KvL" firstAttribute="top" secondItem="1ya-u3-Wpc" secondAttribute="top" constant="20" id="yb3-ck-7CI"/>
                                     <constraint firstAttribute="trailing" secondItem="SbI-J8-cpZ" secondAttribute="trailing" constant="20" id="yvm-C7-Jtk"/>
                                 </constraints>
                             </view>
@@ -457,6 +473,13 @@
                                     <constraint firstItem="KiX-b7-Wco" firstAttribute="leading" secondItem="PJ4-Zp-aza" secondAttribute="leading" id="tu8-z4-js1"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvG-BE-rre" customClass="HSBColorPicker" customModule="WeirdFace" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="298" width="414" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="MoY-rw-REi"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -471,7 +494,9 @@
                             <constraint firstItem="Mzz-6Y-iPH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="LUO-dK-ob5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lUI-CS-egL" secondAttribute="trailing" id="Li7-sO-VHO"/>
                             <constraint firstItem="PJ4-Zp-aza" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MxU-VS-mRh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nvG-BE-rre" secondAttribute="trailing" id="Ujg-1C-Brp"/>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UzG-TH-Msb"/>
+                            <constraint firstItem="nvG-BE-rre" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="V3I-0X-MnS"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="B4U-NF-7Rw" secondAttribute="bottom" id="WB9-Jt-JyK"/>
                             <constraint firstItem="5pi-pv-97D" firstAttribute="top" secondItem="Mzz-6Y-iPH" secondAttribute="bottom" constant="20" id="drM-tI-aCl"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fgf-6N-SWD"/>
@@ -489,6 +514,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mzz-6Y-iPH" secondAttribute="trailing" constant="20" id="uX4-Pn-kb8"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
+                            <constraint firstItem="nvG-BE-rre" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zad-Nb-odn"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="kiK-Ct-qDG" secondAttribute="bottom" id="zgk-Aw-Tj2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -501,6 +527,8 @@
                         <outlet property="addTatTab" destination="lpP-b3-2s9" id="EgA-4N-ApJ"/>
                         <outlet property="arNotSupportedTextView" destination="70z-Ih-j1T" id="Y32-gk-MqM"/>
                         <outlet property="collectionView" destination="B4U-NF-7Rw" id="Ghn-rv-ouP"/>
+                        <outlet property="colorPicker" destination="nvG-BE-rre" id="VMI-Wz-LM2"/>
+                        <outlet property="colorPickerButton" destination="zud-lK-KvL" id="T6S-2a-aa0"/>
                         <outlet property="customTab" destination="1Y2-b5-LSz" id="rM2-5V-Zpi"/>
                         <outlet property="drawnImageContainerView" destination="1ya-u3-Wpc" id="e8i-Dv-5Jc"/>
                         <outlet property="drawnImageFullScreenAcceptButton" destination="fWH-d5-Ctm" id="5sh-M0-BWf"/>
@@ -535,6 +563,7 @@
     </scenes>
     <resources>
         <image name="iconCheckMark" width="104" height="104"/>
+        <image name="iconColorWheel" width="96" height="96"/>
         <image name="iconDiscard" width="90" height="90"/>
         <image name="iconDownArrow" width="96" height="96"/>
         <image name="iconDrawTab" width="96" height="96"/>
