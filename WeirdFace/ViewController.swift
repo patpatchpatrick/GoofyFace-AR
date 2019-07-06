@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var uploadTab: UITabBarItem!
     @IBOutlet weak var positionTab: UITabBarItem!
     @IBOutlet weak var addTatTab: UITabBarItem!
-    @IBOutlet weak var saveTab: UITabBarItem!
+    @IBOutlet weak var shareTab: UITabBarItem!
     
     //App mode
     let modeSelect = 0
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     let modeUpload = 2
     let modePosition = 3
     let modePlace = 4
-    let modeSave = 5
+    let modeShare = 5
     var viewMode:Int = 0
     
     var imageChanged = false
@@ -251,7 +251,7 @@ class ViewController: UIViewController {
         hideButton.isHidden = true
         positionTab.isEnabled = false
         addTatTab.isEnabled = false
-        saveTab.isEnabled = false
+        shareTab.isEnabled = false
     }
     
     @IBAction func hideButtonTapped(_ sender: UIButton) {
@@ -302,6 +302,19 @@ class ViewController: UIViewController {
         
     }
     
+    func shareImage(image: UIImage){
+        
+        let objectsToShare: [AnyObject] = [ image ]
+        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        
+       // activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+        
+        
+        self.present(activityViewController, animated: true, completion: nil)
+        
+    }
     
 }
 
@@ -475,17 +488,17 @@ extension ViewController: UITabBarDelegate {
             viewModel?.commitTattoo()
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
-            saveTab.isEnabled = true
+            shareTab.isEnabled = true
             addTatTab.isEnabled = false
             positionTab.isEnabled = false
         }
         
-        //"Save Mode" - Save image to user's gallery
-        if item.tag == modeSave {
+        //"Share Mode" - Save image to user's gallery or share via any other apps
+        if item.tag == modeShare {
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
             let selectedImage = sceneView.snapshot()
-            UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+            shareImage(image: selectedImage)
         }
     }
     

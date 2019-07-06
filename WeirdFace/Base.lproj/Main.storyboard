@@ -418,7 +418,7 @@
                                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                                     </tabBarItem>
                                     <tabBarItem tag="4" enabled="NO" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
-                                    <tabBarItem tag="5" enabled="NO" title="Save Image" image="iconSaveTab" id="bxK-EN-O1e"/>
+                                    <tabBarItem tag="5" enabled="NO" title="Share Image" image="iconShareTab" id="bxK-EN-O1e" userLabel="Share Tab"/>
                                 </items>
                             </tabBar>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJ4-Zp-aza" userLabel="Drawn Full Screen">
@@ -569,9 +569,9 @@
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="Adu-np-aql"/>
                         <outlet property="positionTab" destination="eD9-1i-A5P" id="hHH-pr-gMa"/>
                         <outlet property="resetButton" destination="Mzz-6Y-iPH" id="mmA-GC-Dt3"/>
-                        <outlet property="saveTab" destination="bxK-EN-O1e" id="NQe-8N-l0c"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="selectTab" destination="8HX-JG-j86" id="3DE-NB-Xh9"/>
+                        <outlet property="shareTab" destination="bxK-EN-O1e" id="NQe-8N-l0c"/>
                         <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
                         <outlet property="transformButtonContainer" destination="3e2-Dm-7hj" id="3AC-1J-bcA"/>
@@ -606,7 +606,7 @@
         <image name="iconReset" width="100" height="100"/>
         <image name="iconRightArrow" width="96" height="96"/>
         <image name="iconRightRotate" width="96" height="96"/>
-        <image name="iconSaveTab" width="90" height="90"/>
+        <image name="iconShareTab" width="96" height="96"/>
         <image name="iconTattooTab" width="100" height="100"/>
         <image name="iconUndo" width="96" height="96"/>
         <image name="iconUpArrow" width="96" height="96"/>
