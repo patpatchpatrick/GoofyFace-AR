@@ -430,6 +430,7 @@ extension ViewController: UITabBarDelegate {
             hideButton.isHidden = true
             let selectedImage = sceneView.snapshot()
             UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+            AudioServicesPlaySystemSound(1108)
         }
     }
     
