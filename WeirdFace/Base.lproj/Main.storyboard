@@ -559,7 +559,9 @@
                         <outlet property="colorPickerButton" destination="zud-lK-KvL" id="T6S-2a-aa0"/>
                         <outlet property="colorPickerFullScreenButton" destination="ysR-mG-iEB" id="2g7-kF-lCq"/>
                         <outlet property="customTab" destination="1Y2-b5-LSz" id="rM2-5V-Zpi"/>
+                        <outlet property="drawnImageAcceptButton" destination="SbI-J8-cpZ" id="vUD-Ib-93b"/>
                         <outlet property="drawnImageContainerView" destination="1ya-u3-Wpc" id="e8i-Dv-5Jc"/>
+                        <outlet property="drawnImageDiscardButton" destination="8YD-bA-91R" id="wiv-kH-XIQ"/>
                         <outlet property="drawnImageFullScreenAcceptButton" destination="fWH-d5-Ctm" id="5sh-M0-BWf"/>
                         <outlet property="drawnImageFullScreenUndoButton" destination="Z3c-FI-Fst" id="Pkz-ob-EYf"/>
                         <outlet property="drawnImageView" destination="ieo-Vk-1Wr" id="EFM-NH-Y6Y"/>
@@ -575,7 +577,19 @@
                         <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
                         <outlet property="transformButtonContainer" destination="3e2-Dm-7hj" id="3AC-1J-bcA"/>
+                        <outlet property="transformDownButton" destination="off-Qj-Kv0" id="nPQ-JS-6dn"/>
+                        <outlet property="transformHideButton" destination="5pi-pv-97D" id="aSD-NK-URb"/>
+                        <outlet property="transformLeftButton" destination="8i1-ez-QlO" id="cCj-59-QKG"/>
+                        <outlet property="transformMinusButton" destination="LBv-jF-GxD" id="xWQ-CJ-WYr"/>
+                        <outlet property="transformPlusButton" destination="p4K-4H-9sp" id="J8K-uR-ggS"/>
+                        <outlet property="transformPositionAcceptButton" destination="P5X-up-xv3" id="Lgo-Ir-6qF"/>
+                        <outlet property="transformRightButton" destination="Ec3-YK-XjR" id="i3y-9e-fME"/>
+                        <outlet property="transformRotateCCWButton" destination="OFi-bX-qjf" id="eb9-1T-tzb"/>
+                        <outlet property="transformRotateCWButton" destination="dBj-vu-oPn" id="7pk-i0-McV"/>
+                        <outlet property="transformUpButton" destination="AE4-82-WQd" id="zxm-cv-m8U"/>
+                        <outlet property="uploadImageAcceptButton" destination="zUL-rS-EfA" id="7tC-ME-CPc"/>
                         <outlet property="uploadImageBorderedView" destination="O2s-JJ-VR2" id="9Ww-JI-PM0"/>
+                        <outlet property="uploadImageDiscardButton" destination="pEf-Pw-Uuz" id="46e-V1-7SM"/>
                         <outlet property="uploadTab" destination="R5u-Fc-AMs" id="Wta-0Z-4ph"/>
                         <outlet property="uploadedImage" destination="SoO-Kd-aHe" id="3iT-Q2-ghh"/>
                         <outlet property="uploadedImageContainer" destination="kiK-Ct-qDG" id="onU-gj-lkI"/>

@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var arTrackingSupported = true
     @IBOutlet weak var arNotSupportedTextView: UITextView!
     
+    var premiumModePurchased = false // track if premium mode purchased by user
+    
     @IBOutlet var mainView: ARSCNView!
     
     @IBOutlet weak var resetButton: UIButton!
@@ -29,10 +31,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawnImageView: DrawnImageView!
     @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
     @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
+    
+    @IBOutlet weak var drawnImageDiscardButton: UIButton!
+    @IBOutlet weak var drawnImageAcceptButton: UIButton!
     @IBOutlet weak var drawnImageFullScreenAcceptButton: UIButton!
     @IBOutlet weak var drawnImageFullScreenUndoButton: UIButton!
     @IBOutlet weak var colorPickerButton: UIButton!
     @IBOutlet weak var colorPickerFullScreenButton: UIButton!
+    @IBOutlet weak var uploadImageDiscardButton: UIButton!
+    @IBOutlet weak var uploadImageAcceptButton: UIButton!
+    
+    @IBOutlet weak var transformHideButton: UIButton!
+    
+    @IBOutlet weak var transformLeftButton: UIButton!
+    @IBOutlet weak var transformRightButton: UIButton!
+    
+    @IBOutlet weak var transformUpButton: UIButton!
+    
+    @IBOutlet weak var transformDownButton: UIButton!
+    
+    @IBOutlet weak var transformRotateCWButton: UIButton!
+    
+    @IBOutlet weak var transformRotateCCWButton: UIButton!
+    
+    @IBOutlet weak var transformMinusButton: UIButton!
+    
+    @IBOutlet weak var transformPlusButton: UIButton!
+    
+    @IBOutlet weak var transformPositionAcceptButton: UIButton!
     @IBOutlet weak var colorPicker: HSBColorPicker!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
@@ -82,14 +108,12 @@ class ViewController: UIViewController {
         sceneView.delegate = self
         colorPicker.delegate = self
         
-        //Rotate the buttons in the full screen imageview since user will be using the screen in landscape mode
-        drawnImageFullScreenAcceptButton.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-
-        drawnImageFullScreenUndoButton.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-        
         let model = TattooModel(imageName: "blank", tattooType: .new)
         viewModel = TattooViewModel(tattooModel: model)
         viewModel?.loadImage()
+        
+        configureButtons()
+        rotateFullScreenImages()
         
     }
     
@@ -498,7 +522,7 @@ extension ViewController: UITabBarDelegate {
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
             let selectedImage = sceneView.snapshot()
-            AudioServicesPlaySystemSound(1108)
+            AudioServicesPlaySystemSound(1108) //Play camera shutter sound
             shareImage(image: selectedImage)
         }
     }
