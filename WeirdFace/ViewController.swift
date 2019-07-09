@@ -498,6 +498,7 @@ extension ViewController: UITabBarDelegate {
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
             let selectedImage = sceneView.snapshot()
+            AudioServicesPlaySystemSound(1108)
             shareImage(image: selectedImage)
         }
     }
