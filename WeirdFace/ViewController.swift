@@ -40,25 +40,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var colorPickerFullScreenButton: UIButton!
     @IBOutlet weak var uploadImageDiscardButton: UIButton!
     @IBOutlet weak var uploadImageAcceptButton: UIButton!
-    
     @IBOutlet weak var transformHideButton: UIButton!
-    
     @IBOutlet weak var transformLeftButton: UIButton!
     @IBOutlet weak var transformRightButton: UIButton!
-    
     @IBOutlet weak var transformUpButton: UIButton!
-    
     @IBOutlet weak var transformDownButton: UIButton!
-    
     @IBOutlet weak var transformRotateCWButton: UIButton!
-    
     @IBOutlet weak var transformRotateCCWButton: UIButton!
-    
     @IBOutlet weak var transformMinusButton: UIButton!
-    
     @IBOutlet weak var transformPlusButton: UIButton!
-    
     @IBOutlet weak var transformPositionAcceptButton: UIButton!
+    
+    @IBOutlet weak var watermark: UILabel!
+    @IBOutlet weak var previewImageContainer: UIView!
+    @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var colorPicker: HSBColorPicker!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
@@ -521,8 +516,16 @@ extension ViewController: UITabBarDelegate {
         if item.tag == modeShare {
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
-            let selectedImage = sceneView.snapshot()
+            
+            //Capture image of user 
+           let selectedImage = sceneView.snapshot()
+            
+            
             AudioServicesPlaySystemSound(1108) //Play camera shutter sound
+            
+            //Show the preview of the image that the user took
+            previewImage.image = selectedImage
+            previewImageContainer.isHidden = false
             shareImage(image: selectedImage)
         }
     }
