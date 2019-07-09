@@ -223,7 +223,7 @@
                                             <constraint firstAttribute="height" constant="50" id="gN2-Sw-adB"/>
                                         </constraints>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
-                                        <state key="normal" image="iconFullScreen">
+                                        <state key="normal" image="iconFullScreenLocked">
                                             <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                         </state>
                                         <connections>
@@ -237,7 +237,7 @@
                                             <constraint firstAttribute="width" constant="50" id="q7Y-D3-D48"/>
                                         </constraints>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
-                                        <state key="normal" image="iconColorWheel">
+                                        <state key="normal" image="iconColorWheelLocked">
                                             <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                         </state>
                                         <connections>
@@ -608,10 +608,11 @@
     <resources>
         <image name="iconCheckMark" width="104" height="104"/>
         <image name="iconColorWheel" width="96" height="96"/>
+        <image name="iconColorWheelLocked" width="96" height="96"/>
         <image name="iconDiscard" width="90" height="90"/>
         <image name="iconDownArrow" width="96" height="96"/>
         <image name="iconDrawTab" width="96" height="96"/>
-        <image name="iconFullScreen" width="90" height="90"/>
+        <image name="iconFullScreenLocked" width="90" height="90"/>
         <image name="iconHide" width="96" height="96"/>
         <image name="iconLeftArrow" width="96" height="96"/>
         <image name="iconLeftRotate" width="96" height="96"/>
