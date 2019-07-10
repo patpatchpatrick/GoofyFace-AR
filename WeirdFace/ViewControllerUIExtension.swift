@@ -17,6 +17,7 @@ extension ViewController {
         //Add shadow to all buttons
         addShadowToView(view: drawnImageFullScreenAcceptButton)
         addShadowToView(view: drawnImageFullScreenUndoButton)
+        addShadowToView(view: drawnImageFullScreenDiscardButton)
         addShadowToView(view: colorPickerButton)
         addShadowToView(view: colorPickerFullScreenButton)
         addShadowToView(view: drawnImageAcceptButton)
@@ -34,6 +35,8 @@ extension ViewController {
         addShadowToView(view: transformMinusButton)
         addShadowToView(view: transformPlusButton)
         addShadowToView(view: transformPositionAcceptButton)
+        addShadowToView(view: discardPreviewButton)
+        addShadowToView(view: removeWatermarkButton)
         
     }
     

@@ -162,12 +162,13 @@
                                             <action selector="acceptPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wib-ys-7b4"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Face Tattoo AR App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcT-fb-Skg" userLabel="watermark">
-                                        <rect key="frame" x="56" y="567.5" width="302" height="43"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watermark" translatesAutoresizingMaskIntoConstraints="NO" id="oAM-Cu-Mni">
+                                        <rect key="frame" x="107" y="618" width="200" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="Ga9-o5-j8O"/>
+                                            <constraint firstAttribute="height" constant="100" id="VW4-N1-LhN"/>
+                                        </constraints>
+                                    </imageView>
                                     <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="And-L5-wPD">
                                         <rect key="frame" x="0.0" y="502" width="414" height="216"/>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
@@ -176,12 +177,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="And-L5-wPD" secondAttribute="bottom" constant="100" id="9jm-8J-9Fl"/>
+                                    <constraint firstItem="oAM-Cu-Mni" firstAttribute="centerX" secondItem="Atl-Lq-BB2" secondAttribute="centerX" id="Av8-Kq-PFP"/>
                                     <constraint firstItem="P5X-up-xv3" firstAttribute="top" secondItem="Atl-Lq-BB2" secondAttribute="top" constant="20" id="Ltw-3X-jLb"/>
-                                    <constraint firstItem="QcT-fb-Skg" firstAttribute="centerX" secondItem="Atl-Lq-BB2" secondAttribute="centerX" id="NrI-aM-NMK"/>
+                                    <constraint firstAttribute="bottom" secondItem="oAM-Cu-Mni" secondAttribute="bottom" constant="100" id="TZP-eq-lpW"/>
                                     <constraint firstAttribute="trailing" secondItem="3e2-Dm-7hj" secondAttribute="trailing" id="Uzr-aa-QcH"/>
                                     <constraint firstItem="And-L5-wPD" firstAttribute="leading" secondItem="Atl-Lq-BB2" secondAttribute="leading" id="fsP-8f-cqe"/>
                                     <constraint firstItem="3e2-Dm-7hj" firstAttribute="top" secondItem="Atl-Lq-BB2" secondAttribute="top" id="kLo-HD-UML"/>
-                                    <constraint firstItem="QcT-fb-Skg" firstAttribute="centerY" secondItem="Atl-Lq-BB2" secondAttribute="centerY" constant="180" id="paB-Lq-eEh"/>
                                     <constraint firstItem="P5X-up-xv3" firstAttribute="centerX" secondItem="Atl-Lq-BB2" secondAttribute="centerX" id="uF8-rl-0je"/>
                                     <constraint firstItem="3e2-Dm-7hj" firstAttribute="leading" secondItem="Atl-Lq-BB2" secondAttribute="leading" id="xTW-zX-Xy4"/>
                                     <constraint firstAttribute="trailing" secondItem="And-L5-wPD" secondAttribute="trailing" id="z7c-vB-X9N"/>
@@ -413,12 +414,37 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ibE-UN-alx">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="733"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfi-sb-gTv">
+                                        <rect key="frame" x="20" y="20" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="KiO-Qu-iHB"/>
+                                            <constraint firstAttribute="width" constant="50" id="xcg-Vw-pYk"/>
+                                        </constraints>
+                                        <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                        <state key="normal" title="Button" image="iconDiscard"/>
+                                        <connections>
+                                            <action selector="discardPreviewButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BVt-eJ-oQo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-mh-TH0">
+                                        <rect key="frame" x="344" y="20" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="8bu-fs-jX6"/>
+                                            <constraint firstAttribute="height" constant="50" id="jSJ-HS-C7D"/>
+                                        </constraints>
+                                        <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                        <state key="normal" title="Button" image="iconRemoveWatermark"/>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="hfe-mh-TH0" firstAttribute="top" secondItem="kNC-8r-omt" secondAttribute="top" constant="20" id="7hU-RL-YxS"/>
                                     <constraint firstItem="ibE-UN-alx" firstAttribute="leading" secondItem="kNC-8r-omt" secondAttribute="leading" id="8S5-LS-uWr"/>
                                     <constraint firstAttribute="bottom" secondItem="ibE-UN-alx" secondAttribute="bottom" id="RcB-cR-3nq"/>
+                                    <constraint firstAttribute="trailing" secondItem="hfe-mh-TH0" secondAttribute="trailing" constant="20" id="boE-o0-Ej3"/>
                                     <constraint firstAttribute="trailing" secondItem="ibE-UN-alx" secondAttribute="trailing" id="bsp-8q-Grb"/>
+                                    <constraint firstItem="sfi-sb-gTv" firstAttribute="top" secondItem="kNC-8r-omt" secondAttribute="top" constant="20" id="lWw-Y2-RGO"/>
+                                    <constraint firstItem="sfi-sb-gTv" firstAttribute="leading" secondItem="kNC-8r-omt" secondAttribute="leading" constant="20" id="m3H-Ux-FYU"/>
                                     <constraint firstItem="ibE-UN-alx" firstAttribute="top" secondItem="kNC-8r-omt" secondAttribute="top" id="rtB-WQ-lgJ"/>
                                 </constraints>
                             </view>
@@ -586,10 +612,12 @@
                         <outlet property="colorPickerButton" destination="zud-lK-KvL" id="T6S-2a-aa0"/>
                         <outlet property="colorPickerFullScreenButton" destination="ysR-mG-iEB" id="2g7-kF-lCq"/>
                         <outlet property="customTab" destination="1Y2-b5-LSz" id="rM2-5V-Zpi"/>
+                        <outlet property="discardPreviewButton" destination="sfi-sb-gTv" id="Lr4-61-JGN"/>
                         <outlet property="drawnImageAcceptButton" destination="SbI-J8-cpZ" id="vUD-Ib-93b"/>
                         <outlet property="drawnImageContainerView" destination="1ya-u3-Wpc" id="e8i-Dv-5Jc"/>
                         <outlet property="drawnImageDiscardButton" destination="8YD-bA-91R" id="wiv-kH-XIQ"/>
                         <outlet property="drawnImageFullScreenAcceptButton" destination="fWH-d5-Ctm" id="5sh-M0-BWf"/>
+                        <outlet property="drawnImageFullScreenDiscardButton" destination="f8b-Fe-hrN" id="uTA-7g-f28"/>
                         <outlet property="drawnImageFullScreenUndoButton" destination="Z3c-FI-Fst" id="Pkz-ob-EYf"/>
                         <outlet property="drawnImageView" destination="ieo-Vk-1Wr" id="EFM-NH-Y6Y"/>
                         <outlet property="drawnImageViewFullScreen" destination="KiX-b7-Wco" id="HGu-Gw-6Tz"/>
@@ -599,6 +627,7 @@
                         <outlet property="positionTab" destination="eD9-1i-A5P" id="hHH-pr-gMa"/>
                         <outlet property="previewImage" destination="ibE-UN-alx" id="lzp-q8-pv8"/>
                         <outlet property="previewImageContainer" destination="kNC-8r-omt" id="bLM-LD-Fe3"/>
+                        <outlet property="removeWatermarkButton" destination="hfe-mh-TH0" id="gDb-Yn-lnZ"/>
                         <outlet property="resetButton" destination="Mzz-6Y-iPH" id="mmA-GC-Dt3"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="selectTab" destination="8HX-JG-j86" id="3DE-NB-Xh9"/>
@@ -622,7 +651,6 @@
                         <outlet property="uploadTab" destination="R5u-Fc-AMs" id="Wta-0Z-4ph"/>
                         <outlet property="uploadedImage" destination="SoO-Kd-aHe" id="3iT-Q2-ghh"/>
                         <outlet property="uploadedImageContainer" destination="kiK-Ct-qDG" id="onU-gj-lkI"/>
-                        <outlet property="watermark" destination="QcT-fb-Skg" id="hpY-EG-OCK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -648,6 +676,7 @@
         <image name="iconLeftRotate" width="96" height="96"/>
         <image name="iconMinus" width="52" height="52"/>
         <image name="iconPositionTab" width="100" height="100"/>
+        <image name="iconRemoveWatermark" width="96" height="96"/>
         <image name="iconReset" width="100" height="100"/>
         <image name="iconRightArrow" width="96" height="96"/>
         <image name="iconRightRotate" width="96" height="96"/>
@@ -657,5 +686,6 @@
         <image name="iconUpArrow" width="96" height="96"/>
         <image name="iconUploadTab" width="96" height="96"/>
         <image name="plusIcon" width="52" height="52"/>
+        <image name="watermark" width="800" height="400"/>
     </resources>
 </document>

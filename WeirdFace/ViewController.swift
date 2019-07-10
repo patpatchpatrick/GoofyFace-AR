@@ -36,6 +36,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawnImageAcceptButton: UIButton!
     @IBOutlet weak var drawnImageFullScreenAcceptButton: UIButton!
     @IBOutlet weak var drawnImageFullScreenUndoButton: UIButton!
+    
+    @IBOutlet weak var drawnImageFullScreenDiscardButton: UIButton!
     @IBOutlet weak var colorPickerButton: UIButton!
     @IBOutlet weak var colorPickerFullScreenButton: UIButton!
     @IBOutlet weak var uploadImageDiscardButton: UIButton!
@@ -51,9 +53,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var transformPlusButton: UIButton!
     @IBOutlet weak var transformPositionAcceptButton: UIButton!
     
-    @IBOutlet weak var watermark: UILabel!
     @IBOutlet weak var previewImageContainer: UIView!
     @IBOutlet weak var previewImage: UIImageView!
+    @IBOutlet weak var discardPreviewButton: UIButton!
+    @IBOutlet weak var removeWatermarkButton: UIButton!
+    
     @IBOutlet weak var colorPicker: HSBColorPicker!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
@@ -321,6 +325,15 @@ class ViewController: UIViewController {
         
     }
     
+    
+    @IBAction func discardPreviewButtonTapped(_ sender: UIButton) {
+        hideImagePreview()
+    }
+    
+    func hideImagePreview(){
+        previewImageContainer.isHidden = true
+    }
+    
     func shareImage(image: UIImage){
         
         let objectsToShare: [AnyObject] = [ image ]
@@ -521,13 +534,37 @@ extension ViewController: UITabBarDelegate {
            let selectedImage = sceneView.snapshot()
             
             
+           let watermarkedImage = addWatermarkToImage(imageToWatermark: selectedImage)
+            
             AudioServicesPlaySystemSound(1108) //Play camera shutter sound
             
             //Show the preview of the image that the user took
-            previewImage.image = selectedImage
+            previewImage.image = watermarkedImage
             previewImageContainer.isHidden = false
             shareImage(image: selectedImage)
         }
+    }
+    
+    func addWatermarkToImage(imageToWatermark: UIImage) -> UIImage?{
+        if let img2 = UIImage(named: "watermark.png") {
+            
+            let rect = CGRect(x: 0, y: 0, width: imageToWatermark.size.width, height: imageToWatermark.size.height)
+            
+            UIGraphicsBeginImageContextWithOptions(imageToWatermark.size, true, 0)
+            guard let context = UIGraphicsGetCurrentContext() else {return nil}
+            
+            context.setFillColor(UIColor.white.cgColor)
+            context.fill(rect)
+            
+            imageToWatermark.draw(in: rect, blendMode: .normal, alpha: 1)
+            img2.draw(in: CGRect(x: imageToWatermark.size.width / 2 - img2.size.width / 2,y: imageToWatermark.size.height - 400,width: 800,height: 400), blendMode: .normal, alpha: 0.3)
+            img2.draw(in: CGRect(x: imageToWatermark.size.width / 2 - img2.size.width / 2,y: 0,width: 800,height: 400), blendMode: .normal, alpha: 0.3)
+            
+            let result = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return result
+        } else {return nil}
     }
     
     //Save image to user's gallery
