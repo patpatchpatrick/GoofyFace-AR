@@ -18,6 +18,7 @@ extension ViewController {
         addShadowToView(view: drawnImageFullScreenAcceptButton)
         addShadowToView(view: drawnImageFullScreenUndoButton)
         addShadowToView(view: drawnImageFullScreenDiscardButton)
+        addShadowToView(view: drawnImageViewFullScreenButton)
         addShadowToView(view: colorPickerButton)
         addShadowToView(view: colorPickerFullScreenButton)
         addShadowToView(view: drawnImageAcceptButton)
@@ -38,6 +39,22 @@ extension ViewController {
         addShadowToView(view: discardPreviewButton)
         addShadowToView(view: removeWatermarkButton)
         
+        
+    }
+    
+    func configureViewsForPremiumMode(){
+        
+        //Remove icons with locks on them
+        if premiumModePurchased{
+            let fullScreenUnlockedImg = UIImage(named: "iconFullScreen.png")
+            drawnImageViewFullScreenButton.setImage(fullScreenUnlockedImg, for: .normal)
+            let colorPickUnlockedImg = UIImage(named: "iconColorWheel.png")
+            colorPickerButton.setImage(colorPickUnlockedImg, for: .normal)
+        }
+        
+        //Hide watermark and remove watermark button
+        watermark.isHidden = true
+        removeWatermarkButton.isHidden = true
     }
     
     func addShadowToView(view: UIView){

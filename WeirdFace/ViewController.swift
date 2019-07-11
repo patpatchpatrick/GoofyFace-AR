@@ -9,6 +9,7 @@
 import UIKit
 import ARKit
 import SceneKit
+import StoreKit
 
 class ViewController: UIViewController {
     
@@ -16,9 +17,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var arNotSupportedTextView: UITextView!
     
     var premiumModePurchased = false // track if premium mode purchased by user
+    let inAppPurchasePremiumAccountID = "premium" // app store ID for in app purchase
     
     @IBOutlet var mainView: ARSCNView!
-    
+    @IBOutlet weak var watermark: UIImageView!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var hideButton: UIButton!
     @IBOutlet weak var acceptPositionButton: UIButton!
@@ -29,6 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var uploadedImageContainer: UIView!
     @IBOutlet weak var drawnImageContainerView: UIView!
     @IBOutlet weak var drawnImageView: DrawnImageView!
+    @IBOutlet weak var drawnImageViewFullScreenButton: UIButton!
     @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
     @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
     
@@ -97,8 +100,8 @@ class ViewController: UIViewController {
         } else {
             arNotSupportedTextView.isHidden = true
         }
- 
         
+        SKPaymentQueue.default().add(self)
         collectionView.delegate = self
         collectionView.dataSource = self
         tabBar.delegate = self
@@ -111,7 +114,14 @@ class ViewController: UIViewController {
         viewModel = TattooViewModel(tattooModel: model)
         viewModel?.loadImage()
         
+        //Check if user has premium account purchased
+        let prefs = UserDefaults.standard
+        premiumModePurchased =  prefs.bool(forKey: inAppPurchasePremiumAccountID)
+        
         configureButtons()
+        if premiumModePurchased{
+            configureViewsForPremiumMode()
+        }
         rotateFullScreenImages()
         
     }
@@ -285,9 +295,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func drawnImageFullScreenButtonTapped(_ sender: UIButton) {
-        
+        //Show color wheel if premium account purchased, otherse show alert with option to purchase
+        if premiumModePurchased {
         drawnImageViewFullScreenContainer.isHidden = false
-        drawnImageContainerView.isHidden = true
+            drawnImageContainerView.isHidden = true}
+        else {
+              displayPremiumAccessRequiredAlert(title: "Premium Account Required", message: "Premium Account Required to Use Color Picker")
+        }
         
     }
     
@@ -310,7 +324,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawnImageColorWheelTapped(_ sender: UIButton) {
-        colorPicker.isHidden = false
+        //Show color wheel if premium account purchased, otherse show alert with option to purchase
+        if premiumModePurchased {
+                    colorPicker.isHidden = false
+        } else {
+            displayPremiumAccessRequiredAlert(title: "Premium Account Required", message: "Premium Account Required to Use Color Picker")
+        }
         
     }
     
@@ -347,6 +366,13 @@ class ViewController: UIViewController {
         self.present(activityViewController, animated: true, completion: nil)
         
     }
+    
+    @IBAction func removeWatermarkButtonTapped(_ sender: UIButton) {
+        
+            displayPremiumAccessRequiredAlert(title: "Premium Account Required", message: "Premium Account Required to Remove Watermarks")
+        
+    }
+    
     
 }
 
@@ -533,15 +559,21 @@ extension ViewController: UITabBarDelegate {
             //Capture image of user 
            let selectedImage = sceneView.snapshot()
             
-            
-           let watermarkedImage = addWatermarkToImage(imageToWatermark: selectedImage)
-            
             AudioServicesPlaySystemSound(1108) //Play camera shutter sound
-            
-            //Show the preview of the image that the user took
-            previewImage.image = watermarkedImage
-            previewImageContainer.isHidden = false
-            shareImage(image: selectedImage)
+    
+            //Show the preview of the image that the user took and allow them to share it
+            //If user is in "premium mode", remove the watermark
+            if !premiumModePurchased{
+                if let watermarkedImage = addWatermarkToImage(imageToWatermark: selectedImage){
+                    previewImage.image = watermarkedImage
+                    previewImageContainer.isHidden = false
+                    shareImage(image: watermarkedImage)
+                }
+            } else {
+                previewImage.image = selectedImage
+                previewImageContainer.isHidden = false
+                shareImage(image: selectedImage)
+            }
         }
     }
     
@@ -579,6 +611,28 @@ extension ViewController: UITabBarDelegate {
     func showAlertWith(title: String, message: String){
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+    
+    func displayPremiumAccessRequiredAlert(title: String, message: String){
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        ac.addAction(UIAlertAction(title: "Buy Premium Access", style: .default, handler: {action in
+            self.buyInAppPurchases()
+        }))
+        present(ac, animated: true)
+        
+    }
+    
+    func verifyIfUserWantsToCompletePurchase(title: String, message: String, callback: @escaping (Bool) -> Void){
+        //Verify if user wants to complete purchase of product and send callback
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "No", style: .default, handler: {action in
+            callback(false)
+        }))
+        ac.addAction(UIAlertAction(title: "Buy", style: .default, handler: {action in
+            callback(true)
+        }))
         present(ac, animated: true)
     }
     
@@ -655,5 +709,105 @@ extension ViewController: HSBColorPickerDelegate {
     
     
 }
+
+extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserver{
+    
+    func buyProduct(product: SKProduct) {
+        print("Sending the Payment Request to Apple");
+        let payment = SKPayment(product: product)
+        SKPaymentQueue.default().add(payment);
+    }
+    
+    func buyInAppPurchases(){
+        
+        if (SKPaymentQueue.canMakePayments()) {
+            let productID:NSSet = NSSet(array: [self.inAppPurchasePremiumAccountID as NSString]);
+            let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>);
+            productsRequest.delegate = self;
+            productsRequest.start();
+            print("Fetching Products");
+        } else {
+            print("can't make purchases");
+        }
+        
+    }
+    
+    func restoreInAppPurchases(){
+        
+        
+        if (SKPaymentQueue.canMakePayments()) {
+            SKPaymentQueue.default().add(self)
+            SKPaymentQueue.default().restoreCompletedTransactions()
+        } else {
+            // show error
+        }
+        
+    }
+    
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        print(response.products)
+        let count : Int = response.products.count
+        if (count>0) {
+            
+            let validProduct: SKProduct = response.products[0] as SKProduct
+            if (validProduct.productIdentifier == self.inAppPurchasePremiumAccountID as String) {
+                print(validProduct.localizedTitle)
+                print(validProduct.localizedDescription)
+                print(validProduct.price)
+                //Display price and details to user and verify if they want to complete the purchase, if so, buy the product
+                verifyIfUserWantsToCompletePurchase(title: "Premium Account Required", message: "Purchase Premium Account to Get Access to Extra Features for " + validProduct.localizedPrice + "?", callback: {
+                    purchaseConfirmed in
+                    if purchaseConfirmed{
+                         self.buyProduct(product: validProduct)
+                    }
+                })
+            } else {
+                print(validProduct.productIdentifier)
+            }
+        } else {
+            print("nothing")
+        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction:AnyObject in transactions {
+            if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
+                
+           //     self.dismissPurchaseBtn.isEnabled = true
+             //   self.restorePurchaseBtn.isEnabled = true
+               // self.buyNowBtn.isEnabled = true
+                
+                switch trans.transactionState {
+                case .purchased:
+                    print("Product Purchased")
+                    let preferences = UserDefaults.standard
+                    preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
+                    SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                    break;
+                case .failed:
+                    print("Purchased Failed");
+                    SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                    break;
+                case .restored:
+                    print("Already Purchased")
+                    let preferences = UserDefaults.standard
+                    preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
+                    SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+                default:
+                    break;
+                }
+            }
+        }
+    }
+    
+    //If an error occurs, the code will go to this function
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        // Show some alert
+    }
+    
+
+    
+}
+
 
 

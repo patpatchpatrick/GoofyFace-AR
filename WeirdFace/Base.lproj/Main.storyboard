@@ -434,6 +434,9 @@
                                         </constraints>
                                         <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                         <state key="normal" title="Button" image="iconRemoveWatermark"/>
+                                        <connections>
+                                            <action selector="removeWatermarkButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wna-71-ANR"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -621,6 +624,7 @@
                         <outlet property="drawnImageFullScreenUndoButton" destination="Z3c-FI-Fst" id="Pkz-ob-EYf"/>
                         <outlet property="drawnImageView" destination="ieo-Vk-1Wr" id="EFM-NH-Y6Y"/>
                         <outlet property="drawnImageViewFullScreen" destination="KiX-b7-Wco" id="HGu-Gw-6Tz"/>
+                        <outlet property="drawnImageViewFullScreenButton" destination="iwg-Pb-pdY" id="Yxf-MS-jfu"/>
                         <outlet property="drawnImageViewFullScreenContainer" destination="PJ4-Zp-aza" id="xS9-2t-bl0"/>
                         <outlet property="hideButton" destination="5pi-pv-97D" id="g12-qJ-gOZ"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="Adu-np-aql"/>
@@ -651,6 +655,7 @@
                         <outlet property="uploadTab" destination="R5u-Fc-AMs" id="Wta-0Z-4ph"/>
                         <outlet property="uploadedImage" destination="SoO-Kd-aHe" id="3iT-Q2-ghh"/>
                         <outlet property="uploadedImageContainer" destination="kiK-Ct-qDG" id="onU-gj-lkI"/>
+                        <outlet property="watermark" destination="oAM-Cu-Mni" id="vdb-8V-V3h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
