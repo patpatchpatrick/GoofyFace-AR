@@ -24,6 +24,7 @@ class DrawnImageView: UIImageView {
     //When the undo button is pressed, paths/shape layers can be removed from stack
     private lazy var shapeLayerStack = ShapeLayerStack()
     private lazy var pathStack = PathStack()
+    private lazy var currentColor: UIColor = UIColor.black
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,7 +48,7 @@ class DrawnImageView: UIImageView {
         let shapeLayer = CAShapeLayer()
         layer.addSublayer(shapeLayer)
         shapeLayer.lineWidth = 7
-        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.strokeColor = currentColor.cgColor
         shapeLayerStack.push(shapeLayer)
         isUserInteractionEnabled = true
         
@@ -55,6 +56,7 @@ class DrawnImageView: UIImageView {
     
     func changeColor(color: UIColor){
         //Create new path and shapelayer for new color and add to stacks
+        currentColor = color
         let shapeLayer = CAShapeLayer()
         layer.addSublayer(shapeLayer)
         shapeLayer.lineWidth = 7
@@ -66,13 +68,23 @@ class DrawnImageView: UIImageView {
         
     }
     
-    func undo(){
+    func undo() {
         //Undo the most recent drawing (path) drawn by user and remove from stacks
+        //If nil, return the default color (black) to inform user
         guard let path = pathStack.pop() else {return}
         guard let shapeLayer = shapeLayerStack.pop() else {return}
         path.removeAllPoints()
         shapeLayer.path = path.cgPath
         
+    }
+    
+    func getCurrentColor() -> UIColor {
+        //Return UIColor of current stroke path
+        if let strokeColor = shapeLayerStack.peek()?.strokeColor {
+            return UIColor(cgColor: strokeColor)
+        } else {
+            return UIColor.black
+        }
     }
     
     func clear(){

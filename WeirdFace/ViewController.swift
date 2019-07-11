@@ -350,7 +350,10 @@ class ViewController: UIViewController {
     
     
     @IBAction func drawnImageFullScreenUndoTapped(_ sender: UIButton) {
+        //Undo the path and update the colorPicker button tint color to the previous color so the user knows what color they are working with
         drawnImageViewFullScreen.undo()
+        let currentColor = drawnImageViewFullScreen.getCurrentColor()
+        colorPickerFullScreenButton.tintColor = currentColor
         
     }
     
