@@ -500,6 +500,50 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdn-cv-5Tf">
+                                        <rect key="frame" x="32" y="345" width="350" height="128"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Rotate Device To Draw In Full Screen Mode" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwb-2x-hUx">
+                                                <rect key="frame" x="55" y="10" width="200" height="41"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="CF0-Yh-zbG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconLeftRotate" translatesAutoresizingMaskIntoConstraints="NO" id="pSl-0Y-7bh">
+                                                <rect key="frame" x="265" y="10" width="40" height="40"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="OVH-2b-qZ5"/>
+                                                    <constraint firstAttribute="width" constant="40" id="x4h-wf-1vV"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOT-TF-NEv">
+                                                <rect key="frame" x="155" y="71" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Tnc-C8-ag6"/>
+                                                    <constraint firstAttribute="height" constant="40" id="zy2-R4-eVO"/>
+                                                </constraints>
+                                                <state key="normal" image="iconDiscard"/>
+                                                <connections>
+                                                    <action selector="discardRotateMessageTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0qA-eh-fvO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="WOT-TF-NEv" firstAttribute="top" secondItem="Fwb-2x-hUx" secondAttribute="bottom" constant="20" id="F98-Pu-qE8"/>
+                                            <constraint firstItem="WOT-TF-NEv" firstAttribute="centerX" secondItem="Cdn-cv-5Tf" secondAttribute="centerX" id="FfG-p8-NMh"/>
+                                            <constraint firstItem="pSl-0Y-7bh" firstAttribute="leading" secondItem="Fwb-2x-hUx" secondAttribute="trailing" constant="10" id="OG0-lE-Bxb"/>
+                                            <constraint firstItem="pSl-0Y-7bh" firstAttribute="top" secondItem="Fwb-2x-hUx" secondAttribute="top" id="hDO-iB-WTY"/>
+                                            <constraint firstItem="Fwb-2x-hUx" firstAttribute="centerX" secondItem="Cdn-cv-5Tf" secondAttribute="centerX" constant="-20" id="hxd-Dz-tsA"/>
+                                            <constraint firstAttribute="height" constant="128" id="pjx-01-u5G"/>
+                                            <constraint firstAttribute="width" constant="350" id="seA-Ry-PmZ"/>
+                                            <constraint firstItem="Fwb-2x-hUx" firstAttribute="top" secondItem="Cdn-cv-5Tf" secondAttribute="top" constant="10" id="wXy-xz-uUQ"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysR-mG-iEB">
                                         <rect key="frame" x="90" y="20" width="50" height="50"/>
                                         <constraints>
@@ -557,10 +601,12 @@
                                     <constraint firstAttribute="trailing" secondItem="KiX-b7-Wco" secondAttribute="trailing" id="KTM-Vw-r26"/>
                                     <constraint firstItem="f8b-Fe-hrN" firstAttribute="leading" secondItem="PJ4-Zp-aza" secondAttribute="leading" constant="20" id="TS5-fO-VuV"/>
                                     <constraint firstItem="Z3c-FI-Fst" firstAttribute="top" secondItem="PJ4-Zp-aza" secondAttribute="top" constant="20" id="TxC-6r-2my"/>
+                                    <constraint firstItem="Cdn-cv-5Tf" firstAttribute="centerX" secondItem="PJ4-Zp-aza" secondAttribute="centerX" id="bsM-o9-gOy"/>
                                     <constraint firstItem="ysR-mG-iEB" firstAttribute="leading" secondItem="f8b-Fe-hrN" secondAttribute="trailing" constant="20" id="f8b-17-9yT"/>
                                     <constraint firstAttribute="bottom" secondItem="fWH-d5-Ctm" secondAttribute="bottom" constant="20" id="gFq-aq-Vzj"/>
                                     <constraint firstItem="KiX-b7-Wco" firstAttribute="top" secondItem="PJ4-Zp-aza" secondAttribute="top" id="loo-Ak-us7"/>
                                     <constraint firstAttribute="bottom" secondItem="KiX-b7-Wco" secondAttribute="bottom" id="nmU-Mb-Tf2"/>
+                                    <constraint firstItem="Cdn-cv-5Tf" firstAttribute="centerY" secondItem="PJ4-Zp-aza" secondAttribute="centerY" id="oHd-y4-NVV"/>
                                     <constraint firstItem="f8b-Fe-hrN" firstAttribute="top" secondItem="PJ4-Zp-aza" secondAttribute="top" constant="20" id="rjT-7n-CF1"/>
                                     <constraint firstItem="KiX-b7-Wco" firstAttribute="leading" secondItem="PJ4-Zp-aza" secondAttribute="leading" id="tu8-z4-js1"/>
                                 </constraints>
@@ -680,6 +726,7 @@
                         <outlet property="drawnImageDiscardButton" destination="8YD-bA-91R" id="wiv-kH-XIQ"/>
                         <outlet property="drawnImageFullScreenAcceptButton" destination="fWH-d5-Ctm" id="5sh-M0-BWf"/>
                         <outlet property="drawnImageFullScreenDiscardButton" destination="f8b-Fe-hrN" id="uTA-7g-f28"/>
+                        <outlet property="drawnImageFullScreenRotateMessage" destination="Cdn-cv-5Tf" id="dLA-50-9Ww"/>
                         <outlet property="drawnImageFullScreenUndoButton" destination="Z3c-FI-Fst" id="Pkz-ob-EYf"/>
                         <outlet property="drawnImageView" destination="ieo-Vk-1Wr" id="EFM-NH-Y6Y"/>
                         <outlet property="drawnImageViewFullScreen" destination="KiX-b7-Wco" id="HGu-Gw-6Tz"/>

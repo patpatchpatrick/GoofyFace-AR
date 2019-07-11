@@ -35,6 +35,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawnImageView: DrawnImageView!
     @IBOutlet weak var drawnImageViewFullScreenButton: UIButton!
     @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
+    
+    @IBOutlet weak var drawnImageFullScreenRotateMessage: UIView!
     @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
     
     @IBOutlet weak var settingsButton: UIButton!
@@ -125,7 +127,7 @@ class ViewController: UIViewController {
         let prefs = UserDefaults.standard
         premiumModePurchased =  prefs.bool(forKey: inAppPurchasePremiumAccountID)
         
-        configureButtons()
+        configureButtonsAndViews()
 
         if premiumModePurchased{
             configureViewsForPremiumMode()
@@ -140,6 +142,11 @@ class ViewController: UIViewController {
                                                selector: #selector(updated_data),
                                                name:Notification.Name("UPDATED_DATA"),
                                                object: nil)
+        //Observer for if Device Rotated
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(device_rotated),
+                                            name:UIDevice.orientationDidChangeNotification,
+                                               object: nil)
         if arTrackingSupported {
         let configuration = ARFaceTrackingConfiguration()
             sceneView.session.run(configuration)}
@@ -148,10 +155,28 @@ class ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIDevice.orientationDidChangeNotification,
+                                                  object: nil)
         if arTrackingSupported{
                 sceneView.session.pause()
         }
     }
+    
+    @objc func device_rotated(notification:Notification) -> Void{
+        
+        //If device is rotated, hide the message that tells user to rotate the device in full screen mode
+        switch UIDevice.current.orientation {
+        case .landscapeLeft, .landscapeRight:
+            drawnImageFullScreenRotateMessage.isHidden = true
+        case .portrait, .portraitUpsideDown:
+            print("Portrait")
+        default:
+            drawnImageFullScreenRotateMessage.isHidden = true
+        }
+        
+    }
+    
     
     @objc func updated_data(notification:Notification) -> Void{
         
@@ -306,8 +331,15 @@ class ViewController: UIViewController {
         //Show color wheel if premium account purchased, otherse show alert with option to purchase
         if premiumModePurchased {
         drawnImageViewFullScreenContainer.isHidden = false
-            drawnImageContainerView.isHidden = true}
-        else {
+        drawnImageContainerView.isHidden = true
+        switch UIDevice.current.orientation{
+            case .portrait, .portraitUpsideDown:
+                //Show message that tells user to rotate device if screen is not landscape
+                drawnImageFullScreenRotateMessage.isHidden = false
+            default:
+                print("Orientation Is Correct")
+            }
+        } else {
             drawnImageViewFullScreenButton.isEnabled = false
             self.buyInAppPurchases()
         }
@@ -404,6 +436,12 @@ class ViewController: UIViewController {
     
     @IBAction func hideSettingsButtonTapped(_ sender: UIButton) {
         settingsContainer.isHidden = true
+    }
+    
+    
+    @IBAction func discardRotateMessageTapped(_ sender: UIButton) {
+        drawnImageFullScreenRotateMessage.isHidden = true
+        //Discard rotate message if user presses X button
     }
 }
 

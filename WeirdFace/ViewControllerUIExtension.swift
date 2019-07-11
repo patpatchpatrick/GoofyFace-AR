@@ -12,7 +12,7 @@ import UIKit
 //Class to keep track of updates to UI
 extension ViewController {
     
-    func configureButtons(){
+    func configureButtonsAndViews(){
         
         //Add shadow to all buttons
         addShadowToView(view: drawnImageFullScreenAcceptButton)
@@ -41,6 +41,7 @@ extension ViewController {
         addShadowToView(view: settingsButton)
         
          addShadowToView(view: settingsContainer)
+        addShadowToView(view: drawnImageFullScreenRotateMessage)
     }
     
     func configureViewsForPremiumMode(){
