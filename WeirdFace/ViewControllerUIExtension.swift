@@ -38,8 +38,9 @@ extension ViewController {
         addShadowToView(view: transformPositionAcceptButton)
         addShadowToView(view: discardPreviewButton)
         addShadowToView(view: removeWatermarkButton)
+        addShadowToView(view: settingsButton)
         
-        
+         addShadowToView(view: settingsContainer)
     }
     
     func configureViewsForPremiumMode(){
@@ -50,11 +51,15 @@ extension ViewController {
             drawnImageViewFullScreenButton.setImage(fullScreenUnlockedImg, for: .normal)
             let colorPickUnlockedImg = UIImage(named: "iconColorWheel.png")
             colorPickerButton.setImage(colorPickUnlockedImg, for: .normal)
+            purchasePremiumButton.isEnabled = false
+            purchasePremiumButton.setTitle("Premium Mode Purchased", for: .normal)
+            
+            //Hide watermark and remove watermark button
+            watermark.isHidden = true
+            removeWatermarkButton.isHidden = true
+            
         }
-        
-        //Hide watermark and remove watermark button
-        watermark.isHidden = true
-        removeWatermarkButton.isHidden = true
+    
     }
     
     func addShadowToView(view: UIView){

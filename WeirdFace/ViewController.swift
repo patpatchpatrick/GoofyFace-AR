@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     var premiumModePurchased = false // track if premium mode purchased by user
     let inAppPurchasePremiumAccountID = "premium" // app store ID for in app purchase
     
+    var selectedPreviewImage: UIImage?
+    
     @IBOutlet var mainView: ARSCNView!
     @IBOutlet weak var watermark: UIImageView!
     @IBOutlet weak var resetButton: UIButton!
@@ -35,6 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var drawnImageViewFullScreenContainer: UIView!
     @IBOutlet weak var drawnImageViewFullScreen: BorderedDrawnImageView!
     
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var drawnImageDiscardButton: UIButton!
     @IBOutlet weak var drawnImageAcceptButton: UIButton!
     @IBOutlet weak var drawnImageFullScreenAcceptButton: UIButton!
@@ -67,6 +70,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
     var imagePicker = UIImagePickerController()
+    
+    @IBOutlet weak var settingsContainer: UIView!
+    @IBOutlet weak var purchasePremiumButton: UIButton!
+    @IBOutlet weak var restorePremiumButton: UIButton!
     
     @IBOutlet weak var selectTab: UITabBarItem!
     @IBOutlet weak var customTab: UITabBarItem!
@@ -119,6 +126,7 @@ class ViewController: UIViewController {
         premiumModePurchased =  prefs.bool(forKey: inAppPurchasePremiumAccountID)
         
         configureButtons()
+
         if premiumModePurchased{
             configureViewsForPremiumMode()
         }
@@ -300,7 +308,8 @@ class ViewController: UIViewController {
         drawnImageViewFullScreenContainer.isHidden = false
             drawnImageContainerView.isHidden = true}
         else {
-              displayPremiumAccessRequiredAlert(title: "Premium Account Required", message: "Premium Account Required to Use Color Picker")
+            drawnImageViewFullScreenButton.isEnabled = false
+            self.buyInAppPurchases()
         }
         
     }
@@ -328,7 +337,8 @@ class ViewController: UIViewController {
         if premiumModePurchased {
                     colorPicker.isHidden = false
         } else {
-            displayPremiumAccessRequiredAlert(title: "Premium Account Required", message: "Premium Account Required to Use Color Picker")
+            colorPickerButton.isEnabled = false
+            self.buyInAppPurchases()
         }
         
     }
@@ -359,21 +369,39 @@ class ViewController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         
-        
-       // activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-        
-        
         self.present(activityViewController, animated: true, completion: nil)
         
     }
     
     @IBAction func removeWatermarkButtonTapped(_ sender: UIButton) {
         
-            displayPremiumAccessRequiredAlert(title: "Premium Account Required", message: "Premium Account Required to Remove Watermarks")
+            removeWatermarkButton.isEnabled = false
+            self.buyInAppPurchases()
         
     }
     
+    @IBAction func purchasePremiumButtonTapped(_ sender: UIButton) {
+        //Purchase button tapped inside Settings menu
+        purchasePremiumButton.isEnabled = false
+         self.buyInAppPurchases()
+        
+    }
     
+    @IBAction func restorePurchasesButtonTapped(_ sender: UIButton) {
+        //Restore button tapped inside Settings menu
+        restorePremiumButton.isEnabled = false
+        self.restoreInAppPurchases()
+    }
+    
+    
+    @IBAction func settingsButtonTapped(_ sender: UIButton) {
+        settingsContainer.isHidden = false
+    }
+    
+    
+    @IBAction func hideSettingsButtonTapped(_ sender: UIButton) {
+        settingsContainer.isHidden = true
+    }
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -507,15 +535,20 @@ extension ViewController: UITabBarDelegate {
         if item.tag == modeSelect {
             collectionView.isHidden = false
             resetButton.isHidden = true
+            settingsButton.isHidden = true
+            previewImageContainer.isHidden = true
         } else {
             collectionView.isHidden = true
             resetButton.isHidden = false
+            settingsButton.isHidden = false
         }
         
         //"Draw mode" - user can draw their own tattoo
         if item.tag == modeDraw {
             resetDrawView()
             drawnImageContainerView.isHidden = false
+            settingsButton.isHidden = true
+            previewImageContainer.isHidden = true
         } else {
             drawnImageContainerView.isHidden = true
         }
@@ -524,6 +557,7 @@ extension ViewController: UITabBarDelegate {
         if item.tag == modeUpload {
             resetUploadView()
             uploadedImageContainer.isHidden = false
+            previewImageContainer.isHidden = true
             selectUploadPicture()
         } else {
             uploadedImageContainer.isHidden = true
@@ -534,6 +568,8 @@ extension ViewController: UITabBarDelegate {
             viewModel?.positionType = .auto
             viewModel?.displayPositionMap()
             tattooTypePicker.isHidden = false
+            settingsButton.isHidden = true
+            previewImageContainer.isHidden = true
         } else {
             tattooTypePicker.isHidden = true
             acceptPositionButton.isHidden = true
@@ -549,12 +585,23 @@ extension ViewController: UITabBarDelegate {
             shareTab.isEnabled = true
             addTatTab.isEnabled = false
             positionTab.isEnabled = false
+            settingsButton.isHidden = false
+            previewImageContainer.isHidden = true
         }
         
         //"Share Mode" - Save image to user's gallery or share via any other apps
         if item.tag == modeShare {
+            
+            if !previewImageContainer.isHidden {
+                //If user clicks share button while the preview window is still open, reload the shareImage menu
+                guard let currentImg = selectedPreviewImage else {return}
+                shareImage(image: currentImg)
+                return
+            }
+            
             transformButtonContainer.isHidden = true
             hideButton.isHidden = true
+            settingsButton.isHidden = false
             
             //Capture image of user 
            let selectedImage = sceneView.snapshot()
@@ -565,11 +612,13 @@ extension ViewController: UITabBarDelegate {
             //If user is in "premium mode", remove the watermark
             if !premiumModePurchased{
                 if let watermarkedImage = addWatermarkToImage(imageToWatermark: selectedImage){
+                    selectedPreviewImage = watermarkedImage
                     previewImage.image = watermarkedImage
                     previewImageContainer.isHidden = false
                     shareImage(image: watermarkedImage)
                 }
             } else {
+                selectedPreviewImage = selectedImage
                 previewImage.image = selectedImage
                 previewImageContainer.isHidden = false
                 shareImage(image: selectedImage)
@@ -636,6 +685,8 @@ extension ViewController: UITabBarDelegate {
         present(ac, animated: true)
     }
     
+    
+    
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -658,6 +709,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         viewModel?.changeImage(named: imageName)
         collectionView.isHidden = true
         resetButton.isHidden = false
+        settingsButton.isHidden = false
         positionTab.isEnabled = true
     }
     
@@ -728,6 +780,12 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
             print("Fetching Products");
         } else {
             print("can't make purchases");
+            showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
+            removeWatermarkButton.isEnabled = true
+            drawnImageViewFullScreenButton.isEnabled = true
+            colorPickerButton.isEnabled = true
+            purchasePremiumButton.isEnabled = true
+            restorePremiumButton.isEnabled = true
         }
         
     }
@@ -739,7 +797,8 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
             SKPaymentQueue.default().add(self)
             SKPaymentQueue.default().restoreCompletedTransactions()
         } else {
-            // show error
+            restorePremiumButton.isEnabled = true
+              showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
         }
         
     }
@@ -755,7 +814,13 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
                 print(validProduct.localizedDescription)
                 print(validProduct.price)
                 //Display price and details to user and verify if they want to complete the purchase, if so, buy the product
-                verifyIfUserWantsToCompletePurchase(title: "Premium Account Required", message: "Purchase Premium Account to Get Access to Extra Features for " + validProduct.localizedPrice + "?", callback: {
+                //Restore buttons so they can be re-clicked
+                removeWatermarkButton.isEnabled = true
+                drawnImageViewFullScreenButton.isEnabled = true
+                colorPickerButton.isEnabled = true
+                purchasePremiumButton.isEnabled = true
+                restorePremiumButton.isEnabled = true
+                verifyIfUserWantsToCompletePurchase(title: "Premium Account Required", message: "Purchase Premium Account to Get Access to Extra Features (Enhanced Drawing Tools and No Watermarks) for " + validProduct.localizedPrice + "?", callback: {
                     purchaseConfirmed in
                     if purchaseConfirmed{
                          self.buyProduct(product: validProduct)
@@ -782,6 +847,8 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
                     print("Product Purchased")
                     let preferences = UserDefaults.standard
                     preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
+                    premiumModePurchased = true
+                    configureViewsForPremiumMode()
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
                 case .failed:
@@ -790,6 +857,8 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
                     break;
                 case .restored:
                     print("Already Purchased")
+                    showAlertWith(title: "Already Purchased", message: "")
+                    restorePremiumButton.isEnabled = true
                     let preferences = UserDefaults.standard
                     preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
@@ -802,7 +871,8 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
     
     //If an error occurs, the code will go to this function
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        // Show some alert
+           showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
+        restorePremiumButton.isEnabled = true
     }
     
 

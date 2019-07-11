@@ -222,6 +222,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwP-Vh-OFo" userLabel="SettingsButton">
+                                <rect key="frame" x="20" y="64" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="429-8z-144"/>
+                                    <constraint firstAttribute="width" constant="50" id="Evm-pA-zgf"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="iconSettings"/>
+                                <connections>
+                                    <action selector="settingsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mDf-oX-8ba"/>
+                                </connections>
+                            </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ya-u3-Wpc">
                                 <rect key="frame" x="0.0" y="44" width="414" height="733"/>
                                 <subviews>
@@ -560,6 +572,49 @@
                                     <constraint firstAttribute="height" constant="300" id="MoY-rw-REi"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-Ru-ufZ" userLabel="Settings">
+                                <rect key="frame" x="0.0" y="44" width="240" height="150"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmR-Wf-QIN">
+                                        <rect key="frame" x="35.5" y="10" width="169" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Buy Premium Account"/>
+                                        <connections>
+                                            <action selector="purchasePremiumButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qds-Wt-N5H"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9v-Xr-MfC">
+                                        <rect key="frame" x="48" y="53" width="144" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Restore Purchases"/>
+                                        <connections>
+                                            <action selector="restorePurchasesButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="efG-Yq-qaO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNU-oD-qAT">
+                                        <rect key="frame" x="105" y="101" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="fdz-1p-5Tl"/>
+                                            <constraint firstAttribute="width" constant="30" id="iB5-TC-2Xa"/>
+                                        </constraints>
+                                        <state key="normal" image="iconDiscard"/>
+                                        <connections>
+                                            <action selector="hideSettingsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vfz-f9-Tcd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="RmR-Wf-QIN" firstAttribute="centerX" secondItem="hwc-Ru-ufZ" secondAttribute="centerX" id="XPr-iO-yuq"/>
+                                    <constraint firstItem="b9v-Xr-MfC" firstAttribute="centerX" secondItem="hwc-Ru-ufZ" secondAttribute="centerX" id="ciD-9M-ijk"/>
+                                    <constraint firstAttribute="width" constant="240" id="h8q-ZF-q3j"/>
+                                    <constraint firstItem="RmR-Wf-QIN" firstAttribute="top" secondItem="hwc-Ru-ufZ" secondAttribute="top" constant="10" id="puR-b5-Dcv"/>
+                                    <constraint firstItem="b9v-Xr-MfC" firstAttribute="top" secondItem="RmR-Wf-QIN" secondAttribute="bottom" constant="10" id="qeZ-jW-Abn"/>
+                                    <constraint firstItem="fNU-oD-qAT" firstAttribute="centerX" secondItem="hwc-Ru-ufZ" secondAttribute="centerX" id="tdl-iF-qn4"/>
+                                    <constraint firstAttribute="bottom" secondItem="fNU-oD-qAT" secondAttribute="bottom" constant="19" id="wrm-ZU-D3k"/>
+                                    <constraint firstAttribute="height" constant="150" id="wz6-Ch-Ti3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -569,9 +624,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PJ4-Zp-aza" secondAttribute="trailing" id="4wc-Uc-Pnt"/>
                             <constraint firstItem="kNC-8r-omt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5bf-ZF-5zL"/>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="71C-ei-uB6"/>
+                            <constraint firstItem="hwc-Ru-ufZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7o9-2S-wQY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lUI-CS-egL" secondAttribute="bottom" id="BbK-EF-IWd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PJ4-Zp-aza" secondAttribute="bottom" id="Cwj-63-2Cg"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EM4-Dn-4Wo"/>
+                            <constraint firstItem="wwP-Vh-OFo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="HLz-LP-IWA"/>
                             <constraint firstItem="70z-Ih-j1T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I1l-we-vdb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kNC-8r-omt" secondAttribute="trailing" id="Kh9-Uv-GPJ"/>
                             <constraint firstItem="Mzz-6Y-iPH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="LUO-dK-ob5"/>
@@ -587,6 +644,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1ya-u3-Wpc" secondAttribute="trailing" id="gWG-rt-B6j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kiK-Ct-qDG" secondAttribute="trailing" id="h1Y-tW-rOD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Atl-Lq-BB2" secondAttribute="bottom" id="hSU-r7-osO"/>
+                            <constraint firstItem="hwc-Ru-ufZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hhX-0a-fOa"/>
                             <constraint firstItem="5pi-pv-97D" firstAttribute="leading" secondItem="Mzz-6Y-iPH" secondAttribute="leading" id="jaV-U5-Lxy"/>
                             <constraint firstItem="B4U-NF-7Rw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jgk-EO-ntF"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="1ya-u3-Wpc" secondAttribute="bottom" id="juc-TI-lPX"/>
@@ -595,6 +653,7 @@
                             <constraint firstItem="lUI-CS-egL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="n3K-7Z-xma"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocq-ZH-Cba"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
+                            <constraint firstItem="wwP-Vh-OFo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="q63-B1-MfJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mzz-6Y-iPH" secondAttribute="trailing" constant="20" id="uX4-Pn-kb8"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
@@ -631,10 +690,14 @@
                         <outlet property="positionTab" destination="eD9-1i-A5P" id="hHH-pr-gMa"/>
                         <outlet property="previewImage" destination="ibE-UN-alx" id="lzp-q8-pv8"/>
                         <outlet property="previewImageContainer" destination="kNC-8r-omt" id="bLM-LD-Fe3"/>
+                        <outlet property="purchasePremiumButton" destination="RmR-Wf-QIN" id="Y1F-Q4-UiL"/>
                         <outlet property="removeWatermarkButton" destination="hfe-mh-TH0" id="gDb-Yn-lnZ"/>
                         <outlet property="resetButton" destination="Mzz-6Y-iPH" id="mmA-GC-Dt3"/>
+                        <outlet property="restorePremiumButton" destination="b9v-Xr-MfC" id="5gi-pb-YhQ"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="selectTab" destination="8HX-JG-j86" id="3DE-NB-Xh9"/>
+                        <outlet property="settingsButton" destination="wwP-Vh-OFo" id="LdB-0F-EUQ"/>
+                        <outlet property="settingsContainer" destination="hwc-Ru-ufZ" id="aWL-oj-WjA"/>
                         <outlet property="shareTab" destination="bxK-EN-O1e" id="NQe-8N-l0c"/>
                         <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
@@ -685,6 +748,7 @@
         <image name="iconReset" width="100" height="100"/>
         <image name="iconRightArrow" width="96" height="96"/>
         <image name="iconRightRotate" width="96" height="96"/>
+        <image name="iconSettings" width="96" height="96"/>
         <image name="iconShareTab" width="96" height="96"/>
         <image name="iconTattooTab" width="100" height="100"/>
         <image name="iconUndo" width="96" height="96"/>

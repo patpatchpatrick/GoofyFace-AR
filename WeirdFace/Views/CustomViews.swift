@@ -82,6 +82,7 @@ class DrawnImageView: UIImageView {
         pathStack.clear()
         shapeLayerStack.resetAllShapePaths()
         shapeLayerStack.clear()
+        setupView()
     
     }
     
