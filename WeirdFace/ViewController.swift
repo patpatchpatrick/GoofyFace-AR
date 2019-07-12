@@ -168,10 +168,12 @@ class ViewController: UIViewController {
         //If device is rotated, hide the message that tells user to rotate the device in full screen mode
         switch UIDevice.current.orientation {
         case .landscapeLeft, .landscapeRight:
+            print("Landscape")
             drawnImageFullScreenRotateMessage.isHidden = true
         case .portrait, .portraitUpsideDown:
             print("Portrait")
         default:
+            print("Default")
             drawnImageFullScreenRotateMessage.isHidden = true
         }
         
@@ -879,17 +881,10 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
         for transaction:AnyObject in transactions {
             if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
                 
-           //     self.dismissPurchaseBtn.isEnabled = true
-             //   self.restorePurchaseBtn.isEnabled = true
-               // self.buyNowBtn.isEnabled = true
-                
                 switch trans.transactionState {
                 case .purchased:
                     print("Product Purchased")
-                    let preferences = UserDefaults.standard
-                    preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
-                    premiumModePurchased = true
-                    configureViewsForPremiumMode()
+                    activatePremiumMode()
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
                 case .failed:
@@ -898,10 +893,9 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
                     break;
                 case .restored:
                     print("Already Purchased")
-                    showAlertWith(title: "Already Purchased", message: "")
+                    showAlertWith(title: "Already Purchased", message: "Premium Mode Activated")
+                    activatePremiumMode()
                     restorePremiumButton.isEnabled = true
-                    let preferences = UserDefaults.standard
-                    preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                 default:
                     break;
@@ -914,6 +908,13 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
            showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
         restorePremiumButton.isEnabled = true
+    }
+    
+    func activatePremiumMode(){
+        let preferences = UserDefaults.standard
+        preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
+        premiumModePurchased = true
+        configureViewsForPremiumMode()
     }
     
 
