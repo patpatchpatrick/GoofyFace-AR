@@ -40,8 +40,9 @@ extension ViewController {
         addShadowToView(view: removeWatermarkButton)
         addShadowToView(view: settingsButton)
         
-         addShadowToView(view: settingsContainer)
+        addShadowToView(view: settingsContainer)
         addShadowToView(view: drawnImageFullScreenRotateMessage)
+        rotateFullScreenImages()
     }
     
     func configureViewsForPremiumMode(){

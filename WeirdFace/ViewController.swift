@@ -132,7 +132,6 @@ class ViewController: UIViewController {
         if premiumModePurchased{
             configureViewsForPremiumMode()
         }
-        rotateFullScreenImages()
         
     }
     
