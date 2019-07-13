@@ -94,7 +94,8 @@ class ViewController: UIViewController {
     var viewMode:Int = 0
     
     var imageChanged = false
-    var viewModel: TattooViewModel?
+    var tattooViewModel: TattooViewModel?
+    var mainUIViewModel: MainUIViewModel?
 
     
     override func viewDidLoad() {
@@ -119,9 +120,13 @@ class ViewController: UIViewController {
         sceneView.delegate = self
         colorPicker.delegate = self
         
-        let model = TattooModel(imageName: "blank", tattooType: .new)
-        viewModel = TattooViewModel(tattooModel: model)
-        viewModel?.loadImage()
+        let tattooModel = TattooModel(imageName: "blank", tattooType: .new)
+        tattooViewModel = TattooViewModel(tattooModel: tattooModel)
+        tattooViewModel?.loadImage()
+        
+        let mainUIModel = MainUIModel()
+        mainUIViewModel = MainUIViewModel(model: mainUIModel, delegate: self)
+        
         
         //Check if user has premium account purchased
         let prefs = UserDefaults.standard
@@ -192,7 +197,7 @@ class ViewController: UIViewController {
         drawnImageView.layer.backgroundColor = UIColor.clear.cgColor
         drawnImageView.layer.borderWidth = 0.0
         let userDrawing = drawnImageView.screenShot
-        viewModel?.changeImage(image: userDrawing!)
+        tattooViewModel?.changeImage(image: userDrawing!)
         drawnImageContainerView.isHidden = true
         positionTab.isEnabled = true
         
@@ -212,7 +217,7 @@ class ViewController: UIViewController {
         uploadImageBorderedView.layer.borderWidth = 0.0
         guard let uploadedImage = uploadImageBorderedView.screenShot else {return}
         
-        viewModel?.changeImage(image: uploadedImage)
+        tattooViewModel?.changeImage(image: uploadedImage)
         uploadedImageContainer.isHidden = true
         positionTab.isEnabled = true
     }
@@ -232,38 +237,38 @@ class ViewController: UIViewController {
     
     @IBAction func rotateClockwise(_ sender: UIButton) {
         
-        viewModel?.rotate(clockwise: true)
+        tattooViewModel?.rotate(clockwise: true)
         
     }
     
     
     @IBAction func rotateCounterClock(_ sender: UIButton) {
         
-        viewModel?.rotate(clockwise: false)
+        tattooViewModel?.rotate(clockwise: false)
     }
     
     
     @IBAction func plusX(_ sender: UIButton) {
         
 
-        viewModel?.incrementX()
+        tattooViewModel?.incrementX()
     }
     
     
     @IBAction func plusY(_ sender: UIButton) {
-        viewModel?.decrementY()
+        tattooViewModel?.decrementY()
         
     }
     
     
     @IBAction func minusX(_ sender: UIButton) {
-        viewModel?.decrementX()
+        tattooViewModel?.decrementX()
         
     }
     
     @IBAction func minusY(_ sender: UIButton) {
         
-        viewModel?.incrementY()
+        tattooViewModel?.incrementY()
         
     }
     
@@ -271,13 +276,13 @@ class ViewController: UIViewController {
     @IBAction func sizeDecrease(_ sender: UIButton) {
         
         //Decrease tattoo size while keeping 2x1 proportions
-        viewModel?.decrementSize()
+        tattooViewModel?.decrementSize()
     }
     
     
     @IBAction func sizeIncrease(_ sender: UIButton) {
          //Increase tattoo size while keeping 2x1 proportions
-        viewModel?.incrementSize()
+        tattooViewModel?.incrementSize()
     }
     
     
@@ -298,9 +303,9 @@ class ViewController: UIViewController {
         
         //If tattoo auto position is accepted, tattoo manual transformation box is displayed for user to adjust the tattoo
         
-        viewModel?.acceptPosition()
+        tattooViewModel?.acceptPosition()
         tattooTypePicker.isHidden = true
-        viewModel?.positionType = .manual
+        tattooViewModel?.positionType = .manual
         transformButtonContainer.isHidden = false
         hideButton.isHidden = false
         acceptPositionButton.isHidden = true
@@ -313,7 +318,7 @@ class ViewController: UIViewController {
         
         //Reset the screen and remove all tattoos
         
-        viewModel?.reset()
+        tattooViewModel?.reset()
         transformButtonContainer.isHidden = true
         hideButton.isHidden = true
         positionTab.isEnabled = false
@@ -360,7 +365,7 @@ class ViewController: UIViewController {
         let userDrawing = drawnImageViewFullScreen.screenShot?.rotate(radians: -.pi/2)
         
         drawnImageViewFullScreen.layer.backgroundColor = UIColor.white.cgColor
-        viewModel?.changeImage(image: userDrawing!)
+        tattooViewModel?.changeImage(image: userDrawing!)
         drawnImageViewFullScreenContainer.isHidden = true
         positionTab.isEnabled = true
     }
@@ -472,7 +477,7 @@ extension ViewController: ARSCNViewDelegate {
         
         //If the image was changed, set the new image on the face contents
         if imageChanged {
-            material.diffuse.contents = viewModel?.image
+            material.diffuse.contents = tattooViewModel?.image
             material.lightingModel = .physicallyBased
             imageChanged = false
         }
@@ -503,7 +508,7 @@ extension ViewController: ARSCNViewDelegate {
         //If the image was changed, set the new image on the face contents
         if imageChanged {
             let material = faceGeometry.firstMaterial!
-            material.diffuse.contents = viewModel?.image// Example texture map image.
+            material.diffuse.contents = tattooViewModel?.image// Example texture map image.
             material.lightingModel = .physicallyBased
             imageChanged = false
         }
@@ -541,8 +546,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         //If Picker position is changed, update viewModel
         //If a new position is chose, the image must be repositioned
         if let type = TattooType(rawValue: row+1) {
-            viewModel?.positionType = .auto
-            viewModel?.changeTattooType(type: type)
+            tattooViewModel?.positionType = .auto
+            tattooViewModel?.changeTattooType(type: type)
             acceptPositionButton.isHidden = false
             
         }
@@ -575,60 +580,30 @@ extension ViewController: UITabBarDelegate {
         
         //"Select mode" - user can select custom tattooo
         if item.tag == modeSelect {
-            collectionView.isHidden = false
-            resetButton.isHidden = true
-            settingsButton.isHidden = true
-            previewImageContainer.isHidden = true
-        } else {
-            collectionView.isHidden = true
-            resetButton.isHidden = false
-            settingsButton.isHidden = false
+            mainUIViewModel?.modeChanged(mode: .select)
         }
         
         //"Draw mode" - user can draw their own tattoo
         if item.tag == modeDraw {
-            resetDrawView()
-            drawnImageContainerView.isHidden = false
-            settingsButton.isHidden = true
-            previewImageContainer.isHidden = true
-        } else {
-            drawnImageContainerView.isHidden = true
+             mainUIViewModel?.modeChanged(mode: .draw)
         }
         
         //"Upload mode" - user can upload their own tattoo
         if item.tag == modeUpload {
-            resetUploadView()
-            uploadedImageContainer.isHidden = false
-            previewImageContainer.isHidden = true
-            selectUploadPicture()
-        } else {
-            uploadedImageContainer.isHidden = true
+            mainUIViewModel?.modeChanged(mode: .upload)
         }
         
         //"Position mode" - User can position/transform the tattoo
         if item.tag == modePosition {
-            viewModel?.positionType = .auto
-            viewModel?.displayPositionMap()
-            tattooTypePicker.isHidden = false
-            settingsButton.isHidden = true
-            previewImageContainer.isHidden = true
-        } else {
-            tattooTypePicker.isHidden = true
-            acceptPositionButton.isHidden = true
-            hideButton.isHidden = true
-            transformButtonContainer.isHidden = true
+            tattooViewModel?.positionType = .auto
+            tattooViewModel?.displayPositionMap()
+            mainUIViewModel?.modeChanged(mode: .position)
         }
         
         //"Place Mode" - User can place the tattoo and commit the changes (i.e. commit the tattoo to the user's face)
         if item.tag == modePlace {
-            viewModel?.commitTattoo()
-            transformButtonContainer.isHidden = true
-            hideButton.isHidden = true
-            shareTab.isEnabled = true
-            addTatTab.isEnabled = false
-            positionTab.isEnabled = false
-            settingsButton.isHidden = false
-            previewImageContainer.isHidden = true
+            tattooViewModel?.commitTattoo()
+            mainUIViewModel?.modeChanged(mode: .place)
         }
         
         //"Share Mode" - Save image to user's gallery or share via any other apps
@@ -748,7 +723,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Update the image in the viewModel to match the image selected in the collection view by the user
         let imageName = String(indexPath.row)
-        viewModel?.changeImage(named: imageName)
+        tattooViewModel?.changeImage(named: imageName)
         collectionView.isHidden = true
         resetButton.isHidden = false
         settingsButton.isHidden = false
@@ -917,6 +892,81 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
     }
     
 
+    
+}
+
+extension ViewController: MainUIViewModelViewDelegate{
+    
+    //Handle UI changes when the user changes the "mode" of the app
+    
+    func modeChanged(to mode: Mode, _ viewModel: MainUIViewModel) {
+        
+        resetViewsToDefault()
+        
+        switch mode {
+        case .select: modeChangedToSelect()
+        case .draw: modeChangedToDraw()
+        case .upload: modeChangedToUpload()
+        case .position: modeChangedToPosition()
+        case .place: modeChangedToPlace()
+        default:
+            print("default")
+        }
+    }
+    
+    func resetViewsToDefault(){
+        
+    collectionView.isHidden = true
+    resetButton.isHidden = false
+    settingsButton.isHidden = false
+    drawnImageContainerView.isHidden = true
+    uploadedImageContainer.isHidden = true
+    tattooTypePicker.isHidden = true
+    acceptPositionButton.isHidden = true
+    hideButton.isHidden = true
+    transformButtonContainer.isHidden = true
+    
+    }
+    
+    func modeChangedToSelect() {
+        collectionView.isHidden = false
+        resetButton.isHidden = true
+        settingsButton.isHidden = true
+        previewImageContainer.isHidden = true
+    }
+    
+    func modeChangedToDraw() {
+        resetDrawView()
+        drawnImageContainerView.isHidden = false
+        settingsButton.isHidden = true
+        previewImageContainer.isHidden = true
+    }
+    
+    func modeChangedToUpload() {
+        resetUploadView()
+        uploadedImageContainer.isHidden = false
+        previewImageContainer.isHidden = true
+        selectUploadPicture()
+    }
+    
+    func modeChangedToPosition() {
+        tattooTypePicker.isHidden = false
+        settingsButton.isHidden = true
+        previewImageContainer.isHidden = true
+    }
+    
+    func modeChangedToPlace() {
+        transformButtonContainer.isHidden = true
+        hideButton.isHidden = true
+        shareTab.isEnabled = true
+        addTatTab.isEnabled = false
+        positionTab.isEnabled = false
+        settingsButton.isHidden = false
+        previewImageContainer.isHidden = true
+    }
+    
+    
+    
     
 }
 

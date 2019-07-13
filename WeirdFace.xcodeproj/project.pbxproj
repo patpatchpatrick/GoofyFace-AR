@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F60366FA22DA61FA0090470C /* mainUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366F922DA61FA0090470C /* mainUIViewModel.swift */; };
+		F60366FC22DA631E0090470C /* mainUIViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366FB22DA631E0090470C /* mainUIViewModelProtocol.swift */; };
+		F60366FE22DA63890090470C /* mainUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366FD22DA63890090470C /* mainUIModel.swift */; };
 		F60EA44822C53895002BE1CD /* TattooModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44722C53895002BE1CD /* TattooModel.swift */; };
 		F60EA44B22C53D21002BE1CD /* TattooViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44A22C53D21002BE1CD /* TattooViewModel.swift */; };
 		F624768422C414C50066215E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624768322C414C50066215E /* AppDelegate.swift */; };
@@ -44,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F60366F922DA61FA0090470C /* mainUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainUIViewModel.swift; sourceTree = "<group>"; };
+		F60366FB22DA631E0090470C /* mainUIViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainUIViewModelProtocol.swift; sourceTree = "<group>"; };
+		F60366FD22DA63890090470C /* mainUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainUIModel.swift; sourceTree = "<group>"; };
 		F60EA44722C53895002BE1CD /* TattooModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooModel.swift; sourceTree = "<group>"; };
 		F60EA44A22C53D21002BE1CD /* TattooViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooViewModel.swift; sourceTree = "<group>"; };
 		F624768022C414C50066215E /* WeirdFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeirdFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				F60EA44722C53895002BE1CD /* TattooModel.swift */,
+				F60366FD22DA63890090470C /* mainUIModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				F60EA44A22C53D21002BE1CD /* TattooViewModel.swift */,
+				F60366F922DA61FA0090470C /* mainUIViewModel.swift */,
+				F60366FB22DA631E0090470C /* mainUIViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -337,10 +346,13 @@
 				F60EA44822C53895002BE1CD /* TattooModel.swift in Sources */,
 				F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */,
 				F69A028A22D518FE00012BF6 /* ViewControllerUIExtension.swift in Sources */,
+				F60366FE22DA63890090470C /* mainUIModel.swift in Sources */,
 				F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */,
 				F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */,
+				F60366FA22DA61FA0090470C /* mainUIViewModel.swift in Sources */,
 				F60EA44B22C53D21002BE1CD /* TattooViewModel.swift in Sources */,
 				F6EA899722D001C6002935DB /* DataStructures.swift in Sources */,
+				F60366FC22DA631E0090470C /* mainUIViewModelProtocol.swift in Sources */,
 				F624768422C414C50066215E /* AppDelegate.swift in Sources */,
 				F624768C22C414C50066215E /* WeirdFace.xcdatamodeld in Sources */,
 			);
