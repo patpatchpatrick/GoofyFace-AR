@@ -48,7 +48,7 @@ extension ViewController {
     func configureViewsForPremiumMode(){
         
         //Remove icons with locks on them
-        if premiumModePurchased{
+
             let fullScreenUnlockedImg = UIImage(named: "iconFullScreen.png")
             drawnImageViewFullScreenButton.setImage(fullScreenUnlockedImg, for: .normal)
             let colorPickUnlockedImg = UIImage(named: "iconColorWheel.png")
@@ -60,7 +60,7 @@ extension ViewController {
             watermark.isHidden = true
             removeWatermarkButton.isHidden = true
             
-        }
+        
     
     }
     

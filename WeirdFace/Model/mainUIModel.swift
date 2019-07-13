@@ -7,7 +7,33 @@
 //
 
 import Foundation
+import UIKit
+
+enum Mode{
+    case select
+    case draw
+    case upload
+    case position
+    case place
+    case share
+}
 
 public class MainUIModel {
+    
+    var premiumModePurchased:Bool // track if premium mode purchased by user
+    let inAppPurchasePremiumAccountID = "premium" // app store ID for in app purchase
+    var selectedPreviewImage : UIImage?  //preview image
+    
+    init() {
+        //Check if user has access to premium mode when initializing model
+        let prefs = UserDefaults.standard
+        self.premiumModePurchased =  prefs.bool(forKey: inAppPurchasePremiumAccountID)
+    }
+    
+    func activatePremiumAccess(){
+        let preferences = UserDefaults.standard
+        preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
+        premiumModePurchased = true
+    }
     
 }

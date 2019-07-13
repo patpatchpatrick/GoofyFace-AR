@@ -7,27 +7,26 @@
 //
 
 import Foundation
-
-enum Mode{
-    case select
-    case draw
-    case upload
-    case position
-    case place
-}
+import UIKit
 
 protocol MainUIViewModelViewDelegate: class
 {
     func modeChanged(to mode: Mode, _ viewModel: MainUIViewModel)
-
+    func premiumModeUnlocked()
+    func shareImage(image: UIImage)
+    func hideButtonsForSnapshot()
+    func playSnapshotSound()
+    func setAndShowPreviewImage(image: UIImage)
+    func setViewsForFullScreenDrawnImage(unlocked: Bool)
+    func setViewsForColorPicker(unlocked: Bool)
 
 }
 
 
 protocol MainUIViewModelProtocol
 {
-    var model: MainUIModel? { get set }
-    var viewDelegate: MainUIViewModelViewDelegate? { get set }
+    var model: MainUIModel { get set }
+    var viewDelegate: MainUIViewModelViewDelegate { get set }
 
 }
 

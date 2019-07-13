@@ -16,9 +16,6 @@ class ViewController: UIViewController {
     var arTrackingSupported = true
     @IBOutlet weak var arNotSupportedTextView: UITextView!
     
-    var premiumModePurchased = false // track if premium mode purchased by user
-    let inAppPurchasePremiumAccountID = "premium" // app store ID for in app purchase
-    
     var selectedPreviewImage: UIImage?
     
     @IBOutlet var mainView: ARSCNView!
@@ -128,15 +125,9 @@ class ViewController: UIViewController {
         mainUIViewModel = MainUIViewModel(model: mainUIModel, delegate: self)
         
         
-        //Check if user has premium account purchased
-        let prefs = UserDefaults.standard
-        premiumModePurchased =  prefs.bool(forKey: inAppPurchasePremiumAccountID)
-        
         configureButtonsAndViews()
 
-        if premiumModePurchased{
-            configureViewsForPremiumMode()
-        }
+        mainUIViewModel?.checkIfUserHasPremiumAccess()
         
     }
     
@@ -334,21 +325,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func drawnImageFullScreenButtonTapped(_ sender: UIButton) {
-        //Show color wheel if premium account purchased, otherse show alert with option to purchase
-        if premiumModePurchased {
-        drawnImageViewFullScreenContainer.isHidden = false
-        drawnImageContainerView.isHidden = true
-        switch UIDevice.current.orientation{
-            case .portrait, .portraitUpsideDown:
-                //Show message that tells user to rotate device if screen is not landscape
-                drawnImageFullScreenRotateMessage.isHidden = false
-            default:
-                print("Orientation Is Correct")
-            }
-        } else {
-            drawnImageViewFullScreenButton.isEnabled = false
-            self.buyInAppPurchases()
-        }
+        
+       mainUIViewModel?.drawnImageFullScreenModeRequested()
         
     }
     
@@ -371,13 +349,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawnImageColorWheelTapped(_ sender: UIButton) {
+        
         //Show color wheel if premium account purchased, otherse show alert with option to purchase
-        if premiumModePurchased {
-                    colorPicker.isHidden = false
-        } else {
-            colorPickerButton.isEnabled = false
-            self.buyInAppPurchases()
-        }
+        mainUIViewModel?.colorPickerRequested()
         
     }
     
@@ -404,7 +378,7 @@ class ViewController: UIViewController {
         previewImageContainer.isHidden = true
     }
     
-    func shareImage(image: UIImage){
+    func displayShareImageWindow(image: UIImage){
         
         let objectsToShare: [AnyObject] = [ image ]
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
@@ -608,61 +582,12 @@ extension ViewController: UITabBarDelegate {
         
         //"Share Mode" - Save image to user's gallery or share via any other apps
         if item.tag == modeShare {
+            let previewWindowOpen = !previewImageContainer.isHidden
+            //Capture image of user
+            let selectedImage = sceneView.snapshot()
+            mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage)
             
-            if !previewImageContainer.isHidden {
-                //If user clicks share button while the preview window is still open, reload the shareImage menu
-                guard let currentImg = selectedPreviewImage else {return}
-                shareImage(image: currentImg)
-                return
-            }
-            
-            transformButtonContainer.isHidden = true
-            hideButton.isHidden = true
-            settingsButton.isHidden = false
-            
-            //Capture image of user 
-           let selectedImage = sceneView.snapshot()
-            
-            AudioServicesPlaySystemSound(1108) //Play camera shutter sound
-    
-            //Show the preview of the image that the user took and allow them to share it
-            //If user is in "premium mode", remove the watermark
-            if !premiumModePurchased{
-                if let watermarkedImage = addWatermarkToImage(imageToWatermark: selectedImage){
-                    selectedPreviewImage = watermarkedImage
-                    previewImage.image = watermarkedImage
-                    previewImageContainer.isHidden = false
-                    shareImage(image: watermarkedImage)
-                }
-            } else {
-                selectedPreviewImage = selectedImage
-                previewImage.image = selectedImage
-                previewImageContainer.isHidden = false
-                shareImage(image: selectedImage)
-            }
         }
-    }
-    
-    func addWatermarkToImage(imageToWatermark: UIImage) -> UIImage?{
-        if let img2 = UIImage(named: "watermark.png") {
-            
-            let rect = CGRect(x: 0, y: 0, width: imageToWatermark.size.width, height: imageToWatermark.size.height)
-            
-            UIGraphicsBeginImageContextWithOptions(imageToWatermark.size, true, 0)
-            guard let context = UIGraphicsGetCurrentContext() else {return nil}
-            
-            context.setFillColor(UIColor.white.cgColor)
-            context.fill(rect)
-            
-            imageToWatermark.draw(in: rect, blendMode: .normal, alpha: 1)
-            img2.draw(in: CGRect(x: imageToWatermark.size.width / 2 - img2.size.width / 2,y: imageToWatermark.size.height - 400,width: 800,height: 400), blendMode: .normal, alpha: 0.3)
-            img2.draw(in: CGRect(x: imageToWatermark.size.width / 2 - img2.size.width / 2,y: 0,width: 800,height: 400), blendMode: .normal, alpha: 0.3)
-            
-            let result = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            return result
-        } else {return nil}
     }
     
     //Save image to user's gallery
@@ -790,7 +715,7 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
     func buyInAppPurchases(){
         
         if (SKPaymentQueue.canMakePayments()) {
-            let productID:NSSet = NSSet(array: [self.inAppPurchasePremiumAccountID as NSString]);
+            let productID:NSSet = NSSet(array: [mainUIViewModel?.model.inAppPurchasePremiumAccountID as! NSString]);
             let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>);
             productsRequest.delegate = self;
             productsRequest.start();
@@ -826,7 +751,7 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
         if (count>0) {
             
             let validProduct: SKProduct = response.products[0] as SKProduct
-            if (validProduct.productIdentifier == self.inAppPurchasePremiumAccountID as String) {
+            if (validProduct.productIdentifier == mainUIViewModel?.model.inAppPurchasePremiumAccountID as? String) {
                 print(validProduct.localizedTitle)
                 print(validProduct.localizedDescription)
                 print(validProduct.price)
@@ -858,7 +783,7 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
                 switch trans.transactionState {
                 case .purchased:
                     print("Product Purchased")
-                    activatePremiumMode()
+                    mainUIViewModel?.activatePremiumAccess()
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
                 case .failed:
@@ -868,7 +793,7 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
                 case .restored:
                     print("Already Purchased")
                     showAlertWith(title: "Already Purchased", message: "Premium Mode Activated")
-                    activatePremiumMode()
+                    mainUIViewModel?.activatePremiumAccess()
                     restorePremiumButton.isEnabled = true
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                 default:
@@ -883,19 +808,40 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
            showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
         restorePremiumButton.isEnabled = true
     }
-    
-    func activatePremiumMode(){
-        let preferences = UserDefaults.standard
-        preferences.set(true, forKey: inAppPurchasePremiumAccountID) //Set user defaults to save that user has purchased in-app purchases
-        premiumModePurchased = true
-        configureViewsForPremiumMode()
-    }
+
     
 
     
 }
 
 extension ViewController: MainUIViewModelViewDelegate{
+  
+    //If user has premium mode, configure views accordingly
+    func premiumModeUnlocked() {
+        configureViewsForPremiumMode()
+    }
+    
+    //Share image using other applications
+    func shareImage(image: UIImage) {
+        displayShareImageWindow(image: image)
+    }
+    
+    //Set and show the user a preview of their snapshot
+    func setAndShowPreviewImage(image: UIImage) {
+        previewImage.image = image
+        previewImageContainer.isHidden = false
+    }
+    
+    func hideButtonsForSnapshot(){
+        transformButtonContainer.isHidden = true
+        hideButton.isHidden = true
+        settingsButton.isHidden = false
+    }
+    
+    func playSnapshotSound() {
+        //Play camera shutter sound
+        AudioServicesPlaySystemSound(1108)
+    }
     
     //Handle UI changes when the user changes the "mode" of the app
     
@@ -965,6 +911,34 @@ extension ViewController: MainUIViewModelViewDelegate{
         previewImageContainer.isHidden = true
     }
     
+    func setViewsForColorPicker(unlocked: Bool) {
+        //Show color wheel if premium account purchased, otherse show alert with option to purchase
+        if unlocked {
+            colorPicker.isHidden = false
+        } else {
+            colorPickerButton.isEnabled = false
+            self.buyInAppPurchases()
+        }
+    }
+    
+    
+    func setViewsForFullScreenDrawnImage(unlocked: Bool) {
+        //Show color wheel if premium account purchased, otherwise show alert with option to purchase
+        if unlocked {
+            drawnImageViewFullScreenContainer.isHidden = false
+            drawnImageContainerView.isHidden = true
+            switch UIDevice.current.orientation{
+            case .portrait, .portraitUpsideDown:
+                //Show message that tells user to rotate device if screen is not landscape
+                drawnImageFullScreenRotateMessage.isHidden = false
+            default:
+                print("Orientation Is Correct")
+            }
+        } else {
+            drawnImageViewFullScreenButton.isEnabled = false
+            self.buyInAppPurchases()
+        }
+    }
     
     
     
