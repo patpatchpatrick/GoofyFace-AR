@@ -169,7 +169,7 @@
                                             <constraint firstAttribute="height" constant="100" id="VW4-N1-LhN"/>
                                         </constraints>
                                     </imageView>
-                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="And-L5-wPD">
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="And-L5-wPD" userLabel="tattooTypePicker">
                                         <rect key="frame" x="0.0" y="502" width="414" height="216"/>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                     </pickerView>

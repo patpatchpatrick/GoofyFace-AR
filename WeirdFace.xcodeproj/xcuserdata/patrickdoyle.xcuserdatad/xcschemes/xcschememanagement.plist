@@ -7,7 +7,40 @@
 		<key>WeirdFace.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>WeirdFaceUITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>WeirdFaceUITests2.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>F624767F22C414C50066215E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F624769622C414C60066215E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F62476A122C414C60066215E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6EAF5DD22DBD7F700F4F267</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
