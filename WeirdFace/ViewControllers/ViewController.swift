@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     var viewMode:Int = 0
     
     var imageChanged = false
-    var tattooViewModel: TattooViewModel?
+    var tattooViewModel: ARViewModel?
     var mainUIViewModel: MainUIViewModel?
 
     
@@ -117,8 +117,8 @@ class ViewController: UIViewController {
         sceneView.delegate = self
         colorPicker.delegate = self
         
-        let tattooModel = TattooModel(imageName: "blank", tattooType: .new)
-        tattooViewModel = TattooViewModel(tattooModel: tattooModel)
+        let tattooModel = ARModel(imageName: "blank", tattooType: .new)
+        tattooViewModel = ARViewModel(tattooModel: tattooModel, delegate: self)
         tattooViewModel?.loadImage()
         
         let mainUIModel = MainUIModel()
@@ -133,10 +133,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updated_data),
-                                               name:Notification.Name("UPDATED_DATA"),
-                                               object: nil)
+  
         //Observer for if Device Rotated
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(device_rotated),
@@ -175,13 +172,6 @@ class ViewController: UIViewController {
     }
     
     
-    @objc func updated_data(notification:Notification) -> Void{
-        
-        imageChanged = true
-        
-    }
-    
-    
     @IBAction func canvasDrawingAccepted(_ sender: UIButton) {
         
         //Update the tattoo image to be the user's drawing
@@ -189,9 +179,7 @@ class ViewController: UIViewController {
         drawnImageView.layer.borderWidth = 0.0
         let userDrawing = drawnImageView.screenShot
         tattooViewModel?.changeImage(image: userDrawing!)
-        drawnImageContainerView.isHidden = true
-        positionTab.isEnabled = true
-        
+        tattooViewModel?.manualDrawingAccepted()
     }
     
     
@@ -207,10 +195,8 @@ class ViewController: UIViewController {
         guard let image = uploadedImage.image else {return}
         uploadImageBorderedView.layer.borderWidth = 0.0
         guard let uploadedImage = uploadImageBorderedView.screenShot else {return}
-        
         tattooViewModel?.changeImage(image: uploadedImage)
-        uploadedImageContainer.isHidden = true
-        positionTab.isEnabled = true
+        tattooViewModel?.uploadedImageAccepted()
     }
     
     
@@ -295,12 +281,6 @@ class ViewController: UIViewController {
         //If tattoo auto position is accepted, tattoo manual transformation box is displayed for user to adjust the tattoo
         
         tattooViewModel?.acceptPosition()
-        tattooTypePicker.isHidden = true
-        tattooViewModel?.positionType = .manual
-        transformButtonContainer.isHidden = false
-        hideButton.isHidden = false
-        acceptPositionButton.isHidden = true
-        addTatTab.isEnabled = true
         
     }
     
@@ -310,11 +290,7 @@ class ViewController: UIViewController {
         //Reset the screen and remove all tattoos
         
         tattooViewModel?.reset()
-        transformButtonContainer.isHidden = true
-        hideButton.isHidden = true
-        positionTab.isEnabled = false
-        addTatTab.isEnabled = false
-        shareTab.isEnabled = false
+  
     }
     
     @IBAction func hideButtonTapped(_ sender: UIButton) {
@@ -344,8 +320,7 @@ class ViewController: UIViewController {
         
         drawnImageViewFullScreen.layer.backgroundColor = UIColor.white.cgColor
         tattooViewModel?.changeImage(image: userDrawing!)
-        drawnImageViewFullScreenContainer.isHidden = true
-        positionTab.isEnabled = true
+        tattooViewModel?.fullScreenDrawingAccepted()
     }
     
     @IBAction func drawnImageColorWheelTapped(_ sender: UIButton) {
@@ -420,8 +395,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func discardRotateMessageTapped(_ sender: UIButton) {
+        //Hide rotate message if user presses X button
         drawnImageFullScreenRotateMessage.isHidden = true
-        //Discard rotate message if user presses X button
     }
 }
 
@@ -437,13 +412,6 @@ extension ViewController: ARSCNViewDelegate {
         guard let sceneView = renderer as? ARSCNView,
             anchor is ARFaceAnchor else { return nil }
         
-       /*
-        #if targetEnvironment(simulator)
-        #error("ARKit is not supported in iOS Simulator. Connect a physical iOS device and select it as your Xcode run destination, or select Generic iOS Device as a build-only destination.")
-        #else
- */
- 
- 
  
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
         let material = faceGeometry.firstMaterial!
@@ -456,12 +424,8 @@ extension ViewController: ARSCNViewDelegate {
             imageChanged = false
         }
  
-        
-     //   #endif
  
        return SCNNode(geometry: faceGeometry)
-       // return SCNNode(geometry: nil)
-        
         
     }
     
@@ -482,7 +446,7 @@ extension ViewController: ARSCNViewDelegate {
         //If the image was changed, set the new image on the face contents
         if imageChanged {
             let material = faceGeometry.firstMaterial!
-            material.diffuse.contents = tattooViewModel?.image// Example texture map image.
+            material.diffuse.contents = tattooViewModel?.image
             material.lightingModel = .physicallyBased
             imageChanged = false
         }
@@ -506,20 +470,19 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print("PICKER COUNT", TattooType.allCases.count)
         //Display all tattoo types except for the last one (which is the default type and shouldn't be selectable)
-        return TattooType.allCases.count - 1
+        return FacialPosition.allCases.count - 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return TattooType(rawValue: row+1)?.description
+        return FacialPosition(rawValue: row+1)?.description
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         //If Picker position is changed, update viewModel
         //If a new position is chose, the image must be repositioned
-        if let type = TattooType(rawValue: row+1) {
+        if let type = FacialPosition(rawValue: row+1) {
             tattooViewModel?.positionType = .auto
             tattooViewModel?.changeTattooType(type: type)
             acceptPositionButton.isHidden = false
@@ -537,7 +500,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         title.font = UIFont.systemFont(ofSize: 21, weight: UIFont.Weight.bold)
         title.textColor = UIColor.green
-        title.text = TattooType(rawValue: row+1)?.description
+        title.text = FacialPosition(rawValue: row+1)?.description
         title.textAlignment = .center
         
         return title
@@ -633,7 +596,7 @@ extension ViewController: UITabBarDelegate {
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tattooImagesCount
+        return totalImageCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -704,113 +667,53 @@ extension ViewController: HSBColorPickerDelegate {
     
 }
 
-extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserver{
+extension ViewController: ARViewModelViewDelegate{
     
-    func buyProduct(product: SKProduct) {
-        print("Sending the Payment Request to Apple");
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.default().add(payment);
+    
+    func resetARViews(){
+        //Reset views to initial state of app
+        transformButtonContainer.isHidden = true
+        hideButton.isHidden = true
+        positionTab.isEnabled = false
+        addTatTab.isEnabled = false
+        shareTab.isEnabled = false
     }
     
-    func buyInAppPurchases(){
-        
-        if (SKPaymentQueue.canMakePayments()) {
-            let productID:NSSet = NSSet(array: [mainUIViewModel?.model.inAppPurchasePremiumAccountID as! NSString]);
-            let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>);
-            productsRequest.delegate = self;
-            productsRequest.start();
-            print("Fetching Products");
-        } else {
-            print("can't make purchases");
-            showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
-            removeWatermarkButton.isEnabled = true
-            drawnImageViewFullScreenButton.isEnabled = true
-            colorPickerButton.isEnabled = true
-            purchasePremiumButton.isEnabled = true
-            restorePremiumButton.isEnabled = true
-        }
-        
+    
+    func fullScreenDrawingAccepted() {
+         //When a full screen drawing is accepted, position tab is enabled for user to position image
+        drawnImageViewFullScreenContainer.isHidden = true
+        positionTab.isEnabled = true
     }
     
-    func restoreInAppPurchases(){
-        
-        
-        if (SKPaymentQueue.canMakePayments()) {
-            SKPaymentQueue.default().add(self)
-            SKPaymentQueue.default().restoreCompletedTransactions()
-        } else {
-            restorePremiumButton.isEnabled = true
-              showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
-        }
-        
+    func uploadedImageAccepted() {
+        //When an uploaded image is accepted, position tab is enabled for user to position image
+        uploadedImageContainer.isHidden = true
+        positionTab.isEnabled = true
     }
     
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print(response.products)
-        let count : Int = response.products.count
-        if (count>0) {
-            
-            let validProduct: SKProduct = response.products[0] as SKProduct
-            if (validProduct.productIdentifier == mainUIViewModel?.model.inAppPurchasePremiumAccountID as? String) {
-                print(validProduct.localizedTitle)
-                print(validProduct.localizedDescription)
-                print(validProduct.price)
-                //Display price and details to user and verify if they want to complete the purchase, if so, buy the product
-                //Restore buttons so they can be re-clicked
-                removeWatermarkButton.isEnabled = true
-                drawnImageViewFullScreenButton.isEnabled = true
-                colorPickerButton.isEnabled = true
-                purchasePremiumButton.isEnabled = true
-                restorePremiumButton.isEnabled = true
-                verifyIfUserWantsToCompletePurchase(title: "Premium Account Required", message: "Purchase Premium Account to Get Access to Extra Features (Enhanced Drawing Tools and No Watermarks) for " + validProduct.localizedPrice + "?", callback: {
-                    purchaseConfirmed in
-                    if purchaseConfirmed{
-                         self.buyProduct(product: validProduct)
-                    }
-                })
-            } else {
-                print(validProduct.productIdentifier)
-            }
-        } else {
-            print("nothing")
-        }
+    func manualDrawingAccepted() {
+        //After manual drawing is accepted, position tab is enabled for user to position drawing
+        drawnImageContainerView.isHidden = true
+        positionTab.isEnabled = true
     }
     
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction:AnyObject in transactions {
-            if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
-                
-                switch trans.transactionState {
-                case .purchased:
-                    print("Product Purchased")
-                    mainUIViewModel?.activatePremiumAccess()
-                    SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
-                    break;
-                case .failed:
-                    print("Purchased Failed");
-                    SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
-                    break;
-                case .restored:
-                    print("Already Purchased")
-                    showAlertWith(title: "Already Purchased", message: "Premium Mode Activated")
-                    mainUIViewModel?.activatePremiumAccess()
-                    restorePremiumButton.isEnabled = true
-                    SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
-                default:
-                    break;
-                }
-            }
-        }
+    func arImagePositionAccepted() {
+        //Position was accepted, set up views accordingly
+        tattooTypePicker.isHidden = true
+        tattooViewModel?.positionType = .manual
+        transformButtonContainer.isHidden = false
+        hideButton.isHidden = false
+        acceptPositionButton.isHidden = true
+        addTatTab.isEnabled = true
     }
     
-    //If an error occurs, the code will go to this function
-    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-           showAlertWith(title: "Error", message: "We're Sorry.  We were unable to process your request.  Please ensure you have internet access and are signed in to your account.")
-        restorePremiumButton.isEnabled = true
-    }
-
     
-
+    func arImagePositionUpdated() {
+        //Let the renderer know that the image has changed
+        imageChanged = true
+    }
+    
     
 }
 

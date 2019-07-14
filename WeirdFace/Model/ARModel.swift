@@ -16,9 +16,9 @@ protocol Printable {
 
 //Total count of tattoo images user can select from
 //Images are numbered, and this number is used to load them
-let tattooImagesCount: Int = 51
+let totalImageCount: Int = 51
 
-enum TattooType: Int, Printable, CaseIterable {
+enum FacialPosition: Int, Printable, CaseIterable {
     case leftBrow = 1
     case forehead = 2
     case rightBrow = 3
@@ -44,14 +44,14 @@ enum TattooType: Int, Printable, CaseIterable {
     }
 }
 
-public class TattooModel {
+public class ARModel {
     var image: UIImage?
     var imageName: String {
         didSet {
             self.image = UIImage(named: imageName)
         }
     }
-    var type: TattooType {
+    var type: FacialPosition {
         didSet {
             updateDimensions()
         }
@@ -63,7 +63,7 @@ public class TattooModel {
     var rotation: Float
     
     init(
-                imageName: String, tattooType: TattooType) {
+                imageName: String, tattooType: FacialPosition) {
         self.imageName = imageName
         self.image = UIImage(named: imageName)
         self.type = tattooType

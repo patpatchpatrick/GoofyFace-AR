@@ -12,9 +12,10 @@ import UIKit
 let defaultCanvasHeight:CGFloat = 1000
 let defaultCanvasWidth:CGFloat = 1000
 
-public class TattooViewModel {
-    
-    private let tattoo: TattooModel
+public class ARViewModel:ARViewModelProtocol {
+    var model: ARModel
+    var viewDelegate: ARViewModelViewDelegate
+
     var image: UIImage?
     var canvas: UIImage?
     var lastCanvas: UIImage?
@@ -40,8 +41,9 @@ public class TattooViewModel {
     let heightMin: CGFloat = 25
     
     
-    public init(tattooModel: TattooModel) {
-        self.tattoo = tattooModel
+    init(tattooModel: ARModel, delegate: ARViewModelViewDelegate) {
+        self.model = tattooModel
+        self.viewDelegate = delegate
     }
     
     func incrementX(){
@@ -108,11 +110,13 @@ public class TattooViewModel {
         
         //Set the manual position of the image to match the default tattoo's position when the image's position is chosen via the picker view
         
-        self.x = self.tattoo.x
-        self.y = self.tattoo.y
-        self.rotation = self.tattoo.rotation
-        self.width = self.tattoo.width
-        self.height = self.tattoo.height
+        self.x = self.model.x
+        self.y = self.model.y
+        self.rotation = self.model.rotation
+        self.width = self.model.width
+        self.height = self.model.height
+        self.positionType = .manual
+        self.viewDelegate.arImagePositionAccepted()
         
     }
     
@@ -124,15 +128,15 @@ public class TattooViewModel {
         
         DispatchQueue.global(qos: .background).async {
         
-            guard let image = self.tattoo.image else {return}
+            guard let image = self.model.image else {return}
             
             switch self.positionType {
-            case .auto: self.reloadImage(image: image, width: self.tattoo.width, height: self.tattoo.height, radians: self.tattoo.rotation, x: self.tattoo.x, y: self.tattoo.y, resetToDefault: false, commitImage: false)
+            case .auto: self.reloadImage(image: image, width: self.model.width, height: self.model.height, radians: self.model.rotation, x: self.model.x, y: self.model.y, resetToDefault: false, commitImage: false)
             case .manual: self.reloadImage(image: image, width: self.width, height: self.height, radians: self.rotation, x: self.x, y: self.y, resetToDefault: false, commitImage: false)
             }
             
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
+                self.viewDelegate.arImagePositionUpdated()
             }
         }
         
@@ -142,7 +146,7 @@ public class TattooViewModel {
         
         //reset default position and tattoo types
         self.positionType = .auto
-        self.tattoo.type = .new
+        self.model.type = .new
         
         //Set canvas back to nil to reset the image
         self.canvas = nil
@@ -154,7 +158,8 @@ public class TattooViewModel {
             self.reloadImage(image: resetImage, width: 1, height: 1, radians: 0, x: 999, y: 999, resetToDefault: true, commitImage: false)
             
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
+                self.viewDelegate.arImagePositionUpdated()
+                self.viewDelegate.resetARViews()
             }
         }
         
@@ -169,19 +174,19 @@ public class TattooViewModel {
         DispatchQueue.global(qos: .background).async {
             
             //Commit the current image
-            guard let image = self.tattoo.image else {return}
+            guard let image = self.model.image else {return}
             self.reloadImage(image: image, width: self.width, height: self.height, radians: self.rotation, x: self.x, y: self.y, resetToDefault: false, commitImage: true)
     
             //Reset default position and tattoo types
             self.positionType = .auto
-            self.tattoo.type = .new
+            self.model.type = .new
             
             //Reset the image to be blank after a tattoo is committed
             guard let resetImage = UIImage(named: "blank") else {return}
             self.reloadImage(image: resetImage, width: 1, height: 1, radians: 0, x: 999, y: 999, resetToDefault: true, commitImage: false)
             
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
+                 self.viewDelegate.arImagePositionUpdated()
             }
         }
     }
@@ -194,26 +199,38 @@ public class TattooViewModel {
             guard let image = UIImage(named: "positionMap") else {return}
             self.image = image
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name("UPDATED_DATA"), object: nil)
+                 self.viewDelegate.arImagePositionUpdated()
             }
         }
         
         
     }
     
-    func changeTattooType(type: TattooType){
-        self.tattoo.type = type
+    func changeTattooType(type: FacialPosition){
+        self.model.type = type
         loadImage()
     }
     
     func changeImage(named: String){
-        self.tattoo.imageName = named
+        self.model.imageName = named
         loadImage()
     }
     
     func changeImage(image: UIImage){
-        self.tattoo.image = image
+        self.model.image = image
         loadImage()
+    }
+    
+    func manualDrawingAccepted(){
+        self.viewDelegate.manualDrawingAccepted()
+    }
+    
+    func uploadedImageAccepted(){
+        self.viewDelegate.uploadedImageAccepted()
+    }
+    
+    func fullScreenDrawingAccepted(){
+        self.viewDelegate.fullScreenDrawingAccepted()
     }
     
     func reloadImage(image: UIImage, width: CGFloat, height: CGFloat, radians: Float, x:CGFloat, y: CGFloat, resetToDefault: Bool, commitImage: Bool){
