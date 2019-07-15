@@ -51,6 +51,13 @@ public class ARModel {
             self.image = UIImage(named: imageName)
         }
     }
+    
+    var defaultXPosition:CGFloat = 400
+    var defaultYPosition:CGFloat = 400
+    var defaultWidth:CGFloat = 200
+    var defaultHeight:CGFloat = 100
+    var defaultRotation:Float = 0
+    
     var type: FacialPosition {
         didSet {
             updateDimensions()

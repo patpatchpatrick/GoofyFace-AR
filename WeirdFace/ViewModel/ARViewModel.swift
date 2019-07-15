@@ -257,11 +257,11 @@ public class ARViewModel:ARViewModelProtocol {
         
         //Reset manual position values to default
         if resetToDefault {
-            self.x = 400
-            self.y = 400
-            self.width = 200
-            self.height = 100
-            self.rotation = 0
+            self.x = self.model.defaultXPosition
+            self.y = self.model.defaultYPosition
+            self.width = self.model.defaultWidth
+            self.height = self.model.defaultHeight
+            self.rotation = self.model.defaultRotation
         }
         
     }
