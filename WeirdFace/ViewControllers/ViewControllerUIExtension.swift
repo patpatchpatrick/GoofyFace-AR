@@ -45,10 +45,11 @@ extension ViewController {
         rotateFullScreenImages()
     }
     
-    func configureViewsForPremiumMode(){
+    func configureViewsForPremiumMode(isPremium: Bool ){
         
         //Remove icons with locks on them
-
+        
+        if isPremium {
             let fullScreenUnlockedImg = UIImage(named: "iconFullScreen.png")
             drawnImageViewFullScreenButton.setImage(fullScreenUnlockedImg, for: .normal)
             let colorPickUnlockedImg = UIImage(named: "iconColorWheel.png")
@@ -59,8 +60,19 @@ extension ViewController {
             //Hide watermark and remove watermark button
             watermark.isHidden = true
             removeWatermarkButton.isHidden = true
+        } else {
+            let fullScreenLockedImg = UIImage(named: "iconFullScreenLocked.png")
+            drawnImageViewFullScreenButton.setImage(fullScreenLockedImg, for: .normal)
+            let colorPickLockedImg = UIImage(named: "iconColorWheelLocked.png")
+            colorPickerButton.setImage(colorPickLockedImg, for: .normal)
+            purchasePremiumButton.isEnabled = true
+            purchasePremiumButton.setTitle("Purchase Premium Mode", for: .normal)
             
-        
+            //Hide watermark and remove watermark button
+            watermark.isHidden = false
+            removeWatermarkButton.isHidden = false
+            
+        }
     
     }
     

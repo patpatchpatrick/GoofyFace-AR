@@ -721,7 +721,7 @@ extension ViewController: MainUIViewModelViewDelegate{
   
     //If user has premium mode, configure views accordingly
     func premiumModeUnlocked() {
-        configureViewsForPremiumMode()
+        configureViewsForPremiumMode(isPremium: true)
     }
     
     //Share image using other applications

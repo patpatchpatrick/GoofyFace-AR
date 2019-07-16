@@ -13,60 +13,76 @@ import CoreData
 class WeirdFaceTests: XCTestCase {
     
     var viewController: ViewController?
-    var tattooModel: ARModel?
-    var tattooViewModel: ARViewModel?
-    var mainUIModel: MainUIModel?
-    var mainUIViewModel: MainUIViewModel?
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        self.viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PrimaryViewController") as! ViewController
+        self.viewController = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "PrimaryViewController") as! ViewController
+        self.viewController?.loadView()
+        self.viewController?.viewDidLoad()
         
-        self.tattooModel = ARModel(imageName: "blank", tattooType: .new)
-        self.tattooViewModel = ARViewModel(tattooModel: tattooModel!, delegate: viewController!)
-        
-        self.mainUIModel = MainUIModel()
-        self.mainUIViewModel = MainUIViewModel(model: mainUIModel!, delegate: viewController!)
     }
 
     override func tearDown() {
+        self.viewController = nil
+        super.tearDown()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
     func testSettingAndResettingArImagePosition(){
         
         //Change AR Image (Tattoo) Position to a non-default position (leftBrow)
-        tattooViewModel?.positionType = .auto
-        tattooViewModel?.changeTattooType(type: .leftBrow)
-        setModelPositionsOnViewModel()
+        viewController?.tattooViewModel?.positionType = .auto
+        viewController?.tattooViewModel?.changeTattooType(type: .leftBrow)
+        viewController?.tattooViewModel?.acceptPosition()
+        
         
         //Ensure positions are no longer default
-        XCTAssertFalse(tattooViewModel?.x == tattooViewModel?.model.defaultXPosition)
-        XCTAssertFalse(tattooViewModel?.y == tattooViewModel?.model.defaultYPosition)
-        XCTAssertFalse(tattooViewModel?.rotation == tattooViewModel?.model.defaultRotation)
+        XCTAssertFalse(viewController?.tattooViewModel?.x == viewController?.tattooViewModel?.model.defaultXPosition)
+        XCTAssertFalse(viewController?.tattooViewModel?.y == viewController?.tattooViewModel?.model.defaultYPosition)
+        XCTAssertFalse(viewController?.tattooViewModel?.rotation == viewController?.tattooViewModel?.model.defaultRotation)
         
         //Reset tattoo positions
-       tattooViewModel?.reset()
+        viewController?.tattooViewModel?.reset()
         sleep(5) //Wait for async code to run
       
         //Assert that positions are now default
-        XCTAssertTrue(tattooViewModel?.x == tattooViewModel?.model.defaultXPosition)
-        XCTAssertTrue(tattooViewModel?.y == tattooViewModel?.model.defaultYPosition)
-        XCTAssertTrue(tattooViewModel?.width == tattooViewModel?.model.defaultWidth)
-        XCTAssertTrue(tattooViewModel?.height == tattooViewModel?.model.defaultHeight)
-        XCTAssertTrue(tattooViewModel?.rotation == tattooViewModel?.model.defaultRotation)
+        XCTAssertTrue(viewController?.tattooViewModel?.x == viewController?.tattooViewModel?.model.defaultXPosition)
+        XCTAssertTrue(viewController?.tattooViewModel?.y == viewController?.tattooViewModel?.model.defaultYPosition)
+        XCTAssertTrue(viewController?.tattooViewModel?.width == viewController?.tattooViewModel?.model.defaultWidth)
+        XCTAssertTrue(viewController?.tattooViewModel?.height == viewController?.tattooViewModel?.model.defaultHeight)
+        XCTAssertTrue(viewController?.tattooViewModel?.rotation == viewController?.tattooViewModel?.model.defaultRotation)
     
     }
     
-    func setModelPositionsOnViewModel(){
-        //Test method to set model tattoo positions on the view model
-        tattooViewModel?.x = (tattooViewModel?.model.x)!
-        tattooViewModel?.y = (tattooViewModel?.model.y)!
-        tattooViewModel?.width = (tattooViewModel?.model.width)!
-        tattooViewModel?.height = (tattooViewModel?.model.height)!
-        tattooViewModel?.rotation = (tattooViewModel?.model.rotation)!
-     
+    func testPremiumModeAccesInAppPurchase(){
+        
+        //Test premium mode access
+        
+        //1.  Set premium mode to false
+        viewController?.mainUIViewModel?.model.premiumModePurchased = false
+        viewController?.configureViewsForPremiumMode(isPremium:false)
+        
+        //2.  Verify premium access is unavailable
+        XCTAssertTrue(viewController?.drawnImageViewFullScreenButton.imageView?.image == UIImage(named: "iconFullScreenLocked.png"))
+        XCTAssertTrue(viewController?.colorPickerButton.imageView?.image == UIImage(named: "iconColorWheelLocked.png"))
+        XCTAssertTrue(viewController?.purchasePremiumButton.isEnabled == true)
+        XCTAssertTrue(viewController?.watermark.isHidden == false)
+        XCTAssertTrue(viewController?.removeWatermarkButton.isHidden  == false)
+   
+        //3.  Activate premium mode for user
+        viewController?.mainUIViewModel?.activatePremiumAccess()
+        
+        //4.  Verify premium access is available
+        XCTAssertTrue(viewController?.drawnImageViewFullScreenButton.imageView?.image == UIImage(named: "iconFullScreen.png"))
+        XCTAssertTrue(viewController?.colorPickerButton.imageView?.image == UIImage(named: "iconColorWheel.png"))
+        XCTAssertTrue(viewController?.purchasePremiumButton.isEnabled == false)
+        XCTAssertTrue(viewController?.watermark.isHidden == true)
+        XCTAssertTrue(viewController?.removeWatermarkButton.isHidden  == true)
+        
     }
+    
+    
+    
 
 }
