@@ -32,6 +32,7 @@ public class ARViewModel:ARViewModelProtocol {
     var width: CGFloat = 200
     var height: CGFloat = 100
     var rotation: Float = 0
+    var size: ARImageSize = .small
     let xMax: CGFloat = 799
     let xMin: CGFloat = 100
     let yMax: CGFloat = 700
@@ -105,6 +106,22 @@ public class ARViewModel:ARViewModelProtocol {
             self.height -= 5
             loadImage()
         }
+    }
+    
+    func setDefaultSize(size: ARImageSize?){
+        guard let size = size else {return}
+        if size != self.size {
+            let multiplier: CGFloat  = CGFloat(size.rawValue) / CGFloat(self.size.rawValue)
+     
+                self.width = self.width * multiplier
+                self.height = self.height * multiplier
+                self.size = size
+                loadImage()
+                print("Multiplier", multiplier)
+            
+        }
+        
+        
     }
     
     func acceptPosition(){

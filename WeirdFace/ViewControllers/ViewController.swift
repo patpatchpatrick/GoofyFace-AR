@@ -555,6 +555,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             
             if let type = ARImageSize(rawValue: row+1) {
                 acceptSizeButton.isHidden = false
+                let size = ARImageSize(rawValue: row+1)
+                tattooViewModel?.setDefaultSize(size: size)
             }
             
             
@@ -791,6 +793,7 @@ extension ViewController: ARViewModelViewDelegate{
         //Position was accepted, set up views accordingly
         tattooTypePicker.isHidden = true
         sizePicker.isHidden = true
+        acceptSizeButton.isHidden = true
         tattooViewModel?.positionType = .manual
         transformPrimaryContainer.isHidden = false
         acceptPositionButton.isHidden = true
@@ -899,6 +902,7 @@ extension ViewController: MainUIViewModelViewDelegate{
         resizeButtonContainer.isHidden = true
         transformPrimaryContainer.isHidden = true
         sizePicker.isHidden = true
+        acceptSizeButton.isHidden = true
         shareTab.isEnabled = true
         addTatTab.isEnabled = false
         positionTab.isEnabled = false
