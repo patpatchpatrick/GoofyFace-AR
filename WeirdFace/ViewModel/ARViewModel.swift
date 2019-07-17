@@ -23,6 +23,7 @@ public class ARViewModel:ARViewModelProtocol {
         case manual
         case auto
     }
+    var arPickerType: ARPickerType = .position //Type of data being shown in the picker
     
     var positionType:PositionType = .auto
     //Manual positions (override default tattoo positions if the user decides to move the tattoo)

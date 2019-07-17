@@ -35,6 +35,7 @@ extension ViewController {
         addDeepShadowToView(view: transformMinusButton)
         addDeepShadowToView(view: transformPlusButton)
         addDeepShadowToView(view: transformPositionAcceptButton)
+        addDeepShadowToView(view: transformSelectSizeButton)
         addDeepShadowToView(view: discardPreviewButton)
         addDeepShadowToView(view: removeWatermarkButton)
         addShadowToView(view: settingsButton)

@@ -28,7 +28,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var transformHeaderButtons: UIView!
     @IBOutlet weak var repositionButton: UIButton!
     @IBOutlet weak var resizeButton: UIButton!
-    
+    @IBOutlet weak var sizePicker: UIPickerView!
+    @IBOutlet weak var acceptSizeButton: UIButton!
     @IBOutlet weak var repositionButtonContainer: UIView!
     
     @IBOutlet weak var resizeButtonContainer: UIView!
@@ -63,6 +64,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var transformMinusButton: UIButton!
     @IBOutlet weak var transformPlusButton: UIButton!
     @IBOutlet weak var transformPositionAcceptButton: UIButton!
+    @IBOutlet weak var transformSelectSizeButton: UIButton!
     
     @IBOutlet weak var previewImageContainer: UIView!
     @IBOutlet weak var previewImage: UIImageView!
@@ -120,6 +122,8 @@ class ViewController: UIViewController {
         tabBar.delegate = self
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
+        sizePicker.delegate = self
+        sizePicker.dataSource = self
         sceneView.delegate = self
         colorPicker.delegate = self
         
@@ -269,6 +273,15 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func selectDefaultSize(_ sender: UIButton) {
+        
+        //Allow user to select a default size
+        sizePicker.isHidden = false
+        //Hide resize buttons while you select a size
+        resizeButtonContainer.isHidden = true
+    }
+    
+    
     
     func resetDrawView(){
         //Set the drawView back to its default state
@@ -282,7 +295,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func acceptPosition(_ sender: UIButton) {
+    @IBAction func acceptDefaultImagePosition(_ sender: UIButton) {
         
         //If tattoo auto position is accepted, tattoo manual transformation box is displayed for user to adjust the tattoo
         
@@ -411,11 +424,19 @@ class ViewController: UIViewController {
     @IBAction func resizeButtonTapped(_ sender: UIButton) {
         //Hide/show resize buttons
         resizeButtonContainer.isHidden = !resizeButtonContainer.isHidden
+        tattooViewModel?.arPickerType = .size
+        sizePicker.reloadAllComponents()
         
         //Hide other transform containers
         repositionButtonContainer.isHidden = true
     }
     
+    @IBAction func acceptSizeButtonTapped(_ sender: UIButton) {
+        //Hide the size picker and show the resize buttons again
+        acceptSizeButton.isHidden = true
+        sizePicker.isHidden = true
+        resizeButtonContainer.isHidden = false
+    }
     
 }
 
@@ -484,42 +505,89 @@ extension ViewController: ARSCNViewDelegate {
 
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
+    //There are 2 primary types of pickers, one to choose position and one to choose size.  The following picker methods are set based on the picker type that is currently in use
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //Display all tattoo types except for the last one (which is the default type and shouldn't be selectable)
-        return FacialPosition.allCases.count - 1
+       
+        switch tattooViewModel?.arPickerType{
+             //Display all tattoo types except for the last one (which is the default type and shouldn't be selectable)
+        case .position?: return FacialPosition.allCases.count - 1
+            
+             //Display all image sizes
+        case .size?: return ARImageSize.allCases.count
+        case .none:
+            return FacialPosition.allCases.count - 1
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return FacialPosition(rawValue: row+1)?.description
+        
+        //Return correct count depending on picker type being used
+        
+        switch tattooViewModel?.arPickerType{
+        case .position?:  return FacialPosition(rawValue: row+1)?.description
+        case .size?:  return ARImageSize(rawValue: row+1)?.description
+        case .none:
+             return FacialPosition(rawValue: row+1)?.description
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         //If Picker position is changed, update viewModel
         //If a new position is chose, the image must be repositioned
-        if let type = FacialPosition(rawValue: row+1) {
-            tattooViewModel?.positionType = .auto
-            tattooViewModel?.changeTattooType(type: type)
-            acceptPositionButton.isHidden = false
+        
+        //If Picker size is changed, update viewModel
+        //New image size will be shown
+        func setFacialPosition(){
+            if let type = FacialPosition(rawValue: row+1) {
+                tattooViewModel?.positionType = .auto
+                tattooViewModel?.changeTattooType(type: type)
+                acceptPositionButton.isHidden = false
+            }
+        }
+        
+        func setARImageSize(){
+            
+            if let type = ARImageSize(rawValue: row+1) {
+                acceptSizeButton.isHidden = false
+            }
+            
             
         }
         
+        switch tattooViewModel?.arPickerType{
+        case .position?:  setFacialPosition()
+        case .size?:  setARImageSize()
+        case .none:
+            setFacialPosition()
+        }
+        
+    
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         //Add style (big green text) to the pickerview
+        
         var title = UILabel()
         if var title = view {
             title = title as! UILabel
         }
         title.font = UIFont.systemFont(ofSize: 21, weight: UIFont.Weight.bold)
         title.textColor = UIColor.green
-        title.text = FacialPosition(rawValue: row+1)?.description
+        
+        switch tattooViewModel?.arPickerType{
+        case .position?:   title.text = FacialPosition(rawValue: row+1)?.description
+        case .size?:   title.text = ARImageSize(rawValue: row+1)?.description
+        case .none:
+           title.text = FacialPosition(rawValue: row+1)?.description
+        }
+      
         title.textAlignment = .center
         
         return title
@@ -551,6 +619,7 @@ extension ViewController: UITabBarDelegate {
         
         //"Position mode" - User can position/transform the tattoo
         if item.tag == modePosition {
+            tattooViewModel?.arPickerType = .position
             tattooViewModel?.positionType = .auto
             tattooViewModel?.displayPositionMap()
             mainUIViewModel?.modeChanged(mode: .position)
@@ -721,10 +790,12 @@ extension ViewController: ARViewModelViewDelegate{
     func arImagePositionAccepted() {
         //Position was accepted, set up views accordingly
         tattooTypePicker.isHidden = true
+        sizePicker.isHidden = true
         tattooViewModel?.positionType = .manual
         transformPrimaryContainer.isHidden = false
         acceptPositionButton.isHidden = true
         addTatTab.isEnabled = true
+        
     }
     
     
@@ -827,11 +898,13 @@ extension ViewController: MainUIViewModelViewDelegate{
         repositionButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
         transformPrimaryContainer.isHidden = true
+        sizePicker.isHidden = true
         shareTab.isEnabled = true
         addTatTab.isEnabled = false
         positionTab.isEnabled = false
         settingsButton.isHidden = false
         previewImageContainer.isHidden = true
+        tattooTypePicker.reloadAllComponents() //reload picker view to contain position dataa
     }
     
     func setViewsForColorPicker(unlocked: Bool) {

@@ -18,6 +18,11 @@ protocol Printable {
 //Images are numbered, and this number is used to load them
 let totalImageCount: Int = 51
 
+enum ARPickerType {
+    case position
+    case size
+}
+
 enum FacialPosition: Int, Printable, CaseIterable {
     case leftBrow = 1
     case forehead = 2
@@ -27,7 +32,6 @@ enum FacialPosition: Int, Printable, CaseIterable {
     case rightCheek = 6
     case lowerLip = 7
     case new = 8
-    //static var count: Int { return TattooType.leftEye.hashValue + 1 }
     
     var description: String {
         switch self {
@@ -40,6 +44,21 @@ enum FacialPosition: Int, Printable, CaseIterable {
         case .lowerLip: return "7"
         case .new:
             return "8"
+        }
+    }
+}
+
+enum ARImageSize: Int, Printable, CaseIterable {
+    case small = 1
+    case medium = 2
+    case large = 3
+
+    
+    var description: String {
+        switch self {
+        case .small: return "Small"
+        case .medium: return "Medium"
+        case .large: return "Large"
         }
     }
 }

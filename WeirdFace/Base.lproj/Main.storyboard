@@ -41,7 +41,7 @@
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                         <state key="normal" image="iconCheckMark"/>
                                         <connections>
-                                            <action selector="acceptPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wib-ys-7b4"/>
+                                            <action selector="acceptDefaultImagePosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wib-ys-7b4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -187,17 +187,48 @@
                                                     <action selector="sizeIncrease:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v2v-HH-ig1"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g68-re-JLe">
+                                                <rect key="frame" x="160" y="20" width="50" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="X6f-7j-sEZ"/>
+                                                    <constraint firstAttribute="width" constant="50" id="Xez-nR-W2b"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="iconResize"/>
+                                                <connections>
+                                                    <action selector="selectDefaultSize:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K0g-ZU-Vuc"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="p4K-4H-9sp" firstAttribute="top" secondItem="LBv-jF-GxD" secondAttribute="top" id="042-TI-g5g"/>
                                             <constraint firstAttribute="height" constant="200" id="1aE-yV-H1h"/>
+                                            <constraint firstItem="g68-re-JLe" firstAttribute="top" secondItem="p4K-4H-9sp" secondAttribute="top" id="9hr-GN-G9U"/>
                                             <constraint firstItem="LBv-jF-GxD" firstAttribute="leading" secondItem="jK1-sM-mK6" secondAttribute="leading" constant="20" id="Jbv-eE-ZZM"/>
                                             <constraint firstItem="p4K-4H-9sp" firstAttribute="leading" secondItem="LBv-jF-GxD" secondAttribute="trailing" constant="20" id="MLH-vB-aVI"/>
                                             <constraint firstItem="LBv-jF-GxD" firstAttribute="top" secondItem="jK1-sM-mK6" secondAttribute="top" constant="20" id="Ona-Nr-zY0"/>
+                                            <constraint firstItem="g68-re-JLe" firstAttribute="leading" secondItem="p4K-4H-9sp" secondAttribute="trailing" constant="20" id="Ve7-rz-G6H"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="jK1-sM-mK6"/>
                                     </view>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWp-Tw-M3W" userLabel="acceptPosition">
+                                        <rect key="frame" x="157" y="20" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="K3P-i6-Wa2"/>
+                                            <constraint firstAttribute="width" constant="100" id="OnP-cD-bRF"/>
+                                        </constraints>
+                                        <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        <state key="normal" image="iconCheckMark"/>
+                                        <connections>
+                                            <action selector="acceptSizeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cew-Ce-xW1"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fH5-aY-pnB" userLabel="sizePicker">
+                                        <rect key="frame" x="0.0" y="502" width="414" height="216"/>
+                                        <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                    </pickerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y0K-1x-yGv" userLabel="TransformHeaderMenu">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                         <subviews>
@@ -245,11 +276,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="y0K-1x-yGv" secondAttribute="trailing" id="GY1-8I-XOS"/>
+                                    <constraint firstItem="hWp-Tw-M3W" firstAttribute="centerX" secondItem="SGY-gw-7lI" secondAttribute="centerX" id="HhB-64-Dub"/>
+                                    <constraint firstItem="hWp-Tw-M3W" firstAttribute="top" secondItem="SGY-gw-7lI" secondAttribute="top" constant="20" id="IgE-Si-OIR"/>
+                                    <constraint firstItem="fH5-aY-pnB" firstAttribute="leading" secondItem="SGY-gw-7lI" secondAttribute="leading" id="KSY-bT-poq"/>
                                     <constraint firstItem="p1y-cK-gMM" firstAttribute="leading" secondItem="SGY-gw-7lI" secondAttribute="leading" id="QRX-mC-js3"/>
                                     <constraint firstItem="3e2-Dm-7hj" firstAttribute="top" secondItem="y0K-1x-yGv" secondAttribute="bottom" id="WsK-hD-eTr"/>
                                     <constraint firstAttribute="trailing" secondItem="3e2-Dm-7hj" secondAttribute="trailing" id="aM8-BR-j0a"/>
                                     <constraint firstItem="3e2-Dm-7hj" firstAttribute="leading" secondItem="SGY-gw-7lI" secondAttribute="leading" id="bnp-g5-x2p"/>
                                     <constraint firstAttribute="trailing" secondItem="p1y-cK-gMM" secondAttribute="trailing" id="pT9-Ka-h7j"/>
+                                    <constraint firstAttribute="trailing" secondItem="fH5-aY-pnB" secondAttribute="trailing" id="sjC-wE-F8b"/>
                                     <constraint firstItem="p1y-cK-gMM" firstAttribute="top" secondItem="y0K-1x-yGv" secondAttribute="bottom" id="tmE-1f-MUg"/>
                                     <constraint firstItem="y0K-1x-yGv" firstAttribute="leading" secondItem="SGY-gw-7lI" secondAttribute="leading" id="vdB-yt-vh5"/>
                                     <constraint firstItem="y0K-1x-yGv" firstAttribute="top" secondItem="SGY-gw-7lI" secondAttribute="top" id="zTe-cX-Whi"/>
@@ -725,6 +760,7 @@
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="kNC-8r-omt" secondAttribute="bottom" id="3mr-pB-pkp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PJ4-Zp-aza" secondAttribute="trailing" id="4wc-Uc-Pnt"/>
                             <constraint firstItem="kNC-8r-omt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5bf-ZF-5zL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fH5-aY-pnB" secondAttribute="bottom" constant="100" id="6Ej-B5-E2a"/>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="71C-ei-uB6"/>
                             <constraint firstItem="SGY-gw-7lI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7mI-YT-ZM0"/>
                             <constraint firstItem="hwc-Ru-ufZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7o9-2S-wQY"/>
@@ -771,6 +807,7 @@
                     </view>
                     <connections>
                         <outlet property="acceptPositionButton" destination="P5X-up-xv3" id="GkR-c6-4t9"/>
+                        <outlet property="acceptSizeButton" destination="hWp-Tw-M3W" id="2C3-Cx-cYX"/>
                         <outlet property="addTatTab" destination="lpP-b3-2s9" id="EgA-4N-ApJ"/>
                         <outlet property="arNotSupportedTextView" destination="70z-Ih-j1T" id="Y32-gk-MqM"/>
                         <outlet property="collectionView" destination="B4U-NF-7Rw" id="Ghn-rv-ouP"/>
@@ -807,6 +844,7 @@
                         <outlet property="settingsButton" destination="wwP-Vh-OFo" id="LdB-0F-EUQ"/>
                         <outlet property="settingsContainer" destination="hwc-Ru-ufZ" id="aWL-oj-WjA"/>
                         <outlet property="shareTab" destination="bxK-EN-O1e" id="NQe-8N-l0c"/>
+                        <outlet property="sizePicker" destination="fH5-aY-pnB" id="2LT-3d-TWg"/>
                         <outlet property="tabBar" destination="lUI-CS-egL" id="o07-r7-Rsa"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
                         <outlet property="transformDownButton" destination="off-Qj-Kv0" id="nPQ-JS-6dn"/>
@@ -819,6 +857,7 @@
                         <outlet property="transformRightButton" destination="Ec3-YK-XjR" id="i3y-9e-fME"/>
                         <outlet property="transformRotateCCWButton" destination="OFi-bX-qjf" id="eb9-1T-tzb"/>
                         <outlet property="transformRotateCWButton" destination="dBj-vu-oPn" id="7pk-i0-McV"/>
+                        <outlet property="transformSelectSizeButton" destination="g68-re-JLe" id="a5I-zm-za3"/>
                         <outlet property="transformUpButton" destination="AE4-82-WQd" id="zxm-cv-m8U"/>
                         <outlet property="uploadImageAcceptButton" destination="zUL-rS-EfA" id="7tC-ME-CPc"/>
                         <outlet property="uploadImageBorderedView" destination="O2s-JJ-VR2" id="9Ww-JI-PM0"/>
