@@ -69,7 +69,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="EoN-OQ-QFz"/>
                                                     <constraint firstAttribute="width" constant="50" id="Igd-TE-x9A"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconLeftArrow"/>
                                                 <connections>
                                                     <action selector="minusX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="86z-zi-l3K"/>
@@ -82,7 +82,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="q4C-wh-SLn"/>
                                                     <constraint firstAttribute="width" constant="50" id="rmk-ob-zWJ"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconRightArrow"/>
                                                 <connections>
                                                     <action selector="plusX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YXa-uN-B1E"/>
@@ -95,7 +95,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="Yra-c0-eUt"/>
                                                     <constraint firstAttribute="height" constant="50" id="xVU-c0-uNk"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconDownArrow"/>
                                                 <connections>
                                                     <action selector="minusY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qai-Sq-SPJ"/>
@@ -108,7 +108,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="IFe-UD-VXV"/>
                                                     <constraint firstAttribute="width" constant="50" id="b1k-SH-PL6"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconUpArrow"/>
                                                 <connections>
                                                     <action selector="plusY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="noQ-Lr-0OM"/>
@@ -121,7 +121,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="Dor-6x-1yG"/>
                                                     <constraint firstAttribute="width" constant="50" id="Wzp-YO-asb"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconRightRotate"/>
                                                 <connections>
                                                     <action selector="rotateCounterClock:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YoL-dX-e7U"/>
@@ -134,7 +134,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="EMc-c0-eg8"/>
                                                     <constraint firstAttribute="width" constant="50" id="ieb-iD-pnf"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconLeftRotate"/>
                                                 <connections>
                                                     <action selector="rotateClockwise:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OOF-2T-w0X"/>
@@ -168,7 +168,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="Kh2-y8-lqz"/>
                                                     <constraint firstAttribute="height" constant="50" id="tTo-RQ-5c4"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="iconMinus"/>
                                                 <connections>
                                                     <action selector="sizeDecrease:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bC2-yg-uTE"/>
@@ -181,7 +181,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="C51-ab-imr"/>
                                                     <constraint firstAttribute="width" constant="50" id="pLe-fZ-Mcw"/>
                                                 </constraints>
-                                                <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="plusIcon"/>
                                                 <connections>
                                                     <action selector="sizeIncrease:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v2v-HH-ig1"/>
@@ -290,10 +290,10 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwP-Vh-OFo" userLabel="SettingsButton">
-                                <rect key="frame" x="20" y="64" width="50" height="50"/>
+                                <rect key="frame" x="364" y="44" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="429-8z-144"/>
-                                    <constraint firstAttribute="width" constant="50" id="Evm-pA-zgf"/>
+                                    <constraint firstAttribute="height" constant="40" id="429-8z-144"/>
+                                    <constraint firstAttribute="width" constant="40" id="Evm-pA-zgf"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="iconSettings"/>
@@ -453,12 +453,13 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzz-6Y-iPH">
-                                <rect key="frame" x="344" y="64" width="50" height="50"/>
+                                <rect key="frame" x="304" y="44" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="PPJ-iP-4E0"/>
-                                    <constraint firstAttribute="height" constant="50" id="i5b-Cx-hmB"/>
+                                    <constraint firstAttribute="width" constant="40" id="PPJ-iP-4E0"/>
+                                    <constraint firstAttribute="height" constant="40" id="i5b-Cx-hmB"/>
                                 </constraints>
-                                <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="iconReset"/>
                                 <connections>
                                     <action selector="resetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f5p-Iw-CSg"/>
@@ -730,10 +731,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lUI-CS-egL" secondAttribute="bottom" id="BbK-EF-IWd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PJ4-Zp-aza" secondAttribute="bottom" id="Cwj-63-2Cg"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EM4-Dn-4Wo"/>
-                            <constraint firstItem="wwP-Vh-OFo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="HLz-LP-IWA"/>
+                            <constraint firstItem="wwP-Vh-OFo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HLz-LP-IWA"/>
                             <constraint firstItem="70z-Ih-j1T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I1l-we-vdb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kNC-8r-omt" secondAttribute="trailing" id="Kh9-Uv-GPJ"/>
-                            <constraint firstItem="Mzz-6Y-iPH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="LUO-dK-ob5"/>
+                            <constraint firstItem="Mzz-6Y-iPH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LUO-dK-ob5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lUI-CS-egL" secondAttribute="trailing" id="Li7-sO-VHO"/>
                             <constraint firstItem="PJ4-Zp-aza" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MxU-VS-mRh"/>
                             <constraint firstItem="kNC-8r-omt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OvR-E3-bf3"/>
@@ -742,6 +743,8 @@
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UzG-TH-Msb"/>
                             <constraint firstItem="nvG-BE-rre" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="V3I-0X-MnS"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="B4U-NF-7Rw" secondAttribute="bottom" id="WB9-Jt-JyK"/>
+                            <constraint firstItem="Mzz-6Y-iPH" firstAttribute="trailing" secondItem="wwP-Vh-OFo" secondAttribute="leading" constant="-20" id="X9w-1Y-uNu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wwP-Vh-OFo" secondAttribute="trailing" constant="10" id="Y2F-n2-k8u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SGY-gw-7lI" secondAttribute="bottom" id="agB-dM-147"/>
                             <constraint firstItem="SGY-gw-7lI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b6i-Fz-yFV"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fgf-6N-SWD"/>
@@ -756,9 +759,7 @@
                             <constraint firstItem="lUI-CS-egL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="n3K-7Z-xma"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocq-ZH-Cba"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
-                            <constraint firstItem="wwP-Vh-OFo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="q63-B1-MfJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mzz-6Y-iPH" secondAttribute="trailing" constant="20" id="uX4-Pn-kb8"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
                             <constraint firstItem="nvG-BE-rre" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zad-Nb-odn"/>
                             <constraint firstItem="lUI-CS-egL" firstAttribute="top" secondItem="kiK-Ct-qDG" secondAttribute="bottom" id="zgk-Aw-Tj2"/>

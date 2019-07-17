@@ -808,7 +808,6 @@ extension ViewController: MainUIViewModelViewDelegate{
     func modeChangedToDraw() {
         resetDrawView()
         drawnImageContainerView.isHidden = false
-        settingsButton.isHidden = true
         previewImageContainer.isHidden = true
     }
     
@@ -821,7 +820,6 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     func modeChangedToPosition() {
         tattooTypePicker.isHidden = false
-        settingsButton.isHidden = true
         previewImageContainer.isHidden = true
     }
     

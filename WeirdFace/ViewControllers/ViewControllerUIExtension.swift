@@ -21,22 +21,22 @@ extension ViewController {
         addShadowToView(view: drawnImageViewFullScreenButton)
         addShadowToView(view: colorPickerButton)
         addShadowToView(view: colorPickerFullScreenButton)
-        addShadowToView(view: drawnImageAcceptButton)
-        addShadowToView(view: drawnImageDiscardButton)
+        addDeepShadowToView(view: drawnImageAcceptButton)
+        addDeepShadowToView(view: drawnImageDiscardButton)
         addShadowToView(view: resetButton)
-        addShadowToView(view: uploadImageDiscardButton)
-        addShadowToView(view: uploadImageAcceptButton)
-        addShadowToView(view: transformLeftButton)
-        addShadowToView(view: transformRightButton)
-        addShadowToView(view: transformUpButton)
-        addShadowToView(view: transformDownButton)
-        addShadowToView(view: transformRotateCWButton)
-        addShadowToView(view: transformRotateCCWButton)
-        addShadowToView(view: transformMinusButton)
-        addShadowToView(view: transformPlusButton)
-        addShadowToView(view: transformPositionAcceptButton)
-        addShadowToView(view: discardPreviewButton)
-        addShadowToView(view: removeWatermarkButton)
+        addDeepShadowToView(view: uploadImageDiscardButton)
+        addDeepShadowToView(view: uploadImageAcceptButton)
+        addDeepShadowToView(view: transformLeftButton)
+        addDeepShadowToView(view: transformRightButton)
+        addDeepShadowToView(view: transformUpButton)
+        addDeepShadowToView(view: transformDownButton)
+        addDeepShadowToView(view: transformRotateCWButton)
+        addDeepShadowToView(view: transformRotateCCWButton)
+        addDeepShadowToView(view: transformMinusButton)
+        addDeepShadowToView(view: transformPlusButton)
+        addDeepShadowToView(view: transformPositionAcceptButton)
+        addDeepShadowToView(view: discardPreviewButton)
+        addDeepShadowToView(view: removeWatermarkButton)
         addShadowToView(view: settingsButton)
         
         addShadowToView(view: settingsContainer)
@@ -83,6 +83,14 @@ extension ViewController {
         view.layer.shadowOffset = CGSize(width: 0, height: 1)
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 1.0
+        view.clipsToBounds = false
+    }
+    
+    func addDeepShadowToView(view: UIView){
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 1)
+        view.layer.shadowOpacity = 0.8
+        view.layer.shadowRadius = 2.0
         view.clipsToBounds = false
     }
     
