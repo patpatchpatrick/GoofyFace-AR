@@ -692,7 +692,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! CollectionViewCell
-        let imageName = String(indexPath.row)
+        let imageName = String(totalImageCount - indexPath.row - 1)
         print("INDEX PATH", indexPath.row)
         cell.collectionImage.image = UIImage(named: imageName)
         return cell
@@ -700,7 +700,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Update the image in the viewModel to match the image selected in the collection view by the user
-        let imageName = String(indexPath.row)
+        let imageName = String(totalImageCount - indexPath.row - 1)
         tattooViewModel?.changeImage(named: imageName)
         collectionView.isHidden = true
         resetButton.isHidden = false
@@ -894,7 +894,10 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     func modeChangedToPosition() {
         tattooTypePicker.isHidden = false
+        sizePicker.isHidden = true
+        acceptSizeButton.isHidden = true
         previewImageContainer.isHidden = true
+        tattooTypePicker.reloadAllComponents() //reload picker view to contain position data
     }
     
     func modeChangedToPlace() {
@@ -908,7 +911,6 @@ extension ViewController: MainUIViewModelViewDelegate{
         positionTab.isEnabled = false
         settingsButton.isHidden = false
         previewImageContainer.isHidden = true
-        tattooTypePicker.reloadAllComponents() //reload picker view to contain position dataa
     }
     
     func setViewsForColorPicker(unlocked: Bool) {
