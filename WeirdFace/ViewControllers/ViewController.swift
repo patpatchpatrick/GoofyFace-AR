@@ -21,10 +21,17 @@ class ViewController: UIViewController {
     @IBOutlet var mainView: ARSCNView!
     @IBOutlet weak var watermark: UIImageView!
     @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var hideButton: UIButton!
     @IBOutlet weak var acceptPositionButton: UIButton!
     
-    @IBOutlet weak var transformButtonContainer: UIView!
+    @IBOutlet weak var transformPrimaryContainer: UIView!
+    
+    @IBOutlet weak var transformHeaderButtons: UIView!
+    @IBOutlet weak var repositionButton: UIButton!
+    @IBOutlet weak var resizeButton: UIButton!
+    
+    @IBOutlet weak var repositionButtonContainer: UIView!
+    
+    @IBOutlet weak var resizeButtonContainer: UIView!
     @IBOutlet weak var uploadImageBorderedView: BorderedView!
     @IBOutlet weak var uploadedImage: UIImageView!
     @IBOutlet weak var uploadedImageContainer: UIView!
@@ -47,7 +54,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var colorPickerFullScreenButton: UIButton!
     @IBOutlet weak var uploadImageDiscardButton: UIButton!
     @IBOutlet weak var uploadImageAcceptButton: UIButton!
-    @IBOutlet weak var transformHideButton: UIButton!
     @IBOutlet weak var transformLeftButton: UIButton!
     @IBOutlet weak var transformRightButton: UIButton!
     @IBOutlet weak var transformUpButton: UIButton!
@@ -293,11 +299,6 @@ class ViewController: UIViewController {
   
     }
     
-    @IBAction func hideButtonTapped(_ sender: UIButton) {
-        
-        //Hide/Show the transform buttons
-        transformButtonContainer.isHidden = !transformButtonContainer.isHidden
-    }
     
     
     @IBAction func drawnImageFullScreenButtonTapped(_ sender: UIButton) {
@@ -398,6 +399,24 @@ class ViewController: UIViewController {
         //Hide rotate message if user presses X button
         drawnImageFullScreenRotateMessage.isHidden = true
     }
+    
+    @IBAction func repositionButtonTapped(_ sender: UIButton) {
+        //Hide/show reposition buttons
+        repositionButtonContainer.isHidden = !repositionButtonContainer.isHidden
+        
+        //Hide other transform containers
+        resizeButtonContainer.isHidden = true
+    }
+    
+    @IBAction func resizeButtonTapped(_ sender: UIButton) {
+        //Hide/show resize buttons
+        resizeButtonContainer.isHidden = !resizeButtonContainer.isHidden
+        
+        //Hide other transform containers
+        repositionButtonContainer.isHidden = true
+    }
+    
+    
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -672,8 +691,9 @@ extension ViewController: ARViewModelViewDelegate{
     
     func resetARViews(){
         //Reset views to initial state of app
-        transformButtonContainer.isHidden = true
-        hideButton.isHidden = true
+        transformPrimaryContainer.isHidden = true
+        repositionButtonContainer.isHidden = true
+        resizeButtonContainer.isHidden = true
         positionTab.isEnabled = false
         addTatTab.isEnabled = false
         shareTab.isEnabled = false
@@ -702,8 +722,7 @@ extension ViewController: ARViewModelViewDelegate{
         //Position was accepted, set up views accordingly
         tattooTypePicker.isHidden = true
         tattooViewModel?.positionType = .manual
-        transformButtonContainer.isHidden = false
-        hideButton.isHidden = false
+        transformPrimaryContainer.isHidden = false
         acceptPositionButton.isHidden = true
         addTatTab.isEnabled = true
     }
@@ -736,8 +755,9 @@ extension ViewController: MainUIViewModelViewDelegate{
     }
     
     func hideButtonsForSnapshot(){
-        transformButtonContainer.isHidden = true
-        hideButton.isHidden = true
+        repositionButtonContainer.isHidden = true
+        resizeButtonContainer.isHidden = true
+        transformPrimaryContainer.isHidden = true
         settingsButton.isHidden = false
     }
     
@@ -772,8 +792,9 @@ extension ViewController: MainUIViewModelViewDelegate{
     uploadedImageContainer.isHidden = true
     tattooTypePicker.isHidden = true
     acceptPositionButton.isHidden = true
-    hideButton.isHidden = true
-    transformButtonContainer.isHidden = true
+    repositionButtonContainer.isHidden = true
+    resizeButtonContainer.isHidden = true
+    transformPrimaryContainer.isHidden = true
     
     }
     
@@ -805,8 +826,9 @@ extension ViewController: MainUIViewModelViewDelegate{
     }
     
     func modeChangedToPlace() {
-        transformButtonContainer.isHidden = true
-        hideButton.isHidden = true
+        repositionButtonContainer.isHidden = true
+        resizeButtonContainer.isHidden = true
+        transformPrimaryContainer.isHidden = true
         shareTab.isEnabled = true
         addTatTab.isEnabled = false
         positionTab.isEnabled = false

@@ -26,7 +26,6 @@ extension ViewController {
         addShadowToView(view: resetButton)
         addShadowToView(view: uploadImageDiscardButton)
         addShadowToView(view: uploadImageAcceptButton)
-        addShadowToView(view: transformHideButton)
         addShadowToView(view: transformLeftButton)
         addShadowToView(view: transformRightButton)
         addShadowToView(view: transformUpButton)
@@ -42,6 +41,9 @@ extension ViewController {
         
         addShadowToView(view: settingsContainer)
         addShadowToView(view: drawnImageFullScreenRotateMessage)
+        addShadowToView(view: transformHeaderButtons)
+        addShadowToView(view: repositionButton)
+        addShadowToView(view: resizeButton)
         rotateFullScreenImages()
     }
     
