@@ -691,7 +691,7 @@
                                     <tabBarItem tag="4" enabled="NO" title="Add Tattoo" image="plusIcon" id="lpP-b3-2s9"/>
                                     <tabBarItem tag="5" enabled="NO" title="Share Image" image="iconShareTab" id="bxK-EN-O1e" userLabel="Share Tab"/>
                                 </items>
-                                <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                <color key="tintColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="selectedImageTintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                             </tabBar>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJ4-Zp-aza" userLabel="Drawn Full Screen">

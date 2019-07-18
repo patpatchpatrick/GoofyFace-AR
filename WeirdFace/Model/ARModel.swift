@@ -16,7 +16,7 @@ protocol Printable {
 
 //Total count of tattoo images user can select from
 //Images are numbered, and this number is used to load them
-let totalImageCount: Int = 62
+let totalImageCount: Int = 85
 
 enum ARPickerType {
     case position
