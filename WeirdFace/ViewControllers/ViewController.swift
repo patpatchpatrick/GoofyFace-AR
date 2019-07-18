@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var acceptSizeButton: UIButton!
     @IBOutlet weak var repositionButtonContainer: UIView!
     
+    @IBOutlet weak var rotateButtonContainer: UIView!
     @IBOutlet weak var resizeButtonContainer: UIView!
     @IBOutlet weak var uploadImageBorderedView: BorderedView!
     @IBOutlet weak var uploadedImage: UIImageView!
@@ -59,10 +60,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var transformRightButton: UIButton!
     @IBOutlet weak var transformUpButton: UIButton!
     @IBOutlet weak var transformDownButton: UIButton!
+    
+    @IBOutlet weak var transformDoubleLeft: UIButton!
+    
+    @IBOutlet weak var transformDoubleRight: UIButton!
+    @IBOutlet weak var transformDoubleDown: UIButton!
+    
+    @IBOutlet weak var transformDoubleUp: UIButton!
+    
     @IBOutlet weak var transformRotateCWButton: UIButton!
     @IBOutlet weak var transformRotateCCWButton: UIButton!
     @IBOutlet weak var transformMinusButton: UIButton!
     @IBOutlet weak var transformPlusButton: UIButton!
+    
+    @IBOutlet weak var transformDoubleMinus: UIButton!
+    
+    @IBOutlet weak var transformDoublePlus: UIButton!
+    
     @IBOutlet weak var transformPositionAcceptButton: UIButton!
     @IBOutlet weak var transformSelectSizeButton: UIButton!
     
@@ -238,40 +252,68 @@ class ViewController: UIViewController {
     @IBAction func plusX(_ sender: UIButton) {
         
 
-        tattooViewModel?.incrementX()
+        tattooViewModel?.incrementX(multiplier: 1)
     }
     
     
     @IBAction func plusY(_ sender: UIButton) {
-        tattooViewModel?.decrementY()
+        tattooViewModel?.decrementY(multiplier: 1)
         
     }
     
     
     @IBAction func minusX(_ sender: UIButton) {
-        tattooViewModel?.decrementX()
+        tattooViewModel?.decrementX(multiplier: 1)
         
     }
     
     @IBAction func minusY(_ sender: UIButton) {
         
-        tattooViewModel?.incrementY()
+        tattooViewModel?.incrementY(multiplier: 1)
         
     }
     
+    @IBAction func minusXDouble(_ sender: UIButton) {
+        tattooViewModel?.decrementX(multiplier: 3)
+    }
+    
+    
+    @IBAction func plusXDouble(_ sender: UIButton) {
+        tattooViewModel?.incrementX(multiplier: 3)
+    }
+    
+    
+    @IBAction func minusYDouble(_ sender: UIButton) {
+         tattooViewModel?.incrementY(multiplier: 3)
+    }
+    
+    
+    @IBAction func plusYDouble(_ sender: UIButton) {
+        tattooViewModel?.decrementY(multiplier: 3)
+    }
     
     @IBAction func sizeDecrease(_ sender: UIButton) {
         
         //Decrease tattoo size while keeping 2x1 proportions
-        tattooViewModel?.decrementSize()
+        tattooViewModel?.decrementSize(multiplier: 1)
     }
     
     
     @IBAction func sizeIncrease(_ sender: UIButton) {
          //Increase tattoo size while keeping 2x1 proportions
-        tattooViewModel?.incrementSize()
+        tattooViewModel?.incrementSize(multiplier: 1)
     }
     
+    @IBAction func sizeDecreaseDouble(_ sender: UIButton) {
+        //Decrease tattoo size while keeping 2x1 proportions
+        tattooViewModel?.decrementSize(multiplier: 3)
+    }
+    
+    
+    @IBAction func sizeIncreaseDouble(_ sender: UIButton) {
+        //Increase tattoo size while keeping 2x1 proportions
+        tattooViewModel?.incrementSize(multiplier: 3)
+    }
     
     @IBAction func selectDefaultSize(_ sender: UIButton) {
         
@@ -419,6 +461,7 @@ class ViewController: UIViewController {
         
         //Hide other transform containers
         resizeButtonContainer.isHidden = true
+        rotateButtonContainer.isHidden = true
     }
     
     @IBAction func resizeButtonTapped(_ sender: UIButton) {
@@ -429,7 +472,19 @@ class ViewController: UIViewController {
         
         //Hide other transform containers
         repositionButtonContainer.isHidden = true
+        rotateButtonContainer.isHidden = true
     }
+    
+    @IBAction func rotateHeaderButtonTapped(_ sender: UIButton) {
+        rotateButtonContainer.isHidden = !rotateButtonContainer.isHidden
+        
+        //Hide other transform containers
+        repositionButtonContainer.isHidden = true
+        resizeButtonContainer.isHidden = true
+        rotateButtonContainer.isHidden = true
+        
+    }
+    
     
     @IBAction func acceptSizeButtonTapped(_ sender: UIButton) {
         //Hide the size picker and show the resize buttons again
@@ -766,6 +821,7 @@ extension ViewController: ARViewModelViewDelegate{
         //Reset views to initial state of app
         transformPrimaryContainer.isHidden = true
         repositionButtonContainer.isHidden = true
+        rotateButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
         positionTab.isEnabled = false
         addTatTab.isEnabled = false
@@ -832,6 +888,7 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     func hideButtonsForSnapshot(){
         repositionButtonContainer.isHidden = true
+        rotateButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
         transformPrimaryContainer.isHidden = true
         settingsButton.isHidden = false
@@ -869,6 +926,7 @@ extension ViewController: MainUIViewModelViewDelegate{
     tattooTypePicker.isHidden = true
     acceptPositionButton.isHidden = true
     repositionButtonContainer.isHidden = true
+    rotateButtonContainer.isHidden = true
     resizeButtonContainer.isHidden = true
     transformPrimaryContainer.isHidden = true
     
@@ -905,6 +963,7 @@ extension ViewController: MainUIViewModelViewDelegate{
     func modeChangedToPlace() {
         repositionButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
+        rotateButtonContainer.isHidden = true
         transformPrimaryContainer.isHidden = true
         sizePicker.isHidden = true
         acceptSizeButton.isHidden = true

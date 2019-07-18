@@ -48,34 +48,34 @@ public class ARViewModel:ARViewModelProtocol {
         self.viewDelegate = delegate
     }
     
-    func incrementX(){
+    func incrementX(multiplier: CGFloat){
         //Increment image x position
         if self.x < xMax {
-                   self.x += 10
+                   self.x += 10 * multiplier
             loadImage()
         }
     }
     
-    func decrementX(){
+    func decrementX(multiplier: CGFloat){
           //Decrement image x position
         if self.x > xMin {
-            self.x -= 10
+            self.x -= 10 * multiplier
             loadImage()
         }
     }
     
-    func incrementY(){
+    func incrementY(multiplier: CGFloat){
         //Increment image y position
         if self.y < yMax {
-            self.y += 10
+            self.y += 10 * multiplier
             loadImage()
         }
     }
     
-    func decrementY(){
+    func decrementY(multiplier: CGFloat){
         //Decrement image y position
         if self.y > yMin {
-            self.y -= 10
+            self.y -= 10 * multiplier
             loadImage()
         }
     }
@@ -90,20 +90,20 @@ public class ARViewModel:ARViewModelProtocol {
         loadImage()
     }
     
-    func incrementSize(){
+    func incrementSize(multiplier: CGFloat){
         //Scale image.  Keep proportions 2:1
         if self.width < widthMax && self.height < heightMax {
-            self.width += 10
-            self.height += 5
+            self.width += 10 * multiplier
+            self.height += 5 * multiplier
             loadImage()
         }
     }
     
-    func decrementSize(){
+    func decrementSize(multiplier: CGFloat){
         //Scale image.  Keep proportions 2:1
         if self.height > heightMin && self.width > widthMin {
-            self.width -= 10
-            self.height -= 5
+            self.width -= 10 * multiplier
+            self.height -= 5 * multiplier
             loadImage()
         }
     }
