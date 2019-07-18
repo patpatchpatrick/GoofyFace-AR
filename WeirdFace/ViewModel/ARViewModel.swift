@@ -115,10 +115,42 @@ public class ARViewModel:ARViewModelProtocol {
      
                 self.width = self.width * multiplier
                 self.height = self.height * multiplier
+                setDefaultSizePositionModifier(size: size)
                 self.size = size
                 loadImage()
                 print("Multiplier", multiplier)
             
+        }
+    }
+    
+    func setDefaultSizePositionModifier(size: ARImageSize){
+        //Adjust the position of the tattoo when the size changes
+        let multiplier: CGFloat  = CGFloat(size.rawValue) - CGFloat(self.size.rawValue)
+        
+        switch self.model.type{
+        case .forehead:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .leftBrow:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .rightBrow:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .leftCheek:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .nose:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .rightCheek:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .lowerLip:
+            self.x += multiplier * -100
+            self.y += multiplier * -50
+        case .new:
+            print("ans")
         }
         
         
@@ -133,6 +165,7 @@ public class ARViewModel:ARViewModelProtocol {
         self.rotation = self.model.rotation
         self.width = self.model.width
         self.height = self.model.height
+        self.size = .small
         self.positionType = .manual
         self.viewDelegate.arImagePositionAccepted()
         

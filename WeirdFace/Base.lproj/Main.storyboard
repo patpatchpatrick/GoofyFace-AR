@@ -33,7 +33,7 @@
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                     </pickerView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5X-up-xv3" userLabel="acceptPosition">
-                                        <rect key="frame" x="157" y="20" width="100" height="100"/>
+                                        <rect key="frame" x="157" y="60" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="SGS-Mw-W9V"/>
                                             <constraint firstAttribute="height" constant="100" id="jao-mF-9SM"/>
@@ -52,7 +52,7 @@
                                     <constraint firstItem="P5X-up-xv3" firstAttribute="centerX" secondItem="Atl-Lq-BB2" secondAttribute="centerX" id="JIO-sR-vEJ"/>
                                     <constraint firstAttribute="bottom" secondItem="oAM-Cu-Mni" secondAttribute="bottom" constant="100" id="TZP-eq-lpW"/>
                                     <constraint firstItem="And-L5-wPD" firstAttribute="leading" secondItem="Atl-Lq-BB2" secondAttribute="leading" id="fsP-8f-cqe"/>
-                                    <constraint firstItem="P5X-up-xv3" firstAttribute="top" secondItem="Atl-Lq-BB2" secondAttribute="top" constant="20" id="qrF-2T-PND"/>
+                                    <constraint firstItem="P5X-up-xv3" firstAttribute="top" secondItem="Atl-Lq-BB2" secondAttribute="top" constant="60" id="qrF-2T-PND"/>
                                     <constraint firstAttribute="trailing" secondItem="And-L5-wPD" secondAttribute="trailing" id="z7c-vB-X9N"/>
                                 </constraints>
                             </view>
@@ -214,7 +214,7 @@
                                         <viewLayoutGuide key="safeArea" id="jK1-sM-mK6"/>
                                     </view>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWp-Tw-M3W" userLabel="acceptPosition">
-                                        <rect key="frame" x="157" y="20" width="100" height="100"/>
+                                        <rect key="frame" x="157" y="60" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="K3P-i6-Wa2"/>
                                             <constraint firstAttribute="width" constant="100" id="OnP-cD-bRF"/>
@@ -252,6 +252,7 @@
                                                             <constraint firstAttribute="width" constant="40" id="7ob-DY-aN8"/>
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                                                         <state key="normal" image="iconResize"/>
                                                         <connections>
                                                             <action selector="resizeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5mJ-a1-QLh"/>
@@ -277,7 +278,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="y0K-1x-yGv" secondAttribute="trailing" id="GY1-8I-XOS"/>
                                     <constraint firstItem="hWp-Tw-M3W" firstAttribute="centerX" secondItem="SGY-gw-7lI" secondAttribute="centerX" id="HhB-64-Dub"/>
-                                    <constraint firstItem="hWp-Tw-M3W" firstAttribute="top" secondItem="SGY-gw-7lI" secondAttribute="top" constant="20" id="IgE-Si-OIR"/>
+                                    <constraint firstItem="hWp-Tw-M3W" firstAttribute="top" secondItem="SGY-gw-7lI" secondAttribute="top" constant="60" id="IgE-Si-OIR"/>
                                     <constraint firstItem="fH5-aY-pnB" firstAttribute="leading" secondItem="SGY-gw-7lI" secondAttribute="leading" id="KSY-bT-poq"/>
                                     <constraint firstItem="p1y-cK-gMM" firstAttribute="leading" secondItem="SGY-gw-7lI" secondAttribute="leading" id="QRX-mC-js3"/>
                                     <constraint firstItem="3e2-Dm-7hj" firstAttribute="top" secondItem="y0K-1x-yGv" secondAttribute="bottom" id="WsK-hD-eTr"/>

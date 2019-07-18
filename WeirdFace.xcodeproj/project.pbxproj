@@ -153,11 +153,11 @@
 				F658C2DC22C56AB50005CF09 /* Views */,
 				F60EA44922C53D0C002BE1CD /* ViewModel */,
 				F60EA44622C53869002BE1CD /* Model */,
-				F62476B922C42D1A0066215E /* HelperClasses */,
 				F624768322C414C50066215E /* AppDelegate.swift */,
 				F624768722C414C50066215E /* Main.storyboard */,
 				F624768D22C414C60066215E /* Assets.xcassets */,
 				F624768F22C414C60066215E /* LaunchScreen.storyboard */,
+				F62476B922C42D1A0066215E /* HelperClasses */,
 				F624769222C414C60066215E /* Info.plist */,
 				F624768A22C414C50066215E /* WeirdFace.xcdatamodeld */,
 			);

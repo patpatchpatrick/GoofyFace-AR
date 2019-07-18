@@ -435,6 +435,8 @@ class ViewController: UIViewController {
         //Hide the size picker and show the resize buttons again
         acceptSizeButton.isHidden = true
         sizePicker.isHidden = true
+        //Reset size picker to reselect initial item after a size is chosen
+        sizePicker.selectRow(0, inComponent:0, animated:true)
         resizeButtonContainer.isHidden = false
     }
     
