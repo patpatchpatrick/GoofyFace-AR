@@ -481,7 +481,6 @@ class ViewController: UIViewController {
         //Hide other transform containers
         repositionButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
-        rotateButtonContainer.isHidden = true
         
     }
     
