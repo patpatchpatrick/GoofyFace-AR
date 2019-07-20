@@ -103,15 +103,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var addTatTab: UITabBarItem!
     @IBOutlet weak var shareTab: UITabBarItem!
     
-    //App mode
-    let modeSelect = 0
-    let modeDraw = 1
-    let modeUpload = 2
-    let modePosition = 3
-    let modePlace = 4
-    let modeShare = 5
-    var viewMode:Int = 0
-    
     var imageChanged = false
     var tattooViewModel: ARViewModel?
     var mainUIViewModel: MainUIViewModel?
@@ -125,7 +116,6 @@ class ViewController: UIViewController {
         if ARFaceTrackingConfiguration.isSupported == false {
             arTrackingSupported = false
             arNotSupportedTextView.isHidden = false
-            //fatalError("Face tracking is not supported on this device")
         } else {
             arNotSupportedTextView.isHidden = true
         }
@@ -595,7 +585,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         //If Picker position is changed, update viewModel
-        //If a new position is chose, the image must be repositioned
+        //If a new position is chosen, the image must be repositioned
         
         //If Picker size is changed, update viewModel
         //New image size will be shown

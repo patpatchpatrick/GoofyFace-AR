@@ -124,7 +124,7 @@ public class ARViewModel:ARViewModelProtocol {
     }
     
     func setDefaultSizePositionModifier(size: ARImageSize){
-        //Adjust the position of the tattoo when the size changes
+        //Adjust the position of the tattoo when the size changes so that tattoo remains in the same position
         let multiplier: CGFloat  = CGFloat(size.rawValue) - CGFloat(self.size.rawValue)
         
         switch self.model.type{

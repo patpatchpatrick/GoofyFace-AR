@@ -9,6 +9,15 @@
 import Foundation
 import UIKit
 
+//App mode
+let modeSelect = 0
+let modeDraw = 1
+let modeUpload = 2
+let modePosition = 3
+let modePlace = 4
+let modeShare = 5
+var viewMode:Int = 0
+
 class MainUIViewModel : MainUIViewModelProtocol{
     
     var model: MainUIModel
