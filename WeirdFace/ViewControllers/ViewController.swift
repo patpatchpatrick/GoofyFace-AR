@@ -580,7 +580,7 @@ extension ViewController: ARSCNViewDelegate {
              material.diffuse.contents = sceneView.scene.background.contents
              material.lightingModel = .constant
              
-             guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
+             guard let shaderURL = Bundle.main.url(forResource: "BigEyes", withExtension: "shader"),
              let modifier = try? String(contentsOf: shaderURL)
              else { fatalError("Can't load shader modifier from bundle.") }
              faceGeometry.shaderModifiers = [ .geometry: modifier]
@@ -653,7 +653,7 @@ extension ViewController: ARSCNViewDelegate {
              material.diffuse.contents = sceneView.scene.background.contents
              material.lightingModel = .constant
              
-             guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
+             guard let shaderURL = Bundle.main.url(forResource: "BigEyes", withExtension: "shader"),
              let modifier = try? String(contentsOf: shaderURL)
              else { fatalError("Can't load shader modifier from bundle.") }
              faceGeometry.shaderModifiers = [ .geometry: modifier]
