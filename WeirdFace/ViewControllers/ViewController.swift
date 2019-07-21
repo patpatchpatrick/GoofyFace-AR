@@ -87,7 +87,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var colorPicker: HSBColorPicker!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var tattooTypePicker: UIPickerView!
     @IBOutlet weak var sceneView: ARSCNView!
     var imagePicker = UIImagePickerController()
@@ -96,12 +95,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var purchasePremiumButton: UIButton!
     @IBOutlet weak var restorePremiumButton: UIButton!
     
-    @IBOutlet weak var selectTab: UITabBarItem!
-    @IBOutlet weak var customTab: UITabBarItem!
-    @IBOutlet weak var uploadTab: UITabBarItem!
-    @IBOutlet weak var positionTab: UITabBarItem!
-    @IBOutlet weak var addTatTab: UITabBarItem!
-    @IBOutlet weak var shareTab: UITabBarItem!
+    
+    @IBOutlet weak var selectButton: RoundedButton!
+    @IBOutlet weak var drawButton: RoundedButton!
+    @IBOutlet weak var uploadButton: RoundedButton!
+    @IBOutlet weak var placeButton: RoundedButton!
+    @IBOutlet weak var addButton: RoundedButton!
+    @IBOutlet weak var shareButton: RoundedButton!
+    
     
     var weirdFace = false //Weird Face Mode
     
@@ -125,7 +126,6 @@ class ViewController: UIViewController {
         SKPaymentQueue.default().add(self)
         collectionView.delegate = self
         collectionView.dataSource = self
-        tabBar.delegate = self
         tattooTypePicker.delegate = self
         tattooTypePicker.dataSource = self
         sizePicker.delegate = self
@@ -487,6 +487,50 @@ class ViewController: UIViewController {
         resizeButtonContainer.isHidden = false
     }
     
+    
+    @IBAction func scrollMenuButtonTapped(_ sender: UIButton) {
+        
+        viewMode = sender.tag
+        
+        //"Select mode" - user can select custom tattooo
+        if viewMode == modeSelect {
+            mainUIViewModel?.modeChanged(mode: .select)
+        }
+        
+        //"Draw mode" - user can draw their own tattoo
+        if viewMode == modeDraw {
+            mainUIViewModel?.modeChanged(mode: .draw)
+        }
+        
+        //"Upload mode" - user can upload their own tattoo
+        if viewMode == modeUpload {
+            mainUIViewModel?.modeChanged(mode: .upload)
+        }
+        
+        //"Position mode" - User can position/transform the tattoo
+        if viewMode == modePosition {
+            tattooViewModel?.arPickerType = .position
+            tattooViewModel?.positionType = .auto
+            tattooViewModel?.displayPositionMap()
+            mainUIViewModel?.modeChanged(mode: .position)
+        }
+        
+        //"Place Mode" - User can place the tattoo and commit the changes (i.e. commit the tattoo to the user's face)
+        if viewMode == modePlace {
+            tattooViewModel?.commitTattoo()
+            mainUIViewModel?.modeChanged(mode: .place)
+        }
+        
+        //"Share Mode" - Save image to user's gallery or share via any other apps
+        if viewMode == modeShare {
+            let previewWindowOpen = !previewImageContainer.isHidden
+            //Capture image of user
+            let selectedImage = sceneView.snapshot()
+            mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage)
+            
+        }
+    }
+    
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -505,7 +549,7 @@ extension ViewController: ARSCNViewDelegate {
         
         let material = faceGeometry.firstMaterial!
         
-        /*
+        
         //If the image was changed, set the new image on the face contents
         if imageChanged {
            material.diffuse.contents = tattooViewModel?.image
@@ -514,9 +558,9 @@ extension ViewController: ARSCNViewDelegate {
             imageChanged = false
             
         }
- */
  
-        
+ 
+        /*
         weirdFace = true
         if weirdFace {
             
@@ -535,6 +579,7 @@ extension ViewController: ARSCNViewDelegate {
             faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
             
         }
+ */
  
         
        
@@ -561,7 +606,7 @@ extension ViewController: ARSCNViewDelegate {
              let material = faceGeometry.firstMaterial!
         
         
-        /*
+        
         //If the image was changed, set the new image on the face contents
         if imageChanged {
           material.diffuse.contents = tattooViewModel?.image
@@ -570,9 +615,9 @@ extension ViewController: ARSCNViewDelegate {
             imageChanged = false
  
         }
- */
  
-        
+ 
+        /*
         weirdFace = true
         if weirdFace {
             
@@ -591,6 +636,7 @@ extension ViewController: ARSCNViewDelegate {
             faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
             
         }
+ */
  
         
         faceGeometry.update(from: faceAnchor.geometry)
@@ -698,51 +744,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
 }
 
-extension ViewController: UITabBarDelegate {
-    
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-        
-        viewMode = item.tag
-        
-        //"Select mode" - user can select custom tattooo
-        if item.tag == modeSelect {
-            mainUIViewModel?.modeChanged(mode: .select)
-        }
-        
-        //"Draw mode" - user can draw their own tattoo
-        if item.tag == modeDraw {
-             mainUIViewModel?.modeChanged(mode: .draw)
-        }
-        
-        //"Upload mode" - user can upload their own tattoo
-        if item.tag == modeUpload {
-            mainUIViewModel?.modeChanged(mode: .upload)
-        }
-        
-        //"Position mode" - User can position/transform the tattoo
-        if item.tag == modePosition {
-            tattooViewModel?.arPickerType = .position
-            tattooViewModel?.positionType = .auto
-            tattooViewModel?.displayPositionMap()
-            mainUIViewModel?.modeChanged(mode: .position)
-        }
-        
-        //"Place Mode" - User can place the tattoo and commit the changes (i.e. commit the tattoo to the user's face)
-        if item.tag == modePlace {
-            tattooViewModel?.commitTattoo()
-            mainUIViewModel?.modeChanged(mode: .place)
-        }
-        
-        //"Share Mode" - Save image to user's gallery or share via any other apps
-        if item.tag == modeShare {
-            let previewWindowOpen = !previewImageContainer.isHidden
-            //Capture image of user
-            let selectedImage = sceneView.snapshot()
-            mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage)
-            
-        }
-    }
+extension ViewController {
     
     //Save image to user's gallery
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -806,7 +808,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         collectionView.isHidden = true
         resetButton.isHidden = false
         settingsButton.isHidden = false
-        positionTab.isEnabled = true
+        placeButton.isEnabled = true
     }
     
     
@@ -867,28 +869,28 @@ extension ViewController: ARViewModelViewDelegate{
         repositionButtonContainer.isHidden = true
         rotateButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
-        positionTab.isEnabled = false
-        addTatTab.isEnabled = false
-        shareTab.isEnabled = false
+        placeButton.isEnabled = false
+        addButton.isEnabled = false
+        shareButton.isEnabled = false
     }
     
     
     func fullScreenDrawingAccepted() {
          //When a full screen drawing is accepted, position tab is enabled for user to position image
         drawnImageViewFullScreenContainer.isHidden = true
-        positionTab.isEnabled = true
+        placeButton.isEnabled = true
     }
     
     func uploadedImageAccepted() {
         //When an uploaded image is accepted, position tab is enabled for user to position image
         uploadedImageContainer.isHidden = true
-        positionTab.isEnabled = true
+        placeButton.isEnabled = true
     }
     
     func manualDrawingAccepted() {
         //After manual drawing is accepted, position tab is enabled for user to position drawing
         drawnImageContainerView.isHidden = true
-        positionTab.isEnabled = true
+        placeButton.isEnabled = true
     }
     
     func arImagePositionAccepted() {
@@ -899,7 +901,7 @@ extension ViewController: ARViewModelViewDelegate{
         tattooViewModel?.positionType = .manual
         transformPrimaryContainer.isHidden = false
         acceptPositionButton.isHidden = true
-        addTatTab.isEnabled = true
+        addButton.isEnabled = true
         
     }
     
@@ -1011,9 +1013,9 @@ extension ViewController: MainUIViewModelViewDelegate{
         transformPrimaryContainer.isHidden = true
         sizePicker.isHidden = true
         acceptSizeButton.isHidden = true
-        shareTab.isEnabled = true
-        addTatTab.isEnabled = false
-        positionTab.isEnabled = false
+        shareButton.isEnabled = true
+        addButton.isEnabled = false
+        placeButton.isEnabled = false
         settingsButton.isHidden = false
         previewImageContainer.isHidden = true
     }
