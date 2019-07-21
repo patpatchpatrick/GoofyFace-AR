@@ -96,6 +96,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var restorePremiumButton: UIButton!
     
     
+    @IBOutlet weak var modeSelectMenu: UIView!
+    @IBOutlet weak var scrollMenu: UIView!
     @IBOutlet weak var selectButton: RoundedButton!
     @IBOutlet weak var drawButton: RoundedButton!
     @IBOutlet weak var uploadButton: RoundedButton!
@@ -103,10 +105,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var addButton: RoundedButton!
     @IBOutlet weak var shareButton: RoundedButton!
     
-    
-    var weirdFace = false //Weird Face Mode
-    
-    var imageChanged = false
     var tattooViewModel: ARViewModel?
     var mainUIViewModel: MainUIViewModel?
 
@@ -492,19 +490,25 @@ class ViewController: UIViewController {
         
         viewMode = sender.tag
         
-        //"Select mode" - user can select custom tattooo
-        if viewMode == modeSelect {
-            mainUIViewModel?.modeChanged(mode: .select)
+        //"Change mode" - user can change the app mode
+        if viewMode == modeChange {
+            //Toggle mode select menu
+            modeSelectMenu.isHidden = !modeSelectMenu.isHidden
+        }
+        
+        //"Custom mode" - user can select custom tattooo
+        if viewMode == modeCustom {
+            mainUIViewModel?.tattooModeChanged(mode: .custom)
         }
         
         //"Draw mode" - user can draw their own tattoo
         if viewMode == modeDraw {
-            mainUIViewModel?.modeChanged(mode: .draw)
+            mainUIViewModel?.tattooModeChanged(mode: .draw)
         }
         
         //"Upload mode" - user can upload their own tattoo
         if viewMode == modeUpload {
-            mainUIViewModel?.modeChanged(mode: .upload)
+            mainUIViewModel?.tattooModeChanged(mode: .upload)
         }
         
         //"Position mode" - User can position/transform the tattoo
@@ -512,13 +516,13 @@ class ViewController: UIViewController {
             tattooViewModel?.arPickerType = .position
             tattooViewModel?.positionType = .auto
             tattooViewModel?.displayPositionMap()
-            mainUIViewModel?.modeChanged(mode: .position)
+            mainUIViewModel?.tattooModeChanged(mode: .position)
         }
         
         //"Place Mode" - User can place the tattoo and commit the changes (i.e. commit the tattoo to the user's face)
         if viewMode == modePlace {
             tattooViewModel?.commitTattoo()
-            mainUIViewModel?.modeChanged(mode: .place)
+            mainUIViewModel?.tattooModeChanged(mode: .place)
         }
         
         //"Share Mode" - Save image to user's gallery or share via any other apps
@@ -526,9 +530,19 @@ class ViewController: UIViewController {
             let previewWindowOpen = !previewImageContainer.isHidden
             //Capture image of user
             let selectedImage = sceneView.snapshot()
-            mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage)
+            mainUIViewModel?.tattooModeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage)
             
         }
+    }
+    
+    
+    @IBAction func primaryAppModeChanged(_ sender: UIButton) {
+        
+        //Change the mode of the app
+        let appMode = sender.tag
+        mainUIViewModel?.primaryModeChanged(appMode: appMode)
+        modeSelectMenu.isHidden = true
+        
     }
     
 }
@@ -549,42 +563,49 @@ extension ViewController: ARSCNViewDelegate {
         
         let material = faceGeometry.firstMaterial!
         
-        
-        //If the image was changed, set the new image on the face contents
-        if imageChanged {
-           material.diffuse.contents = tattooViewModel?.image
-          material.lightingModel = .physicallyBased
+        func renderTattooImage(){
             
-            imageChanged = false
-            
+            //If the image was changed, set the new image on the face contents
+            if tattooViewModel!.imageChanged {
+                material.diffuse.contents = tattooViewModel?.image
+                material.lightingModel = .physicallyBased
+                
+                tattooViewModel?.imageChanged = false
+                
+            }
         }
- 
- 
-        /*
-        weirdFace = true
-        if weirdFace {
-            
-            material.diffuse.contents = sceneView.scene.background.contents
-            material.lightingModel = .constant
-            
-            guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
-                let modifier = try? String(contentsOf: shaderURL)
-                else { fatalError("Can't load shader modifier from bundle.") }
-            faceGeometry.shaderModifiers = [ .geometry: modifier]
-            
-            // Pass view-appropriate image transform to the shader modifier so
-            // that the mapped video lines up correctly with the background video.
-            let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
-            let transform = SCNMatrix4(affineTransform)
-            faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
-            
-        }
- */
- 
         
-       
+        func renderDistortedFace(){
+             
+             material.diffuse.contents = sceneView.scene.background.contents
+             material.lightingModel = .constant
+             
+             guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
+             let modifier = try? String(contentsOf: shaderURL)
+             else { fatalError("Can't load shader modifier from bundle.") }
+             faceGeometry.shaderModifiers = [ .geometry: modifier]
+             
+             // Pass view-appropriate image transform to the shader modifier so
+             // that the mapped video lines up correctly with the background video.
+             let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
+             let transform = SCNMatrix4(affineTransform)
+             faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+            
  
- 
+        }
+        
+        //Render appropriate image based on mode selected
+        switch mainUIViewModel?.appMode {
+        case modeTattoo: renderTattooImage()
+            break
+        case modeFaceDistortion: renderDistortedFace()
+        break
+        case .none:
+            print("none")
+        case .some(_):
+            print("some")
+        }
+        
        return SCNNode(geometry: faceGeometry)
         
     }
@@ -603,41 +624,64 @@ extension ViewController: ARSCNViewDelegate {
             let faceAnchor = anchor as? ARFaceAnchor, let frame = sceneView.session.currentFrame
             else { return }
         
-             let material = faceGeometry.firstMaterial!
+             var material = faceGeometry.firstMaterial!
         
-        
-        
-        //If the image was changed, set the new image on the face contents
-        if imageChanged {
-          material.diffuse.contents = tattooViewModel?.image
-        material.lightingModel = .physicallyBased
+        func renderTattooImage(){
             
-            imageChanged = false
- 
-        }
- 
- 
-        /*
-        weirdFace = true
-        if weirdFace {
+            //If the app mode changed back to tattoo mode, clear face geometry modifiers
+            if mainUIViewModel!.appModeChanged {
+                print("App Mode Changed")
+                material.diffuse.contents = tattooViewModel?.image
+                material.lightingModel = .physicallyBased
+                faceGeometry.shaderModifiers = [ .geometry: ""]
+                faceGeometry.setValue("", forKey: "displayTransform")
+                mainUIViewModel!.appModeChanged = false
+            }
             
-            material.diffuse.contents = sceneView.scene.background.contents
-            material.lightingModel = .constant
-            
-            guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
-                let modifier = try? String(contentsOf: shaderURL)
-                else { fatalError("Can't load shader modifier from bundle.") }
-            faceGeometry.shaderModifiers = [ .geometry: modifier]
-            
-            // Pass view-appropriate image transform to the shader modifier so
-            // that the mapped video lines up correctly with the background video.
-            let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
-            let transform = SCNMatrix4(affineTransform)
-            faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+            //If the image was changed, set the new image on the face contents
+            if tattooViewModel!.imageChanged {
+                material.diffuse.contents = tattooViewModel?.image
+                material.lightingModel = .physicallyBased
+                tattooViewModel?.imageChanged = false
+                
+            }
             
         }
- */
- 
+        
+        func renderDistortedFace(){
+             
+             material.diffuse.contents = sceneView.scene.background.contents
+             material.lightingModel = .constant
+             
+             guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
+             let modifier = try? String(contentsOf: shaderURL)
+             else { fatalError("Can't load shader modifier from bundle.") }
+             faceGeometry.shaderModifiers = [ .geometry: modifier]
+             
+             // Pass view-appropriate image transform to the shader modifier so
+             // that the mapped video lines up correctly with the background video.
+             let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
+             let transform = SCNMatrix4(affineTransform)
+             faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+             
+             
+        }
+        
+        
+        //Render appropriate image based on mode selected
+        switch mainUIViewModel?.appMode {
+        case modeTattoo: renderTattooImage()
+            print("Tattoo")
+            break
+        case modeFaceDistortion: renderDistortedFace()
+        print("Distorted")
+            break
+        case .none:
+            print("none")
+        case .some(_):
+            print("some")
+        }
+        
         
         faceGeometry.update(from: faceAnchor.geometry)
  
@@ -908,7 +952,7 @@ extension ViewController: ARViewModelViewDelegate{
     
     func arImagePositionUpdated() {
         //Let the renderer know that the image has changed
-        imageChanged = true
+        tattooViewModel?.imageChanged = true
     }
     
     
@@ -952,7 +996,7 @@ extension ViewController: MainUIViewModelViewDelegate{
         resetViewsToDefault()
         
         switch mode {
-        case .select: modeChangedToSelect()
+        case .custom: modeChangedToCustom()
         case .draw: modeChangedToDraw()
         case .upload: modeChangedToUpload()
         case .position: modeChangedToPosition()
@@ -978,7 +1022,7 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     }
     
-    func modeChangedToSelect() {
+    func modeChangedToCustom() {
         collectionView.isHidden = false
         resetButton.isHidden = true
         settingsButton.isHidden = true

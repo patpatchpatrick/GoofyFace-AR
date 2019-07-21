@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 
-//App mode
-let modeSelect = 0
+//Primary App Mode
+let modeTattoo = 0
+let modeFaceDistortion = 1
+
+//Tattoo App mode
+let modeChange = -1 // Change the app mode
+let modeCustom = 0
 let modeDraw = 1
 let modeUpload = 2
 let modePosition = 3
@@ -19,7 +24,7 @@ let modeShare = 5
 var viewMode:Int = 0
 
 enum Mode{
-    case select
+    case custom
     case draw
     case upload
     case position

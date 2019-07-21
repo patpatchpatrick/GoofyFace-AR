@@ -15,6 +15,7 @@ let defaultCanvasWidth:CGFloat = 1000
 public class ARViewModel:ARViewModelProtocol {
     var model: ARModel
     var viewDelegate: ARViewModelViewDelegate
+    var imageChanged = false
 
     var image: UIImage?
     var canvas: UIImage?

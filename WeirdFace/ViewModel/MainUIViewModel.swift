@@ -11,6 +11,8 @@ import UIKit
 
 class MainUIViewModel : MainUIViewModelProtocol{
     
+    var appMode = 0
+    var appModeChanged = false
     var model: MainUIModel
     var viewDelegate: MainUIViewModelViewDelegate
     
@@ -20,11 +22,18 @@ class MainUIViewModel : MainUIViewModelProtocol{
         self.viewDelegate = delegate
     }
     
-    func modeChanged(mode: Mode){
+    func primaryModeChanged(appMode: Int){
+        if appMode != self.appMode{
+            appModeChanged = true
+        }
+        self.appMode = appMode
+    }
+    
+    func tattooModeChanged(mode: Mode){
         self.viewDelegate.modeChanged(to: mode, self)
     }
     
-    func modeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?){
+    func tattooModeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?){
         
         if previewWindowOpen {
             //If user clicks share button while the preview window is still open, reload the shareImage menu

@@ -407,7 +407,7 @@
                                 </constraints>
                             </view>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B4U-NF-7Rw">
-                                <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="738"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QfY-gf-PBV">
                                     <size key="itemSize" width="300" height="300"/>
@@ -453,7 +453,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ya-u3-Wpc">
-                                <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="738"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwg-Pb-pdY">
                                         <rect key="frame" x="20" y="20" width="50" height="50"/>
@@ -484,7 +484,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbI-J8-cpZ">
-                                        <rect key="frame" x="290" y="634" width="104" height="104"/>
+                                        <rect key="frame" x="290" y="614" width="104" height="104"/>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="iconCheckMark">
@@ -495,7 +495,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YD-bA-91R">
-                                        <rect key="frame" x="20" y="648" width="90" height="90"/>
+                                        <rect key="frame" x="20" y="628" width="90" height="90"/>
                                         <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="iconDiscard">
@@ -506,7 +506,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-Vk-1Wr" customClass="BorderedDrawnImageView" customModule="WeirdFace" customModuleProvider="target">
-                                        <rect key="frame" x="7" y="279" width="400" height="200"/>
+                                        <rect key="frame" x="7" y="269" width="400" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="0jJ-uX-Z1G"/>
@@ -537,10 +537,10 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Ct-qDG">
-                                <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="738"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-Pw-Uuz">
-                                        <rect key="frame" x="20" y="648" width="90" height="90"/>
+                                        <rect key="frame" x="20" y="628" width="90" height="90"/>
                                         <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="iconDiscard">
@@ -551,7 +551,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUL-rS-EfA">
-                                        <rect key="frame" x="290" y="634" width="104" height="104"/>
+                                        <rect key="frame" x="290" y="614" width="104" height="104"/>
                                         <color key="tintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="iconCheckMark">
@@ -562,7 +562,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2s-JJ-VR2" customClass="BorderedView" customModule="WeirdFace" customModuleProvider="target">
-                                        <rect key="frame" x="7" y="279" width="400" height="200"/>
+                                        <rect key="frame" x="7" y="269" width="400" height="200"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SoO-Kd-aHe">
                                                 <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
@@ -628,10 +628,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNC-8r-omt" userLabel="Preview Image">
-                                <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="738"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ibE-UN-alx">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfi-sb-gTv">
                                         <rect key="frame" x="20" y="20" width="50" height="50"/>
@@ -670,20 +670,67 @@
                                     <constraint firstItem="ibE-UN-alx" firstAttribute="top" secondItem="kNC-8r-omt" secondAttribute="top" id="rtB-WQ-lgJ"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xbw-8W-X8U">
+                                <rect key="frame" x="0.0" y="682" width="200" height="100"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="66m-UQ-Idu">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7B-2A-KyK">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="MLJ-wD-AI0"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="120" maxY="0.0"/>
+                                                <state key="normal" title="Tattoo" image="iconTattooTab"/>
+                                                <connections>
+                                                    <action selector="primaryAppModeChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ATs-4d-5Wr"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqA-BT-fDS">
+                                                <rect key="frame" x="0.0" y="50" width="200" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="eFa-4u-uCR"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="120" maxY="0.0"/>
+                                                <state key="normal" title="Face Distort" image="iconFaceDistort">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="primaryAppModeChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d1W-kF-MNZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Bgr-QB-tt8"/>
+                                    <constraint firstItem="66m-UQ-Idu" firstAttribute="top" secondItem="xbw-8W-X8U" secondAttribute="top" id="NdV-dP-tHa"/>
+                                    <constraint firstItem="66m-UQ-Idu" firstAttribute="leading" secondItem="xbw-8W-X8U" secondAttribute="leading" id="Q3m-7n-Q5f"/>
+                                    <constraint firstAttribute="width" constant="200" id="Qx2-XB-6dz"/>
+                                    <constraint firstAttribute="trailing" secondItem="66m-UQ-Idu" secondAttribute="trailing" id="U8v-Uq-L89"/>
+                                    <constraint firstAttribute="bottom" secondItem="66m-UQ-Idu" secondAttribute="bottom" id="auB-bv-Z2R"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buR-5Y-1uS" userLabel="ScrollMenu">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="782" width="414" height="80"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kp-Yf-KKr">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="G8Z-OU-vHD">
-                                                <rect key="frame" x="0.0" y="0.0" width="410" height="60"/>
+                                                <rect key="frame" x="10" y="10" width="480" height="60"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGM-vY-8fH" userLabel="SelectButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                    <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqc-c9-eQQ" userLabel="Mode" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="SQc-K3-w8M"/>
-                                                            <constraint firstAttribute="height" constant="60" id="zPB-Kw-9Zx"/>
+                                                            <constraint firstAttribute="width" constant="60" id="eQI-06-kWf"/>
+                                                            <constraint firstAttribute="height" constant="60" id="yhl-AG-XGQ"/>
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -700,11 +747,35 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
+                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="saK-bd-31b"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGM-vY-8fH" userLabel="SelectButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                        <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="SQc-K3-w8M"/>
+                                                            <constraint firstAttribute="height" constant="60" id="zPB-Kw-9Zx"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                        <state key="normal" image="iconSelect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="30"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
                                                             <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NTv-g1-hmk"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVk-z1-bU9" userLabel="DrawButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="140" y="0.0" width="60" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="yBy-l3-SPi"/>
                                                             <constraint firstAttribute="width" constant="60" id="yLm-pH-tUz"/>
@@ -727,7 +798,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNB-cW-loJ" userLabel="Upload Button Tapped" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="140" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="210" y="0.0" width="60" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="9Zb-TA-ChJ"/>
                                                             <constraint firstAttribute="width" constant="60" id="rn2-Ha-UgE"/>
@@ -750,7 +821,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vce-c3-3e4" userLabel="PlaceButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="210" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="280" y="0.0" width="60" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="Ff9-CJ-Odw"/>
                                                             <constraint firstAttribute="width" constant="60" id="Wd1-Ot-gO3"/>
@@ -773,7 +844,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rb1-he-r0E" userLabel="Add Button" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="280" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="350" y="0.0" width="60" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="1tW-GK-Kss"/>
                                                             <constraint firstAttribute="width" constant="60" id="M2w-5i-fkg"/>
@@ -796,7 +867,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="318-sH-wrI" userLabel="ShareButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="350" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="420" y="0.0" width="60" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="MWH-ob-a4O"/>
                                                             <constraint firstAttribute="width" constant="60" id="Too-Zd-lcc"/>
@@ -826,9 +897,9 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="G8Z-OU-vHD" firstAttribute="leading" secondItem="7kp-Yf-KKr" secondAttribute="leading" id="1BR-af-aTQ"/>
+                                            <constraint firstItem="G8Z-OU-vHD" firstAttribute="leading" secondItem="7kp-Yf-KKr" secondAttribute="leading" constant="10" id="1BR-af-aTQ"/>
                                             <constraint firstAttribute="bottom" secondItem="G8Z-OU-vHD" secondAttribute="bottom" id="GPB-5C-L5y"/>
-                                            <constraint firstItem="G8Z-OU-vHD" firstAttribute="top" secondItem="7kp-Yf-KKr" secondAttribute="top" id="c3F-b3-uN4"/>
+                                            <constraint firstItem="G8Z-OU-vHD" firstAttribute="top" secondItem="7kp-Yf-KKr" secondAttribute="top" constant="10" id="c3F-b3-uN4"/>
                                             <constraint firstAttribute="trailing" secondItem="G8Z-OU-vHD" secondAttribute="trailing" id="mLc-nx-CYh"/>
                                         </constraints>
                                     </scrollView>
@@ -836,7 +907,7 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="7kp-Yf-KKr" firstAttribute="leading" secondItem="buR-5Y-1uS" secondAttribute="leading" id="PhD-sL-foD"/>
-                                    <constraint firstAttribute="height" constant="60" id="aGn-P1-MiQ"/>
+                                    <constraint firstAttribute="height" constant="80" id="aGn-P1-MiQ"/>
                                     <constraint firstItem="7kp-Yf-KKr" firstAttribute="top" secondItem="buR-5Y-1uS" secondAttribute="top" id="gaT-p6-pv9"/>
                                     <constraint firstAttribute="trailing" secondItem="7kp-Yf-KKr" secondAttribute="trailing" id="mlN-ge-hpi"/>
                                     <constraint firstAttribute="bottom" secondItem="7kp-Yf-KKr" secondAttribute="bottom" id="nLa-Tk-Dza"/>
@@ -1030,6 +1101,7 @@
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="71C-ei-uB6"/>
                             <constraint firstItem="SGY-gw-7lI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7mI-YT-ZM0"/>
                             <constraint firstItem="hwc-Ru-ufZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7o9-2S-wQY"/>
+                            <constraint firstItem="xbw-8W-X8U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Alp-yE-3xo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PJ4-Zp-aza" secondAttribute="bottom" id="Cwj-63-2Cg"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EM4-Dn-4Wo"/>
                             <constraint firstItem="wwP-Vh-OFo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HLz-LP-IWA"/>
@@ -1063,6 +1135,7 @@
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocq-ZH-Cba"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
+                            <constraint firstItem="buR-5Y-1uS" firstAttribute="top" secondItem="xbw-8W-X8U" secondAttribute="bottom" id="vB4-Kh-L8Q"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
                             <constraint firstItem="nvG-BE-rre" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zad-Nb-odn"/>
                         </constraints>
@@ -1094,6 +1167,7 @@
                         <outlet property="drawnImageViewFullScreenButton" destination="iwg-Pb-pdY" id="Yxf-MS-jfu"/>
                         <outlet property="drawnImageViewFullScreenContainer" destination="PJ4-Zp-aza" id="xS9-2t-bl0"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="Adu-np-aql"/>
+                        <outlet property="modeSelectMenu" destination="xbw-8W-X8U" id="uQA-XR-k5p"/>
                         <outlet property="placeButton" destination="Vce-c3-3e4" id="6IV-1t-NbM"/>
                         <outlet property="previewImage" destination="ibE-UN-alx" id="lzp-q8-pv8"/>
                         <outlet property="previewImageContainer" destination="kNC-8r-omt" id="bLM-LD-Fe3"/>
@@ -1107,6 +1181,7 @@
                         <outlet property="restorePremiumButton" destination="b9v-Xr-MfC" id="5gi-pb-YhQ"/>
                         <outlet property="rotateButtonContainer" destination="xWm-n3-nhy" id="BoD-US-9kk"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
+                        <outlet property="scrollMenu" destination="buR-5Y-1uS" id="Iss-8i-iDn"/>
                         <outlet property="selectButton" destination="MGM-vY-8fH" id="ABK-AN-GkC"/>
                         <outlet property="settingsButton" destination="wwP-Vh-OFo" id="LdB-0F-EUQ"/>
                         <outlet property="settingsContainer" destination="hwc-Ru-ufZ" id="aWL-oj-WjA"/>
@@ -1160,6 +1235,7 @@
         <image name="iconDoubleArrowRight" width="100" height="100"/>
         <image name="iconDoubleArrowUp" width="100" height="100"/>
         <image name="iconDrawTab" width="96" height="96"/>
+        <image name="iconFaceDistort" width="96" height="96"/>
         <image name="iconFullScreenLocked" width="90" height="90"/>
         <image name="iconLeftRotate" width="96" height="96"/>
         <image name="iconMinus" width="52" height="52"/>
@@ -1169,6 +1245,7 @@
         <image name="iconReset" width="100" height="100"/>
         <image name="iconResize" width="96" height="96"/>
         <image name="iconRightRotate" width="96" height="96"/>
+        <image name="iconSelect" width="100" height="100"/>
         <image name="iconSettings" width="96" height="96"/>
         <image name="iconShareTab" width="96" height="96"/>
         <image name="iconSingleArrowDown" width="100" height="100"/>
