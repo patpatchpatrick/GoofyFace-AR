@@ -33,5 +33,28 @@ _geometry.texcoords[0] = transformedVertex.xy;
  * MARK: Post-process special effects
  */
 
+//MODIFICATIONS TO FACE - POST-PROCESSING
 // Make head appear big. (You could also apply other geometry modifications here.)
-_geometry.position.xyz *= 1.5;
+
+/*
+if (_geometry.position.y > 0.02) {
+_geometry.position.x += 0.05;
+}
+*/
+
+// (LEFT EYE)
+if (_geometry.position.x < -0.01 && _geometry.position.x > -0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 ) {
+_geometry.position.xyz *= 1.2;
+}
+
+// (RIGHT EYE)
+if (_geometry.position.x > 0.01 && _geometry.position.x < 0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 ) {
+_geometry.position.xyz *= 1.2;
+}
+
+
+
+
+
+
+_geometry.position.xyz *= 1.0;

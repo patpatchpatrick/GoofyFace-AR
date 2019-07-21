@@ -103,6 +103,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var addTatTab: UITabBarItem!
     @IBOutlet weak var shareTab: UITabBarItem!
     
+    var weirdFace = false //Weird Face Mode
+    
     var imageChanged = false
     var tattooViewModel: ARViewModel?
     var mainUIViewModel: MainUIViewModel?
@@ -142,6 +144,7 @@ class ViewController: UIViewController {
         configureButtonsAndViews()
 
         mainUIViewModel?.checkIfUserHasPremiumAccess()
+        
         
     }
     
@@ -495,20 +498,46 @@ extension ViewController: ARSCNViewDelegate {
         //New node added to AR renderer
         if !arTrackingSupported {return nil}
         
-        guard let sceneView = renderer as? ARSCNView,
+        guard let sceneView = renderer as? ARSCNView, let frame = sceneView.session.currentFrame,
             anchor is ARFaceAnchor else { return nil }
         
- 
-        let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
+        let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!, fillMesh: true)!
+        
         let material = faceGeometry.firstMaterial!
         
-        
+        /*
         //If the image was changed, set the new image on the face contents
         if imageChanged {
-            material.diffuse.contents = tattooViewModel?.image
-            material.lightingModel = .physicallyBased
+           material.diffuse.contents = tattooViewModel?.image
+          material.lightingModel = .physicallyBased
+            
             imageChanged = false
+            
         }
+ */
+ 
+        
+        weirdFace = true
+        if weirdFace {
+            
+            material.diffuse.contents = sceneView.scene.background.contents
+            material.lightingModel = .constant
+            
+            guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
+                let modifier = try? String(contentsOf: shaderURL)
+                else { fatalError("Can't load shader modifier from bundle.") }
+            faceGeometry.shaderModifiers = [ .geometry: modifier]
+            
+            // Pass view-appropriate image transform to the shader modifier so
+            // that the mapped video lines up correctly with the background video.
+            let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
+            let transform = SCNMatrix4(affineTransform)
+            faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+            
+        }
+ 
+        
+       
  
  
        return SCNNode(geometry: faceGeometry)
@@ -522,21 +551,47 @@ extension ViewController: ARSCNViewDelegate {
         
         if !arTrackingSupported {return}
         
+        
         //Renderer node updated
 
         guard let faceGeometry = node.geometry as? ARSCNFaceGeometry,
-            let faceAnchor = anchor as? ARFaceAnchor
+            let faceAnchor = anchor as? ARFaceAnchor, let frame = sceneView.session.currentFrame
             else { return }
         
+             let material = faceGeometry.firstMaterial!
         
+        
+        /*
         //If the image was changed, set the new image on the face contents
         if imageChanged {
-            let material = faceGeometry.firstMaterial!
-            material.diffuse.contents = tattooViewModel?.image
-            material.lightingModel = .physicallyBased
+          material.diffuse.contents = tattooViewModel?.image
+        material.lightingModel = .physicallyBased
+            
             imageChanged = false
+ 
         }
-
+ */
+ 
+        
+        weirdFace = true
+        if weirdFace {
+            
+            material.diffuse.contents = sceneView.scene.background.contents
+            material.lightingModel = .constant
+            
+            guard let shaderURL = Bundle.main.url(forResource: "VideoTexturedFace", withExtension: "shader"),
+                let modifier = try? String(contentsOf: shaderURL)
+                else { fatalError("Can't load shader modifier from bundle.") }
+            faceGeometry.shaderModifiers = [ .geometry: modifier]
+            
+            // Pass view-appropriate image transform to the shader modifier so
+            // that the mapped video lines up correctly with the background video.
+            let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
+            let transform = SCNMatrix4(affineTransform)
+            faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+            
+        }
+ 
         
         faceGeometry.update(from: faceAnchor.geometry)
  
