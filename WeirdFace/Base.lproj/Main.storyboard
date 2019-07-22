@@ -720,200 +720,398 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buR-5Y-1uS" userLabel="ScrollMenu">
                                 <rect key="frame" x="0.0" y="782" width="414" height="80"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kp-Yf-KKr">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZYD-py-DKC" userLabel="TatScrollMenu">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="G8Z-OU-vHD">
-                                                <rect key="frame" x="10" y="10" width="480" height="60"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kp-Yf-KKr">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                                 <subviews>
-                                                    <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqc-c9-eQQ" userLabel="Mode" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="eQI-06-kWf"/>
-                                                            <constraint firstAttribute="height" constant="60" id="yhl-AG-XGQ"/>
-                                                        </constraints>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="G8Z-OU-vHD">
+                                                        <rect key="frame" x="10" y="10" width="480" height="60"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqc-c9-eQQ" userLabel="Mode" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="eQI-06-kWf"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="yhl-AG-XGQ"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="iconTattooTab"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="saK-bd-31b"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGM-vY-8fH" userLabel="SelectButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="SQc-K3-w8M"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="zPB-Kw-9Zx"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconSelect"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NTv-g1-hmk"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVk-z1-bU9" userLabel="DrawButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="140" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="yBy-l3-SPi"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="yLm-pH-tUz"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="iconDrawTab"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Ov-B4-0Og"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNB-cW-loJ" userLabel="Upload Button Tapped" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="210" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="9Zb-TA-ChJ"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="rn2-Ha-UgE"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="iconUploadTab"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RRl-lJ-xe7"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vce-c3-3e4" userLabel="PlaceButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="280" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="Ff9-CJ-Odw"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="Wd1-Ot-gO3"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="iconPositionTab"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0bZ-vp-z9w"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rb1-he-r0E" userLabel="Add Button" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="350" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="1tW-GK-Kss"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="M2w-5i-fkg"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="plusIcon"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YER-ZA-83e"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="318-sH-wrI" userLabel="ShareButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="420" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="MWH-ob-a4O"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="Too-Zd-lcc"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="iconShareTab"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6YD-9R-v4t"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                        <state key="normal" image="iconTattooTab"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="saK-bd-31b"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGM-vY-8fH" userLabel="SelectButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="70" y="0.0" width="60" height="60"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="SQc-K3-w8M"/>
-                                                            <constraint firstAttribute="height" constant="60" id="zPB-Kw-9Zx"/>
+                                                            <constraint firstAttribute="height" constant="60" id="xub-c5-hSc"/>
                                                         </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
-                                                        <state key="normal" image="iconSelect"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NTv-g1-hmk"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVk-z1-bU9" userLabel="DrawButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="140" y="0.0" width="60" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="yBy-l3-SPi"/>
-                                                            <constraint firstAttribute="width" constant="60" id="yLm-pH-tUz"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" image="iconDrawTab"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Ov-B4-0Og"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNB-cW-loJ" userLabel="Upload Button Tapped" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="210" y="0.0" width="60" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="9Zb-TA-ChJ"/>
-                                                            <constraint firstAttribute="width" constant="60" id="rn2-Ha-UgE"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" image="iconUploadTab"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RRl-lJ-xe7"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vce-c3-3e4" userLabel="PlaceButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="280" y="0.0" width="60" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="Ff9-CJ-Odw"/>
-                                                            <constraint firstAttribute="width" constant="60" id="Wd1-Ot-gO3"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" image="iconPositionTab"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0bZ-vp-z9w"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rb1-he-r0E" userLabel="Add Button" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="350" y="0.0" width="60" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="1tW-GK-Kss"/>
-                                                            <constraint firstAttribute="width" constant="60" id="M2w-5i-fkg"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                        <state key="normal" image="plusIcon"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YER-ZA-83e"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" tag="5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="318-sH-wrI" userLabel="ShareButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                        <rect key="frame" x="420" y="0.0" width="60" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="MWH-ob-a4O"/>
-                                                            <constraint firstAttribute="width" constant="60" id="Too-Zd-lcc"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" image="iconShareTab"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="30"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6YD-9R-v4t"/>
-                                                        </connections>
-                                                    </button>
+                                                    </stackView>
                                                 </subviews>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="xub-c5-hSc"/>
+                                                    <constraint firstItem="G8Z-OU-vHD" firstAttribute="leading" secondItem="7kp-Yf-KKr" secondAttribute="leading" constant="10" id="1BR-af-aTQ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="G8Z-OU-vHD" secondAttribute="bottom" id="GPB-5C-L5y"/>
+                                                    <constraint firstItem="G8Z-OU-vHD" firstAttribute="top" secondItem="7kp-Yf-KKr" secondAttribute="top" constant="10" id="c3F-b3-uN4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="G8Z-OU-vHD" secondAttribute="trailing" id="mLc-nx-CYh"/>
                                                 </constraints>
-                                            </stackView>
+                                            </scrollView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="G8Z-OU-vHD" firstAttribute="leading" secondItem="7kp-Yf-KKr" secondAttribute="leading" constant="10" id="1BR-af-aTQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="G8Z-OU-vHD" secondAttribute="bottom" id="GPB-5C-L5y"/>
-                                            <constraint firstItem="G8Z-OU-vHD" firstAttribute="top" secondItem="7kp-Yf-KKr" secondAttribute="top" constant="10" id="c3F-b3-uN4"/>
-                                            <constraint firstAttribute="trailing" secondItem="G8Z-OU-vHD" secondAttribute="trailing" id="mLc-nx-CYh"/>
+                                            <constraint firstAttribute="bottom" secondItem="7kp-Yf-KKr" secondAttribute="bottom" id="Iap-GC-GjC"/>
+                                            <constraint firstAttribute="trailing" secondItem="7kp-Yf-KKr" secondAttribute="trailing" id="NMe-2i-nbB"/>
+                                            <constraint firstItem="7kp-Yf-KKr" firstAttribute="leading" secondItem="ZYD-py-DKC" secondAttribute="leading" id="cJK-Cx-Nxf"/>
+                                            <constraint firstItem="7kp-Yf-KKr" firstAttribute="top" secondItem="ZYD-py-DKC" secondAttribute="top" id="yo2-Dq-L8j"/>
                                         </constraints>
-                                    </scrollView>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRy-gY-1u3" userLabel="DisScrollMenu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyg-rY-PS8">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="R3O-VZ-385">
+                                                        <rect key="frame" x="10" y="10" width="130" height="60"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86h-sq-pVK" userLabel="Mode" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="guQ-ay-f3F"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="tEa-pw-8Tj"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="iconTattooTab"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fdy-Se-Rae"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53s-NF-0Ha" userLabel="FaceFeatures" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="nqx-bl-723"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="z98-ha-BBK"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconFaceDistort"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="faceFeatureDistortionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p2Q-Dz-VFl"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="o22-YO-nR0"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="R3O-VZ-385" firstAttribute="leading" secondItem="nyg-rY-PS8" secondAttribute="leading" constant="10" id="JIb-s6-Y69"/>
+                                                    <constraint firstAttribute="bottom" secondItem="R3O-VZ-385" secondAttribute="bottom" id="JvB-sh-eQr"/>
+                                                    <constraint firstItem="R3O-VZ-385" firstAttribute="top" secondItem="nyg-rY-PS8" secondAttribute="top" constant="10" id="MmV-sI-3Bz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="R3O-VZ-385" secondAttribute="trailing" id="qAf-Jx-cmL"/>
+                                                </constraints>
+                                            </scrollView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="nyg-rY-PS8" firstAttribute="leading" secondItem="jRy-gY-1u3" secondAttribute="leading" id="Dfx-D8-egB"/>
+                                            <constraint firstAttribute="height" constant="80" id="NHK-CL-Rhf"/>
+                                            <constraint firstItem="nyg-rY-PS8" firstAttribute="top" secondItem="jRy-gY-1u3" secondAttribute="top" id="POJ-Z5-r6I"/>
+                                            <constraint firstAttribute="trailing" secondItem="nyg-rY-PS8" secondAttribute="trailing" id="d7R-NW-wpJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="nyg-rY-PS8" secondAttribute="bottom" id="wlb-MD-Kcs"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="Y9b-1D-HtQ"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="7kp-Yf-KKr" firstAttribute="leading" secondItem="buR-5Y-1uS" secondAttribute="leading" id="PhD-sL-foD"/>
+                                    <constraint firstItem="jRy-gY-1u3" firstAttribute="top" secondItem="buR-5Y-1uS" secondAttribute="top" id="7ZN-fX-xTy"/>
+                                    <constraint firstAttribute="trailing" secondItem="jRy-gY-1u3" secondAttribute="trailing" id="Ahe-5r-tnN"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZYD-py-DKC" secondAttribute="trailing" id="UDK-zc-ohc"/>
+                                    <constraint firstItem="jRy-gY-1u3" firstAttribute="leading" secondItem="buR-5Y-1uS" secondAttribute="leading" id="X8O-Eb-6Bs"/>
+                                    <constraint firstItem="ZYD-py-DKC" firstAttribute="leading" secondItem="buR-5Y-1uS" secondAttribute="leading" id="Zzv-s1-Mse"/>
                                     <constraint firstAttribute="height" constant="80" id="aGn-P1-MiQ"/>
-                                    <constraint firstItem="7kp-Yf-KKr" firstAttribute="top" secondItem="buR-5Y-1uS" secondAttribute="top" id="gaT-p6-pv9"/>
-                                    <constraint firstAttribute="trailing" secondItem="7kp-Yf-KKr" secondAttribute="trailing" id="mlN-ge-hpi"/>
-                                    <constraint firstAttribute="bottom" secondItem="7kp-Yf-KKr" secondAttribute="bottom" id="nLa-Tk-Dza"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZYD-py-DKC" secondAttribute="bottom" id="dIF-1z-qZT"/>
+                                    <constraint firstAttribute="bottom" secondItem="jRy-gY-1u3" secondAttribute="bottom" id="pZ8-iu-SAK"/>
+                                    <constraint firstItem="ZYD-py-DKC" firstAttribute="top" secondItem="buR-5Y-1uS" secondAttribute="top" id="r6U-xe-956"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRW-OU-7tb" userLabel="SecondaryScrollMenu">
+                                <rect key="frame" x="0.0" y="702" width="414" height="80"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7f6-QU-CPd" userLabel="DisScrollMenu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vha-xg-d68">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7sa-CP-JYI">
+                                                        <rect key="frame" x="10" y="10" width="130" height="60"/>
+                                                        <subviews>
+                                                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qk-0V-Aqf" userLabel="Eyes" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="FEo-jw-tPp"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="xd8-di-43p"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="iconEyes"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="eyesButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K0f-vR-USf"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL5-ta-7ZY" userLabel="SelectButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="5D2-9Q-1WP"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="ADM-J1-Iuo"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconFaceDistort"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="JjB-QA-Q04"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="7sa-CP-JYI" firstAttribute="leading" secondItem="vha-xg-d68" secondAttribute="leading" constant="10" id="Lw6-ex-gYn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="7sa-CP-JYI" secondAttribute="bottom" id="ZRc-HH-Vld"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7sa-CP-JYI" secondAttribute="trailing" id="qfy-kz-occ"/>
+                                                    <constraint firstItem="7sa-CP-JYI" firstAttribute="top" secondItem="vha-xg-d68" secondAttribute="top" constant="10" id="svg-Lp-cu5"/>
+                                                </constraints>
+                                            </scrollView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="vha-xg-d68" firstAttribute="leading" secondItem="7f6-QU-CPd" secondAttribute="leading" id="29K-1y-7Ni"/>
+                                            <constraint firstItem="vha-xg-d68" firstAttribute="top" secondItem="7f6-QU-CPd" secondAttribute="top" id="JFU-jD-wge"/>
+                                            <constraint firstAttribute="trailing" secondItem="vha-xg-d68" secondAttribute="trailing" id="RzN-dn-GN1"/>
+                                            <constraint firstAttribute="bottom" secondItem="vha-xg-d68" secondAttribute="bottom" id="arP-gg-AHd"/>
+                                            <constraint firstAttribute="height" constant="80" id="fWK-0T-D59"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="TyW-GZ-LRJ"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7f6-QU-CPd" secondAttribute="trailing" id="1eq-42-QsZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="7f6-QU-CPd" secondAttribute="bottom" id="Py7-aB-NxG"/>
+                                    <constraint firstItem="7f6-QU-CPd" firstAttribute="top" secondItem="nRW-OU-7tb" secondAttribute="top" id="dvs-Rn-hQI"/>
+                                    <constraint firstAttribute="height" constant="80" id="vdF-Ve-vMh"/>
+                                    <constraint firstItem="7f6-QU-CPd" firstAttribute="leading" secondItem="nRW-OU-7tb" secondAttribute="leading" id="ysD-fm-utG"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="Zcq-0M-8m5"/>
+                            </view>
+                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="hB3-H4-vhC">
+                                <rect key="frame" x="148" y="652" width="118" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="K60-ho-kpx"/>
+                                    <constraint firstAttribute="width" constant="114" id="xoM-Es-qcc"/>
+                                </constraints>
+                            </slider>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJ4-Zp-aza" userLabel="Drawn Full Screen">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
@@ -1103,6 +1301,7 @@
                             <constraint firstItem="SGY-gw-7lI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7mI-YT-ZM0"/>
                             <constraint firstItem="hwc-Ru-ufZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7o9-2S-wQY"/>
                             <constraint firstItem="xbw-8W-X8U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Alp-yE-3xo"/>
+                            <constraint firstItem="buR-5Y-1uS" firstAttribute="top" secondItem="nRW-OU-7tb" secondAttribute="bottom" id="B1i-Iw-72L"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PJ4-Zp-aza" secondAttribute="bottom" id="Cwj-63-2Cg"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EM4-Dn-4Wo"/>
                             <constraint firstItem="wwP-Vh-OFo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HLz-LP-IWA"/>
@@ -1113,8 +1312,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="buR-5Y-1uS" secondAttribute="trailing" id="Lki-ni-p23"/>
                             <constraint firstItem="PJ4-Zp-aza" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MxU-VS-mRh"/>
                             <constraint firstItem="kNC-8r-omt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OvR-E3-bf3"/>
+                            <constraint firstItem="nRW-OU-7tb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RJ5-bU-0DD"/>
                             <constraint firstItem="kNC-8r-omt" firstAttribute="bottom" secondItem="buR-5Y-1uS" secondAttribute="top" id="S8L-Zn-XnN"/>
+                            <constraint firstItem="nRW-OU-7tb" firstAttribute="top" secondItem="hB3-H4-vhC" secondAttribute="bottom" constant="20" id="SyR-HP-HIF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="buR-5Y-1uS" secondAttribute="bottom" id="TgQ-R5-s5m"/>
+                            <constraint firstItem="nRW-OU-7tb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UO6-NK-ITa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nvG-BE-rre" secondAttribute="trailing" id="Ujg-1C-Brp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SGY-gw-7lI" secondAttribute="trailing" id="UyL-af-AwI"/>
                             <constraint firstItem="Atl-Lq-BB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UzG-TH-Msb"/>
@@ -1139,6 +1341,7 @@
                             <constraint firstItem="buR-5Y-1uS" firstAttribute="top" secondItem="xbw-8W-X8U" secondAttribute="bottom" id="vB4-Kh-L8Q"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
                             <constraint firstItem="nvG-BE-rre" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zad-Nb-odn"/>
+                            <constraint firstItem="hB3-H4-vhC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zvJ-Po-N1o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -1167,6 +1370,8 @@
                         <outlet property="drawnImageViewFullScreen" destination="KiX-b7-Wco" id="HGu-Gw-6Tz"/>
                         <outlet property="drawnImageViewFullScreenButton" destination="iwg-Pb-pdY" id="Yxf-MS-jfu"/>
                         <outlet property="drawnImageViewFullScreenContainer" destination="PJ4-Zp-aza" id="xS9-2t-bl0"/>
+                        <outlet property="faceDistortScrollMenu" destination="jRy-gY-1u3" id="Ao4-gN-kLL"/>
+                        <outlet property="featuresSlider" destination="hB3-H4-vhC" id="NzF-Un-ju6"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="Adu-np-aql"/>
                         <outlet property="modeSelectMenu" destination="xbw-8W-X8U" id="uQA-XR-k5p"/>
                         <outlet property="placeButton" destination="Vce-c3-3e4" id="6IV-1t-NbM"/>
@@ -1183,11 +1388,13 @@
                         <outlet property="rotateButtonContainer" destination="xWm-n3-nhy" id="BoD-US-9kk"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="scrollMenu" destination="buR-5Y-1uS" id="Iss-8i-iDn"/>
+                        <outlet property="secondaryScrollMenu" destination="nRW-OU-7tb" id="5mg-0x-e8N"/>
                         <outlet property="selectButton" destination="MGM-vY-8fH" id="ABK-AN-GkC"/>
                         <outlet property="settingsButton" destination="wwP-Vh-OFo" id="LdB-0F-EUQ"/>
                         <outlet property="settingsContainer" destination="hwc-Ru-ufZ" id="aWL-oj-WjA"/>
                         <outlet property="shareButton" destination="318-sH-wrI" id="Ltr-YC-Atz"/>
                         <outlet property="sizePicker" destination="fH5-aY-pnB" id="2LT-3d-TWg"/>
+                        <outlet property="tattooScrollMenu" destination="ZYD-py-DKC" id="BFq-bT-Iub"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
                         <outlet property="transformDoubleDown" destination="PU3-bb-7yW" id="xbZ-dO-fkt"/>
                         <outlet property="transformDoubleLeft" destination="joW-Zv-ck0" id="Cte-Tl-hJc"/>
@@ -1236,6 +1443,7 @@
         <image name="iconDoubleArrowRight" width="100" height="100"/>
         <image name="iconDoubleArrowUp" width="100" height="100"/>
         <image name="iconDrawTab" width="96" height="96"/>
+        <image name="iconEyes" width="100" height="100"/>
         <image name="iconFaceDistort" width="96" height="96"/>
         <image name="iconFullScreenLocked" width="90" height="90"/>
         <image name="iconLeftRotate" width="96" height="96"/>

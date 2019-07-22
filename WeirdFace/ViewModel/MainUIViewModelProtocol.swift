@@ -11,7 +11,8 @@ import UIKit
 
 protocol MainUIViewModelViewDelegate: class
 {
-    func modeChanged(to mode: Mode, _ viewModel: MainUIViewModel)
+    func mainAppModeChanged(to mode: Int)
+    func tattooModeChanged(to mode: Mode, _ viewModel: MainUIViewModel)
     func premiumModeUnlocked()
     func shareImage(image: UIImage)
     func hideButtonsForSnapshot()

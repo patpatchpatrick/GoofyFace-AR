@@ -25,12 +25,13 @@ class MainUIViewModel : MainUIViewModelProtocol{
     func primaryModeChanged(appMode: Int){
         if appMode != self.appMode{
             appModeChanged = true
+            self.viewDelegate.mainAppModeChanged(to: appMode)
         }
         self.appMode = appMode
     }
     
     func tattooModeChanged(mode: Mode){
-        self.viewDelegate.modeChanged(to: mode, self)
+        self.viewDelegate.tattooModeChanged(to: mode, self)
     }
     
     func tattooModeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?){

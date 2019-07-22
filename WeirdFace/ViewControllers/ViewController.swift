@@ -96,6 +96,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var restorePremiumButton: UIButton!
     
     
+    @IBOutlet weak var featuresSlider: UISlider!
+    @IBOutlet weak var secondaryScrollMenu: UIView!
+    
+    @IBOutlet weak var faceDistortScrollMenu: UIView!
+    @IBOutlet weak var tattooScrollMenu: UIView!
     @IBOutlet weak var modeSelectMenu: UIView!
     @IBOutlet weak var scrollMenu: UIView!
     @IBOutlet weak var selectButton: RoundedButton!
@@ -138,10 +143,11 @@ class ViewController: UIViewController {
         let mainUIModel = MainUIModel()
         mainUIViewModel = MainUIViewModel(model: mainUIModel, delegate: self)
         
+        /*
         var instanceOfCustomObject: ShaderModifier = ShaderModifier()
         instanceOfCustomObject.someProperty = "Hello World"
         print(instanceOfCustomObject.someProperty)
-        instanceOfCustomObject.someMethod()
+        instanceOfCustomObject.someMethod() */
         
         configureButtonsAndViews()
 
@@ -549,6 +555,18 @@ class ViewController: UIViewController {
         
     }
     
+    
+    @IBAction func faceFeatureDistortionButtonTapped(_ sender: UIButton) {
+        //Toggle secondary menu which shows facial features
+        secondaryScrollMenu.isHidden = !secondaryScrollMenu.isHidden
+    }
+    
+    
+    @IBAction func eyesButtonTapped(_ sender: UIButton) {
+        //Toggle features slider
+        featuresSlider.isHidden = !featuresSlider.isHidden
+    }
+    
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -595,7 +613,8 @@ extension ViewController: ARSCNViewDelegate {
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
              let transform = SCNMatrix4(affineTransform)
              faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
-             faceGeometry.setValue(4.0, forKey: "testOne")
+            let eyeSize = featuresSlider.value
+            faceGeometry.setValue(eyeSize, forKey: "eyeSize")
             
  
         }
@@ -669,8 +688,8 @@ extension ViewController: ARSCNViewDelegate {
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
              let transform = SCNMatrix4(affineTransform)
              faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
-             faceGeometry.setValue(4.0, forKey: "testOne")
-         //   faceGeometry.intensity = 3.0
+            let eyeSize = featuresSlider.value
+             faceGeometry.setValue(eyeSize, forKey: "eyeSize")
              
              
         }
@@ -967,6 +986,25 @@ extension ViewController: ARViewModelViewDelegate{
 }
 
 extension ViewController: MainUIViewModelViewDelegate{
+    
+    //Main app mode changed (between tattoo and face distort)
+    //Show appropriate menus
+    func mainAppModeChanged(to mode: Int) {
+        
+        switch mode {
+        case modeTattoo:
+            tattooScrollMenu.isHidden = false
+            faceDistortScrollMenu.isHidden = true
+            secondaryScrollMenu.isHidden = true
+            featuresSlider.isHidden = true
+        case modeFaceDistortion:
+            tattooScrollMenu.isHidden = true
+            faceDistortScrollMenu.isHidden = false
+        default:
+            print("Default")
+        }
+    }
+    
   
     //If user has premium mode, configure views accordingly
     func premiumModeUnlocked() {
@@ -999,7 +1037,7 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     //Handle UI changes when the user changes the "mode" of the app
     
-    func modeChanged(to mode: Mode, _ viewModel: MainUIViewModel) {
+    func tattooModeChanged(to mode: Mode, _ viewModel: MainUIViewModel) {
         
         resetViewsToDefault()
         
