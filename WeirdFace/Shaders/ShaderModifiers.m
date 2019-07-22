@@ -10,10 +10,11 @@
 
 #import "ShaderModifiers.h"
 
-@implementation CustomObject
+@implementation ShaderModifier
 
 - (void) someMethod {
     NSLog(@"SomeMethod Ran");
+   // [myMaterial setValue:@1.0 forKeyPath:@"mixLevel"];
 }
 
 @end

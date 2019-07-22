@@ -138,7 +138,7 @@ class ViewController: UIViewController {
         let mainUIModel = MainUIModel()
         mainUIViewModel = MainUIViewModel(model: mainUIModel, delegate: self)
         
-        var instanceOfCustomObject: CustomObject = CustomObject()
+        var instanceOfCustomObject: ShaderModifier = ShaderModifier()
         instanceOfCustomObject.someProperty = "Hello World"
         print(instanceOfCustomObject.someProperty)
         instanceOfCustomObject.someMethod()
@@ -564,6 +564,7 @@ extension ViewController: ARSCNViewDelegate {
             anchor is ARFaceAnchor else { return nil }
         
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!, fillMesh: true)!
+       // let faceGeometry = CustomFace(device: sceneView.device!, fillMesh: true)!
         
         let material = faceGeometry.firstMaterial!
         
@@ -594,6 +595,7 @@ extension ViewController: ARSCNViewDelegate {
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
              let transform = SCNMatrix4(affineTransform)
              faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+             faceGeometry.setValue(4.0, forKey: "testOne")
             
  
         }
@@ -667,6 +669,8 @@ extension ViewController: ARSCNViewDelegate {
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
              let transform = SCNMatrix4(affineTransform)
              faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+             faceGeometry.setValue(4.0, forKey: "testOne")
+         //   faceGeometry.intensity = 3.0
              
              
         }

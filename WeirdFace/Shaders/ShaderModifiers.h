@@ -10,7 +10,7 @@
 //#define ShaderModifiers_h
 #import <Foundation/Foundation.h>
 
-@interface CustomObject : NSObject
+@interface ShaderModifier : NSObject
 
 @property (strong, nonatomic) id someProperty;
 

@@ -56,3 +56,8 @@ extension SCNReferenceNode {
         }
     }
 }
+
+class CustomFace: ARSCNFaceGeometry {
+    var intensity:CGFloat = 1.2
+
+}
