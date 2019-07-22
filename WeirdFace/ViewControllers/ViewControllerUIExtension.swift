@@ -46,7 +46,7 @@ extension ViewController {
         addDeepShadowToView(view: removeWatermarkButton)
         addShadowToView(view: settingsButton)
         
-        secondaryScrollMenu.addBottomBorderWithColor(color: UIColor.white, width: 1.0, widthExtension: 0.0)
+        scrollMenu.addTopBorderWithColor(color: UIColor.white, width: 1.0)
         
         addShadowToView(view: settingsContainer)
         addShadowToView(view: drawnImageFullScreenRotateMessage)

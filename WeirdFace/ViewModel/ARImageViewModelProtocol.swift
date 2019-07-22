@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ARViewModelViewDelegate: class
+protocol ARImageViewModelViewDelegate: class
 {
     func arImagePositionUpdated()
     func arImagePositionAccepted()
@@ -20,9 +20,9 @@ protocol ARViewModelViewDelegate: class
 }
 
 
-protocol ARViewModelProtocol
+protocol ARImageViewModelProtocol
 {
-    var model: ARModel { get set }
-    var viewDelegate: ARViewModelViewDelegate { get set }
+    var model: ARImageModel { get set }
+    var viewDelegate: ARImageViewModelViewDelegate { get set }
     
 }

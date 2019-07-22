@@ -9,6 +9,7 @@ SceneKit shader (geometry) modifier for texture mapping ARKit camera video onto 
 #pragma arguments
 float4x4 displayTransform // from ARFrame.displayTransform(for:viewportSize:)
 float eyeSize = 1.0;
+float noseSize = 1.0;
 
 #pragma body
 
@@ -44,13 +45,18 @@ _geometry.position.x += 0.05;
 */
 
 // (LEFT EYE)
-if (_geometry.position.x < -0.01 && _geometry.position.x > -0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 ) {
+if (_geometry.position.x < -0.01 && _geometry.position.x > -0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 && _geometry.position.z > 0.015) {
 _geometry.position.xyz *= eyeSize;
 }
 
 // (RIGHT EYE)
-if (_geometry.position.x > 0.01 && _geometry.position.x < 0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 ) {
+if (_geometry.position.x > 0.01 && _geometry.position.x < 0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 && _geometry.position.z > 0.015) {
 _geometry.position.xyz *= eyeSize;
+}
+
+// (NOSE)
+if ((_geometry.position.x > -0.03 && _geometry.position.x < 0.03 && _geometry.position.y > -0.02 && _geometry.position.y < 0.04 && _geometry.position.z > 0.053)) {
+_geometry.position.xyz *= noseSize;
 }
 
 

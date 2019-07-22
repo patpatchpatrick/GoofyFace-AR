@@ -12,9 +12,10 @@ import UIKit
 let defaultCanvasHeight:CGFloat = 1000
 let defaultCanvasWidth:CGFloat = 1000
 
-public class ARViewModel:ARViewModelProtocol {
-    var model: ARModel
-    var viewDelegate: ARViewModelViewDelegate
+//View Model for Images placed on user in AR (i.e. tattoos)
+public class ARImageViewModel:ARImageViewModelProtocol {
+    var model: ARImageModel
+    var viewDelegate: ARImageViewModelViewDelegate
     var imageChanged = false
 
     var image: UIImage?
@@ -44,7 +45,7 @@ public class ARViewModel:ARViewModelProtocol {
     let heightMin: CGFloat = 25
     
     
-    init(tattooModel: ARModel, delegate: ARViewModelViewDelegate) {
+    init(tattooModel: ARImageModel, delegate: ARImageViewModelViewDelegate) {
         self.model = tattooModel
         self.viewDelegate = delegate
     }

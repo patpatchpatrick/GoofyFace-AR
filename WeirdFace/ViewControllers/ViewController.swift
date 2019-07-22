@@ -110,8 +110,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var addButton: RoundedButton!
     @IBOutlet weak var shareButton: RoundedButton!
     
-    var tattooViewModel: ARViewModel?
+    var tattooViewModel: ARImageViewModel?
     var mainUIViewModel: MainUIViewModel?
+    var distortionViewModel: ARDistortionViewModel?
 
     
     override func viewDidLoad() {
@@ -136,12 +137,15 @@ class ViewController: UIViewController {
         sceneView.delegate = self
         colorPicker.delegate = self
         
-        let tattooModel = ARModel(imageName: "blank", tattooType: .new)
-        tattooViewModel = ARViewModel(tattooModel: tattooModel, delegate: self)
+        let tattooModel = ARImageModel(imageName: "blank", tattooType: .new)
+        tattooViewModel = ARImageViewModel(tattooModel: tattooModel, delegate: self)
         tattooViewModel?.loadImage()
         
         let mainUIModel = MainUIModel()
         mainUIViewModel = MainUIViewModel(model: mainUIModel, delegate: self)
+        
+        let distortionModel = ARDistortionModel()
+        distortionViewModel = ARDistortionViewModel(model: distortionModel, delegate: self)
         
         /*
         var instanceOfCustomObject: ShaderModifier = ShaderModifier()
@@ -562,10 +566,21 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func eyesButtonTapped(_ sender: UIButton) {
+    @IBAction func facialFeatureButtonTapped(_ sender: UIButton) {
+        
         //Toggle features slider
-        featuresSlider.isHidden = !featuresSlider.isHidden
+        featuresSlider.isHidden = false
+        
+        //Update the current feature being edited
+        let featureType = sender.tag
+        distortionViewModel?.setCurrentFeatureBeingEdited(feature: featureType)
+        
     }
+    
+    @IBAction func featureSliderValueChanged(_ sender: UISlider) {
+        distortionViewModel?.featureSliderValueUpdated(value: sender.value)
+    }
+    
     
 }
 
@@ -613,8 +628,8 @@ extension ViewController: ARSCNViewDelegate {
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
              let transform = SCNMatrix4(affineTransform)
              faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
-            let eyeSize = featuresSlider.value
-            faceGeometry.setValue(eyeSize, forKey: "eyeSize")
+            faceGeometry.setValue(distortionViewModel?.eyeDistortion, forKey: "eyeSize")
+             faceGeometry.setValue(distortionViewModel?.noseDistortion, forKey: "noseSize")
             
  
         }
@@ -688,8 +703,8 @@ extension ViewController: ARSCNViewDelegate {
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
              let transform = SCNMatrix4(affineTransform)
              faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
-            let eyeSize = featuresSlider.value
-             faceGeometry.setValue(eyeSize, forKey: "eyeSize")
+            faceGeometry.setValue(distortionViewModel?.eyeDistortion, forKey: "eyeSize")
+             faceGeometry.setValue(distortionViewModel?.noseDistortion, forKey: "noseSize")
              
              
         }
@@ -931,7 +946,7 @@ extension ViewController: HSBColorPickerDelegate {
     
 }
 
-extension ViewController: ARViewModelViewDelegate{
+extension ViewController: ARImageViewModelViewDelegate{
     
     
     func resetARViews(){
@@ -1140,6 +1155,10 @@ extension ViewController: MainUIViewModelViewDelegate{
     }
     
     
+    
+}
+
+extension ViewController: ARDistortionViewModelViewDelegate{
     
 }
 

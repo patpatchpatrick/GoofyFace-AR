@@ -63,7 +63,7 @@ enum ARImageSize: Int, Printable, CaseIterable {
     }
 }
 
-public class ARModel {
+public class ARImageModel {
     var image: UIImage?
     var imageName: String {
         didSet {

@@ -10,9 +10,9 @@
 		F60366FA22DA61FA0090470C /* MainUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366F922DA61FA0090470C /* MainUIViewModel.swift */; };
 		F60366FC22DA631E0090470C /* MainUIViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366FB22DA631E0090470C /* MainUIViewModelProtocol.swift */; };
 		F60366FE22DA63890090470C /* MainUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366FD22DA63890090470C /* MainUIModel.swift */; };
-		F603670022DA833F0090470C /* ARViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366FF22DA833F0090470C /* ARViewModelProtocol.swift */; };
-		F60EA44822C53895002BE1CD /* ARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44722C53895002BE1CD /* ARModel.swift */; };
-		F60EA44B22C53D21002BE1CD /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44A22C53D21002BE1CD /* ARViewModel.swift */; };
+		F603670022DA833F0090470C /* ARImageViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60366FF22DA833F0090470C /* ARImageViewModelProtocol.swift */; };
+		F60EA44822C53895002BE1CD /* ARImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44722C53895002BE1CD /* ARImageModel.swift */; };
+		F60EA44B22C53D21002BE1CD /* ARImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60EA44A22C53D21002BE1CD /* ARImageViewModel.swift */; };
 		F624768422C414C50066215E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624768322C414C50066215E /* AppDelegate.swift */; };
 		F624768622C414C50066215E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624768522C414C50066215E /* ViewController.swift */; };
 		F624768922C414C50066215E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F624768722C414C50066215E /* Main.storyboard */; };
@@ -26,6 +26,9 @@
 		F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658C2DD22C56ACD0005CF09 /* CustomViews.swift */; };
 		F659DF6B22E63350000E8A72 /* ShaderModifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = F659DF6A22E63350000E8A72 /* ShaderModifiers.m */; };
 		F65AE0F822E526F400DF5827 /* FaceDistortion.shader in Resources */ = {isa = PBXBuildFile; fileRef = F65AE0F722E526F400DF5827 /* FaceDistortion.shader */; };
+		F676747622E670190012A4BB /* ARDistortionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747522E670190012A4BB /* ARDistortionModel.swift */; };
+		F676747822E670560012A4BB /* ARDistortionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747722E670560012A4BB /* ARDistortionViewModel.swift */; };
+		F676747A22E670920012A4BB /* ARDistortionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */; };
 		F681840122D6B4C2003B89AB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F681840022D6B4C2003B89AB /* StoreKit.framework */; };
 		F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F681840422D6D06F003B89AB /* CustomExtensions.swift */; };
 		F69A028A22D518FE00012BF6 /* ViewControllerUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69A028922D518FE00012BF6 /* ViewControllerUIExtension.swift */; };
@@ -54,9 +57,9 @@
 		F60366F922DA61FA0090470C /* MainUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIViewModel.swift; sourceTree = "<group>"; };
 		F60366FB22DA631E0090470C /* MainUIViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIViewModelProtocol.swift; sourceTree = "<group>"; };
 		F60366FD22DA63890090470C /* MainUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIModel.swift; sourceTree = "<group>"; };
-		F60366FF22DA833F0090470C /* ARViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModelProtocol.swift; sourceTree = "<group>"; };
-		F60EA44722C53895002BE1CD /* ARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModel.swift; sourceTree = "<group>"; };
-		F60EA44A22C53D21002BE1CD /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
+		F60366FF22DA833F0090470C /* ARImageViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARImageViewModelProtocol.swift; sourceTree = "<group>"; };
+		F60EA44722C53895002BE1CD /* ARImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARImageModel.swift; sourceTree = "<group>"; };
+		F60EA44A22C53D21002BE1CD /* ARImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARImageViewModel.swift; sourceTree = "<group>"; };
 		F624768022C414C50066215E /* WeirdFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeirdFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F624768322C414C50066215E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F624768522C414C50066215E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +81,9 @@
 		F659DF6A22E63350000E8A72 /* ShaderModifiers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaderModifiers.m; sourceTree = "<group>"; };
 		F659DF6C22E63D2B000E8A72 /* ShaderModifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderModifiers.h; sourceTree = "<group>"; };
 		F65AE0F722E526F400DF5827 /* FaceDistortion.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDistortion.shader; sourceTree = "<group>"; };
+		F676747522E670190012A4BB /* ARDistortionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionModel.swift; sourceTree = "<group>"; };
+		F676747722E670560012A4BB /* ARDistortionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionViewModel.swift; sourceTree = "<group>"; };
+		F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionViewModelProtocol.swift; sourceTree = "<group>"; };
 		F681840022D6B4C2003B89AB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F681840422D6D06F003B89AB /* CustomExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
 		F69A028922D518FE00012BF6 /* ViewControllerUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUIExtension.swift; sourceTree = "<group>"; };
@@ -114,8 +120,9 @@
 		F60EA44622C53869002BE1CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F60EA44722C53895002BE1CD /* ARModel.swift */,
+				F60EA44722C53895002BE1CD /* ARImageModel.swift */,
 				F60366FD22DA63890090470C /* MainUIModel.swift */,
+				F676747522E670190012A4BB /* ARDistortionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,10 +130,12 @@
 		F60EA44922C53D0C002BE1CD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				F60EA44A22C53D21002BE1CD /* ARViewModel.swift */,
+				F60EA44A22C53D21002BE1CD /* ARImageViewModel.swift */,
 				F60366F922DA61FA0090470C /* MainUIViewModel.swift */,
 				F60366FB22DA631E0090470C /* MainUIViewModelProtocol.swift */,
-				F60366FF22DA833F0090470C /* ARViewModelProtocol.swift */,
+				F60366FF22DA833F0090470C /* ARImageViewModelProtocol.swift */,
+				F676747722E670560012A4BB /* ARDistortionViewModel.swift */,
+				F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -377,7 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F624768622C414C50066215E /* ViewController.swift in Sources */,
-				F60EA44822C53895002BE1CD /* ARModel.swift in Sources */,
+				F60EA44822C53895002BE1CD /* ARImageModel.swift in Sources */,
 				F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */,
 				F69A028A22D518FE00012BF6 /* ViewControllerUIExtension.swift in Sources */,
 				F60366FE22DA63890090470C /* MainUIModel.swift in Sources */,
@@ -386,10 +395,13 @@
 				F6EAF5D922DBCA4300F4F267 /* ViewControllerIAPExtension.swift in Sources */,
 				F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */,
 				F60366FA22DA61FA0090470C /* MainUIViewModel.swift in Sources */,
-				F60EA44B22C53D21002BE1CD /* ARViewModel.swift in Sources */,
+				F676747A22E670920012A4BB /* ARDistortionViewModelProtocol.swift in Sources */,
+				F60EA44B22C53D21002BE1CD /* ARImageViewModel.swift in Sources */,
 				F6EA899722D001C6002935DB /* DataStructures.swift in Sources */,
 				F60366FC22DA631E0090470C /* MainUIViewModelProtocol.swift in Sources */,
-				F603670022DA833F0090470C /* ARViewModelProtocol.swift in Sources */,
+				F603670022DA833F0090470C /* ARImageViewModelProtocol.swift in Sources */,
+				F676747822E670560012A4BB /* ARDistortionViewModel.swift in Sources */,
+				F676747622E670190012A4BB /* ARDistortionModel.swift in Sources */,
 				F624768422C414C50066215E /* AppDelegate.swift in Sources */,
 				F624768C22C414C50066215E /* WeirdFace.xcdatamodeld in Sources */,
 			);
