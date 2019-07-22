@@ -138,6 +138,10 @@ class ViewController: UIViewController {
         let mainUIModel = MainUIModel()
         mainUIViewModel = MainUIViewModel(model: mainUIModel, delegate: self)
         
+        var instanceOfCustomObject: CustomObject = CustomObject()
+        instanceOfCustomObject.someProperty = "Hello World"
+        print(instanceOfCustomObject.someProperty)
+        instanceOfCustomObject.someMethod()
         
         configureButtonsAndViews()
 
@@ -657,7 +661,7 @@ extension ViewController: ARSCNViewDelegate {
              let modifier = try? String(contentsOf: shaderURL)
              else { fatalError("Can't load shader modifier from bundle.") }
              faceGeometry.shaderModifiers = [ .geometry: modifier]
-             
+            
              // Pass view-appropriate image transform to the shader modifier so
              // that the mapped video lines up correctly with the background video.
              let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)

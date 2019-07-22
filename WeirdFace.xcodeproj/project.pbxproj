@@ -24,6 +24,7 @@
 		F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476BA22C42D2A0066215E /* ImageExtensions.swift */; };
 		F62476BD22C436410066215E /* VideoTexturedFace.shader in Resources */ = {isa = PBXBuildFile; fileRef = F62476BC22C436410066215E /* VideoTexturedFace.shader */; };
 		F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658C2DD22C56ACD0005CF09 /* CustomViews.swift */; };
+		F659DF6B22E63350000E8A72 /* ShaderModifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = F659DF6A22E63350000E8A72 /* ShaderModifiers.m */; };
 		F65AE0F822E526F400DF5827 /* BigEyes.shader in Resources */ = {isa = PBXBuildFile; fileRef = F65AE0F722E526F400DF5827 /* BigEyes.shader */; };
 		F681840122D6B4C2003B89AB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F681840022D6B4C2003B89AB /* StoreKit.framework */; };
 		F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F681840422D6D06F003B89AB /* CustomExtensions.swift */; };
@@ -73,6 +74,9 @@
 		F62476BA22C42D2A0066215E /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		F62476BC22C436410066215E /* VideoTexturedFace.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VideoTexturedFace.shader; sourceTree = "<group>"; };
 		F658C2DD22C56ACD0005CF09 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
+		F659DF6922E63350000E8A72 /* WeirdFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeirdFace-Bridging-Header.h"; sourceTree = "<group>"; };
+		F659DF6A22E63350000E8A72 /* ShaderModifiers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaderModifiers.m; sourceTree = "<group>"; };
+		F659DF6C22E63D2B000E8A72 /* ShaderModifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderModifiers.h; sourceTree = "<group>"; };
 		F65AE0F722E526F400DF5827 /* BigEyes.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = BigEyes.shader; sourceTree = "<group>"; };
 		F681840022D6B4C2003B89AB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F681840422D6D06F003B89AB /* CustomExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 		F624768222C414C50066215E /* WeirdFace */ = {
 			isa = PBXGroup;
 			children = (
+				F659DF6822E63281000E8A72 /* Shaders */,
 				F6EAF5D722DBCA1B00F4F267 /* ViewControllers */,
 				F658C2DC22C56AB50005CF09 /* Views */,
 				F60EA44922C53D0C002BE1CD /* ViewModel */,
@@ -189,9 +194,7 @@
 			children = (
 				F62476BA22C42D2A0066215E /* ImageExtensions.swift */,
 				F681840422D6D06F003B89AB /* CustomExtensions.swift */,
-				F62476BC22C436410066215E /* VideoTexturedFace.shader */,
 				F6EA899622D001C6002935DB /* DataStructures.swift */,
-				F65AE0F722E526F400DF5827 /* BigEyes.shader */,
 			);
 			path = HelperClasses;
 			sourceTree = "<group>";
@@ -202,6 +205,18 @@
 				F658C2DD22C56ACD0005CF09 /* CustomViews.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F659DF6822E63281000E8A72 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				F65AE0F722E526F400DF5827 /* BigEyes.shader */,
+				F62476BC22C436410066215E /* VideoTexturedFace.shader */,
+				F659DF6A22E63350000E8A72 /* ShaderModifiers.m */,
+				F659DF6922E63350000E8A72 /* WeirdFace-Bridging-Header.h */,
+				F659DF6C22E63D2B000E8A72 /* ShaderModifiers.h */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 		F6C5B1A622C6D532003E4A33 /* Frameworks */ = {
@@ -290,6 +305,7 @@
 				TargetAttributes = {
 					F624767F22C414C50066215E = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -365,6 +381,7 @@
 				F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */,
 				F69A028A22D518FE00012BF6 /* ViewControllerUIExtension.swift in Sources */,
 				F60366FE22DA63890090470C /* MainUIModel.swift in Sources */,
+				F659DF6B22E63350000E8A72 /* ShaderModifiers.m in Sources */,
 				F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */,
 				F6EAF5D922DBCA4300F4F267 /* ViewControllerIAPExtension.swift in Sources */,
 				F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */,
@@ -549,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FXSK8WB9T;
 				INFOPLIST_FILE = WeirdFace/Info.plist;
@@ -558,6 +576,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.patpatchpatrick.FaceTattooArtist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeirdFace/Shaders/WeirdFace-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -567,6 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5FXSK8WB9T;
 				INFOPLIST_FILE = WeirdFace/Info.plist;
@@ -576,6 +597,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.patpatchpatrick.FaceTattooArtist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeirdFace/Shaders/WeirdFace-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
