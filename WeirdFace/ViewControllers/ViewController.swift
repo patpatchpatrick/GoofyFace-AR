@@ -95,11 +95,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var purchasePremiumButton: UIButton!
     @IBOutlet weak var restorePremiumButton: UIButton!
     
+    @IBOutlet weak var distortionSizeButton: RoundedButton!
+    @IBOutlet weak var distortionPositionButton: RoundedButton!
+    var distortionEditModeButtons: [UIButton] = []
     
     @IBOutlet weak var featuresSlider: UISlider!
     @IBOutlet weak var secondarySizeSubMenu: UIView!
     @IBOutlet weak var secondaryPositionSubMenu: UIView!
     @IBOutlet weak var secondaryScrollMenu: UIView!
+    
+    @IBOutlet weak var featureHeadButton: RoundedButton!
+    @IBOutlet weak var featureMouthButton: RoundedButton!
+    @IBOutlet weak var featureNoseButton: RoundedButton!
+    @IBOutlet weak var featureEyesButton: RoundedButton!
+    var featureButtons: [UIButton] = []
+    
+    @IBOutlet weak var positionXButton: RoundedButton!
+    @IBOutlet weak var positionYButton: RoundedButton!
+    @IBOutlet weak var positionZButton: RoundedButton!
+    var positionButtons: [UIButton] = []
     
     @IBOutlet weak var faceDistortScrollMenu: UIView!
     @IBOutlet weak var tattooScrollMenu: UIView!
@@ -510,7 +524,7 @@ class ViewController: UIViewController {
         if viewMode == modeChange {
             //Toggle mode select menu
             distortionViewModel?.hideAllSubMenus()
-            modeSelectMenu.isHidden = !modeSelectMenu.isHidden
+            distortionViewModel?.modeSelectMenuTapped()
         }
         
         //"Custom mode" - user can select custom tattooo
@@ -567,7 +581,7 @@ class ViewController: UIViewController {
         
         //Edit mode for facial distortion changed
         let editMode = sender.tag
-        distortionViewModel?.distortionEditModeChanged(editMode: editMode)
+        distortionViewModel?.distortionEditModeChanged(editMode: editMode, button: sender)
     }
     
     
@@ -578,7 +592,7 @@ class ViewController: UIViewController {
         
         //Update the current feature being edited
         let featureType = sender.tag
-        distortionViewModel?.setCurrentFeatureBeingEdited(feature: featureType)
+        distortionViewModel?.setCurrentFeatureBeingEdited(feature: featureType, button: sender)
         
     }
     
@@ -1014,6 +1028,60 @@ extension ViewController: MainUIViewModelViewDelegate{
 }
 
 extension ViewController: ARDistortionViewModelViewDelegate{
+    
+    func toggleFeatureSlider(hidden: Bool) {
+        featuresSlider.isHidden = hidden
+    }
+    
+    
+    func toggleModeSelectMenu() {
+        modeSelectMenu.isHidden = !modeSelectMenu.isHidden
+    }
+    
+    
+    func hideModeSelectMenu(){
+        modeSelectMenu.isHidden = true
+    }
+    
+    func resetFeaturesSlider() {
+        featuresSlider.setValue(1.0, animated: true)
+    }
+    
+    
+    func collapseSecondaryMenuIfExpanded() {
+        if !secondaryScrollMenu.isHidden {
+            secondaryScrollMenu.isHidden = true
+            hideAndResetFeaturesSlider()
+            distortionViewModel?.resetEditMode()
+        }
+    }
+    
+    
+    func unselectDistortionEditButtons() {
+        for button in distortionEditModeButtons {
+            configureButtonAsUnselected(button: button)
+        }
+    }
+    
+    
+    func unselectPositionButtons() {
+        for button in positionButtons {
+            configureButtonAsUnselected(button: button)
+        }
+    }
+    
+    
+    func unselectFeatureButtons() {
+        for button in featureButtons {
+            configureButtonAsUnselected(button: button)
+        }
+    }
+    
+    
+    func distortionButtonSelected(button: UIButton) {
+        configureButtonAsSelected(button: button)
+    }
+    
     
     func toggleSecondaryMenu(hidden: Bool) {
         secondaryScrollMenu.isHidden = hidden

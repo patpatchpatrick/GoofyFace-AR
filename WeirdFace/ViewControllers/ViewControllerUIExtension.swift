@@ -14,6 +14,32 @@ extension ViewController {
     
     func configureButtonsAndViews(){
         
+        addButtonsToArrays()
+        rotateFullScreenImages()
+    }
+    
+    func hideAndResetFeaturesSlider(){
+        featuresSlider.isHidden = true
+        featuresSlider.setValue(1.0, animated: false)
+    }
+    
+    func addButtonsToArrays(){
+        
+        distortionEditModeButtons.append(distortionSizeButton)
+        distortionEditModeButtons.append(distortionPositionButton)
+        
+        featureButtons.append(featureHeadButton)
+        featureButtons.append(featureMouthButton)
+        featureButtons.append(featureNoseButton)
+        featureButtons.append(featureEyesButton)
+        
+        positionButtons.append(positionXButton)
+        positionButtons.append(positionYButton)
+        positionButtons.append(positionZButton)
+        
+    }
+    
+    func addShadowsAndBordersToViews(){
         //Add shadow to all buttons
         addShadowToView(view: drawnImageFullScreenAcceptButton)
         addShadowToView(view: drawnImageFullScreenUndoButton)
@@ -53,7 +79,7 @@ extension ViewController {
         addShadowToView(view: transformHeaderButtons)
         addShadowToView(view: repositionButton)
         addShadowToView(view: resizeButton)
-        rotateFullScreenImages()
+        
     }
     
     func configureViewsForPremiumMode(isPremium: Bool ){
@@ -101,6 +127,20 @@ extension ViewController {
         view.layer.shadowOpacity = 0.8
         view.layer.shadowRadius = 2.0
         view.clipsToBounds = false
+    }
+    
+    func configureButtonAsSelected(button: UIButton){
+        if let button = button as? RoundedButton {
+            button.borderColor = UIColor.green
+            button.tintColor = UIColor.green
+        }
+    }
+    
+    func configureButtonAsUnselected(button: UIButton){
+        if let button = button as? RoundedButton {
+            button.borderColor = UIColor.white
+            button.tintColor = UIColor.white
+        }
     }
     
     func rotateFullScreenImages(){

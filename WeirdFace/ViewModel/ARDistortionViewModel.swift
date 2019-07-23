@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class ARDistortionViewModel : ARDistortionViewModelProtocol{
     
     var model: ARDistortionModel
     var viewDelegate: ARDistortionViewModelViewDelegate
     
-    var currentEditMode:Int = 0 //Current facial edit mode
+    var currentEditMode:Int = -1 //Current facial edit mode
     var currentAttribute:Int = 0 //Current feature being edited
     
     var headDistortion: Float = 1.0 //Magnitude of eye distortion
@@ -30,15 +31,25 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
         self.viewDelegate = delegate
     }
     
-    func distortionEditModeChanged(editMode: Int){
+    func resetEditMode(){
+        //When the edit menu is collapsed, set value back to default (-1)
+        currentEditMode = -1
+    }
+    
+    func distortionEditModeChanged(editMode: Int, button: UIButton){
         //Set up the views depending on the type of distortion edit mode that the user selected
+        //Unselect buttons, then select the one that was chosen corresponding to the edit mode that was selected
+        //Set the value of the current edit mode
+        let modeChanged = editMode != currentEditMode
+        viewDelegate.hideModeSelectMenu()
         currentEditMode = editMode
+        viewDelegate.unselectDistortionEditButtons()
+        viewDelegate.distortionButtonSelected(button: button)
         switch editMode {
         case facialSizeMode:
             viewDelegate.toggleSecondaryMenu(hidden: false)
             viewDelegate.toggleSecondarySizeSubMenu(hidden: false)
             viewDelegate.toggleSecondaryPositionSubMenu(hidden: true)
-          
         case facialPositionMode:
             viewDelegate.toggleSecondaryMenu(hidden: false)
             viewDelegate.toggleSecondarySizeSubMenu(hidden: true)
@@ -47,6 +58,18 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
             print("Default")
         }
         
+        if !modeChanged {
+            //If same button was tapped twice, collapse the secondary menu
+            viewDelegate.collapseSecondaryMenuIfExpanded()
+        }
+        
+    }
+    
+    func modeSelectMenuTapped(){
+        
+        hideAllSubMenus()
+        viewDelegate.toggleModeSelectMenu()
+        
     }
     
     func hideAllSubMenus(){
@@ -54,10 +77,19 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
         viewDelegate.toggleSecondaryMenu(hidden: true)
         viewDelegate.toggleSecondarySizeSubMenu(hidden: true)
         viewDelegate.toggleSecondaryPositionSubMenu(hidden: true)
+        viewDelegate.toggleFeatureSlider(hidden: true)
         
     }
     
-    func setCurrentFeatureBeingEdited(feature: Int){
+    func setCurrentFeatureBeingEdited(feature: Int, button: UIButton){
+        //Unselect buttons, then select the tapped button and mark the attribtue that was selected as the current attribute
+        if feature != currentAttribute {
+            //If attribute changed, reset the slider value to default
+            viewDelegate.resetFeaturesSlider()
+        }
+        viewDelegate.unselectPositionButtons()
+        viewDelegate.unselectFeatureButtons()
+        viewDelegate.distortionButtonSelected(button: button)
         currentAttribute = feature
     }
     

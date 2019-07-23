@@ -50,18 +50,18 @@ _geometry.position.x += 0.05;
 */
 
 // (LEFT EYE)
-if (_geometry.position.x < -0.01 && _geometry.position.x > -0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 && _geometry.position.z > 0.015) {
-_geometry.position.xyz *= eyeSize;
+if (_geometry.position.x < -0.01 && _geometry.position.x > -0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.06 && _geometry.position.z > 0.015) {
+_geometry.position.xy *= eyeSize;
 }
 
 // (RIGHT EYE)
-if (_geometry.position.x > 0.01 && _geometry.position.x < 0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.04 && _geometry.position.z > 0.015) {
-_geometry.position.xyz *= eyeSize;
+if (_geometry.position.x > 0.01 && _geometry.position.x < 0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.06 && _geometry.position.z > 0.015) {
+_geometry.position.xy *= eyeSize;
 }
 
 // (NOSE)
 if ((_geometry.position.x > -0.03 && _geometry.position.x < 0.03 && _geometry.position.y > -0.02 && _geometry.position.y < 0.04 && _geometry.position.z > 0.053)) {
-_geometry.position.xyz *= noseSize;
+_geometry.position.xy *= noseSize;
 }
 
 // (MOUTH)

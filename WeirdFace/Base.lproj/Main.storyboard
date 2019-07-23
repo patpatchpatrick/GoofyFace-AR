@@ -1046,7 +1046,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7sa-CP-JYI">
-                                                        <rect key="frame" x="10" y="10" width="340" height="60"/>
+                                                        <rect key="frame" x="10" y="10" width="270" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7A-5k-XfP" userLabel="Head" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -1142,30 +1142,6 @@
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a3l-TJ-cKQ"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8o-eg-9I0" userLabel="Head" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                                <rect key="frame" x="280" y="0.0" width="60" height="60"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="60" id="0Zz-vT-I5b"/>
-                                                                    <constraint firstAttribute="width" constant="60" id="jWn-37-Dux"/>
-                                                                </constraints>
-                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                                <state key="normal" image="iconHead"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="30"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="2"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="So7-Qa-SZP"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1570,6 +1546,8 @@
                         <outlet property="colorPickerButton" destination="zud-lK-KvL" id="T6S-2a-aa0"/>
                         <outlet property="colorPickerFullScreenButton" destination="ysR-mG-iEB" id="2g7-kF-lCq"/>
                         <outlet property="discardPreviewButton" destination="sfi-sb-gTv" id="Lr4-61-JGN"/>
+                        <outlet property="distortionPositionButton" destination="qJm-w1-0Mg" id="jZ2-Y9-Jce"/>
+                        <outlet property="distortionSizeButton" destination="53s-NF-0Ha" id="HFr-Xl-qYv"/>
                         <outlet property="drawButton" destination="SVk-z1-bU9" id="FQv-J0-AT2"/>
                         <outlet property="drawnImageAcceptButton" destination="SbI-J8-cpZ" id="vUD-Ib-93b"/>
                         <outlet property="drawnImageContainerView" destination="1ya-u3-Wpc" id="e8i-Dv-5Jc"/>
@@ -1583,10 +1561,17 @@
                         <outlet property="drawnImageViewFullScreenButton" destination="iwg-Pb-pdY" id="Yxf-MS-jfu"/>
                         <outlet property="drawnImageViewFullScreenContainer" destination="PJ4-Zp-aza" id="xS9-2t-bl0"/>
                         <outlet property="faceDistortScrollMenu" destination="jRy-gY-1u3" id="Ao4-gN-kLL"/>
+                        <outlet property="featureEyesButton" destination="9Qk-0V-Aqf" id="Axb-7z-zLf"/>
+                        <outlet property="featureHeadButton" destination="f7A-5k-XfP" id="5fJ-wR-orq"/>
+                        <outlet property="featureMouthButton" destination="253-cB-IKb" id="pxl-r9-93q"/>
+                        <outlet property="featureNoseButton" destination="WL5-ta-7ZY" id="7Vw-Ai-Qvk"/>
                         <outlet property="featuresSlider" destination="hB3-H4-vhC" id="NzF-Un-ju6"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="Adu-np-aql"/>
                         <outlet property="modeSelectMenu" destination="xbw-8W-X8U" id="uQA-XR-k5p"/>
                         <outlet property="placeButton" destination="Vce-c3-3e4" id="6IV-1t-NbM"/>
+                        <outlet property="positionXButton" destination="oxE-Eg-Z2W" id="ukA-tY-9Sa"/>
+                        <outlet property="positionYButton" destination="ScT-i0-2nF" id="Ogy-Fe-sj6"/>
+                        <outlet property="positionZButton" destination="Daw-bN-2hZ" id="Ljc-Yu-Grn"/>
                         <outlet property="previewImage" destination="ibE-UN-alx" id="lzp-q8-pv8"/>
                         <outlet property="previewImageContainer" destination="kNC-8r-omt" id="bLM-LD-Fe3"/>
                         <outlet property="purchasePremiumButton" destination="RmR-Wf-QIN" id="Y1F-Q4-UiL"/>
