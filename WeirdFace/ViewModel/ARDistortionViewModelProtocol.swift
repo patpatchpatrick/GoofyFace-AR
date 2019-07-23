@@ -10,7 +10,9 @@ import Foundation
 
 protocol ARDistortionViewModelViewDelegate: class
 {
-  
+    func toggleSecondaryMenu(hidden: Bool)
+    func toggleSecondarySizeSubMenu(hidden: Bool)
+    func toggleSecondaryPositionSubMenu(hidden: Bool)
 }
 
 

@@ -923,7 +923,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="R3O-VZ-385">
-                                                        <rect key="frame" x="10" y="10" width="130" height="60"/>
+                                                        <rect key="frame" x="10" y="10" width="200" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86h-sq-pVK" userLabel="Mode" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -957,7 +957,7 @@
                                                                 </constraints>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
-                                                                <state key="normal" image="iconFaceDistort"/>
+                                                                <state key="normal" image="iconResize"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="30"/>
@@ -970,7 +970,31 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="faceFeatureDistortionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p2Q-Dz-VFl"/>
+                                                                    <action selector="distortionEditModeChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p2Q-Dz-VFl"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJm-w1-0Mg" userLabel="Position" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="140" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="MDl-yn-xBZ"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="pRl-Uc-mj9"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconReposition"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="distortionEditModeChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i91-XI-8Ha"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1022,10 +1046,34 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7sa-CP-JYI">
-                                                        <rect key="frame" x="10" y="10" width="130" height="60"/>
+                                                        <rect key="frame" x="10" y="10" width="340" height="60"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qk-0V-Aqf" userLabel="Eyes" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7A-5k-XfP" userLabel="Head" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="RfG-gg-hez"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="z7H-YZ-tN4"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="iconHead"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W7o-h8-l4R"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qk-0V-Aqf" userLabel="Eyes" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="70" y="0.0" width="60" height="60"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="60" id="FEo-jw-tPp"/>
                                                                     <constraint firstAttribute="height" constant="60" id="xd8-di-43p"/>
@@ -1048,8 +1096,8 @@
                                                                     <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K0f-vR-USf"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL5-ta-7ZY" userLabel="SelectButton" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
-                                                                <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL5-ta-7ZY" userLabel="Nose" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="140" y="0.0" width="60" height="60"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="60" id="5D2-9Q-1WP"/>
                                                                     <constraint firstAttribute="height" constant="60" id="ADM-J1-Iuo"/>
@@ -1070,6 +1118,54 @@
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dCI-Po-rh1"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="253-cB-IKb" userLabel="Mouth" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="210" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="MWq-DE-awT"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="zuz-YR-nvc"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="iconMouth"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a3l-TJ-cKQ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8o-eg-9I0" userLabel="Head" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="280" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="0Zz-vT-I5b"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="jWn-37-Dux"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" image="iconHead"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="So7-Qa-SZP"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1097,12 +1193,122 @@
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="TyW-GZ-LRJ"/>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-Yi-KbO" userLabel="PosScrollMenu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-Zt-je6">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jzv-p8-EJK">
+                                                        <rect key="frame" x="10" y="10" width="200" height="60"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxE-Eg-Z2W" userLabel="x" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="Wzv-Yy-j4A"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="YZ2-XX-PSV"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconXPos"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KIf-YW-rYh"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ScT-i0-2nF" userLabel="y" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="70" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="SCf-kL-29j"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="la5-s3-lDx"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconYPos"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aeo-po-LnD"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-bN-2hZ" userLabel="z" customClass="RoundedButton" customModule="WeirdFace" customModuleProvider="target">
+                                                                <rect key="frame" x="140" y="0.0" width="60" height="60"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="6zk-qq-Skr"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="Rm2-g1-YQA"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                                                                <state key="normal" image="iconZPos"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="30"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="facialFeatureButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hp5-UQ-COB"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="0md-sI-KBF"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Jzv-p8-EJK" firstAttribute="top" secondItem="I2a-Zt-je6" secondAttribute="top" constant="10" id="3aQ-oA-Az9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Jzv-p8-EJK" secondAttribute="trailing" id="YC3-tE-rIq"/>
+                                                    <constraint firstItem="Jzv-p8-EJK" firstAttribute="leading" secondItem="I2a-Zt-je6" secondAttribute="leading" constant="10" id="gZI-nH-1a0"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Jzv-p8-EJK" secondAttribute="bottom" id="jfo-vN-jAe"/>
+                                                </constraints>
+                                            </scrollView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="I2a-Zt-je6" firstAttribute="leading" secondItem="K4H-Yi-KbO" secondAttribute="leading" id="G0d-7v-02O"/>
+                                            <constraint firstItem="I2a-Zt-je6" firstAttribute="top" secondItem="K4H-Yi-KbO" secondAttribute="top" id="OzN-Kb-B5D"/>
+                                            <constraint firstAttribute="height" constant="80" id="P3f-xc-rEO"/>
+                                            <constraint firstAttribute="bottom" secondItem="I2a-Zt-je6" secondAttribute="bottom" id="dar-0c-UhK"/>
+                                            <constraint firstAttribute="trailing" secondItem="I2a-Zt-je6" secondAttribute="trailing" id="ic1-M0-cFX"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="ihZ-CW-XOu"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="7f6-QU-CPd" secondAttribute="trailing" id="1eq-42-QsZ"/>
+                                    <constraint firstItem="K4H-Yi-KbO" firstAttribute="bottom" secondItem="Zcq-0M-8m5" secondAttribute="bottom" id="AGD-YK-CBw"/>
                                     <constraint firstAttribute="bottom" secondItem="7f6-QU-CPd" secondAttribute="bottom" id="Py7-aB-NxG"/>
+                                    <constraint firstItem="K4H-Yi-KbO" firstAttribute="trailing" secondItem="Zcq-0M-8m5" secondAttribute="trailing" id="UYi-td-9vi"/>
                                     <constraint firstItem="7f6-QU-CPd" firstAttribute="top" secondItem="nRW-OU-7tb" secondAttribute="top" id="dvs-Rn-hQI"/>
+                                    <constraint firstItem="K4H-Yi-KbO" firstAttribute="leading" secondItem="Zcq-0M-8m5" secondAttribute="leading" id="ex0-xo-udi"/>
+                                    <constraint firstItem="K4H-Yi-KbO" firstAttribute="top" secondItem="Zcq-0M-8m5" secondAttribute="top" id="tXt-cp-k7J"/>
                                     <constraint firstAttribute="height" constant="80" id="vdF-Ve-vMh"/>
                                     <constraint firstItem="7f6-QU-CPd" firstAttribute="leading" secondItem="nRW-OU-7tb" secondAttribute="leading" id="ysD-fm-utG"/>
                                 </constraints>
@@ -1394,7 +1600,9 @@
                         <outlet property="rotateButtonContainer" destination="xWm-n3-nhy" id="BoD-US-9kk"/>
                         <outlet property="sceneView" destination="Atl-Lq-BB2" id="681-It-zbq"/>
                         <outlet property="scrollMenu" destination="buR-5Y-1uS" id="Iss-8i-iDn"/>
+                        <outlet property="secondaryPositionSubMenu" destination="K4H-Yi-KbO" id="UhK-fK-CCF"/>
                         <outlet property="secondaryScrollMenu" destination="nRW-OU-7tb" id="5mg-0x-e8N"/>
+                        <outlet property="secondarySizeSubMenu" destination="7f6-QU-CPd" id="clO-kV-hWg"/>
                         <outlet property="selectButton" destination="MGM-vY-8fH" id="ABK-AN-GkC"/>
                         <outlet property="settingsButton" destination="wwP-Vh-OFo" id="LdB-0F-EUQ"/>
                         <outlet property="settingsContainer" destination="hwc-Ru-ufZ" id="aWL-oj-WjA"/>
@@ -1452,8 +1660,10 @@
         <image name="iconEyes" width="100" height="100"/>
         <image name="iconFaceDistort" width="96" height="96"/>
         <image name="iconFullScreenLocked" width="90" height="90"/>
+        <image name="iconHead" width="96" height="96"/>
         <image name="iconLeftRotate" width="96" height="96"/>
         <image name="iconMinus" width="52" height="52"/>
+        <image name="iconMouth" width="100" height="100"/>
         <image name="iconNose" width="90" height="90"/>
         <image name="iconPositionTab" width="100" height="100"/>
         <image name="iconRemoveWatermark" width="96" height="96"/>
@@ -1471,6 +1681,9 @@
         <image name="iconTattooTab" width="100" height="100"/>
         <image name="iconUndo" width="96" height="96"/>
         <image name="iconUploadTab" width="96" height="96"/>
+        <image name="iconXPos" width="100" height="100"/>
+        <image name="iconYPos" width="100" height="100"/>
+        <image name="iconZPos" width="100" height="100"/>
         <image name="minusIconDouble" width="52" height="52"/>
         <image name="plusIcon" width="52" height="52"/>
         <image name="plusIconDouble" width="52" height="52"/>

@@ -10,6 +10,11 @@ SceneKit shader (geometry) modifier for texture mapping ARKit camera video onto 
 float4x4 displayTransform // from ARFrame.displayTransform(for:viewportSize:)
 float eyeSize = 1.0;
 float noseSize = 1.0;
+float mouthSize = 1.0;
+float headSize = 1.0;
+float xPos = 1.0;
+float yPos = 1.0;
+float zPos = 1.0;
 
 #pragma body
 
@@ -59,9 +64,17 @@ if ((_geometry.position.x > -0.03 && _geometry.position.x < 0.03 && _geometry.po
 _geometry.position.xyz *= noseSize;
 }
 
+// (MOUTH)
+if ((_geometry.position.x > -0.04 && _geometry.position.x < 0.04 && _geometry.position.y > -0.09 && _geometry.position.y < -0.04 && _geometry.position.z > 0.01)) {
+_geometry.position.x *= mouthSize;
+_geometry.position.y *= mouthSize;
+_geometry.position.z *= mouthSize;
+}
 
+// (HEAD)
+_geometry.position.xyz *= headSize;
 
-
-
-
-_geometry.position.xyz *= 1.0;
+// (HEAD POSITION)
+_geometry.position.x += xPos/10;
+_geometry.position.y += yPos/10;
+_geometry.position.z += zPos/10;

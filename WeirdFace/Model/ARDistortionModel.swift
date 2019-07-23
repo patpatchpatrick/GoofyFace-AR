@@ -9,9 +9,21 @@
 import Foundation
 
 //Model for AR Face Distortion
+
+//Primary Facial Edit Modes
+let facialSizeMode = 0
+let facialPositionMode = 1
+
 //Facial Feature Types
+let featureHead = -1
 let featureEyes = 0
 let featureNose = 1
+let featureMouth = 2
+
+//Positions
+let headXPosition = 0
+let headYPosition = 1
+let headZPosition = 2
 
 public class ARDistortionModel {
     

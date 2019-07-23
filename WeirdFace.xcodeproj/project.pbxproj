@@ -29,6 +29,7 @@
 		F676747622E670190012A4BB /* ARDistortionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747522E670190012A4BB /* ARDistortionModel.swift */; };
 		F676747822E670560012A4BB /* ARDistortionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747722E670560012A4BB /* ARDistortionViewModel.swift */; };
 		F676747A22E670920012A4BB /* ARDistortionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */; };
+		F676747C22E684A20012A4BB /* ViewControllerARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747B22E684A20012A4BB /* ViewControllerARDelegate.swift */; };
 		F681840122D6B4C2003B89AB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F681840022D6B4C2003B89AB /* StoreKit.framework */; };
 		F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F681840422D6D06F003B89AB /* CustomExtensions.swift */; };
 		F69A028A22D518FE00012BF6 /* ViewControllerUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69A028922D518FE00012BF6 /* ViewControllerUIExtension.swift */; };
@@ -84,6 +85,7 @@
 		F676747522E670190012A4BB /* ARDistortionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionModel.swift; sourceTree = "<group>"; };
 		F676747722E670560012A4BB /* ARDistortionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionViewModel.swift; sourceTree = "<group>"; };
 		F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionViewModelProtocol.swift; sourceTree = "<group>"; };
+		F676747B22E684A20012A4BB /* ViewControllerARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerARDelegate.swift; sourceTree = "<group>"; };
 		F681840022D6B4C2003B89AB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F681840422D6D06F003B89AB /* CustomExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
 		F69A028922D518FE00012BF6 /* ViewControllerUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUIExtension.swift; sourceTree = "<group>"; };
@@ -134,8 +136,8 @@
 				F60366F922DA61FA0090470C /* MainUIViewModel.swift */,
 				F60366FB22DA631E0090470C /* MainUIViewModelProtocol.swift */,
 				F60366FF22DA833F0090470C /* ARImageViewModelProtocol.swift */,
-				F676747722E670560012A4BB /* ARDistortionViewModel.swift */,
 				F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */,
+				F676747722E670560012A4BB /* ARDistortionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -242,6 +244,7 @@
 				F624768522C414C50066215E /* ViewController.swift */,
 				F69A028922D518FE00012BF6 /* ViewControllerUIExtension.swift */,
 				F6EAF5D822DBCA4300F4F267 /* ViewControllerIAPExtension.swift */,
+				F676747B22E684A20012A4BB /* ViewControllerARDelegate.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				F60EA44B22C53D21002BE1CD /* ARImageViewModel.swift in Sources */,
 				F6EA899722D001C6002935DB /* DataStructures.swift in Sources */,
 				F60366FC22DA631E0090470C /* MainUIViewModelProtocol.swift in Sources */,
+				F676747C22E684A20012A4BB /* ViewControllerARDelegate.swift in Sources */,
 				F603670022DA833F0090470C /* ARImageViewModelProtocol.swift in Sources */,
 				F676747822E670560012A4BB /* ARDistortionViewModel.swift in Sources */,
 				F676747622E670190012A4BB /* ARDistortionModel.swift in Sources */,
