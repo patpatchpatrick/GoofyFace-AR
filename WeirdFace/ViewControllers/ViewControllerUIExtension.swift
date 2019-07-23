@@ -16,6 +16,7 @@ extension ViewController {
         
         addButtonsToArrays()
         rotateFullScreenImages()
+        addShadowsAndBordersToViews()
     }
     
     func hideAndResetFeaturesSlider(){
@@ -56,7 +57,6 @@ extension ViewController {
         addShadowToView(view: colorPickerFullScreenButton)
         addDeepShadowToView(view: drawnImageAcceptButton)
         addDeepShadowToView(view: drawnImageDiscardButton)
-        addShadowToView(view: resetButton)
         addDeepShadowToView(view: uploadImageDiscardButton)
         addDeepShadowToView(view: uploadImageAcceptButton)
         addDeepShadowToView(view: transformLeftButton)
@@ -77,15 +77,14 @@ extension ViewController {
         addDeepShadowToView(view: transformSelectSizeButton)
         addDeepShadowToView(view: discardPreviewButton)
         addDeepShadowToView(view: removeWatermarkButton)
+        addShadowToView(view: resetButton)
         addShadowToView(view: settingsButton)
         
         scrollMenu.addTopBorderWithColor(color: UIColor.white, width: 1.0)
         
         addShadowToView(view: settingsContainer)
         addShadowToView(view: drawnImageFullScreenRotateMessage)
-        addShadowToView(view: transformHeaderButtons)
-        addShadowToView(view: repositionButton)
-        addShadowToView(view: resizeButton)
+        addShadowToView(view: secondaryTattooTransformSubMenu)
         
     }
     

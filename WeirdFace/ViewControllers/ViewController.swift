@@ -25,9 +25,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var transformPrimaryContainer: UIView!
     
-    @IBOutlet weak var transformHeaderButtons: UIView!
-    @IBOutlet weak var repositionButton: UIButton!
-    @IBOutlet weak var resizeButton: UIButton!
+    
+    @IBOutlet weak var secondaryTattooTransformSubMenu: UIView!
     @IBOutlet weak var sizePicker: UIPickerView!
     @IBOutlet weak var acceptSizeButton: UIButton!
     @IBOutlet weak var repositionButtonContainer: UIView!
@@ -373,6 +372,7 @@ class ViewController: UIViewController {
         //Reset the screen and remove all tattoos
         
         tattooViewModel?.reset()
+        distortionViewModel?.reset()
   
     }
     
@@ -602,6 +602,13 @@ class ViewController: UIViewController {
         distortionViewModel?.featureSliderValueUpdated(value: sender.value)
     }
     
+    
+    @IBAction func hideTransformControls(_ sender: UIButton) {
+        
+        secondaryScrollMenu.isHidden = true
+        secondaryTattooTransformSubMenu.isHidden = true
+        transformPrimaryContainer.isHidden = true
+    }
     
 }
 
@@ -856,6 +863,8 @@ extension ViewController: ARImageViewModelViewDelegate{
         sizePicker.isHidden = true
         acceptSizeButton.isHidden = true
         tattooViewModel?.positionType = .manual
+        secondaryScrollMenu.isHidden = false
+        secondaryTattooTransformSubMenu.isHidden = false
         transformPrimaryContainer.isHidden = false
         acceptPositionButton.isHidden = true
         addButton.isEnabled = true
@@ -878,6 +887,13 @@ extension ViewController: MainUIViewModelViewDelegate{
         acceptSizeButton.isHidden = true
         tattooTypePicker.isHidden = true
         sizePicker.isHidden = true
+        secondaryScrollMenu.isHidden = true
+        secondaryTattooTransformSubMenu.isHidden = true
+        transformPrimaryContainer.isHidden = true
+        drawnImageContainerView.isHidden = true
+        uploadedImageContainer.isHidden = true
+        drawnImageViewFullScreenContainer.isHidden = true
+        hideImagePreview()
     }
     
     

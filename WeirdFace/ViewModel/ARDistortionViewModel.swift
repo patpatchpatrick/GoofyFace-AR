@@ -72,6 +72,21 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
         
     }
     
+    func reset(){
+        
+        //Reset positions/sizes
+        
+        headDistortion = 1.0
+        eyeDistortion = 1.0
+        noseDistortion = 1.0
+        mouthDistortion = 1.0
+        
+        headCurrentXPosition = 0.0
+        headCurrentYPosition = 0.0
+        headCurrentZPosition = 0.0
+        
+    }
+    
     func hideAllSubMenus(){
         
         viewDelegate.toggleSecondaryMenu(hidden: true)
@@ -119,14 +134,11 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
     }
     
     func updateFacialPositionValues(value: Float){
-        print("UPDATE FACIAL POSITION")
-        print(headCurrentXPosition)
-        print(headCurrentYPosition)
-        print(headCurrentZPosition)
+        //For positions, subtract 1.5 (since the slider values go from 0 - 3.0, 1.5 is subtracted because the position should move left/negative if less than halfway and right/positive if more than halfway
         switch currentAttribute{
-        case headXPosition: headCurrentXPosition = value/2.0
-        case headYPosition: headCurrentYPosition = value/2.0
-        case headZPosition: headCurrentZPosition = value/2.0
+        case headXPosition: headCurrentXPosition = (value - 1.5) * 2.0
+        case headYPosition: headCurrentYPosition = (value - 1.5) * 2.0
+        case headZPosition: headCurrentZPosition = (value - 1.5) * 2.0
         default: print("Default")
         }
     
