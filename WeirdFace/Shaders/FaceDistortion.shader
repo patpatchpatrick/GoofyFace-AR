@@ -65,10 +65,8 @@ _geometry.position.xy *= noseSize;
 }
 
 // (MOUTH)
-if ((_geometry.position.x > -0.04 && _geometry.position.x < 0.04 && _geometry.position.y > -0.09 && _geometry.position.y < -0.04 && _geometry.position.z > 0.01)) {
-_geometry.position.x *= mouthSize;
-_geometry.position.y *= mouthSize;
-_geometry.position.z *= mouthSize;
+if (( _geometry.position.y < -0.03 && _geometry.position.z > 0.01)) {
+_geometry.position.xy *= mouthSize;
 }
 
 // (HEAD)

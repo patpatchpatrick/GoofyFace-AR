@@ -125,6 +125,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var placeButton: RoundedButton!
     @IBOutlet weak var addButton: RoundedButton!
     @IBOutlet weak var shareButton: RoundedButton!
+    var tattooButtons: [UIButton] = []
     
     var tattooViewModel: ARImageViewModel?
     var mainUIViewModel: MainUIViewModel?
@@ -523,23 +524,24 @@ class ViewController: UIViewController {
         //"Change mode" - user can change the app mode
         if viewMode == modeChange {
             //Toggle mode select menu
+            mainUIViewModel?.hideAllTattooSubMenus()
             distortionViewModel?.hideAllSubMenus()
             distortionViewModel?.modeSelectMenuTapped()
         }
         
         //"Custom mode" - user can select custom tattooo
         if viewMode == modeCustom {
-            mainUIViewModel?.tattooModeChanged(mode: .custom)
+            mainUIViewModel?.tattooModeChanged(mode: .custom, button: sender)
         }
         
         //"Draw mode" - user can draw their own tattoo
         if viewMode == modeDraw {
-            mainUIViewModel?.tattooModeChanged(mode: .draw)
+            mainUIViewModel?.tattooModeChanged(mode: .draw, button: sender)
         }
         
         //"Upload mode" - user can upload their own tattoo
         if viewMode == modeUpload {
-            mainUIViewModel?.tattooModeChanged(mode: .upload)
+            mainUIViewModel?.tattooModeChanged(mode: .upload, button: sender)
         }
         
         //"Position mode" - User can position/transform the tattoo
@@ -547,13 +549,13 @@ class ViewController: UIViewController {
             tattooViewModel?.arPickerType = .position
             tattooViewModel?.positionType = .auto
             tattooViewModel?.displayPositionMap()
-            mainUIViewModel?.tattooModeChanged(mode: .position)
+            mainUIViewModel?.tattooModeChanged(mode: .position, button: sender)
         }
         
         //"Place Mode" - User can place the tattoo and commit the changes (i.e. commit the tattoo to the user's face)
         if viewMode == modePlace {
             tattooViewModel?.commitTattoo()
-            mainUIViewModel?.tattooModeChanged(mode: .place)
+            mainUIViewModel?.tattooModeChanged(mode: .place, button: sender)
         }
         
         //"Share Mode" - Save image to user's gallery or share via any other apps
@@ -561,7 +563,7 @@ class ViewController: UIViewController {
             let previewWindowOpen = !previewImageContainer.isHidden
             //Capture image of user
             let selectedImage = sceneView.snapshot()
-            mainUIViewModel?.tattooModeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage)
+            mainUIViewModel?.tattooModeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage, button: sender)
             
         }
     }
@@ -871,6 +873,25 @@ extension ViewController: ARImageViewModelViewDelegate{
 
 extension ViewController: MainUIViewModelViewDelegate{
     
+    func hideTattooSubMenus() {
+        acceptPositionButton.isHidden = true
+        acceptSizeButton.isHidden = true
+        tattooTypePicker.isHidden = true
+        sizePicker.isHidden = true
+    }
+    
+    
+    func unselectAllButtons() {
+        for button in tattooButtons {
+            configureButtonAsUnselected(button: button)
+        }
+    }
+    
+    func selectButton(button: UIButton) {
+        configureButtonAsSelected(button: button)
+    }
+    
+    
     //Main app mode changed (between tattoo and face distort)
     //Show appropriate menus
     func mainAppModeChanged(to mode: Int) {
@@ -1022,8 +1043,6 @@ extension ViewController: MainUIViewModelViewDelegate{
             self.buyInAppPurchases()
         }
     }
-    
-    
     
 }
 

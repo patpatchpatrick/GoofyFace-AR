@@ -30,11 +30,16 @@ class MainUIViewModel : MainUIViewModelProtocol{
         self.appMode = appMode
     }
     
-    func tattooModeChanged(mode: Mode){
+    func tattooModeChanged(mode: Mode, button: UIButton){
+        self.viewDelegate.unselectAllButtons()
+        self.viewDelegate.selectButton(button: button)
         self.viewDelegate.tattooModeChanged(to: mode, self)
     }
     
-    func tattooModeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?){
+    func tattooModeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?, button: UIButton){
+        
+        self.viewDelegate.unselectAllButtons()
+        self.viewDelegate.selectButton(button: button)
         
         if previewWindowOpen {
             //If user clicks share button while the preview window is still open, reload the shareImage menu
@@ -113,6 +118,13 @@ class MainUIViewModel : MainUIViewModelProtocol{
         let unlocked = model.premiumModePurchased
         viewDelegate.setViewsForColorPicker(unlocked: unlocked)
     }
+    
+    func hideAllTattooSubMenus(){
+        
+        viewDelegate.hideTattooSubMenus()
+    }
+    
+    
 }
     
     

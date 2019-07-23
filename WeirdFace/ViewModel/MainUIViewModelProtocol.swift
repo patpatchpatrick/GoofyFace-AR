@@ -20,7 +20,10 @@ protocol MainUIViewModelViewDelegate: class
     func setAndShowPreviewImage(image: UIImage)
     func setViewsForFullScreenDrawnImage(unlocked: Bool)
     func setViewsForColorPicker(unlocked: Bool)
-
+    func unselectAllButtons()
+    func selectButton(button: UIButton)
+    func hideTattooSubMenus()
+    
 }
 
 

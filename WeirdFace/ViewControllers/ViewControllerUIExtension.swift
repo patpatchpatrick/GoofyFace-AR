@@ -25,6 +25,13 @@ extension ViewController {
     
     func addButtonsToArrays(){
         
+        tattooButtons.append(selectButton)
+        tattooButtons.append(drawButton)
+        tattooButtons.append(uploadButton)
+        tattooButtons.append(placeButton)
+        tattooButtons.append(addButton)
+        tattooButtons.append(shareButton)
+        
         distortionEditModeButtons.append(distortionSizeButton)
         distortionEditModeButtons.append(distortionPositionButton)
         
