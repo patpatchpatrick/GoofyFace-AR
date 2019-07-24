@@ -113,6 +113,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var positionZButton: RoundedButton!
     var positionButtons: [UIButton] = []
     
+    
+    @IBOutlet weak var tattooRepositionButton: RoundedButton!
+    
+    @IBOutlet weak var tattooResizeButton: RoundedButton!
+    @IBOutlet weak var tattooRotateButton: RoundedButton!
+    var tattooTransformButtons: [UIButton] = []
+    
     @IBOutlet weak var faceDistortScrollMenu: UIView!
     @IBOutlet weak var tattooScrollMenu: UIView!
     @IBOutlet weak var modeSelectMenu: UIView!
@@ -485,6 +492,7 @@ class ViewController: UIViewController {
         //Hide other transform containers
         resizeButtonContainer.isHidden = true
         rotateButtonContainer.isHidden = true
+        mainUIViewModel?.transformButtonSelected(button: sender)
     }
     
     @IBAction func resizeButtonTapped(_ sender: UIButton) {
@@ -496,6 +504,7 @@ class ViewController: UIViewController {
         //Hide other transform containers
         repositionButtonContainer.isHidden = true
         rotateButtonContainer.isHidden = true
+        mainUIViewModel?.transformButtonSelected(button: sender)
     }
     
     @IBAction func rotateHeaderButtonTapped(_ sender: UIButton) {
@@ -504,7 +513,7 @@ class ViewController: UIViewController {
         //Hide other transform containers
         repositionButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
-        
+        mainUIViewModel?.transformButtonSelected(button: sender)
     }
     
     
@@ -920,6 +929,9 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     func unselectAllButtons() {
         for button in tattooMainMenuButtons {
+            configureButtonAsUnselected(button: button)
+        }
+        for button in tattooTransformButtons {
             configureButtonAsUnselected(button: button)
         }
     }

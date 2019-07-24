@@ -135,6 +135,11 @@ class MainUIViewModel : MainUIViewModelProtocol{
         self.viewDelegate.unselectAllButtons()
     }
     
+    func transformButtonSelected(button: UIButton){
+        viewDelegate.unselectAllButtons()
+        viewDelegate.selectButton(button: button)
+    }
+    
     
 }
     

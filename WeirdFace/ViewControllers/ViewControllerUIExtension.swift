@@ -55,6 +55,10 @@ extension ViewController {
         positionButtons.append(positionYButton)
         positionButtons.append(positionZButton)
         
+        tattooTransformButtons.append(tattooResizeButton)
+        tattooTransformButtons.append(tattooRepositionButton)
+        tattooTransformButtons.append(tattooRotateButton)
+        
     }
     
     func addShadowsAndBordersToViews(){

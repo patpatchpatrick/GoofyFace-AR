@@ -1730,6 +1730,9 @@
                         <outlet property="settingsContainer" destination="hwc-Ru-ufZ" id="aWL-oj-WjA"/>
                         <outlet property="shareButton" destination="318-sH-wrI" id="Ltr-YC-Atz"/>
                         <outlet property="sizePicker" destination="fH5-aY-pnB" id="2LT-3d-TWg"/>
+                        <outlet property="tattooRepositionButton" destination="Foh-re-sa3" id="e8r-om-Ka7"/>
+                        <outlet property="tattooResizeButton" destination="VdH-5z-Dx0" id="dBW-tN-QII"/>
+                        <outlet property="tattooRotateButton" destination="Vgh-hy-v2e" id="zB3-U6-ChH"/>
                         <outlet property="tattooScrollMenu" destination="ZYD-py-DKC" id="BFq-bT-Iub"/>
                         <outlet property="tattooTypeButton" destination="dIG-gA-9hn" id="dHY-U1-eWC"/>
                         <outlet property="tattooTypePicker" destination="And-L5-wPD" id="i5R-CJ-hqs"/>
