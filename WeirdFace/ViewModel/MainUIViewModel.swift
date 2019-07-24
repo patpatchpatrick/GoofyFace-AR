@@ -11,11 +11,12 @@ import UIKit
 
 class MainUIViewModel : MainUIViewModelProtocol{
     
+    
     var appMode = 0
     var appModeChanged = false
     var model: MainUIModel
     var viewDelegate: MainUIViewModelViewDelegate
-    
+    var recording = false
     
     init(model: MainUIModel, delegate: MainUIViewModelViewDelegate ) {
         self.model = model
@@ -140,6 +141,22 @@ class MainUIViewModel : MainUIViewModelProtocol{
     func transformButtonSelected(button: UIButton){
         viewDelegate.unselectAllButtons()
         viewDelegate.selectButton(button: button)
+    }
+    
+    func recordButtonTapped(){
+        if !recording {
+            startRecording()
+        } else {
+            stopRecording()
+        }
+    }
+    
+    func startRecording(){
+        viewDelegate.startScreenRecording()
+    }
+    
+    func stopRecording(){
+        viewDelegate.stopScreenRecording()
     }
     
     

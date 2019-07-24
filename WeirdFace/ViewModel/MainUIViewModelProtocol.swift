@@ -25,6 +25,8 @@ protocol MainUIViewModelViewDelegate: class
     func hideTattooSubMenus()
     func toggleTattooModeMenu()
     func hideSecondaryMenu()
+    func startScreenRecording()
+    func stopScreenRecording()
     
 }
 

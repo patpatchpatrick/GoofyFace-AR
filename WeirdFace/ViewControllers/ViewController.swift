@@ -10,6 +10,8 @@ import UIKit
 import ARKit
 import SceneKit
 import StoreKit
+import ReplayKit
+import AVKit
 
 class ViewController: UIViewController {
     
@@ -131,15 +133,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var addButton: RoundedButton!
     @IBOutlet weak var shareButton: RoundedButton!
     @IBOutlet weak var tattooTypeButton: RoundedButton!
+    @IBOutlet weak var stopRecordButton: RoundedButton!
+    
     var tattooMainMenuButtons: [UIButton] = []
     
     var tattooViewModel: ARImageViewModel?
     var mainUIViewModel: MainUIViewModel?
     var distortionViewModel: ARDistortionViewModel?
-    
-    let sr = ScreenRecorder()
-    var startRecording = false
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -535,20 +535,7 @@ class ViewController: UIViewController {
         viewMode = sender.tag
         
         if viewMode == modeRecord {
-            print("RECORDING")
-            startRecording = !startRecording
-            if startRecording{
-                sr.startRecording(withFileName: "Test", recordingHandler: {
-                    error in
-                    print("START" + error.debugDescription)
-                })
-            } else {
-                sr.stopRecording(isBack: false, aPathName: "Test", handler: {
-                    error in
-                    print("STOP" + error.debugDescription)
-                })
-            }
-           
+            mainUIViewModel?.recordButtonTapped()
         }
         
         //"Change mode" - user can change the app mode
@@ -928,6 +915,16 @@ extension ViewController: ARImageViewModelViewDelegate{
 }
 
 extension ViewController: MainUIViewModelViewDelegate{
+    
+    
+    func startScreenRecording() {
+        rpStartRecording()
+    }
+    
+    func stopScreenRecording() {
+        rpStopRecording()
+    }
+    
     func hideSecondaryMenu() {
         secondaryScrollMenu.isHidden = true
         secondaryTattooModeSubMenu.isHidden = true
@@ -1196,7 +1193,79 @@ extension ViewController: ARDistortionViewModelViewDelegate{
     func toggleSecondaryPositionSubMenu(hidden: Bool) {
         secondaryPositionSubMenu.isHidden = hidden
     }
+
     
+}
+
+extension ViewController: RPPreviewViewControllerDelegate{
+    
+    //Start screen recording with replaykit and set buttons to appropriate icons
+    func rpStartRecording() {
+        let recorder = RPScreenRecorder.shared()
+        recorder.isMicrophoneEnabled = true
+        recorder.startRecording(withMicrophoneEnabled: true) { [unowned self] (error) in
+            if let unwrappedError = error {
+                print(unwrappedError.localizedDescription)
+            } else {
+                self.mainUIViewModel?.recording = true
+                
+                DispatchQueue.main.async {
+                    self.stopRecordButton.isHidden = false
+                    self.hideAllViewsAndButtonsForRecording()
+                }
+                
+                
+            }
+        }
+    }
+    
+    //Start screen recording with replaykit and set buttons to appropriate icons
+    //Show preview window for user to decide to share/save/delete recording
+    func rpStopRecording() {
+        let recorder = RPScreenRecorder.shared()
+        recorder.isMicrophoneEnabled = true
+        recorder.stopRecording { [unowned self] (preview, error) in
+            if let error = error {
+                print("STOP REC ERROR")
+                print(error.localizedDescription)
+            } else {
+                self.mainUIViewModel?.recording = false
+                
+                DispatchQueue.main.async {
+                    self.restoreViewsAfterFinishedRecording()
+                }
+                
+                if let unwrappedPreview = preview {
+                    
+                    unwrappedPreview.previewControllerDelegate = self
+                    self.present(unwrappedPreview, animated: true, completion: nil)
+                }
+            }
+            
+        }
+    }
+    
+    //Dismiss preview view controller when user cancels/saves preview
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        previewController.dismiss(animated: true, completion: {})
+    }
+    
+    func hideAllViewsAndButtonsForRecording(){
+        hideButtonsForSnapshot()
+        hideSecondaryMenu()
+        hideTattooSubMenus()
+        hideImagePreview()
+        resetButton.isHidden = true
+        settingsButton.isHidden = true
+        scrollMenu.isHidden = true
+    }
+    
+    func restoreViewsAfterFinishedRecording(){
+        scrollMenu.isHidden = false
+        resetButton.isHidden = false
+        settingsButton.isHidden = false
+        stopRecordButton.isHidden = true
+    }
     
 }
 
