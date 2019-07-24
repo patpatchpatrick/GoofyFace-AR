@@ -34,6 +34,7 @@ class MainUIViewModel : MainUIViewModelProtocol{
         self.viewDelegate.unselectAllButtons()
         self.viewDelegate.selectButton(button: button)
         self.viewDelegate.tattooModeChanged(to: mode, self)
+        self.viewDelegate.hideSecondaryMenu()
     }
     
     func tattooModeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?, button: UIButton){
@@ -122,6 +123,16 @@ class MainUIViewModel : MainUIViewModelProtocol{
     func hideAllTattooSubMenus(){
         
         viewDelegate.hideTattooSubMenus()
+    }
+    
+    func selectTattooType(button: UIButton){
+        self.viewDelegate.unselectAllButtons()
+        self.viewDelegate.selectButton(button: button)
+        viewDelegate.toggleTattooModeMenu()
+    }
+    
+    func reset(){
+        self.viewDelegate.unselectAllButtons()
     }
     
     

@@ -216,7 +216,6 @@ public class ARImageViewModel:ARImageViewModelProtocol {
             }
         }
         
-        
     }
     
     func commitTattoo(){

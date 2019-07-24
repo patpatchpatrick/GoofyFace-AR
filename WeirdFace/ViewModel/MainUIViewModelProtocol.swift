@@ -23,6 +23,8 @@ protocol MainUIViewModelViewDelegate: class
     func unselectAllButtons()
     func selectButton(button: UIButton)
     func hideTattooSubMenus()
+    func toggleTattooModeMenu()
+    func hideSecondaryMenu()
     
 }
 

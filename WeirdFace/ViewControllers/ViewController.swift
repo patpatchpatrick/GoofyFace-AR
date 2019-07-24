@@ -24,8 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var acceptPositionButton: UIButton!
     
     @IBOutlet weak var transformPrimaryContainer: UIView!
-    
-    
+    @IBOutlet weak var secondaryTattooModeSubMenu: UIView!
     @IBOutlet weak var secondaryTattooTransformSubMenu: UIView!
     @IBOutlet weak var sizePicker: UIPickerView!
     @IBOutlet weak var acceptSizeButton: UIButton!
@@ -124,7 +123,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var placeButton: RoundedButton!
     @IBOutlet weak var addButton: RoundedButton!
     @IBOutlet weak var shareButton: RoundedButton!
-    var tattooButtons: [UIButton] = []
+    @IBOutlet weak var tattooTypeButton: RoundedButton!
+    var tattooMainMenuButtons: [UIButton] = []
     
     var tattooViewModel: ARImageViewModel?
     var mainUIViewModel: MainUIViewModel?
@@ -373,6 +373,7 @@ class ViewController: UIViewController {
         
         tattooViewModel?.reset()
         distortionViewModel?.reset()
+        mainUIViewModel?.reset()
   
     }
     
@@ -527,6 +528,13 @@ class ViewController: UIViewController {
             mainUIViewModel?.hideAllTattooSubMenus()
             distortionViewModel?.hideAllSubMenus()
             distortionViewModel?.modeSelectMenuTapped()
+        }
+        
+        //"Tattoo Type" - select type of tattoo to use (custom/draw/uplaod)
+        if viewMode == modeTattooType {
+            //Toggle mode select menu
+            mainUIViewModel?.selectTattooType(button: sender)
+            
         }
         
         //"Custom mode" - user can select custom tattooo
@@ -772,7 +780,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         collectionView.isHidden = true
         resetButton.isHidden = false
         settingsButton.isHidden = false
-        placeButton.isEnabled = true
+        configureEnabledButton(button: placeButton)
     }
     
     
@@ -833,28 +841,28 @@ extension ViewController: ARImageViewModelViewDelegate{
         repositionButtonContainer.isHidden = true
         rotateButtonContainer.isHidden = true
         resizeButtonContainer.isHidden = true
-        placeButton.isEnabled = false
-        addButton.isEnabled = false
-        shareButton.isEnabled = false
+        configureDisabledButton(button: placeButton)
+        configureDisabledButton(button: addButton)
+        configureDisabledButton(button: shareButton)
     }
     
     
     func fullScreenDrawingAccepted() {
          //When a full screen drawing is accepted, position tab is enabled for user to position image
         drawnImageViewFullScreenContainer.isHidden = true
-        placeButton.isEnabled = true
+        configureEnabledButton(button: placeButton)
     }
     
     func uploadedImageAccepted() {
         //When an uploaded image is accepted, position tab is enabled for user to position image
         uploadedImageContainer.isHidden = true
-        placeButton.isEnabled = true
+        configureEnabledButton(button: placeButton)
     }
     
     func manualDrawingAccepted() {
         //After manual drawing is accepted, position tab is enabled for user to position drawing
         drawnImageContainerView.isHidden = true
-        placeButton.isEnabled = true
+        configureEnabledButton(button: placeButton)
     }
     
     func arImagePositionAccepted() {
@@ -867,7 +875,7 @@ extension ViewController: ARImageViewModelViewDelegate{
         secondaryTattooTransformSubMenu.isHidden = false
         transformPrimaryContainer.isHidden = false
         acceptPositionButton.isHidden = true
-        addButton.isEnabled = true
+        configureEnabledButton(button: addButton)
         
     }
     
@@ -881,6 +889,18 @@ extension ViewController: ARImageViewModelViewDelegate{
 }
 
 extension ViewController: MainUIViewModelViewDelegate{
+    func hideSecondaryMenu() {
+        secondaryScrollMenu.isHidden = true
+        secondaryTattooModeSubMenu.isHidden = true
+        secondaryTattooTransformSubMenu.isHidden = true
+    }
+    
+    
+    func toggleTattooModeMenu() {
+        secondaryScrollMenu.isHidden = !secondaryScrollMenu.isHidden
+        secondaryTattooModeSubMenu.isHidden = secondaryScrollMenu.isHidden
+    }
+    
     
     func hideTattooSubMenus() {
         acceptPositionButton.isHidden = true
@@ -889,6 +909,7 @@ extension ViewController: MainUIViewModelViewDelegate{
         sizePicker.isHidden = true
         secondaryScrollMenu.isHidden = true
         secondaryTattooTransformSubMenu.isHidden = true
+        secondaryTattooModeSubMenu.isHidden = true
         transformPrimaryContainer.isHidden = true
         drawnImageContainerView.isHidden = true
         uploadedImageContainer.isHidden = true
@@ -898,7 +919,7 @@ extension ViewController: MainUIViewModelViewDelegate{
     
     
     func unselectAllButtons() {
-        for button in tattooButtons {
+        for button in tattooMainMenuButtons {
             configureButtonAsUnselected(button: button)
         }
     }
@@ -1024,9 +1045,9 @@ extension ViewController: MainUIViewModelViewDelegate{
         transformPrimaryContainer.isHidden = true
         sizePicker.isHidden = true
         acceptSizeButton.isHidden = true
-        shareButton.isEnabled = true
-        addButton.isEnabled = false
-        placeButton.isEnabled = false
+        configureEnabledButton(button: shareButton)
+        configureDisabledButton(button: addButton)
+        configureDisabledButton(button: placeButton)
         settingsButton.isHidden = false
         previewImageContainer.isHidden = true
     }

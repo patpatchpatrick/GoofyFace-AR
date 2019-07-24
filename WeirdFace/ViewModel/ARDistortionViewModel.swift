@@ -85,6 +85,10 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
         headCurrentYPosition = 0.0
         headCurrentZPosition = 0.0
         
+        viewDelegate.unselectFeatureButtons()
+        viewDelegate.unselectPositionButtons()
+        viewDelegate.unselectDistortionEditButtons()
+        
     }
     
     func hideAllSubMenus(){

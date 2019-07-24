@@ -17,6 +17,15 @@ extension ViewController {
         addButtonsToArrays()
         rotateFullScreenImages()
         addShadowsAndBordersToViews()
+        disableDefaultButtons()
+    }
+    
+    func disableDefaultButtons(){
+        configureDisabledButton(button: placeButton)
+        configureDisabledButton(button: addButton)
+        configureDisabledButton(button: shareButton)
+
+
     }
     
     func hideAndResetFeaturesSlider(){
@@ -26,12 +35,13 @@ extension ViewController {
     
     func addButtonsToArrays(){
         
-        tattooButtons.append(selectButton)
-        tattooButtons.append(drawButton)
-        tattooButtons.append(uploadButton)
-        tattooButtons.append(placeButton)
-        tattooButtons.append(addButton)
-        tattooButtons.append(shareButton)
+        tattooMainMenuButtons.append(selectButton)
+        tattooMainMenuButtons.append(drawButton)
+        tattooMainMenuButtons.append(uploadButton)
+        tattooMainMenuButtons.append(placeButton)
+        tattooMainMenuButtons.append(addButton)
+        tattooMainMenuButtons.append(shareButton)
+        tattooMainMenuButtons.append(tattooTypeButton)
         
         distortionEditModeButtons.append(distortionSizeButton)
         distortionEditModeButtons.append(distortionPositionButton)
@@ -85,6 +95,25 @@ extension ViewController {
         addShadowToView(view: settingsContainer)
         addShadowToView(view: drawnImageFullScreenRotateMessage)
         addShadowToView(view: secondaryTattooTransformSubMenu)
+        
+    }
+    
+    func configureDisabledButton(button: UIButton){
+        if let button = button as? RoundedButton {
+            
+            button.borderWidth = 0.0
+            button.isEnabled = false
+            
+        }
+    }
+    
+    func configureEnabledButton(button: UIButton) {
+        if let button = button as? RoundedButton {
+            
+            button.borderWidth = 1.0
+            button.isEnabled = true
+            
+        }
         
     }
     

@@ -15,6 +15,7 @@ let modeFaceDistortion = 1
 
 //Tattoo App mode
 let modeChange = -1 // Change the app mode
+let modeTattooType = -2 //Select tattoo type
 let modeCustom = 0
 let modeDraw = 1
 let modeUpload = 2
