@@ -22,6 +22,7 @@ let modeUpload = 2
 let modePosition = 3
 let modePlace = 4
 let modeShare = 5
+let modeRecord = 6
 var viewMode:Int = 0
 
 enum Mode{

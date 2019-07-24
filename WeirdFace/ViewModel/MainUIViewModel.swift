@@ -37,7 +37,7 @@ class MainUIViewModel : MainUIViewModelProtocol{
         self.viewDelegate.hideSecondaryMenu()
     }
     
-    func tattooModeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?, button: UIButton){
+    func modeChangedToShare(previewWindowOpen: Bool, snapshot: UIImage?, button: UIButton){
         
         self.viewDelegate.unselectAllButtons()
         self.viewDelegate.selectButton(button: button)
@@ -53,6 +53,7 @@ class MainUIViewModel : MainUIViewModelProtocol{
         
         //Hide buttons so a snapshot of user can be taken
         self.viewDelegate.hideButtonsForSnapshot()
+        viewDelegate.hideSecondaryMenu()
         
         //Play camera snapshot sound
         self.viewDelegate.playSnapshotSound()
@@ -60,7 +61,6 @@ class MainUIViewModel : MainUIViewModelProtocol{
         //Show the preview of the image that the user took and allow them to share it
         //If user is in "premium mode", remove the watermark
         //Also save the preview in the model
-        print("TESTONE")
         let premiumModePurchased = model.premiumModePurchased
         if !premiumModePurchased{
             if let watermarkedImage = addWatermarkToImage(imageToWatermark: selectedImage){
@@ -133,6 +133,8 @@ class MainUIViewModel : MainUIViewModelProtocol{
     
     func reset(){
         self.viewDelegate.unselectAllButtons()
+        self.viewDelegate.hideSecondaryMenu()
+        self.viewDelegate.hideTattooSubMenus()
     }
     
     func transformButtonSelected(button: UIButton){

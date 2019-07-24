@@ -136,6 +136,9 @@ class ViewController: UIViewController {
     var tattooViewModel: ARImageViewModel?
     var mainUIViewModel: MainUIViewModel?
     var distortionViewModel: ARDistortionViewModel?
+    
+    let sr = ScreenRecorder()
+    var startRecording = false
 
     
     override func viewDidLoad() {
@@ -531,6 +534,23 @@ class ViewController: UIViewController {
         
         viewMode = sender.tag
         
+        if viewMode == modeRecord {
+            print("RECORDING")
+            startRecording = !startRecording
+            if startRecording{
+                sr.startRecording(withFileName: "Test", recordingHandler: {
+                    error in
+                    print("START" + error.debugDescription)
+                })
+            } else {
+                sr.stopRecording(isBack: false, aPathName: "Test", handler: {
+                    error in
+                    print("STOP" + error.debugDescription)
+                })
+            }
+           
+        }
+        
         //"Change mode" - user can change the app mode
         if viewMode == modeChange {
             //Toggle mode select menu
@@ -580,7 +600,7 @@ class ViewController: UIViewController {
             let previewWindowOpen = !previewImageContainer.isHidden
             //Capture image of user
             let selectedImage = sceneView.snapshot()
-            mainUIViewModel?.tattooModeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage, button: sender)
+            mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage, button: sender)
             
         }
     }
@@ -626,6 +646,16 @@ class ViewController: UIViewController {
         secondaryTattooTransformSubMenu.isHidden = true
         transformPrimaryContainer.isHidden = true
     }
+    
+    @IBAction func distortionShareButtonTapped(_ sender: UIButton) {
+        
+        let previewWindowOpen = !previewImageContainer.isHidden
+        //Capture image of user
+        let selectedImage = sceneView.snapshot()
+        mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage, button: sender)
+        
+    }
+    
     
 }
 
@@ -902,6 +932,7 @@ extension ViewController: MainUIViewModelViewDelegate{
         secondaryScrollMenu.isHidden = true
         secondaryTattooModeSubMenu.isHidden = true
         secondaryTattooTransformSubMenu.isHidden = true
+        featuresSlider.isHidden = true
     }
     
     
@@ -932,6 +963,9 @@ extension ViewController: MainUIViewModelViewDelegate{
             configureButtonAsUnselected(button: button)
         }
         for button in tattooTransformButtons {
+            configureButtonAsUnselected(button: button)
+        }
+        for button in distortionEditModeButtons {
             configureButtonAsUnselected(button: button)
         }
     }
