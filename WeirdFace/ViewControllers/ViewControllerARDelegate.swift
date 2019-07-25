@@ -10,6 +10,8 @@ import Foundation
 import SceneKit
 import ARKit
 
+
+
 extension ViewController: ARSCNViewDelegate {
     
     
@@ -23,7 +25,7 @@ extension ViewController: ARSCNViewDelegate {
             anchor is ARFaceAnchor else { return nil }
         
         let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!, fillMesh: true)!
-        // let faceGeometry = CustomFace(device: sceneView.device!, fillMesh: true)!
+        
         
         let material = faceGeometry.firstMaterial!
         
@@ -170,3 +172,4 @@ extension ViewController: ARSCNViewDelegate {
     
     
 }
+

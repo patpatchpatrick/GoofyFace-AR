@@ -152,6 +152,7 @@ class ViewController: UIViewController {
         } else {
             arNotSupportedTextView.isHidden = true
         }
+        arTrackingSupported = false
         
         SKPaymentQueue.default().add(self)
         collectionView.delegate = self
@@ -160,7 +161,7 @@ class ViewController: UIViewController {
         tattooTypePicker.dataSource = self
         sizePicker.delegate = self
         sizePicker.dataSource = self
-        sceneView.delegate = self
+     //   sceneView.delegate = self
         colorPicker.delegate = self
         
         let tattooModel = ARImageModel(imageName: "blank", tattooType: .new)
@@ -1258,6 +1259,7 @@ extension ViewController: RPPreviewViewControllerDelegate{
         resetButton.isHidden = true
         settingsButton.isHidden = true
         scrollMenu.isHidden = true
+        modeSelectMenu.isHidden = true
     }
     
     func restoreViewsAfterFinishedRecording(){
