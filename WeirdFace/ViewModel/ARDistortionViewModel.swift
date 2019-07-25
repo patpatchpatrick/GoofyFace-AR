@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+//View Model for Distorting AR Facial Geometry
 class ARDistortionViewModel : ARDistortionViewModelProtocol{
     
     var model: ARDistortionModel

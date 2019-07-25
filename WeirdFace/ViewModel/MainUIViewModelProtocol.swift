@@ -27,6 +27,7 @@ protocol MainUIViewModelViewDelegate: class
     func hideSecondaryMenu()
     func startScreenRecording()
     func stopScreenRecording()
+    func showColorPicker()
     
 }
 

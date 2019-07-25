@@ -10,8 +10,6 @@ import UIKit
 import ARKit
 import SceneKit
 import StoreKit
-import ReplayKit
-import AVKit
 
 class ViewController: UIViewController {
     
@@ -144,7 +142,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //Set bool to track if facetracking is supported, if it is not supported, facetracking features are disabled and a message is displayed to the user indicating that their device is not supported
         if ARFaceTrackingConfiguration.isSupported == false {
             arTrackingSupported = false
@@ -161,7 +158,7 @@ class ViewController: UIViewController {
         tattooTypePicker.dataSource = self
         sizePicker.delegate = self
         sizePicker.dataSource = self
-     //   sceneView.delegate = self
+        sceneView.delegate = self
         colorPicker.delegate = self
         
         let tattooModel = ARImageModel(imageName: "blank", tattooType: .new)
@@ -173,12 +170,6 @@ class ViewController: UIViewController {
         
         let distortionModel = ARDistortionModel()
         distortionViewModel = ARDistortionViewModel(model: distortionModel, delegate: self)
-        
-        /*
-        var instanceOfCustomObject: ShaderModifier = ShaderModifier()
-        instanceOfCustomObject.someProperty = "Hello World"
-        print(instanceOfCustomObject.someProperty)
-        instanceOfCustomObject.someMethod() */
         
         configureButtonsAndViews()
 
@@ -349,23 +340,7 @@ class ViewController: UIViewController {
     
     @IBAction func selectDefaultSize(_ sender: UIButton) {
         
-        //Allow user to select a default size
-        sizePicker.isHidden = false
-        //Hide resize buttons while you select a size
-        resizeButtonContainer.isHidden = true
-    }
-    
-    
-    
-    func resetDrawView(){
-        //Set the drawView back to its default state
-        drawnImageView.layer.backgroundColor = UIColor.white.cgColor
-        drawnImageView.layer.borderWidth = 2.0
-    }
-    
-    func resetUploadView(){
-        //set the uploadview back to its default state
-        uploadImageBorderedView.layer.borderWidth = 2.0
+        tattooViewModel?.selectDefaultSize()
     }
     
     
@@ -397,8 +372,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawnImageFullScreenDiscardButtonTapped(_ sender: UIButton) {
-        drawnImageViewFullScreenContainer.isHidden = true
-        drawnImageViewFullScreen.clear()
+        
+        
+        tattooViewModel?.fullScreenDrawingDiscarded()
     }
     
     @IBAction func drawnImageFullScreenAcceptButtonTapped(_ sender: UIButton) {
@@ -422,7 +398,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func drawnImageFullScreenColorWheelTapped(_ sender: UIButton) {
-        colorPicker.isHidden = false
+        mainUIViewModel?.showColorPicker()
     }
     
     
@@ -437,20 +413,6 @@ class ViewController: UIViewController {
     
     @IBAction func discardPreviewButtonTapped(_ sender: UIButton) {
         hideImagePreview()
-    }
-    
-    func hideImagePreview(){
-        previewImageContainer.isHidden = true
-    }
-    
-    func displayShareImageWindow(image: UIImage){
-        
-        let objectsToShare: [AnyObject] = [ image ]
-        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        
-        self.present(activityViewController, animated: true, completion: nil)
-        
     }
     
     @IBAction func removeWatermarkButtonTapped(_ sender: UIButton) {
@@ -803,11 +765,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //Update the image in the viewModel to match the image selected in the collection view by the user
         let imageName = String(totalImageCount - indexPath.row - 1)
-        tattooViewModel?.changeImage(named: imageName)
-        collectionView.isHidden = true
-        resetButton.isHidden = false
-        settingsButton.isHidden = false
-        configureEnabledButton(button: placeButton)
+        tattooViewModel?.changeImageToCustomImage(named: imageName)
     }
     
     
@@ -843,6 +801,7 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
 }
 
 extension ViewController: HSBColorPickerDelegate {
+    //Color Picker
     func HSBColorColorPickerTouched(sender: HSBColorPicker, color: UIColor, point: CGPoint, state: UIGestureRecognizer.State) {
         //Color is chosen in color picker
         //Change the color of the pens in the drawnImageViews
@@ -858,418 +817,4 @@ extension ViewController: HSBColorPickerDelegate {
     
     
 }
-
-extension ViewController: ARImageViewModelViewDelegate{
-    
-    
-    func resetARViews(){
-        //Reset views to initial state of app
-        transformPrimaryContainer.isHidden = true
-        repositionButtonContainer.isHidden = true
-        rotateButtonContainer.isHidden = true
-        resizeButtonContainer.isHidden = true
-        configureDisabledButton(button: placeButton)
-        configureDisabledButton(button: addButton)
-        configureDisabledButton(button: shareButton)
-    }
-    
-    
-    func fullScreenDrawingAccepted() {
-         //When a full screen drawing is accepted, position tab is enabled for user to position image
-        drawnImageViewFullScreenContainer.isHidden = true
-        configureEnabledButton(button: placeButton)
-    }
-    
-    func uploadedImageAccepted() {
-        //When an uploaded image is accepted, position tab is enabled for user to position image
-        uploadedImageContainer.isHidden = true
-        configureEnabledButton(button: placeButton)
-    }
-    
-    func manualDrawingAccepted() {
-        //After manual drawing is accepted, position tab is enabled for user to position drawing
-        drawnImageContainerView.isHidden = true
-        configureEnabledButton(button: placeButton)
-    }
-    
-    func arImagePositionAccepted() {
-        //Position was accepted, set up views accordingly
-        tattooTypePicker.isHidden = true
-        sizePicker.isHidden = true
-        acceptSizeButton.isHidden = true
-        tattooViewModel?.positionType = .manual
-        secondaryScrollMenu.isHidden = false
-        secondaryTattooTransformSubMenu.isHidden = false
-        transformPrimaryContainer.isHidden = false
-        acceptPositionButton.isHidden = true
-        configureEnabledButton(button: addButton)
-        
-    }
-    
-    
-    func arImagePositionUpdated() {
-        //Let the renderer know that the image has changed
-        tattooViewModel?.imageChanged = true
-    }
-    
-    
-}
-
-extension ViewController: MainUIViewModelViewDelegate{
-    
-    
-    func startScreenRecording() {
-        rpStartRecording()
-    }
-    
-    func stopScreenRecording() {
-        rpStopRecording()
-    }
-    
-    func hideSecondaryMenu() {
-        secondaryScrollMenu.isHidden = true
-        secondaryTattooModeSubMenu.isHidden = true
-        secondaryTattooTransformSubMenu.isHidden = true
-        featuresSlider.isHidden = true
-    }
-    
-    
-    func toggleTattooModeMenu() {
-        secondaryScrollMenu.isHidden = !secondaryScrollMenu.isHidden
-        secondaryTattooModeSubMenu.isHidden = secondaryScrollMenu.isHidden
-    }
-    
-    
-    func hideTattooSubMenus() {
-        acceptPositionButton.isHidden = true
-        acceptSizeButton.isHidden = true
-        tattooTypePicker.isHidden = true
-        sizePicker.isHidden = true
-        secondaryScrollMenu.isHidden = true
-        secondaryTattooTransformSubMenu.isHidden = true
-        secondaryTattooModeSubMenu.isHidden = true
-        transformPrimaryContainer.isHidden = true
-        drawnImageContainerView.isHidden = true
-        uploadedImageContainer.isHidden = true
-        drawnImageViewFullScreenContainer.isHidden = true
-        hideImagePreview()
-    }
-    
-    
-    func unselectAllButtons() {
-        for button in tattooMainMenuButtons {
-            configureButtonAsUnselected(button: button)
-        }
-        for button in tattooTransformButtons {
-            configureButtonAsUnselected(button: button)
-        }
-        for button in distortionEditModeButtons {
-            configureButtonAsUnselected(button: button)
-        }
-    }
-    
-    func selectButton(button: UIButton) {
-        configureButtonAsSelected(button: button)
-    }
-    
-    
-    //Main app mode changed (between tattoo and face distort)
-    //Show appropriate menus
-    func mainAppModeChanged(to mode: Int) {
-        
-        switch mode {
-        case modeTattoo:
-            tattooScrollMenu.isHidden = false
-            faceDistortScrollMenu.isHidden = true
-            secondaryScrollMenu.isHidden = true
-            featuresSlider.isHidden = true
-        case modeFaceDistortion:
-            tattooScrollMenu.isHidden = true
-            faceDistortScrollMenu.isHidden = false
-        default:
-            print("Default")
-        }
-    }
-    
-  
-    //If user has premium mode, configure views accordingly
-    func premiumModeUnlocked() {
-        configureViewsForPremiumMode(isPremium: true)
-    }
-    
-    //Share image using other applications
-    func shareImage(image: UIImage) {
-        displayShareImageWindow(image: image)
-    }
-    
-    //Set and show the user a preview of their snapshot
-    func setAndShowPreviewImage(image: UIImage) {
-        previewImage.image = image
-        previewImageContainer.isHidden = false
-    }
-    
-    func hideButtonsForSnapshot(){
-        repositionButtonContainer.isHidden = true
-        rotateButtonContainer.isHidden = true
-        resizeButtonContainer.isHidden = true
-        transformPrimaryContainer.isHidden = true
-        settingsButton.isHidden = false
-    }
-    
-    func playSnapshotSound() {
-        //Play camera shutter sound
-        AudioServicesPlaySystemSound(1108)
-    }
-    
-    //Handle UI changes when the user changes the "mode" of the app
-    
-    func tattooModeChanged(to mode: Mode, _ viewModel: MainUIViewModel) {
-        
-        resetViewsToDefault()
-        
-        switch mode {
-        case .custom: modeChangedToCustom()
-        case .draw: modeChangedToDraw()
-        case .upload: modeChangedToUpload()
-        case .position: modeChangedToPosition()
-        case .place: modeChangedToPlace()
-        default:
-            print("default")
-        }
-    }
-    
-    func resetViewsToDefault(){
-        
-    collectionView.isHidden = true
-    resetButton.isHidden = false
-    settingsButton.isHidden = false
-    drawnImageContainerView.isHidden = true
-    uploadedImageContainer.isHidden = true
-    tattooTypePicker.isHidden = true
-    acceptPositionButton.isHidden = true
-    repositionButtonContainer.isHidden = true
-    rotateButtonContainer.isHidden = true
-    resizeButtonContainer.isHidden = true
-    transformPrimaryContainer.isHidden = true
-    
-    }
-    
-    func modeChangedToCustom() {
-        collectionView.isHidden = false
-        resetButton.isHidden = true
-        settingsButton.isHidden = true
-        previewImageContainer.isHidden = true
-    }
-    
-    func modeChangedToDraw() {
-        resetDrawView()
-        drawnImageContainerView.isHidden = false
-        previewImageContainer.isHidden = true
-    }
-    
-    func modeChangedToUpload() {
-        resetUploadView()
-        uploadedImageContainer.isHidden = false
-        previewImageContainer.isHidden = true
-        selectUploadPicture()
-    }
-    
-    func modeChangedToPosition() {
-        tattooTypePicker.isHidden = false
-        sizePicker.isHidden = true
-        acceptSizeButton.isHidden = true
-        previewImageContainer.isHidden = true
-        tattooTypePicker.reloadAllComponents() //reload picker view to contain position data
-    }
-    
-    func modeChangedToPlace() {
-        repositionButtonContainer.isHidden = true
-        resizeButtonContainer.isHidden = true
-        rotateButtonContainer.isHidden = true
-        transformPrimaryContainer.isHidden = true
-        sizePicker.isHidden = true
-        acceptSizeButton.isHidden = true
-        configureEnabledButton(button: shareButton)
-        configureDisabledButton(button: addButton)
-        configureDisabledButton(button: placeButton)
-        settingsButton.isHidden = false
-        previewImageContainer.isHidden = true
-    }
-    
-    func setViewsForColorPicker(unlocked: Bool) {
-        //Show color wheel if premium account purchased, otherse show alert with option to purchase
-        if unlocked {
-            colorPicker.isHidden = false
-        } else {
-            colorPickerButton.isEnabled = false
-            self.buyInAppPurchases()
-        }
-    }
-    
-    
-    func setViewsForFullScreenDrawnImage(unlocked: Bool) {
-        //Show color wheel if premium account purchased, otherwise show alert with option to purchase
-        if unlocked {
-            drawnImageViewFullScreenContainer.isHidden = false
-            drawnImageContainerView.isHidden = true
-            switch UIDevice.current.orientation{
-            case .portrait, .portraitUpsideDown:
-                //Show message that tells user to rotate device if screen is not landscape
-                drawnImageFullScreenRotateMessage.isHidden = false
-            default:
-                print("Orientation Is Correct")
-            }
-        } else {
-            drawnImageViewFullScreenButton.isEnabled = false
-            self.buyInAppPurchases()
-        }
-    }
-    
-}
-
-extension ViewController: ARDistortionViewModelViewDelegate{
-    
-    func toggleFeatureSlider(hidden: Bool) {
-        featuresSlider.isHidden = hidden
-    }
-    
-    
-    func toggleModeSelectMenu() {
-        modeSelectMenu.isHidden = !modeSelectMenu.isHidden
-    }
-    
-    
-    func hideModeSelectMenu(){
-        modeSelectMenu.isHidden = true
-    }
-    
-    func resetFeaturesSlider() {
-        featuresSlider.setValue(1.0, animated: true)
-    }
-    
-    
-    func collapseSecondaryMenuIfExpanded() {
-        if !secondaryScrollMenu.isHidden {
-            secondaryScrollMenu.isHidden = true
-            hideAndResetFeaturesSlider()
-            distortionViewModel?.resetEditMode()
-        }
-    }
-    
-    
-    func unselectDistortionEditButtons() {
-        for button in distortionEditModeButtons {
-            configureButtonAsUnselected(button: button)
-        }
-    }
-    
-    
-    func unselectPositionButtons() {
-        for button in positionButtons {
-            configureButtonAsUnselected(button: button)
-        }
-    }
-    
-    
-    func unselectFeatureButtons() {
-        for button in featureButtons {
-            configureButtonAsUnselected(button: button)
-        }
-    }
-    
-    
-    func distortionButtonSelected(button: UIButton) {
-        configureButtonAsSelected(button: button)
-    }
-    
-    
-    func toggleSecondaryMenu(hidden: Bool) {
-        secondaryScrollMenu.isHidden = hidden
-    }
-    
-    func toggleSecondarySizeSubMenu(hidden: Bool) {
-        secondarySizeSubMenu.isHidden = hidden
-    }
-    
-    func toggleSecondaryPositionSubMenu(hidden: Bool) {
-        secondaryPositionSubMenu.isHidden = hidden
-    }
-
-    
-}
-
-extension ViewController: RPPreviewViewControllerDelegate{
-    
-    //Start screen recording with replaykit and set buttons to appropriate icons
-    func rpStartRecording() {
-        let recorder = RPScreenRecorder.shared()
-        recorder.isMicrophoneEnabled = true
-        recorder.startRecording(withMicrophoneEnabled: true) { [unowned self] (error) in
-            if let unwrappedError = error {
-                print(unwrappedError.localizedDescription)
-            } else {
-                self.mainUIViewModel?.recording = true
-                
-                DispatchQueue.main.async {
-                    self.stopRecordButton.isHidden = false
-                    self.hideAllViewsAndButtonsForRecording()
-                }
-                
-                
-            }
-        }
-    }
-    
-    //Start screen recording with replaykit and set buttons to appropriate icons
-    //Show preview window for user to decide to share/save/delete recording
-    func rpStopRecording() {
-        let recorder = RPScreenRecorder.shared()
-        recorder.isMicrophoneEnabled = true
-        recorder.stopRecording { [unowned self] (preview, error) in
-            if let error = error {
-                print("STOP REC ERROR")
-                print(error.localizedDescription)
-            } else {
-                self.mainUIViewModel?.recording = false
-                
-                DispatchQueue.main.async {
-                    self.restoreViewsAfterFinishedRecording()
-                }
-                
-                if let unwrappedPreview = preview {
-                    
-                    unwrappedPreview.previewControllerDelegate = self
-                    self.present(unwrappedPreview, animated: true, completion: nil)
-                }
-            }
-            
-        }
-    }
-    
-    //Dismiss preview view controller when user cancels/saves preview
-    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-        previewController.dismiss(animated: true, completion: {})
-    }
-    
-    func hideAllViewsAndButtonsForRecording(){
-        hideButtonsForSnapshot()
-        hideSecondaryMenu()
-        hideTattooSubMenus()
-        hideImagePreview()
-        resetButton.isHidden = true
-        settingsButton.isHidden = true
-        scrollMenu.isHidden = true
-        modeSelectMenu.isHidden = true
-    }
-    
-    func restoreViewsAfterFinishedRecording(){
-        scrollMenu.isHidden = false
-        resetButton.isHidden = false
-        settingsButton.isHidden = false
-        stopRecordButton.isHidden = true
-    }
-    
-}
-
-
 

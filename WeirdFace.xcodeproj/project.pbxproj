@@ -22,10 +22,11 @@
 		F624769C22C414C60066215E /* WeirdFaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624769B22C414C60066215E /* WeirdFaceTests.swift */; };
 		F62476A722C414C60066215E /* WeirdFaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476A622C414C60066215E /* WeirdFaceUITests.swift */; };
 		F62476BB22C42D2A0066215E /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62476BA22C42D2A0066215E /* ImageExtensions.swift */; };
-		F62476BD22C436410066215E /* VideoTexturedFace.shader in Resources */ = {isa = PBXBuildFile; fileRef = F62476BC22C436410066215E /* VideoTexturedFace.shader */; };
 		F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658C2DD22C56ACD0005CF09 /* CustomViews.swift */; };
 		F659DF6B22E63350000E8A72 /* ShaderModifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = F659DF6A22E63350000E8A72 /* ShaderModifiers.m */; };
 		F65AE0F822E526F400DF5827 /* FaceDistortion.shader in Resources */ = {isa = PBXBuildFile; fileRef = F65AE0F722E526F400DF5827 /* FaceDistortion.shader */; };
+		F668A46A22EA0616008111CE /* ViewControllerScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668A46922EA0616008111CE /* ViewControllerScreenRecorder.swift */; };
+		F668A46C22EA066A008111CE /* ViewControllerViewModelInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F668A46B22EA066A008111CE /* ViewControllerViewModelInputs.swift */; };
 		F676747622E670190012A4BB /* ARDistortionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747522E670190012A4BB /* ARDistortionModel.swift */; };
 		F676747822E670560012A4BB /* ARDistortionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747722E670560012A4BB /* ARDistortionViewModel.swift */; };
 		F676747A22E670920012A4BB /* ARDistortionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */; };
@@ -76,12 +77,13 @@
 		F62476A622C414C60066215E /* WeirdFaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeirdFaceUITests.swift; sourceTree = "<group>"; };
 		F62476A822C414C60066215E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F62476BA22C42D2A0066215E /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
-		F62476BC22C436410066215E /* VideoTexturedFace.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VideoTexturedFace.shader; sourceTree = "<group>"; };
 		F658C2DD22C56ACD0005CF09 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		F659DF6922E63350000E8A72 /* WeirdFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeirdFace-Bridging-Header.h"; sourceTree = "<group>"; };
 		F659DF6A22E63350000E8A72 /* ShaderModifiers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaderModifiers.m; sourceTree = "<group>"; };
 		F659DF6C22E63D2B000E8A72 /* ShaderModifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderModifiers.h; sourceTree = "<group>"; };
 		F65AE0F722E526F400DF5827 /* FaceDistortion.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDistortion.shader; sourceTree = "<group>"; };
+		F668A46922EA0616008111CE /* ViewControllerScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreenRecorder.swift; sourceTree = "<group>"; };
+		F668A46B22EA066A008111CE /* ViewControllerViewModelInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModelInputs.swift; sourceTree = "<group>"; };
 		F676747522E670190012A4BB /* ARDistortionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionModel.swift; sourceTree = "<group>"; };
 		F676747722E670560012A4BB /* ARDistortionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionViewModel.swift; sourceTree = "<group>"; };
 		F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistortionViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -133,11 +135,11 @@
 			isa = PBXGroup;
 			children = (
 				F60EA44A22C53D21002BE1CD /* ARImageViewModel.swift */,
+				F60366FF22DA833F0090470C /* ARImageViewModelProtocol.swift */,
 				F60366F922DA61FA0090470C /* MainUIViewModel.swift */,
 				F60366FB22DA631E0090470C /* MainUIViewModelProtocol.swift */,
-				F60366FF22DA833F0090470C /* ARImageViewModelProtocol.swift */,
-				F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */,
 				F676747722E670560012A4BB /* ARDistortionViewModel.swift */,
+				F676747922E670920012A4BB /* ARDistortionViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -221,11 +223,10 @@
 		F659DF6822E63281000E8A72 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				F65AE0F722E526F400DF5827 /* FaceDistortion.shader */,
-				F62476BC22C436410066215E /* VideoTexturedFace.shader */,
 				F659DF6A22E63350000E8A72 /* ShaderModifiers.m */,
 				F659DF6922E63350000E8A72 /* WeirdFace-Bridging-Header.h */,
 				F659DF6C22E63D2B000E8A72 /* ShaderModifiers.h */,
+				F65AE0F722E526F400DF5827 /* FaceDistortion.shader */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -245,6 +246,8 @@
 				F69A028922D518FE00012BF6 /* ViewControllerUIExtension.swift */,
 				F6EAF5D822DBCA4300F4F267 /* ViewControllerIAPExtension.swift */,
 				F676747B22E684A20012A4BB /* ViewControllerARDelegate.swift */,
+				F668A46922EA0616008111CE /* ViewControllerScreenRecorder.swift */,
+				F668A46B22EA066A008111CE /* ViewControllerViewModelInputs.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -359,7 +362,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F62476BD22C436410066215E /* VideoTexturedFace.shader in Resources */,
 				F65AE0F822E526F400DF5827 /* FaceDistortion.shader in Resources */,
 				F624769122C414C60066215E /* LaunchScreen.storyboard in Resources */,
 				F624768E22C414C60066215E /* Assets.xcassets in Resources */,
@@ -393,6 +395,7 @@
 				F681840522D6D06F003B89AB /* CustomExtensions.swift in Sources */,
 				F69A028A22D518FE00012BF6 /* ViewControllerUIExtension.swift in Sources */,
 				F60366FE22DA63890090470C /* MainUIModel.swift in Sources */,
+				F668A46A22EA0616008111CE /* ViewControllerScreenRecorder.swift in Sources */,
 				F659DF6B22E63350000E8A72 /* ShaderModifiers.m in Sources */,
 				F658C2DE22C56ACD0005CF09 /* CustomViews.swift in Sources */,
 				F6EAF5D922DBCA4300F4F267 /* ViewControllerIAPExtension.swift in Sources */,
@@ -405,6 +408,7 @@
 				F676747C22E684A20012A4BB /* ViewControllerARDelegate.swift in Sources */,
 				F603670022DA833F0090470C /* ARImageViewModelProtocol.swift in Sources */,
 				F676747822E670560012A4BB /* ARDistortionViewModel.swift in Sources */,
+				F668A46C22EA066A008111CE /* ViewControllerViewModelInputs.swift in Sources */,
 				F676747622E670190012A4BB /* ARDistortionModel.swift in Sources */,
 				F624768422C414C50066215E /* AppDelegate.swift in Sources */,
 				F624768C22C414C50066215E /* WeirdFace.xcdatamodeld in Sources */,

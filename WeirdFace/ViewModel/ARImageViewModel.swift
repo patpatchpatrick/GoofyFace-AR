@@ -263,9 +263,14 @@ public class ARImageViewModel:ARImageViewModelProtocol {
         loadImage()
     }
     
-    func changeImage(named: String){
+    func changeImageToCustomImage(named: String){
         self.model.imageName = named
         loadImage()
+        customImageChanged()
+    }
+    
+    func customImageChanged(){
+        viewDelegate.customImageChanged()
     }
     
     func changeImage(image: UIImage){
@@ -283,6 +288,14 @@ public class ARImageViewModel:ARImageViewModelProtocol {
     
     func fullScreenDrawingAccepted(){
         self.viewDelegate.fullScreenDrawingAccepted()
+    }
+    
+    func selectDefaultSize(){
+        viewDelegate.selectDefaultSize()
+    }
+    
+    func fullScreenDrawingDiscarded(){
+        viewDelegate.fullScreenDrawingDiscarded()
     }
     
     func reloadImage(image: UIImage, width: CGFloat, height: CGFloat, radians: Float, x:CGFloat, y: CGFloat, resetToDefault: Bool, commitImage: Bool){

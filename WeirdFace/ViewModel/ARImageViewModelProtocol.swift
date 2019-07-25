@@ -16,6 +16,9 @@ protocol ARImageViewModelViewDelegate: class
     func uploadedImageAccepted()
     func fullScreenDrawingAccepted()
     func resetARViews()
+    func customImageChanged()
+    func selectDefaultSize()
+    func fullScreenDrawingDiscarded()
     
 }
 

@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
+//View Model for Main UI
 class MainUIViewModel : MainUIViewModelProtocol{
-    
     
     var appMode = 0
     var appModeChanged = false
@@ -130,6 +130,10 @@ class MainUIViewModel : MainUIViewModelProtocol{
         self.viewDelegate.unselectAllButtons()
         self.viewDelegate.selectButton(button: button)
         viewDelegate.toggleTattooModeMenu()
+    }
+    
+    func showColorPicker(){
+        viewDelegate.showColorPicker()
     }
     
     func reset(){

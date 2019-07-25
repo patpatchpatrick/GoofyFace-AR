@@ -190,4 +190,29 @@ extension ViewController {
         
     }
     
+    func resetDrawView(){
+        //Set the drawView back to its default state
+        drawnImageView.layer.backgroundColor = UIColor.white.cgColor
+        drawnImageView.layer.borderWidth = 2.0
+    }
+    
+    func resetUploadView(){
+        //set the uploadview back to its default state
+        uploadImageBorderedView.layer.borderWidth = 2.0
+    }
+    
+    func hideImagePreview(){
+        previewImageContainer.isHidden = true
+    }
+    
+    func displayShareImageWindow(image: UIImage){
+        
+        let objectsToShare: [AnyObject] = [ image ]
+        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityViewController, animated: true, completion: nil)
+        
+    }
+    
 }

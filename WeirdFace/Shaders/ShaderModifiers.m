@@ -18,3 +18,11 @@
 }
 
 @end
+
+/*
+ 
+ CODE TO USE IN SWIFT IF YOU NEED TO ACCESS OBJ - C Object
+ var instanceOfCustomObject: ShaderModifier = ShaderModifier()
+ instanceOfCustomObject.someProperty = "Hello World"
+ print(instanceOfCustomObject.someProperty)
+ instanceOfCustomObject.someMethod() */
