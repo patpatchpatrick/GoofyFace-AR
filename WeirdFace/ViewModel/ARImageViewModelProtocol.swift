@@ -19,6 +19,7 @@ protocol ARImageViewModelViewDelegate: class
     func customImageChanged()
     func selectDefaultSize()
     func fullScreenDrawingDiscarded()
+    func acceptImageSize()
     
 }
 

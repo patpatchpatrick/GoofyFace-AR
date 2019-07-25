@@ -136,6 +136,14 @@ class MainUIViewModel : MainUIViewModelProtocol{
         viewDelegate.showColorPicker()
     }
     
+    func setViewsForImageTransformation(type: ImageTransformationType){
+        viewDelegate.setViewsForImageTransformation(type: type)
+    }
+    
+    func hideTransformControls(){
+        viewDelegate.hideTransformControls()
+    }
+    
     func reset(){
         self.viewDelegate.unselectAllButtons()
         self.viewDelegate.hideSecondaryMenu()

@@ -15,6 +15,16 @@ import StoreKit
 //View Controller Extension to handle all input received via ViewModels
 extension ViewController: ARImageViewModelViewDelegate{
     
+    func acceptImageSize() {
+        //Hide the size picker and show the resize buttons again
+        acceptSizeButton.isHidden = true
+        sizePicker.isHidden = true
+        //Reset size picker to reselect initial item after a size is chosen
+        sizePicker.selectRow(0, inComponent:0, animated:true)
+        resizeButtonContainer.isHidden = false
+    }
+    
+    
     func fullScreenDrawingDiscarded() {
         drawnImageViewFullScreenContainer.isHidden = true
         drawnImageViewFullScreen.clear()
@@ -92,6 +102,42 @@ extension ViewController: ARImageViewModelViewDelegate{
 }
 
 extension ViewController: MainUIViewModelViewDelegate{
+    
+    func hideTransformControls() {
+        //Hide controls for image transformatino
+        secondaryScrollMenu.isHidden = true
+        secondaryTattooTransformSubMenu.isHidden = true
+        transformPrimaryContainer.isHidden = true
+    }
+    
+    //Set up views for image transformation
+    func setViewsForImageTransformation(type: ImageTransformationType) {
+        switch type{
+        case .reposition:
+            //Hide/show reposition buttons
+            repositionButtonContainer.isHidden = !repositionButtonContainer.isHidden
+            
+            //Hide other transform containers
+            resizeButtonContainer.isHidden = true
+            rotateButtonContainer.isHidden = true
+        case .resize:
+            //Hide/show resize buttons
+            resizeButtonContainer.isHidden = !resizeButtonContainer.isHidden
+            tattooViewModel?.arPickerType = .size
+            sizePicker.reloadAllComponents()
+            
+            //Hide other transform containers
+            repositionButtonContainer.isHidden = true
+            rotateButtonContainer.isHidden = true
+        case .rotate:
+            rotateButtonContainer.isHidden = !rotateButtonContainer.isHidden
+            
+            //Hide other transform containers
+            repositionButtonContainer.isHidden = true
+            resizeButtonContainer.isHidden = true
+        }
+    }
+    
     
     func showColorPicker() {
         colorPicker.isHidden = false

@@ -294,6 +294,10 @@ public class ARImageViewModel:ARImageViewModelProtocol {
         viewDelegate.selectDefaultSize()
     }
     
+    func acceptImageSize(){
+        viewDelegate.acceptImageSize()
+    }
+    
     func fullScreenDrawingDiscarded(){
         viewDelegate.fullScreenDrawingDiscarded()
     }

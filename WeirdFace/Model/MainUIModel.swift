@@ -34,6 +34,12 @@ enum Mode{
     case share
 }
 
+enum ImageTransformationType{
+    case resize
+    case reposition
+    case rotate
+}
+
 public class MainUIModel {
     
     var premiumModePurchased:Bool // track if premium mode purchased by user

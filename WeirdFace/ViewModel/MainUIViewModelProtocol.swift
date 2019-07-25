@@ -28,6 +28,8 @@ protocol MainUIViewModelViewDelegate: class
     func startScreenRecording()
     func stopScreenRecording()
     func showColorPicker()
+    func setViewsForImageTransformation(type: ImageTransformationType)
+    func hideTransformControls()
     
 }
 
