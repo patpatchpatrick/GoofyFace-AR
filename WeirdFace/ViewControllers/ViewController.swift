@@ -13,6 +13,11 @@ import StoreKit
 
 class ViewController: UIViewController {
     
+    
+    @IBOutlet weak var newFeaturePopUpMessage: UIView!
+    @IBOutlet weak var dismissNewFeatureButton: UIButton!
+    @IBOutlet weak var tryOutNewFeatureButton: UIButton!
+    
     var arTrackingSupported = true
     @IBOutlet weak var arNotSupportedTextView: UITextView!
     
@@ -173,6 +178,8 @@ class ViewController: UIViewController {
         
         let distortionModel = ARDistortionModel()
         distortionViewModel = ARDistortionViewModel(model: distortionModel, delegate: self)
+        
+        checkIfNewFeaturePopUpMessageShouldAppear()
         
         configureButtonsAndViews()
 
@@ -598,6 +605,42 @@ class ViewController: UIViewController {
     @IBAction func animationSpeedChanged(_ sender: UISlider) {
         
         distortionViewModel?.animationSpeedChanged(speed: sender.value)
+        
+    }
+    
+    
+    @IBAction func tryOutNewFeature(_ sender: UIButton) {
+        
+        newFeaturePopUpMessage.isHidden = true
+        
+        //Change the mode of the app
+        let appMode = 1
+        mainUIViewModel?.primaryModeChanged(appMode: appMode)
+        modeSelectMenu.isHidden = true
+        
+        //Edit mode for facial distortion changed
+        let editMode = sender.tag
+        distortionViewModel?.distortionEditModeChanged(editMode: editMode, button: sender)
+        
+        //Update the current feature being edited
+        let featureType = 0
+        distortionViewModel?.setCurrentFeatureBeingEdited(feature: featureType, button: sender)
+        
+         distortionViewModel?.animateSwitchFlipped(state: true)
+        
+        animateSwitch.isOn = true
+    }
+    
+    
+    @IBAction func dismissNewFeatureMessage(_ sender: UIButton) {
+        
+        newFeaturePopUpMessage.isHidden = true
+        
+        //Set the user preference so the pop up doesn't show again in the future
+        let preferences = UserDefaults.standard
+        let initialPopUpKey = "initpop1"
+        preferences.set(true, forKey: initialPopUpKey)
+        preferences.synchronize()
         
     }
     

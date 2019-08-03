@@ -1760,6 +1760,62 @@
                                     <action selector="scrollMenuButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4rt-Mg-Fem"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RON-Qj-edF" userLabel="popUpMessage">
+                                <rect key="frame" x="32" y="348" width="350" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Animate Facial Distortions" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4p-jS-jiB">
+                                        <rect key="frame" x="25" y="87" width="300" height="26.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="tMe-RR-DEC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBx-7C-YeY">
+                                        <rect key="frame" x="200" y="149" width="100" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Try it Out!">
+                                            <color key="titleColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tryOutNewFeature:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YdO-e4-a2J"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72x-kJ-wFg">
+                                        <rect key="frame" x="50" y="150" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="aJt-Zr-9IT"/>
+                                            <constraint firstAttribute="height" constant="40" id="mlj-pL-mtW"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button" image="iconDiscard"/>
+                                        <connections>
+                                            <action selector="dismissNewFeatureMessage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="21r-jb-oOp"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Feature!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wP-Nm-fPw">
+                                        <rect key="frame" x="26" y="10" width="298.5" height="54"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="45"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="72x-kJ-wFg" firstAttribute="leading" secondItem="RON-Qj-edF" secondAttribute="leading" constant="50" id="32x-VT-fPO"/>
+                                    <constraint firstAttribute="bottom" secondItem="72x-kJ-wFg" secondAttribute="bottom" constant="10" id="Had-eW-U9D"/>
+                                    <constraint firstItem="9wP-Nm-fPw" firstAttribute="centerX" secondItem="RON-Qj-edF" secondAttribute="centerX" id="Ifd-Gf-SZ0"/>
+                                    <constraint firstAttribute="width" constant="350" id="JHV-OM-0vO"/>
+                                    <constraint firstAttribute="trailing" secondItem="iBx-7C-YeY" secondAttribute="trailing" constant="50" id="PXs-HM-kQR"/>
+                                    <constraint firstItem="D4p-jS-jiB" firstAttribute="centerY" secondItem="RON-Qj-edF" secondAttribute="centerY" id="Q2g-cf-UHr"/>
+                                    <constraint firstAttribute="height" constant="200" id="SbI-os-Dyw"/>
+                                    <constraint firstItem="9wP-Nm-fPw" firstAttribute="top" secondItem="RON-Qj-edF" secondAttribute="top" constant="10" id="jZk-GH-RsI"/>
+                                    <constraint firstAttribute="bottom" secondItem="iBx-7C-YeY" secondAttribute="bottom" constant="10" id="oQ4-CM-4cg"/>
+                                    <constraint firstItem="D4p-jS-jiB" firstAttribute="centerX" secondItem="RON-Qj-edF" secondAttribute="centerX" id="rAe-Rd-JYZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -1810,11 +1866,13 @@
                             <constraint firstItem="buR-5Y-1uS" firstAttribute="top" secondItem="1ya-u3-Wpc" secondAttribute="bottom" id="kmG-DU-hW9"/>
                             <constraint firstItem="B4U-NF-7Rw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mMI-vY-ZvD"/>
                             <constraint firstItem="PJ4-Zp-aza" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mMV-af-Qp0"/>
+                            <constraint firstItem="RON-Qj-edF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mR0-fD-5OD"/>
                             <constraint firstItem="Mzz-6Y-iPH" firstAttribute="top" secondItem="wwP-Vh-OFo" secondAttribute="bottom" constant="20" id="n4b-Ie-qcA"/>
                             <constraint firstItem="6gU-Pd-6Kg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oXf-gc-rK2"/>
                             <constraint firstItem="1ya-u3-Wpc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ocq-ZH-Cba"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Atl-Lq-BB2" secondAttribute="trailing" id="pvc-36-0Yn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B4U-NF-7Rw" secondAttribute="trailing" id="rUS-xE-6fI"/>
+                            <constraint firstItem="RON-Qj-edF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="tvs-Wd-pkE"/>
                             <constraint firstItem="buR-5Y-1uS" firstAttribute="top" secondItem="xbw-8W-X8U" secondAttribute="bottom" id="vB4-Kh-L8Q"/>
                             <constraint firstItem="kiK-Ct-qDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdw-co-hS1"/>
                             <constraint firstItem="nvG-BE-rre" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zad-Nb-odn"/>
@@ -1838,6 +1896,7 @@
                         <outlet property="colorPickerButton" destination="zud-lK-KvL" id="T6S-2a-aa0"/>
                         <outlet property="colorPickerFullScreenButton" destination="ysR-mG-iEB" id="2g7-kF-lCq"/>
                         <outlet property="discardPreviewButton" destination="sfi-sb-gTv" id="Lr4-61-JGN"/>
+                        <outlet property="dismissNewFeatureButton" destination="72x-kJ-wFg" id="g0U-rA-pQL"/>
                         <outlet property="distortionPositionButton" destination="qJm-w1-0Mg" id="jZ2-Y9-Jce"/>
                         <outlet property="distortionSizeButton" destination="53s-NF-0Ha" id="HFr-Xl-qYv"/>
                         <outlet property="drawButton" destination="SVk-z1-bU9" id="FQv-J0-AT2"/>
@@ -1860,6 +1919,7 @@
                         <outlet property="featuresSlider" destination="hB3-H4-vhC" id="NzF-Un-ju6"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="Adu-np-aql"/>
                         <outlet property="modeSelectMenu" destination="xbw-8W-X8U" id="uQA-XR-k5p"/>
+                        <outlet property="newFeaturePopUpMessage" destination="RON-Qj-edF" id="art-My-z5S"/>
                         <outlet property="placeButton" destination="Vce-c3-3e4" id="6IV-1t-NbM"/>
                         <outlet property="positionXButton" destination="oxE-Eg-Z2W" id="ukA-tY-9Sa"/>
                         <outlet property="positionYButton" destination="ScT-i0-2nF" id="Ogy-Fe-sj6"/>
@@ -1909,6 +1969,7 @@
                         <outlet property="transformRotateCWButton" destination="dBj-vu-oPn" id="7pk-i0-McV"/>
                         <outlet property="transformSelectSizeButton" destination="g68-re-JLe" id="a5I-zm-za3"/>
                         <outlet property="transformUpButton" destination="AE4-82-WQd" id="zxm-cv-m8U"/>
+                        <outlet property="tryOutNewFeatureButton" destination="iBx-7C-YeY" id="kZ3-9x-9qz"/>
                         <outlet property="uploadButton" destination="YNB-cW-loJ" id="8Gn-1N-DWH"/>
                         <outlet property="uploadImageAcceptButton" destination="zUL-rS-EfA" id="7tC-ME-CPc"/>
                         <outlet property="uploadImageBorderedView" destination="O2s-JJ-VR2" id="9Ww-JI-PM0"/>

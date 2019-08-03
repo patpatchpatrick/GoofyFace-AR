@@ -127,6 +127,7 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
     func reset(){
         
         //Reset positions/sizes
+        //Reset animations
         
         headDistortion = 1.0
         eyeDistortion = 1.0

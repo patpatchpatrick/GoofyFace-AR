@@ -12,6 +12,23 @@ import UIKit
 //Class to keep track of updates to UI
 extension ViewController {
     
+    func checkIfNewFeaturePopUpMessageShouldAppear(){
+        
+        let preferences = UserDefaults.standard
+        
+        let initialPopUpKey = "initpop1"
+        
+        if preferences.object(forKey: initialPopUpKey) == nil {
+            newFeaturePopUpMessage.isHidden = false
+        } else {
+            let userDismissedPopUp = preferences.bool(forKey: initialPopUpKey)
+            if userDismissedPopUp {
+               newFeaturePopUpMessage.isHidden = true
+            }
+        }
+        
+    }
+    
     func configureButtonsAndViews(){
         
         addButtonsToArrays()
@@ -63,6 +80,9 @@ extension ViewController {
     
     func addShadowsAndBordersToViews(){
         //Add shadow to all buttons
+        addDeepShadowToView(view: newFeaturePopUpMessage)
+        addShadowToView(view: dismissNewFeatureButton)
+        addShadowToView(view: tryOutNewFeatureButton)
         addShadowToView(view: drawnImageFullScreenAcceptButton)
         addShadowToView(view: drawnImageFullScreenUndoButton)
         addShadowToView(view: drawnImageFullScreenDiscardButton)
