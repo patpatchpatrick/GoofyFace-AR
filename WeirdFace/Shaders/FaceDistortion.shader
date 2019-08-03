@@ -9,12 +9,17 @@ SceneKit shader (geometry) modifier for texture mapping ARKit camera video onto 
 #pragma arguments
 float4x4 displayTransform // from ARFrame.displayTransform(for:viewportSize:)
 float eyeSize = 1.0;
+float eyeAnimationEnabled = 0.0;
 float noseSize = 1.0;
+float noseAnimationEnabled = 0.0;
 float mouthSize = 1.0;
+float mouthAnimationEnabled = 0.0;
 float headSize = 1.0;
+float headAnimationEnabled = 0.0;
 float xPos = 1.0;
 float yPos = 1.0;
 float zPos = 1.0;
+float time = 1.0; //Variable to represent time that has passed
 
 #pragma body
 
@@ -43,36 +48,53 @@ _geometry.texcoords[0] = transformedVertex.xy;
 //MODIFICATIONS TO FACE - POST-PROCESSING
 // Make head appear big. (You could also apply other geometry modifications here.)
 
-/*
-if (_geometry.position.y > 0.02) {
-_geometry.position.x += 0.05;
-}
-*/
 
 // (LEFT EYE)
 if (_geometry.position.x < -0.01 && _geometry.position.x > -0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.06 && _geometry.position.z > 0.015) {
-_geometry.position.xy *= eyeSize;
+if (eyeAnimationEnabled == 1.0){
+    _geometry.position.xy *= eyeSize * (abs(sin(time)) + 1.0);
+} else {
+    _geometry.position.xy *= eyeSize;
+}
 }
 
 // (RIGHT EYE)
 if (_geometry.position.x > 0.01 && _geometry.position.x < 0.06 && _geometry.position.y > 0.01 && _geometry.position.y < 0.06 && _geometry.position.z > 0.015) {
+if (eyeAnimationEnabled == 1.0){
+_geometry.position.xy *= eyeSize * (abs(sin(time)) + 1.0);
+} else {
 _geometry.position.xy *= eyeSize;
+}
 }
 
 // (NOSE)
 if ((_geometry.position.x > -0.03 && _geometry.position.x < 0.03 && _geometry.position.y > -0.02 && _geometry.position.y < 0.04 && _geometry.position.z > 0.053)) {
+if (noseAnimationEnabled == 1.0){
+_geometry.position.xy *= noseSize * (abs(sin(time)) + 1.0);
+} else {
 _geometry.position.xy *= noseSize;
+}
 }
 
 // (MOUTH)
 if (( _geometry.position.y < -0.03 && _geometry.position.z > 0.01)) {
+if (mouthAnimationEnabled == 1.0){
+_geometry.position.xy *= mouthSize * (abs(sin(time)) + 1.0);
+} else {
 _geometry.position.xy *= mouthSize;
+}
 }
 
 // (HEAD)
+if (headAnimationEnabled == 1.0){
+_geometry.position.xyz *= headSize * (abs(sin(time)) + 1.0);
+} else {
 _geometry.position.xyz *= headSize;
+}
 
 // (HEAD POSITION)
 _geometry.position.x += xPos/10;
 _geometry.position.y += yPos/10;
 _geometry.position.z += zPos/10;
+
+

@@ -156,6 +156,7 @@ extension ViewController: MainUIViewModelViewDelegate{
         secondaryTattooModeSubMenu.isHidden = true
         secondaryTattooTransformSubMenu.isHidden = true
         featuresSlider.isHidden = true
+        animateContainer.isHidden = true
     }
     
     
@@ -208,6 +209,7 @@ extension ViewController: MainUIViewModelViewDelegate{
             faceDistortScrollMenu.isHidden = true
             secondaryScrollMenu.isHidden = true
             featuresSlider.isHidden = true
+            animateContainer.isHidden = true
         case modeFaceDistortion:
             tattooScrollMenu.isHidden = true
             faceDistortScrollMenu.isHidden = false
@@ -353,6 +355,20 @@ extension ViewController: MainUIViewModelViewDelegate{
 }
 
 extension ViewController: ARDistortionViewModelViewDelegate{
+    func toggleAnimationContainer(hidden: Bool) {
+        animateContainer.isHidden = hidden
+    }
+    
+    
+    func setAnimationSwitchValue(isOn: Bool) {
+        animateSwitch.isOn = isOn
+    }
+    
+    
+    func resetAnimationSwitch() {
+        animateSwitch.isOn = false
+    }
+    
     
     func toggleFeatureSlider(hidden: Bool) {
         featuresSlider.isHidden = hidden
@@ -377,6 +393,7 @@ extension ViewController: ARDistortionViewModelViewDelegate{
         if !secondaryScrollMenu.isHidden {
             secondaryScrollMenu.isHidden = true
             hideAndResetFeaturesSlider()
+            animateContainer.isHidden = true
             distortionViewModel?.resetEditMode()
         }
     }

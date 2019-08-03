@@ -20,9 +20,12 @@ protocol ARDistortionViewModelViewDelegate: class
     func unselectDistortionEditButtons()
     func collapseSecondaryMenuIfExpanded()
     func resetFeaturesSlider()
+    func resetAnimationSwitch()
+    func setAnimationSwitchValue(isOn: Bool)
     func hideModeSelectMenu()
     func toggleModeSelectMenu()
     func toggleFeatureSlider(hidden: Bool)
+    func toggleAnimationContainer(hidden: Bool)
 }
 
 

@@ -43,6 +43,7 @@ extension ViewController: ARSCNViewDelegate {
         
         func renderDistortedFace(){
             
+            time += 0.01 //Increment time
             material.diffuse.contents = sceneView.scene.background.contents
             material.lightingModel = .constant
             
@@ -63,6 +64,11 @@ extension ViewController: ARSCNViewDelegate {
             faceGeometry.setValue(distortionViewModel?.headCurrentXPosition, forKey: "xPos")
             faceGeometry.setValue(distortionViewModel?.headCurrentYPosition, forKey: "yPos")
             faceGeometry.setValue(distortionViewModel?.headCurrentZPosition, forKey: "zPos")
+            faceGeometry.setValue(distortionViewModel?.getEyeAnimationValue(), forKey: "eyeAnimationEnabled")
+            faceGeometry.setValue(distortionViewModel?.getNoseAnimationValue(), forKey: "noseAnimationEnabled")
+            faceGeometry.setValue(distortionViewModel?.getMouthAnimationValue(), forKey: "mouthAnimationEnabled")
+            faceGeometry.setValue(distortionViewModel?.getHeadAnimationValue(), forKey: "headAnimationEnabled")
+             faceGeometry.setValue(time, forKey: "time")
             
             
         }
@@ -123,6 +129,7 @@ extension ViewController: ARSCNViewDelegate {
         
         func renderDistortedFace(){
             
+            time += 0.01 //Increment time
             material.diffuse.contents = sceneView.scene.background.contents
             material.lightingModel = .constant
             
@@ -143,6 +150,11 @@ extension ViewController: ARSCNViewDelegate {
             faceGeometry.setValue(distortionViewModel?.headCurrentXPosition, forKey: "xPos")
              faceGeometry.setValue(distortionViewModel?.headCurrentYPosition, forKey: "yPos")
              faceGeometry.setValue(distortionViewModel?.headCurrentZPosition, forKey: "zPos")
+            faceGeometry.setValue(distortionViewModel?.getEyeAnimationValue(), forKey: "eyeAnimationEnabled")
+            faceGeometry.setValue(distortionViewModel?.getNoseAnimationValue(), forKey: "noseAnimationEnabled")
+            faceGeometry.setValue(distortionViewModel?.getMouthAnimationValue(), forKey: "mouthAnimationEnabled")
+            faceGeometry.setValue(distortionViewModel?.getHeadAnimationValue(), forKey: "headAnimationEnabled")
+               faceGeometry.setValue(time, forKey: "time")
             
         }
         

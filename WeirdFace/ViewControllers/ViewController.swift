@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     
     var arTrackingSupported = true
     @IBOutlet weak var arNotSupportedTextView: UITextView!
+    var time: Float = 0.01 //Float to represent current time since App began.  Used for shader animations
     
     var selectedPreviewImage: UIImage?
     
@@ -113,6 +114,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var positionZButton: RoundedButton!
     var positionButtons: [UIButton] = []
     
+    @IBOutlet weak var animateContainer: UIView!
+    @IBOutlet weak var animateSwitch: UISwitch!
+    
     
     @IBOutlet weak var tattooRepositionButton: RoundedButton!
     
@@ -149,7 +153,7 @@ class ViewController: UIViewController {
         } else {
             arNotSupportedTextView.isHidden = true
         }
-        arTrackingSupported = false
+        
         
         SKPaymentQueue.default().add(self)
         collectionView.delegate = self
@@ -559,9 +563,6 @@ class ViewController: UIViewController {
     
     @IBAction func facialFeatureButtonTapped(_ sender: UIButton) {
         
-        //Toggle features slider
-        featuresSlider.isHidden = false
-        
         //Update the current feature being edited
         let featureType = sender.tag
         distortionViewModel?.setCurrentFeatureBeingEdited(feature: featureType, button: sender)
@@ -585,6 +586,13 @@ class ViewController: UIViewController {
         //Capture image of user
         let selectedImage = sceneView.snapshot()
         mainUIViewModel?.modeChangedToShare(previewWindowOpen: previewWindowOpen, snapshot: selectedImage, button: sender)
+        
+    }
+    
+    
+    @IBAction func animateSwitchFlipped(_ sender: UISwitch) {
+        
+        distortionViewModel?.animateSwitchFlipped(state: sender.isOn)
         
     }
     
