@@ -43,7 +43,7 @@ extension ViewController: ARSCNViewDelegate {
         
         func renderDistortedFace(){
             
-            time += 0.01 //Increment time
+            distortionViewModel?.incrementTime() //Increment time
             material.diffuse.contents = sceneView.scene.background.contents
             material.lightingModel = .constant
             
@@ -57,6 +57,7 @@ extension ViewController: ARSCNViewDelegate {
             let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
             let transform = SCNMatrix4(affineTransform)
             faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
+            
             faceGeometry.setValue(distortionViewModel?.headDistortion, forKey: "headSize")
             faceGeometry.setValue(distortionViewModel?.eyeDistortion, forKey: "eyeSize")
             faceGeometry.setValue(distortionViewModel?.noseDistortion, forKey: "noseSize")
@@ -64,11 +65,11 @@ extension ViewController: ARSCNViewDelegate {
             faceGeometry.setValue(distortionViewModel?.headCurrentXPosition, forKey: "xPos")
             faceGeometry.setValue(distortionViewModel?.headCurrentYPosition, forKey: "yPos")
             faceGeometry.setValue(distortionViewModel?.headCurrentZPosition, forKey: "zPos")
-            faceGeometry.setValue(distortionViewModel?.getEyeAnimationValue(), forKey: "eyeAnimationEnabled")
-            faceGeometry.setValue(distortionViewModel?.getNoseAnimationValue(), forKey: "noseAnimationEnabled")
-            faceGeometry.setValue(distortionViewModel?.getMouthAnimationValue(), forKey: "mouthAnimationEnabled")
-            faceGeometry.setValue(distortionViewModel?.getHeadAnimationValue(), forKey: "headAnimationEnabled")
-             faceGeometry.setValue(time, forKey: "time")
+       
+              faceGeometry.setValue(distortionViewModel?.noseTime, forKey: "noseTime")
+             faceGeometry.setValue(distortionViewModel?.eyeTime, forKey: "eyeTime")
+            faceGeometry.setValue(distortionViewModel?.mouthTime, forKey: "mouthTime")
+            faceGeometry.setValue(distortionViewModel?.headTime, forKey: "headTime")
             
             
         }
@@ -129,7 +130,7 @@ extension ViewController: ARSCNViewDelegate {
         
         func renderDistortedFace(){
             
-            time += 0.01 //Increment time
+            distortionViewModel?.incrementTime() //Increment time
             material.diffuse.contents = sceneView.scene.background.contents
             material.lightingModel = .constant
             
@@ -142,6 +143,8 @@ extension ViewController: ARSCNViewDelegate {
             // that the mapped video lines up correctly with the background video.
             let affineTransform = frame.displayTransform(for: .portrait, viewportSize: sceneView.bounds.size)
             let transform = SCNMatrix4(affineTransform)
+            
+            
             faceGeometry.setValue(SCNMatrix4Invert(transform), forKey: "displayTransform")
             faceGeometry.setValue(distortionViewModel?.headDistortion, forKey: "headSize")
             faceGeometry.setValue(distortionViewModel?.eyeDistortion, forKey: "eyeSize")
@@ -150,11 +153,11 @@ extension ViewController: ARSCNViewDelegate {
             faceGeometry.setValue(distortionViewModel?.headCurrentXPosition, forKey: "xPos")
              faceGeometry.setValue(distortionViewModel?.headCurrentYPosition, forKey: "yPos")
              faceGeometry.setValue(distortionViewModel?.headCurrentZPosition, forKey: "zPos")
-            faceGeometry.setValue(distortionViewModel?.getEyeAnimationValue(), forKey: "eyeAnimationEnabled")
-            faceGeometry.setValue(distortionViewModel?.getNoseAnimationValue(), forKey: "noseAnimationEnabled")
-            faceGeometry.setValue(distortionViewModel?.getMouthAnimationValue(), forKey: "mouthAnimationEnabled")
-            faceGeometry.setValue(distortionViewModel?.getHeadAnimationValue(), forKey: "headAnimationEnabled")
-               faceGeometry.setValue(time, forKey: "time")
+  
+              faceGeometry.setValue(distortionViewModel?.noseTime, forKey: "noseTime")
+            faceGeometry.setValue(distortionViewModel?.eyeTime, forKey: "eyeTime")
+            faceGeometry.setValue(distortionViewModel?.mouthTime, forKey: "mouthTime")
+            faceGeometry.setValue(distortionViewModel?.headTime, forKey: "headTime")
             
         }
         

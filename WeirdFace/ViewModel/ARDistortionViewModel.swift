@@ -16,17 +16,29 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
     var viewDelegate: ARDistortionViewModelViewDelegate
     
     var currentEditMode:Int = -1 //Current facial edit mode
-    var currentAttribute:Int = 0 //Current feature being edited
+    var currentAttribute:Int = -5 //Current feature being edited
     
     var headDistortion: Float = 1.0 //Magnitude of eye distortion
     var eyeDistortion: Float = 1.0 //Magnitude of eye distortion
     var noseDistortion: Float = 1.0 //Magnitude of nose distortion
     var mouthDistortion: Float = 1.0 //Magnitude of nose distortion
     
+    var time: Float = 0.01 //Float to represent current time since App began.  Used for shader animations.  Different times are used for different facial features so they can be animated at different speeds
+    var eyeTime: Float = 0.01
+    var noseTime: Float = 0.01
+    var mouthTime: Float = 0.01
+    var headTime: Float = 0.01
+    
     var headAnimationEnabled = false //Bool to track whether to animate features
     var eyeAnimationEnabled = false //Bool to track whether to animate features
     var noseAnimationEnabled = false //Bool to track whether to animate features
     var mouthAnimationEnabled = false //Bool to track whether to animate features
+    
+    var animationSpeed: Float = 1.0      //Track how quickly to animate the following facial features
+    var animationEyeSpeed: Float = 1.0
+    var animationNoseSpeed: Float = 1.0
+    var animationMouthSpeed: Float = 1.0
+    var animationHeadSpeed: Float = 1.0
     
     var headCurrentXPosition: Float = 0.0 //Magnitude of position
     var headCurrentYPosition: Float = 0.0 //Magnitude of position
@@ -40,6 +52,39 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
     func resetEditMode(){
         //When the edit menu is collapsed, set value back to default (-1)
         currentEditMode = -1
+    }
+    
+    func incrementTime(){
+        //Increment time at a user dictated animation speed
+        //If animation is not enabled, then the time should be a constant (0)
+        time += 0.01 * animationSpeed
+        if noseAnimationEnabled {noseTime += 0.01 * animationNoseSpeed} else {
+            noseTime = 0.0
+        }
+        if mouthAnimationEnabled {mouthTime += 0.01 * animationMouthSpeed} else {
+            mouthTime = 0.0
+        }
+        if eyeAnimationEnabled {eyeTime += 0.01 * animationEyeSpeed} else {
+            eyeTime = 0.0
+        }
+        if headAnimationEnabled {headTime += 0.01 * animationHeadSpeed} else {
+            headTime = 0.0
+        }
+    
+     
+    }
+    
+    func animationSpeedChanged(speed: Float){
+        //Update the speed of the appropriate attribute being edited
+        
+        switch currentAttribute{
+        case featureHead: animationHeadSpeed = speed
+        case featureEyes: animationEyeSpeed = speed
+        case featureNose: animationNoseSpeed = speed
+        case featureMouth: animationMouthSpeed = speed
+        default: print("Default")
+        }
+        
     }
     
     func distortionEditModeChanged(editMode: Int, button: UIButton){
@@ -97,6 +142,10 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
         noseAnimationEnabled = false
         mouthAnimationEnabled = false
         
+        animationEyeSpeed = 1.0
+        animationNoseSpeed = 1.0
+        animationMouthSpeed = 1.0
+        animationHeadSpeed = 1.0
         
         viewDelegate.unselectFeatureButtons()
         viewDelegate.unselectPositionButtons()
@@ -139,6 +188,17 @@ class ARDistortionViewModel : ARDistortionViewModelProtocol{
         viewDelegate.distortionButtonSelected(button: button)
         currentAttribute = feature
         setAnimationSwitchBasedOnCurrentFeatureState()
+        setAnimationSpeedSliderBasedOnFeatureState()
+    }
+    
+    func setAnimationSpeedSliderBasedOnFeatureState(){
+        switch currentAttribute{
+        case featureHead: viewDelegate.setAnimationSpeedSliderValue(speed: animationHeadSpeed)
+        case featureEyes: viewDelegate.setAnimationSpeedSliderValue(speed: animationEyeSpeed)
+        case featureNose: viewDelegate.setAnimationSpeedSliderValue(speed: animationNoseSpeed)
+        case featureMouth: viewDelegate.setAnimationSpeedSliderValue(speed: animationMouthSpeed)
+        default: print("Default")
+        }
     }
     
     func setAnimationSwitchBasedOnCurrentFeatureState(){

@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     
     var arTrackingSupported = true
     @IBOutlet weak var arNotSupportedTextView: UITextView!
-    var time: Float = 0.01 //Float to represent current time since App began.  Used for shader animations
     
     var selectedPreviewImage: UIImage?
     
@@ -116,7 +115,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var animateContainer: UIView!
     @IBOutlet weak var animateSwitch: UISwitch!
-    
+    @IBOutlet weak var animationSpeedSlider: UISlider!
     
     @IBOutlet weak var tattooRepositionButton: RoundedButton!
     
@@ -596,6 +595,11 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func animationSpeedChanged(_ sender: UISlider) {
+        
+        distortionViewModel?.animationSpeedChanged(speed: sender.value)
+        
+    }
     
 }
 

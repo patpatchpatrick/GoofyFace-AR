@@ -355,6 +355,10 @@ extension ViewController: MainUIViewModelViewDelegate{
 }
 
 extension ViewController: ARDistortionViewModelViewDelegate{
+    func setAnimationSpeedSliderValue(speed: Float) {
+        animationSpeedSlider.setValue(speed, animated: true)
+    }
+    
     func toggleAnimationContainer(hidden: Bool) {
         animateContainer.isHidden = hidden
     }

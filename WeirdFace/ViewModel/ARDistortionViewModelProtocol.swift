@@ -22,6 +22,7 @@ protocol ARDistortionViewModelViewDelegate: class
     func resetFeaturesSlider()
     func resetAnimationSwitch()
     func setAnimationSwitchValue(isOn: Bool)
+    func setAnimationSpeedSliderValue(speed: Float)
     func hideModeSelectMenu()
     func toggleModeSelectMenu()
     func toggleFeatureSlider(hidden: Bool)
